@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'dragon'
+Dragon::Game.play!

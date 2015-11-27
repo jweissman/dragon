@@ -7,8 +7,8 @@ require 'dragon/version'
 Gem::Specification.new do |gem|
   gem.name          = "dragon"
   gem.version       = Dragon::VERSION
-  gem.summary       = %q{TODO: Summary}
-  gem.description   = %q{TODO: Description}
+  gem.summary       = %q{lord-like}
+  gem.description   = %q{text-based rpg}
   gem.license       = "MIT"
   gem.authors       = ["Joseph Weissman"]
   gem.email         = "joe@bignerdranch.com"

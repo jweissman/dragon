@@ -6,9 +6,8 @@ module Dragon
       @console = console
     end
 
-    def character(player)
+    def character_for(player)
       ask_name player
-
       choose_job player
 
       choose_race player
@@ -27,26 +26,26 @@ module Dragon
     end
 
     def choose_job(player)
-      console.choose :job, of: player, 
+      console.choose :profession, of: player, 
         prompt: PLAYER_TYPE_PROMPT,
-        choices: PlayerCharacter::JOBS
+        choices: PlayerCharacter.professions
     end
 
     def choose_race(player)
       console.choose :race, of: player,
         prompt: PLAYER_RACE_PROMPT,
-        choices: PlayerCharacter::RACES
+        choices: Person.races
     end
 
     def choose_subtype(player)
       console.choose :subtype, of: player, 
         prompt: PLAYER_SUBTYPE_PROMPT,
-        choices: PlayerCharacter::SUBTYPES
+        choices: Person.subtypes
     end
 
     def self.construct(klass, term=Console.new)
       term.say "Let's get to know a little about you..."
-      player = new(term).character(klass.new)
+      player = new(term).character_for(klass.new)
       term.say "Okay, that's enough! Let's get moving."
       player
     end

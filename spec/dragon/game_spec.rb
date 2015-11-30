@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'dragon/game'
+require 'dragon'
 
 describe Dragon::Game do
   let(:fake_term) do
@@ -7,18 +7,15 @@ describe Dragon::Game do
   end
 
   let(:fake_player) do
-    instance_spy('Player', action: :quit)
+    instance_spy('Player')
   end
 
-  let(:fake_town) { instance_spy('Town') }
-  let(:fake_world) { instance_spy('World') }
+  let(:fake_engine) { instance_spy('Engine', still_playing?: false) }
 
   before do
     allow(subject).to receive(:console) { fake_term }
     allow(subject).to receive(:player)  { fake_player }
-
-    allow(subject).to receive(:town).and_return fake_town
-    allow(subject).to receive(:world).and_return fake_world
+    allow(subject).to receive(:engine)  { fake_engine }
   end
 
   describe '#boot!' do
@@ -40,19 +37,11 @@ describe Dragon::Game do
     end
 
     context 'iterates gameplay until player exits' do
-      it 'should call #step while still_playing? is true' do
-        allow(subject).to receive(:still_playing?).and_return(true, false)
-        expect(subject).to receive(:step).exactly(:once)
+      it 'should call engine#step while still_playing? is true' do
+        allow(fake_engine).to receive(:still_playing?).and_return(true, false)
+        expect(fake_engine).to receive(:step).exactly(:once)
         subject.play
       end
-    end
-  end
-
-  describe '#step' do
-    after { subject.step }
-    it 'should narrate the scene and interact with the player' do
-      expect(subject).to receive(:narrate).with(world: fake_world, town: fake_town)
-      expect(subject).to receive(:interact)
     end
   end
 end

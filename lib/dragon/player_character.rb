@@ -1,11 +1,13 @@
 module Dragon
-  class PlayerCharacter < Struct.new(:name, :job, :subtype, :race, :age, :gender, :action)
-    JOBS = %w[ warrior wizard soldier rogue ]
-    RACES = %w[ human elf dwarf halfling ]
-    SUBTYPES = %w[ wild mutant dark light sea forest sky weird quiet ]
+  class PlayerCharacter < Person
+    attr_accessor :action, :generated
 
     def self.build(console)
       PlayerBuilder.construct(self, console)
+    end
+
+    def self.professions
+      %w[ warrior wizard soldier rogue cleric ]
     end
   end
 end

@@ -4,22 +4,31 @@ module Dragon
       30.times { puts }
     end
 
-    def hr
-      puts "==============================================================="
+    def hr(light: false)
+      if light
+        puts "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" 
+      else
+        puts "==============================================================="
+      end
     end
 
     def say(msg, heading: false, newline: true, important: false)
       message = "#{!important ? '   ' : '(*) '}#{msg}"
       operation = newline ? :puts : :print
+
+      puts if important
       if heading
         send operation, "  ----->#{message}"
       else
         send operation, "        #{message}"
       end
+      puts if important
+
       self
     end
 
     def ask(attribute, of: nil, prompt: "Enter #{attribute}: ")
+      puts
       say prompt, heading: true, newline: false
       of.send :"#{attribute}=", gets.chomp
     end
@@ -30,6 +39,7 @@ module Dragon
       valid_choice, choice_index = false, nil
 
       until valid_choice
+        puts
         valid_choice, choice_index = prompt_for_choice(prompt, choices, labels)
       end
 
@@ -45,6 +55,7 @@ module Dragon
         say "(#{index+1}) #{labels[choice]}"
       end
 
+      say "Your choice: ", newline: false
       choice_index = gets.chomp.to_i
       valid_choice = choice_index > 0 && choice_index <= choices.count
       [valid_choice, choice_index]
@@ -62,8 +73,6 @@ module Dragon
       hash[sym] = label
       hash
     end
-
-
   end
 end
 

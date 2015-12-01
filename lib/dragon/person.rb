@@ -1,4 +1,45 @@
 module Dragon
+  class ConversationTopic
+    def describe
+      "(override topic description)"
+    end
+  end
+
+  class ConversationAboutLife < ConversationTopic
+    def describe
+      "life in general"
+    end
+
+    def responses
+      [ 
+        "Oh, you know. Alright.",
+        "Pretty great!",
+        "It's going good. And how art thou?"
+      ]
+    end
+  end
+
+  class ConversationAboutWork < ConversationTopic
+    attr_reader :profession
+
+    def initialize(profession: profession)
+      @profession = profession
+    end
+
+    def describe
+      "being a #{profession}"
+    end
+    
+    def responses
+      [
+        "I really enjoy being a #{profession}",
+        "It's okay, it's a living",
+        "Can't complain!",
+        "Difficult but good"
+      ]
+    end
+  end
+
   class Person < Entity
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype
@@ -40,7 +81,7 @@ module Dragon
     end
 
     def self.generate_name
-      name_components.sample(2).join
+      name_components.sample(2).join.capitalize
     end
 
     def self.name_components
@@ -65,10 +106,17 @@ module Dragon
     end
 
     def conversation_topics
-      {
-        work: proc { |_| ["Hard, isn't it?", "Difficult but good"].sample },
-        life_on_earth: proc { |_| ["It's a good thing", "Who knows?"].sample },
-      }.merge(activity_topics)
+      [ 
+        ConversationAboutWork.new(profession: profession),
+        ConversationAboutLife.new
+      ]
+
+      # {
+      #   work: proc { |_| [
+      #     "Can't complain...", "Hard, isn't it?", "Difficult but good"].sample 
+      #   },
+      #   life_on_earth: proc { |_| ["A mystery!", "It's a good thing", "Who knows?"].sample },
+      # }.merge(activity_topics)
     end
 
     def activity_topics

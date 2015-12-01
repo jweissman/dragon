@@ -9,7 +9,7 @@ module Dragon
     end
 
     def welcome(player)
-      say "Thanks for playing Dragon, #{player.describe}!"
+      say "Thanks for playing Dragon, #{player.label}!"
       self
     end
 
@@ -38,9 +38,11 @@ module Dragon
 
     def choose_action(player: nil, actions: nil)
       choose :action, of: player,
-        prompt: PLAYER_ACTION_PROMPT, 
-        choices: actions.keys,
-        labels: actions
+        prompt: PLAYER_ACTION_PROMPT,
+        choices: actions, 
+        labels: Hash[actions.zip(actions.map(&:label))]
+
+        # labels: actions
       self
     end
 
@@ -49,6 +51,7 @@ module Dragon
     def narrate_scene(scene)
       describe scene, prefix: "You are currently "
 
+      say scene.last_action, heading: true if scene.last_action
       say scene.last_response, heading: true if scene.last_response
     end
 

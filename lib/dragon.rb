@@ -21,6 +21,9 @@ require 'dragon/player_builder'
 require 'dragon/console'
 require 'dragon/game_terminal'
 
+require 'dragon/command'
+require 'dragon/command_handler'
+
 require 'dragon/scene'
 require 'dragon/exploration'
 require 'dragon/conversation'

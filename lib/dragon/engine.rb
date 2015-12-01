@@ -12,6 +12,8 @@ module Dragon
       @console = console
       @world   = world
       @player  = player
+
+      @playing = true
     end
 
     def step
@@ -31,10 +33,13 @@ module Dragon
     end
 
     def conversation_with(partner)
-      Conversation.new(controller: self).with(partner)
+      Conversation.new(controller: self).with(partner: partner)
     end
 
-    protected
+    def halt!
+      @playing = false
+    end
+
     def transition_to(scene)
       @current_scene = scene
     end
@@ -44,10 +49,9 @@ module Dragon
     end
 
     def still_playing?
-      action != :quit
+      @playing
     end
 
-    private
     def town
       @town ||= world.towns.sample
     end

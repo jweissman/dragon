@@ -1,11 +1,7 @@
 module Dragon
   class Town < Struct.new(:name, :type, :subtype, :feature)
     def self.generate
-      new(names.sample, types.sample, subtypes.sample, features.sample)
-    end
-
-    def self.names
-      %w[ ur cadiz raknor cerylaitan eichnas grinsborough tinelef astyr segt ]
+      new(Name.generate, types.sample, subtypes.sample, features.sample)
     end
 
     def self.subtypes

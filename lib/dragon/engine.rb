@@ -23,15 +23,18 @@ module Dragon
       interact
       self
     end
- 
-    def describe
-      narrate place: place, scene: scene, town: town, world: world
-    end
 
     def interact
       prompt_player
       react(action)
     end   
+
+    def describe(deep: true)
+      elements = { place: place, scene: scene }
+      elements.merge!(town: town, world: world) if deep
+
+      narrate elements
+    end
 
     def prompt_player
       @last_prompted_actions = actions(place)

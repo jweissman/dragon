@@ -6,7 +6,7 @@ class VirtualConsole
   end
 
   def hr(*args)
-    output_html_content.push("<br><hr><br>")
+    # output_html_content.push("<br><hr><br>")
   end
 
   def say(message, heading: false, important: nil)

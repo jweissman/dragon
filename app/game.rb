@@ -1,18 +1,18 @@
 require 'slim'
 require 'sinatra'
 require 'dragon'
+
 require_all 'app'
 
-$console = VirtualConsole.new
-$terminal = Dragon::GameTerminal.new($console) 
-$player  = Dragon::PlayerCharacter.new
-$engine    = Dragon::Engine.new(terminal: $terminal, player: $player)
+$console  = VirtualConsole.new
+$terminal = Dragon::GameTerminal.new($console)
+$player   = Dragon::PlayerCharacter.new
+$engine   = Dragon::Engine.new(terminal: $terminal, player: $player)
 
 get '/' do
   $console.clear
 
   Dragon::PlayerCharacter.build($console)
-
   @engine_content_html = $console.content
 
   slim :index
@@ -39,15 +39,15 @@ post '/play' do
     label   = params['action']
     actions = $engine.last_prompted_actions
     unless actions.nil?
-      action  = actions.detect do |act| 
-        act.label == label 
+      action  = actions.detect do |act|
+        act.label == label
       end
 
       $engine.react(action) if action
     end
   end
 
-  $engine.describe
+  $engine.describe deep: false
   $engine.prompt_player
 
   @engine_content_html = $console.content

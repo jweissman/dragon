@@ -3,7 +3,7 @@ module Dragon
     attr_accessor :town
 
     def initialize
-      super(names.sample)
+      super(Name.generate)
     end
 
     def self.generate(town)
@@ -34,10 +34,6 @@ module Dragon
 
     def type_label
       self.class.name.split('::').last
-    end
-
-    def names
-      %w[ oxnard ]
     end
   end
 

@@ -5,6 +5,7 @@ require 'forwardable'
 require 'dragon/version'
 
 require 'dragon/entity'
+require 'dragon/name'
 
 require 'dragon/place'
 require 'dragon/area'

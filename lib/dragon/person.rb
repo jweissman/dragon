@@ -5,7 +5,11 @@ module Dragon
 
     attr_accessor :activity
 
-    def self.generate(name: generate_name, profession: professions.sample)
+    def self.generate(
+      name: Name.generate, 
+      profession: professions.sample
+    )
+
       person = new(name)
       person.profession = profession
       person.gender = %w[ male female other ].sample
@@ -37,18 +41,6 @@ module Dragon
 
     def describe
       "#{name.capitalize}, a #{subtype} #{race} #{profession}, who is #{activity}"
-    end
-
-    def self.generate_name
-      name_components.sample(2).join.capitalize
-    end
-
-    def self.name_components
-      %w[ ad edsel quox saff ged tef ben chi smyt cor lin sep tim
-          sed var veris lemm warke kru sel dric cap stel sep mer
-          leg ment jed de fer lis camp hel est wry al gon smar 
-          phi gar ef len tyg lan af nel ekru stam seg mar ald werj 
-          ag lem sen klu ef med fer wyrk ben snel set gon cad lery ]
     end
 
     def self.races

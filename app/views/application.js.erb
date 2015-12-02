@@ -1,7 +1,8 @@
 (function($, global) {
-  var scheme   = 'ws://';
+  var scheme   = "<%= @scheme %>";
+
   var uri      = scheme + window.document.location.host + "/";
-  var ws       = new WebSocket(uri);
+  var ws       = null;
 
   var handleWebsocketMessage = function(message) {
     console.log("----> ON MESSAGE");
@@ -11,32 +12,27 @@
     $(".content").html(content);
   };
 
-  //var submitPlayerCharacterOverWebsocket = function(event) {
-  //  var data = JSON.stringify(form.serializeArray());
-  //};
-
-  var submitChoiceOverWebsocket = function(event) {
+  var submitFormOverWebsocket = function(event) {
     console.log("SUBMIT");
     event.preventDefault();
 
     var form = $(".input-form");
     var data = JSON.stringify(form.serializeArray());
     console.log("data to send", data);
-    ws.send(data); 
+    ws.send(data);
   };
 
   var orchestrateWebsockets = function() {
+    ws = new WebSocket(uri);
     ws.onmessage = handleWebsocketMessage;
-    $(".input-form").on("submit", submitChoiceOverWebsocket);
+    $(".input-form").on("submit", submitFormOverWebsocket);
   };
 
   var init_ws = function() {
-    console.log(" ====> WELCOME TO DRAGON");
     orchestrateWebsockets();
   }
 
   if ($('body').is('.play')) {
-    console.log("---> page body is #play");
     $(document).on('page:load', init_ws);
     $(document).ready(init_ws);
   }

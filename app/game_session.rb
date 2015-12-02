@@ -27,7 +27,7 @@ module Dragon
 
       clear
       process_event(data) if data
-      describe # deep: false
+      describe
       prompt_player
       send output
 

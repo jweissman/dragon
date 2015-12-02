@@ -27,7 +27,7 @@ module Dragon
       active_session.step!(JSON.parse(event.data))
     end
 
-    def delete(client, event)
+    def delete(client)
       @sessions.delete_if { |session| session.client == client }
     end
 
@@ -44,8 +44,6 @@ module Dragon
         end
 
         ws.on :close do |event|
-          #p [:close, ws.object_id, event.code, event.reason]
-
           delete(ws)
           ws = nil
         end

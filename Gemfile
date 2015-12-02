@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'rake'
+
 gem 'require_all'
 gem 'pry', group: :development
 

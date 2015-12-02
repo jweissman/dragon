@@ -61,7 +61,7 @@ DEPENDENCIES
   faye-websocket
   pry
   puma
-  rake (~> 10.0)
+  rake
   rdoc (~> 4.0)
   require_all
   rspec (~> 3.0)

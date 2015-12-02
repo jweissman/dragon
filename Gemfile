@@ -6,6 +6,7 @@ gemspec
 gem 'require_all'
 gem 'pry', group: :development
 
+gem 'faye-websocket'
 gem 'sinatra'
-gem 'thin'
+gem 'puma'
 gem 'slim'

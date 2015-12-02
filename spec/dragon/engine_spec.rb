@@ -28,7 +28,8 @@ describe Engine do
         place: fake_place,
         scene: fake_scene,
         town: fake_town,
-        world: fake_world
+        world: fake_world,
+        player: fake_player
       )
 
       expect(subject).to receive(:interact)

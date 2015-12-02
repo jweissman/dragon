@@ -1,0 +1,30 @@
+body { 
+  color: black;
+  background-color: grey;
+  font-family: helvetica;
+}
+
+h2 { font-size: 18px; padding: 10px; }
+
+.container {
+  font-family: courier;
+  color: black;
+  font-size: 12px;
+  background-color: #e8e8e8;
+  padding: 20px 50px 20px 50px;
+  margin: 20px 60px 60px 60px;
+}
+
+.important { 
+  color: green; 
+  font-weight: 'ultra bold';
+  font-family: helvetica;
+}
+
+.inline { display:inline; }
+
+input[type=submit] {
+  font-size: 20px;
+  padding: 20px;
+  background-color: white;
+}

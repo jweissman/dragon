@@ -27,11 +27,11 @@ module Dragon
       say description
     end
 
-    def narrate(world: nil, town: nil, place: nil, scene: nil)
+    def narrate(world: nil, town: nil, place: nil, scene: nil, player: nil)
       hr
       puts
 
-      describe world, prefix: "You are in the world of " if world
+      describe world, prefix: "You (#{player.describe}) are in the world of " if world
       describe town,  prefix: "The town you are in currently is " if town
 
       puts

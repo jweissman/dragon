@@ -2,38 +2,13 @@ doctype html
 html
   head
     title Dragon
-    css:
-      body { 
-        color: black;
-        background-color: grey;
-        font-family: helvetica;
-      }
+    link href="assets/css/application.css" rel='stylesheet' type='text/css'
 
-      .game {
-        font-family: courier;
-        color: black;
-        font-size: 18px;
-        background-color: #e8e8e8;
-        padding: 20px 50px 20px 50px;
-        margin: 20px 60px 60px 60px;
-      }
-
-      .important { 
-        color: green; 
-        font-size: 125%; 
-        font-weight: 'ultra bold';
-        font-family: helvetica;
-      }
-
-      .inline { display:inline; }
-
-      input[type=submit] {
-        font-size: 24px;
-        padding: 20px;
-        background-color: white;
-      }
-
-  body
+  body class=@page
     h2.inline Dragon
-    a.inline href="/" create new character
-    == yield
+    a.inline href="/" home
+
+    .container== yield
+
+    script src="https://code.jquery.com/jquery-2.1.4.min.js"
+    script src="assets/js/application.js"

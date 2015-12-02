@@ -6,6 +6,10 @@ module Dragon
       PlayerBuilder.construct(self, console)
     end
 
+    def activity
+      @activity ||= :exploring
+    end
+
     def self.professions
       %w[ warrior wizard soldier rogue cleric ]
     end

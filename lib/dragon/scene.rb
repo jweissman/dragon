@@ -3,7 +3,7 @@ module Dragon
     extend Forwardable
 
     attr_reader :engine
-    attr_reader :last_response, :last_action
+    attr_accessor :last_response, :last_action
 
     include Dragon::Commands
 

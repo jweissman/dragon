@@ -16,6 +16,7 @@ module Dragon
       @player   = player
 
       @playing  = true
+      @last_prompted_actions = nil
     end
 
     def step
@@ -30,7 +31,7 @@ module Dragon
     end   
 
     def describe(deep: true)
-      elements = { place: place, scene: scene }
+      elements = { place: place, scene: scene, player: player }
       elements.merge!(town: town, world: world) if deep
 
       narrate elements
@@ -42,6 +43,7 @@ module Dragon
     end
 
     def react(act)
+      puts "Engine#react act=#{act.label}"
       handle action: act, place: place
       self
     end

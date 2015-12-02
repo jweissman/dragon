@@ -8,7 +8,7 @@ module Dragon
     def_delegators :terminal, :choose_action, :narrate, :say
     def_delegators :scene, :actions, :handle
 
-    attr_reader :world, :player, :terminal
+    attr_reader :world, :player, :terminal, :last_prompted_actions
 
     def initialize(terminal: nil, world: World.generate, player: PlayerCharacter.new)
       @terminal = terminal
@@ -30,15 +30,16 @@ module Dragon
 
     def interact
       prompt_player
-      react
+      react(action)
     end   
 
     def prompt_player
-      choose_action player: player, actions: actions(place)
+      @last_prompted_actions = actions(place)
+      choose_action player: player, actions: @last_prompted_actions
     end
 
-    def react
-      handle action: action, place: place
+    def react(act)
+      handle action: act, place: place
       self
     end
 

@@ -23,7 +23,8 @@ module Dragon
     end
 
     def describe(entity, prefix: '', suffix: '')
-      say prefix + entity.describe + suffix + '.'
+      description = prefix + entity.describe + suffix + '.'
+      say description
     end
 
     def narrate(world: nil, town: nil, place: nil, scene: nil)
@@ -59,8 +60,8 @@ module Dragon
     def narrate_scene(scene)
       describe scene, prefix: "You are currently "
 
-      say scene.last_action, heading: true if scene.last_action
-      say scene.last_response, heading: true if scene.last_response
+      say(scene.last_action, heading: true, important: true) if scene.last_action
+      say(scene.last_response, heading: true, important: true) if scene.last_response
     end
 
     def narrate_place(place)

@@ -6,12 +6,17 @@ class VirtualConsole
   end
 
   def hr(*args)
-    # output_html_content.push("<br><hr><br>")
   end
 
-  def say(message, heading: false, important: nil)
+  def say(message, heading: false, important: false)
+    opts = if important
+             { options: {class: 'important'}}
+           else
+             {}
+           end
+
     output_html_content.push(
-      html_tag(heading ? :h4 : :p, message)
+      html_tag(heading ? :h4 : :p, message, opts)
     )
   end
 

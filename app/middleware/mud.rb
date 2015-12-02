@@ -1,5 +1,4 @@
 require 'faye/websocket'
-require 'pry'
 
 module Dragon
   class Mud
@@ -24,11 +23,14 @@ module Dragon
         session.client == client
       end
 
-      active_session.step!(JSON.parse(event.data))
+      parsed_event_data = JSON.parse(event.data)
+      active_session.step!(parsed_event_data)
     end
 
     def delete(client)
-      @sessions.delete_if { |session| session.client == client }
+      @sessions.delete_if do |session| 
+        session.client == client
+      end
     end
 
     def call(env)

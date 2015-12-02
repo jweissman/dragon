@@ -1,15 +1,17 @@
 module Dragon
   class Engine
+    include Dragon::Scenes
+
     extend Forwardable
 
     def_delegators :player, :action
-    def_delegators :console, :choose_action, :narrate, :say
+    def_delegators :terminal, :choose_action, :narrate, :say
     def_delegators :scene, :actions, :handle
 
-    attr_reader :world, :player, :console
+    attr_reader :world, :player, :terminal
 
-    def initialize(console: nil, world: nil, player: nil)
-      @console = console
+    def initialize(terminal: nil, world: World.generate, player: PlayerCharacter.new)
+      @terminal = terminal
       @world   = world
       @player  = player
 
@@ -29,11 +31,11 @@ module Dragon
     end
 
     def initial_scene
-      Exploration.new(controller: self)
+      Exploration.new(engine: self)
     end
 
     def conversation_with(partner)
-      Conversation.new(controller: self).with(partner: partner)
+      Conversation.new(engine: self).with(partner: partner)
     end
 
     def halt!

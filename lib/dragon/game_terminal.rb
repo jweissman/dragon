@@ -1,5 +1,14 @@
 module Dragon
-  class GameTerminal < Console
+  class GameTerminal
+    attr_accessor :console
+
+    extend Forwardable
+    def_delegators :console, :clear, :say, :hr, :ask, :choose
+
+    def initialize(console)
+      @console = console
+    end
+
     def banner
       clear
       hr
@@ -42,7 +51,6 @@ module Dragon
         choices: actions, 
         labels: Hash[actions.zip(actions.map(&:label))]
 
-        # labels: actions
       self
     end
 

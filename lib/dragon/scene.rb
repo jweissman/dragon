@@ -2,14 +2,16 @@ module Dragon
   class Scene
     extend Forwardable
 
-    attr_reader :controller
+    attr_reader :engine
     attr_reader :last_response, :last_action
 
-    def_delegators :controller, 
+    include Dragon::Commands
+
+    def_delegators :engine, 
       :move_to, :transition_to, :initial_scene, :conversation_with
 
-    def initialize(controller: nil)
-      @controller = controller
+    def initialize(engine: nil)
+      @engine = engine
     end
 
     def handle(action: nil, place: nil)
@@ -24,7 +26,7 @@ module Dragon
     end
 
     def respond_to(action, *args)
-      handler = action.class.handler(controller)
+      handler = action.class.handler(engine)
       handler.handle(action)
     end
   end

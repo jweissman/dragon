@@ -1,0 +1,35 @@
+module Dragon
+  module Scenes
+    class Conversation < Scene
+      attr_reader :partner
+
+      def with(partner: nil)
+        @partner = partner
+        self
+      end
+
+      def describe
+        "talking with #{partner.name}"
+      end
+
+      def actions(place)
+        personal_actions(place) + 
+          basic_conversational_actions(place)
+      end
+
+      protected
+      def personal_actions(place)
+        @partner.conversation_topics(place).map do |topic|
+          AskQuestionCommand.new(topic: topic, partner: @partner)
+        end
+      end
+
+      def basic_conversational_actions(place)
+        [
+          TellJokeCommand.new(subject: Person.professions.sample, partner: @partner),
+          SayGoodbyeCommand.new(partner: @partner)
+        ]
+      end
+    end
+  end
+end

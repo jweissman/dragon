@@ -1,8 +1,7 @@
 module Dragon
   class Game
     extend Forwardable
-    def_delegators :console, :say, :ask, :choose, :banner, 
-                             :welcome, :narrate
+    def_delegators :terminal, :say, :banner, :welcome, :narrate
 
     def_delegators :engine, :step, :still_playing?
 
@@ -20,7 +19,7 @@ module Dragon
     def engine
       @engine ||= Dragon::Engine.new(
         player: player,
-        console: console,
+        terminal: terminal,
         world: world
       )
     end
@@ -29,8 +28,12 @@ module Dragon
       @player ||= PlayerCharacter.build(console)
     end
 
+    def terminal
+      @terminal ||= GameTerminal.new(console)
+    end
+
     def console
-      @console ||= GameTerminal.new
+      @console ||= Console.new
     end
 
     def world

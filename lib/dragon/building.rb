@@ -19,18 +19,19 @@ module Dragon
     end
 
     def rooms
-      @rooms ||= Room.generate_list(self, 2)
-      # Array.new(4) do
-      #   Room.generate(self)
-      # end
+      @rooms ||= Room.generate_list(self, 3)
     end
 
     def self.names
-      %w[ house library tavern ]
+      %w[ house library tavern church ]
     end
 
     def self.aspects
-      %w[ red large small dingy palatial glorious quaint modern ]
+      %w[ red orange grey blue green white
+          tiny large small huge
+          dingy quaint
+          palatial glorious
+          quaint modern ]
     end
   end
 

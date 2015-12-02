@@ -1,4 +1,5 @@
-require 'pry'
+# require 'pry'
+require 'require_all'
 require 'forwardable'
 
 require 'dragon/version'
@@ -21,12 +22,17 @@ require 'dragon/player_builder'
 require 'dragon/console'
 require 'dragon/game_terminal'
 
-require 'dragon/command'
+require 'dragon/conversation_topic'
+require_all 'lib/dragon/conversation_topics'
+
 require 'dragon/command_handler'
+require_all 'lib/dragon/handlers'
+
+require 'dragon/command'
+require_all 'lib/dragon/commands'
 
 require 'dragon/scene'
-require 'dragon/exploration'
-require 'dragon/conversation'
+require_all 'lib/dragon/scenes'
 
 require 'dragon/engine'
 require 'dragon/game'

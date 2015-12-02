@@ -4,7 +4,7 @@ require 'dragon'
 describe Engine do
   describe '#step' do
     subject do
-      Engine.new console: fake_console, world: fake_world, player: fake_player
+      Engine.new terminal: fake_terminal, world: fake_world, player: fake_player
     end
     
     after { subject.step }
@@ -13,7 +13,9 @@ describe Engine do
     let(:fake_place) { instance_double 'Place' }
 
     let(:fake_world) { instance_spy('World') }
-    let(:fake_console) { instance_double 'GameTerminal' }
+
+    #let(:fake_console) { instance_double 'Console' }
+    let(:fake_terminal) { instance_double 'GameTerminal' }
 
     let(:fake_player) { instance_double 'Player' }
 
@@ -26,7 +28,7 @@ describe Engine do
      end
 
     it 'should narrate the scene and interact with the player' do
-      expect(fake_console).to receive(:narrate).with(
+      expect(fake_terminal).to receive(:narrate).with(
         place: fake_place,
         scene: fake_scene,
         town: fake_town,

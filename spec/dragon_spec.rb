@@ -3,18 +3,17 @@ require 'dragon'
 
 describe Dragon do
   context 'should play a game which' do
-    let(:fake_term) do
-      instance_double 'GameTerminal', 
-        banner: true, 
+    let(:fake_console) do
+      instance_double 'Console', 
         say: true, 
         ask: true, 
-        choose: true, 
-        welcome: true,
-        narrate: true
+        choose: true,
+        clear: true,
+        hr: true
     end
 
     before do
-      expect(Dragon.game).to receive(:console).at_least(:once).and_return(fake_term)
+      expect(Dragon.game).to receive(:console).at_least(:once).and_return(fake_console)
       expect(Dragon.game).to receive(:still_playing?).and_return(false)
     end
 

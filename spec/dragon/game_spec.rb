@@ -3,7 +3,11 @@ require 'dragon'
 
 describe Dragon::Game do
   let(:fake_term) do
-    instance_double('GameTerminal', say: true, banner: true, welcome: true, narrate: true) 
+    instance_double('GameTerminal', 
+                    say: true, 
+                    banner: true, 
+                    welcome: true, 
+                    narrate: true) 
   end
 
   let(:fake_player) do
@@ -13,9 +17,9 @@ describe Dragon::Game do
   let(:fake_engine) { instance_spy('Engine', still_playing?: false) }
 
   before do
-    allow(subject).to receive(:console) { fake_term }
-    allow(subject).to receive(:player)  { fake_player }
-    allow(subject).to receive(:engine)  { fake_engine }
+    allow(subject).to receive(:terminal) { fake_term }
+    allow(subject).to receive(:player)   { fake_player }
+    allow(subject).to receive(:engine)   { fake_engine }
   end
 
   describe '#boot!' do

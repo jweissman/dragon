@@ -1,0 +1,5 @@
+p Let's play a game, yo
+.game
+  form action="/play" method="POST"
+    == @game_content_html.join
+    input.button type="submit" value="Let's go already >>"

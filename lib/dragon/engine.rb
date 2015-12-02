@@ -12,20 +12,32 @@ module Dragon
 
     def initialize(terminal: nil, world: World.generate, player: PlayerCharacter.new)
       @terminal = terminal
-      @world   = world
-      @player  = player
+      @world    = world
+      @player   = player
 
-      @playing = true
+      @playing  = true
     end
 
     def step
-      narrate place: place, scene: scene, town: town, world: world
+      describe
       interact
       self
     end
+ 
+    def describe
+      narrate place: place, scene: scene, town: town, world: world
+    end
 
     def interact
+      prompt_player
+      react
+    end   
+
+    def prompt_player
       choose_action player: player, actions: actions(place)
+    end
+
+    def react
       handle action: action, place: place
       self
     end

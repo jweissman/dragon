@@ -2,7 +2,7 @@ module Dragon
   module Handlers
     class ConverseCommandHandler < CommandHandler
       def handle(command)
-        person = command.partner
+        person = command.person
 
         if rand > 0.1
           conversation = engine.conversation_with(person)

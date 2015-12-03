@@ -52,8 +52,8 @@ module Dragon
       end
 
       private
-      def converse_with(partner)
-        ConverseCommand.new(partner: partner)
+      def converse_with(person)
+        ConverseCommand.new(person: person)
       end
 
       def visit(place)

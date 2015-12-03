@@ -1,6 +1,6 @@
 module Dragon
   module Commands
-    class ConverseCommand < Command
+    class IgnorePersonCommand < Command
       attr_reader :person
 
       def initialize(person: nil)
@@ -8,11 +8,11 @@ module Dragon
       end
 
       def describe
-        "You greet #{@person.name}."
+        "You ignore #{@person.name} and keep exploring"
       end
 
       def label
-        "Speak with #{@person.name}"
+        "Ignore #{@person.name}"
       end
     end
   end

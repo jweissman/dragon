@@ -3,7 +3,7 @@ module Dragon
     class ItemLeftBehindEvent < Event
       attr_reader :item
 
-      def initialize(item: item)
+      def initialize(item: nil)
         @item = item
       end
       

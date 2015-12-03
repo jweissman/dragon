@@ -14,10 +14,8 @@ module Dragon
       def actions
         [
           Dragon::Commands::EngageCombatantCommand.new(enemy: enemy)
-          #Dragon::Commands::FleeCombatCommand.new(enemy: enemy)
         ]
       end
-      
     end
   end
 end

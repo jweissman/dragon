@@ -14,6 +14,7 @@ module Dragon
 
       def actions(_)
         [
+          AttackCommand.new(enemy: enemy, player: player),
           FleeCommand.new(enemy: enemy)
         ]
       end

@@ -4,7 +4,8 @@ module Dragon
       def handle(command)
         area = command.place.building.town.areas.first
         engine.move_to area
-        "You walk to #{area.describe}"
+
+        PlayerVisitedPlaceEvent.new(place: area)
       end
     end
   end

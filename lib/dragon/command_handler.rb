@@ -1,3 +1,5 @@
 module Dragon
-  class CommandHandler < Struct.new(:engine); end
+  class CommandHandler < Struct.new(:engine)
+    include Dragon::Events
+  end
 end

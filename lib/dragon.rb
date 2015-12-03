@@ -12,6 +12,8 @@ require 'dragon/area'
 require 'dragon/room'
 require 'dragon/building'
 
+require 'dragon/item'
+
 require 'dragon/town'
 require 'dragon/world'
 
@@ -25,6 +27,9 @@ require 'dragon/game_terminal'
 
 require 'dragon/conversation_topic'
 require_all 'lib/dragon/conversation_topics'
+
+require 'dragon/event'
+require_all 'lib/dragon/events'
 
 require 'dragon/command_handler'
 require_all 'lib/dragon/handlers'

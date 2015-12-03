@@ -11,7 +11,7 @@ module Dragon
           partner.activity = topic.activity
         end
 
-        "#{partner.label} says \"#{response}\""
+        WordsSpokenEvent.new(person: partner, message: response)
       end
     end
   end

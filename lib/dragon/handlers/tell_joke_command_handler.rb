@@ -11,7 +11,8 @@ module Dragon
           positive_responses(subject).sample
         end
 
-        "#{partner.label} says \"#{response}\""
+        WordsSpokenEvent.new(person: partner, message: response)
+        #"#{partner.label} says \"#{response}\""
       end
 
       def negative_responses(subject)

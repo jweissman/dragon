@@ -3,7 +3,8 @@ module Dragon
     extend Forwardable
 
     attr_reader :engine
-    attr_accessor :last_response, :last_action
+    # attr_accessor :last_response, :last_action
+    attr_reader :last_command, :last_event
 
     include Dragon::Commands
 
@@ -15,8 +16,8 @@ module Dragon
     end
 
     def handle(action: nil, place: nil)
-      @last_action   = action.describe
-      @last_response = respond_to(action, place)
+      @last_command   = action #.describe
+      @last_event     = respond_to(action, place)
 
       self
     end

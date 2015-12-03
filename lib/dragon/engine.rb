@@ -4,7 +4,7 @@ module Dragon
 
     extend Forwardable
 
-    def_delegators :player, :action
+    def_delegators :player, :action, :inventory
     def_delegators :terminal, :choose_action, :narrate, :say
     def_delegators :scene, :actions, :handle
 
@@ -31,8 +31,8 @@ module Dragon
     end   
 
     def describe(deep: true)
-      elements = { place: place, scene: scene, player: player }
-      elements.merge!(town: town, world: world) if deep
+      elements = { place: place, scene: scene, player: player, town: town }
+      elements.merge!(world: world) if deep
 
       narrate elements
     end

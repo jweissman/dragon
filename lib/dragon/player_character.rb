@@ -1,9 +1,13 @@
 module Dragon
   class PlayerCharacter < Person
-    attr_accessor :action, :generated
+    attr_accessor :action, :inventory
 
     def self.build(console)
       PlayerBuilder.construct(self, console)
+    end
+
+    def inventory
+      @inventory ||= []
     end
 
     def activity

@@ -39,12 +39,21 @@ module Dragon
       puts
 
       if scene
-        say(scene.last_action, heading: true, important: true) if scene.last_action
-        say(scene.last_response, heading: true, important: true) if scene.last_response
+        describe scene.last_command if scene.last_command
+        describe scene.last_event   if scene.last_event
+        #say(scene.last_command, heading: true, important: true) if scene.last_action
+        #say(scene.last_response, heading: true, important: true) if scene.last_response
         narrate_scene(scene) 
       end
 
       narrate_place(place) if place
+
+      if player.inventory.any?
+        say "Your inventory includes: "
+        player.inventory.each do |item|
+          describe item, prefix: " - A "
+        end
+      end
 
       puts
 
@@ -64,7 +73,6 @@ module Dragon
 
     def narrate_scene(scene)
       describe scene, prefix: "You are currently "
-
     end
 
     def narrate_place(place)

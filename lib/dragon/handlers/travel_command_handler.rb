@@ -8,7 +8,7 @@ module Dragon
 
       def travel(destination)
         engine.travel_to destination
-        "You arrive in #{destination.name}"
+        PlayerTravelledToTownEvent.new(place: destination) 
       end
     end
   end

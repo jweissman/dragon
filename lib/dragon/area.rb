@@ -37,7 +37,10 @@ module Dragon
     end
   end
 
-  class TownSquare < Area; end
+  class TownSquare < Area
+    def can_wander?; false end
+  end
+
   class Forest < Area; end
   class Lake < Area; end
 

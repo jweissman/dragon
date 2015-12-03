@@ -6,10 +6,14 @@ module Dragon
       end
 
       def actions(place)
-        people_actions(place) +
-          outdoor_actions(place) +
-          indoor_actions(place) +
-          base_actions
+        if last_event && last_event.actions.any?
+          last_event.actions
+        else
+          people_actions(place) +
+            outdoor_actions(place) +
+            indoor_actions(place) +
+            base_actions
+        end
       end
 
       protected
@@ -27,7 +31,14 @@ module Dragon
       def outdoor_actions(place)
         return [] unless place.is_a?(Area)
 
-        visit_building_actions(place) + travel_actions(place)
+        visit_building_actions(place) + 
+          travel_actions(place) + 
+          wander_actions(place)
+      end
+
+      def wander_actions(place)
+        return [] unless place.can_wander?
+        [ WanderCommand.new(place: place) ]
       end
 
       def travel_actions(place)

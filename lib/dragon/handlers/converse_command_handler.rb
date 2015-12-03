@@ -2,12 +2,15 @@ module Dragon
   module Handlers
     class ConverseCommandHandler < CommandHandler
       def handle(command)
+        person = command.partner
+
         if rand > 0.1
-          conversation = engine.conversation_with(command.partner)
+          conversation = engine.conversation_with(person)
           engine.transition_to(conversation)
-          "#{command.partner.label} greets you"
+
+          WordsSpokenEvent.new(person: person, message: 'Greetings!')
         else
-          "#{command.partner.label} does not seem to be feel like talking right now"
+          WordsSpokenEvent.new(person: person, message: "Sorry, I'm busy right now")
         end
       end
     end

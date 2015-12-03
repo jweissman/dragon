@@ -23,7 +23,7 @@ module Dragon
     end
 
     def describe(entity, prefix: '', suffix: '')
-      description = prefix + entity.describe + suffix + '.'
+      description = prefix + entity.describe + suffix # + '.'
       say description
     end
 
@@ -31,7 +31,7 @@ module Dragon
       hr
       puts
 
-      describe world, prefix: "You (#{player.describe}) are in the world of " if world
+      describe world, prefix: "You (#{player.name}) are in the world of " if world
       describe town,  prefix: "The town you are in currently is " if town
 
       puts
@@ -41,8 +41,7 @@ module Dragon
       if scene
         describe scene.last_command if scene.last_command
         describe scene.last_event   if scene.last_event
-        #say(scene.last_command, heading: true, important: true) if scene.last_action
-        #say(scene.last_response, heading: true, important: true) if scene.last_response
+
         narrate_scene(scene) 
       end
 

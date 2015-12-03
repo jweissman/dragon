@@ -1,9 +1,9 @@
 module Dragon
   module Events
     class PersonEncounteredEvent < Event
-      attr_reader :person, :place
+      attr_reader :person
 
-      def initialize(person: nil, place: nil)
+      def initialize(person: nil)
         @person = person
       end
 

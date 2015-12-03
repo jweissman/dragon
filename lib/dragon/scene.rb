@@ -4,20 +4,20 @@ module Dragon
 
     attr_reader :engine
     # attr_accessor :last_response, :last_action
-    attr_reader :last_command, :last_event
+    # attr_accessor :last_command, :last_event
 
     include Dragon::Commands
 
-    def_delegators :engine, 
-      :move_to, :transition_to, :initial_scene, :conversation_with
+    def_delegators :engine, :last_command, :last_event
+      # :move_to, :transition_to, :initial_scene, :conversation_with, 
 
     def initialize(engine: nil)
       @engine = engine
     end
 
     def handle(action: nil, place: nil)
-      @last_command   = action #.describe
-      @last_event     = respond_to(action, place)
+      # @last_command   = action #.describe
+      engine.last_event = respond_to(action, place)
 
       self
     end

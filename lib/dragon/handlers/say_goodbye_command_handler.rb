@@ -4,7 +4,7 @@ module Dragon
       def handle(command)
         partner = engine.scene.partner
         engine.transition_to(engine.initial_scene)
-        "#{partner.label} says \"Farewell!\""
+        WordsSpokenEvent.new(person: partner, message: "Farewell!")
       end
     end
   end

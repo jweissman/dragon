@@ -13,12 +13,14 @@ module Dragon
       @player = player
       @client = client
       @engine = engine
+
+      @first_time = true
     end
 
     def make_character
       clear
       PlayerCharacter.build(console)
-      send output
+      send output if output
       self
     end
 
@@ -27,11 +29,17 @@ module Dragon
 
       clear
       process_event(data) if data
-      describe
+      describe deep: @first_time
       prompt_player
-      send output
+      send output if output
+
+      @first_time = false if @first_time
 
       self
+    end
+
+    def first_time?
+      @first_time
     end
 
     protected
@@ -63,7 +71,7 @@ module Dragon
     end
 
     def output
-      JSON.dump(content: content.join)
+      JSON.dump(content: content.join) if content
     end
   
     def handle(label)
@@ -86,7 +94,7 @@ module Dragon
 
     private
     def console
-      @console ||= VirtualConsole.new
+      @console ||= StreamingVirtualConsole.new(self)
     end 
 
     def terminal

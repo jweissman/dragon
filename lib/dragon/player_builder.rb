@@ -8,13 +8,14 @@ module Dragon
 
     def character_for(player)
       ask_name player
-      choose_job player
-
-      choose_race player
-      choose_subtype player
-
       console.ask :age,    of: player
       console.ask :gender, of: player
+
+
+      choose_subtype player
+      choose_race player
+      choose_job player
+
 
       player
     end

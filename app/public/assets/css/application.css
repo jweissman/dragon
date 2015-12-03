@@ -1,30 +1,80 @@
 body { 
-  color: black;
-  background-color: grey;
+  color: white;
+  background-color: #8abf8a;
   font-family: helvetica;
+  font-size: 120%;
 }
 
-h2 { font-size: 18px; padding: 10px; }
+body.index .container {
+  background-color: seashell;
+}
+
+h2 { color: black; }
+
+a { color: seashell; }
+a:visited { color: black; }
+
+.topnav {
+  margin-left: 80px;
+  font-size: 70%;
+}
 
 .container {
-  font-family: courier;
   color: black;
-  font-size: 12px;
-  background-color: #e8e8e8;
-  padding: 20px 50px 20px 50px;
-  margin: 20px 60px 60px 60px;
+  background-image: linear-gradient( 45deg,rgba(200,240,200,0.85), seashell);
+
+  padding: 30px 50px 30px 50px;
+  margin: 10px 80px 80px 80px;
+
+  border: 1px solid grey;
 }
 
 .important { 
-  color: green; 
-  font-weight: 'ultra bold';
-  font-family: helvetica;
+  font-size: 110%;
+}
+
+.advice {
+  color: green;
+  font-size: 76%;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .inline { display:inline; }
 
 input[type=submit] {
-  font-size: 20px;
-  padding: 20px;
-  background-color: white;
+  width: 200px;
+  font-size: 150%;
+}
+
+input[type=text] {
+  font-size: 18px;
+  background-color: black;
+  color: lime;
+  width: 200px;
+}
+
+select {
+  font-size: 18px;
+  background-color: black;
+  color: lime;
+  max-width: 200px;
+  width: 200px;
+}
+
+[class*='col-'] {
+  float: left;
+}
+
+.col-2-3 {
+  width: 66.63%;
+}
+.col-1-3 {
+  width: 33.33%;
+}
+
+.grid:after {
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -3,12 +3,16 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rake'
-
 gem 'require_all'
-gem 'pry', group: :development
-
 gem 'faye-websocket'
 gem 'sinatra'
 gem 'puma'
 gem 'slim'
+
+group :development do
+  gem 'rake'
+  gem 'pry'
+  gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
+end
+
+

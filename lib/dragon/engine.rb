@@ -68,6 +68,11 @@ module Dragon
       @current_place = place
     end
 
+    def travel_to(new_town)
+      @town = new_town
+      @current_place = new_town.areas.sample
+    end
+
     def still_playing?
       @playing
     end

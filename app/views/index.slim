@@ -1,3 +1,33 @@
-h3 Welcome to dragon!
-p Let's get started.
-a href='/play' Enter the realms...
+.grid
+  .col-2-3
+    h2 Welcome to Dragon!
+    p The hunt is on for the legendary beast!
+    p Do you have have it takes to compete?
+    p 
+      span Do you have what it takes to 
+      i conquer?
+
+    h2 What is it?
+    p A text-based multiplayer role-playing game.
+
+    h2 Let's get started
+    p First you'll need to create a character.
+    p
+      == "&rarr;"
+      span &nbsp;
+      a href='/play' Click here to enter the realms...
+      span &nbsp;
+      == "&larr;"
+
+  .col-1-3
+    h4 What language is Dragon written in?
+    p The Dragon engine itself is implemented in pure Ruby. 
+    div
+      span It's open source, so you can read or fork 
+      a href='http://github.com/jweissman/dragon' Dragon on Github.
+
+    h4 How does the web client work?
+    p This webapp uses Sinatra-plus-websockets to permit multiple wanderers to explore the Realms at once.
+
+    h4 What are the Realms?
+    p The Realms are a procedurally-generated fantasy world which the Dragon engine permits you to explore...

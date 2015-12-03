@@ -1,6 +1,19 @@
 module Dragon
   class Name
     def self.generate
+      @generated ||= []
+      generated_name = nil
+
+      while generated_name.nil? || @generated.include?(generated_name)
+        generated_name = perform_generation 
+      end
+
+      @generated.push(generated_name)
+      generated_name
+    end
+
+    protected
+    def self.perform_generation
       count = (1..2).to_a.sample
       components.sample(count).join.capitalize
     end

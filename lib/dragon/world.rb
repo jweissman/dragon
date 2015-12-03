@@ -5,7 +5,7 @@ module Dragon
     end
 
     def towns
-      @towns ||= Array.new(5) { Town.generate }
+      @towns ||= Array.new(5) { Town.generate(self) }
     end
 
     def self.generate

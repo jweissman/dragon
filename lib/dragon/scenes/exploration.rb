@@ -12,6 +12,7 @@ module Dragon
           base_actions
       end
 
+      protected
       def people_actions(place)
         place.people.collect(&method(:converse_with))
       end
@@ -26,11 +27,20 @@ module Dragon
       def outdoor_actions(place)
         return [] unless place.is_a?(Area)
 
+        visit_building_actions(place) + travel_actions(place)
+      end
+
+      def travel_actions(place)
+        towns = place.town.world.towns - [place.town]
+        towns.collect(&method(:travel))
+      end
+
+      def visit_building_actions(place)
         buildings = place.town.buildings + (place.town.areas - [place])
         buildings.collect(&method(:visit))
       end
 
-      protected
+      private
       def converse_with(partner)
         ConverseCommand.new(partner: partner)
       end
@@ -41,6 +51,10 @@ module Dragon
 
       def egress_from(place)
         EgressCommand.new(place: place)
+      end
+
+      def travel(place)
+        TravelCommand.new(destination: place)
       end
     end
   end

@@ -1,7 +1,11 @@
 module Dragon
   class Town < Struct.new(:name, :type, :subtype, :feature)
-    def self.generate
-      new(Name.generate, types.sample, subtypes.sample, features.sample)
+    attr_accessor :world
+
+    def self.generate(world)
+      town = new(Name.generate, types.sample, subtypes.sample, features.sample)
+      town.world = world
+      town
     end
 
     def self.subtypes

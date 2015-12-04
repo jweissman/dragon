@@ -34,7 +34,7 @@ module Dragon
     def interact
       prompt_player
       react(action)
-    end   
+    end
 
     def describe(deep: true)
       elements = { place: place, scene: scene, player: player, town: town }
@@ -54,7 +54,6 @@ module Dragon
       process last_events
       self
     end
-
 
     def process(events)
       events.flatten.compact.each do |evt|

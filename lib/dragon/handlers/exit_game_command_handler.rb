@@ -3,7 +3,7 @@ module Dragon
     class ExitGameCommandHandler < CommandHandler
       def handle(command)
         engine.halt!
-        "Well bye!"
+        PlayerLeftRealmsEvent.new
       end
     end
   end

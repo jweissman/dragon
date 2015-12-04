@@ -10,6 +10,12 @@
     var content = data.content;
     console.log("content from server", content);
     $(".content").html(content);
+
+    if ($(".content select").length > 0) {
+      $(".button").prop('disabled', false);
+    } else {
+      $(".button").prop('disabled', true);
+    }
   };
 
   var submitFormOverWebsocket = function(event) {

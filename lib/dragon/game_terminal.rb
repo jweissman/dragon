@@ -27,7 +27,6 @@ module Dragon
       say capitalize_first_word(description), important: important
     end
 
-
     def narrate(world: nil, town: nil, place: nil, scene: nil, player: nil)
       hr
       puts
@@ -102,9 +101,9 @@ module Dragon
                           end
 
       if place.is_a?(Room)
-        describe place, prefix: "You are #{place_preposition} a ", suffix: " inside a #{place.building.describe}" 
+        describe place, prefix: "You are #{place_preposition} the ", suffix: " of a #{place.building.describe}" 
       else
-        describe place, prefix: "You are #{place_preposition} a "
+        describe place, prefix: "You are #{place_preposition} the "
       end
 
       if place.people.any?

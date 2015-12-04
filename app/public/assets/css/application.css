@@ -8,7 +8,7 @@ body {
   background-color: #8abf8a;
   font-family: helvetica;
   font-size: 120%;
-  margin: 0 0 30px;
+  margin: 0 0 18px;
 }
 
 a { color: green; font-weight: bold; }
@@ -38,8 +38,10 @@ a { color: green; font-weight: bold; }
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 30px;
+  height: 18px;
   width: 100%;
+  font-size: 70%;
+  padding: 3px;
   text-align: center;
 }
 
@@ -50,7 +52,7 @@ a { color: green; font-weight: bold; }
 }
 
 .important { 
-  font-size: 120%;
+  font-size: 100%;
   font-weight: bold;
 }
 

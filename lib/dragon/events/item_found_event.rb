@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "You find an #{item.describe}"
+        "You find a(n) #{item.describe}"
       end
 
       def actions

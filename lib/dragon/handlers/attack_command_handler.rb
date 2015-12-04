@@ -8,15 +8,15 @@ module Dragon
       end
 
       def assemble_events(enemy, player)
-        facts = []
-        facts << player_attacks_enemy(enemy, player)
+        events = []
+        events << player_attacks_enemy(enemy, player)
 
         if enemy.alive?
-          facts << EnemyAttackedEvent.new(enemy: enemy)
-          facts << enemy_attacks_player(enemy, player)
+          events << EnemyAttackedEvent.new(enemy: enemy)
+          events << enemy_attacks_player(enemy, player)
         end
 
-        facts
+        events
       end
 
       def player_attacks_enemy(enemy, player)

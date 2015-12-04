@@ -25,8 +25,8 @@ module Dragon
       @map_hp ||= Enemy.max_hp_for_species(species)
     end
 
-    def describe
-      "#{subtype} #{species}"
+    def describe(prefix: 'the')
+      "#{prefix} #{subtype} #{species}"
     end
 
     def self.species_list

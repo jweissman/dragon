@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "A wild #{enemy.describe} appears!"
+        "you encounter #{enemy.describe(prefix: 'a(n)')}"
       end
 
       def actions

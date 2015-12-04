@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "The #{enemy.describe} engages you!"
+        "#{enemy.describe} engages you"
       end
     end
   end

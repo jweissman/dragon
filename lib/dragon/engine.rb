@@ -55,6 +55,7 @@ module Dragon
       self
     end
 
+
     def process(events)
       events.flatten.compact.each do |evt|
         evt.class.listener.receive(evt) if evt.class.listener

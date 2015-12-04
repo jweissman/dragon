@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "#{enemy.describe} attacked!"
+        "#{enemy.describe} attacked"
       end
     end
   end

@@ -24,8 +24,9 @@ module Dragon
 
     def describe(entity, prefix: '', suffix: '', important: false)
       description = prefix + entity.describe + suffix + '.'
-      say description, important: important
+      say capitalize_first_word(description), important: important
     end
+
 
     def narrate(world: nil, town: nil, place: nil, scene: nil, player: nil)
       hr
@@ -33,6 +34,7 @@ module Dragon
 
       describe world, prefix: "You (#{player.describe}) are in the world of " if world
       describe town,  prefix: "The town you are in currently is " if town
+      narrate_place(place) if place
 
       puts
       hr light: true
@@ -41,8 +43,6 @@ module Dragon
       if scene
         narrate_scene scene
       end
-
-      narrate_place(place) if place
 
       if player.inventory.any?
         say "Your inventory includes: "
@@ -86,6 +86,7 @@ module Dragon
       if events.any?
         news = events.flatten.compact
         news.each do |event|
+          simulate_delay_for_dramatic_purposes if news.length > 1
           describe event, important: true
         end
       end
@@ -113,6 +114,19 @@ module Dragon
           describe person, prefix: "There is a person "
         end
       end
+    end
+
+    private
+    def capitalize_first_word(sentence)
+      words = sentence.split(' ')
+      first = words.first.capitalize
+      rest  = words[1..-1]
+
+      [first, rest].flatten.join(' ')
+    end
+
+    def simulate_delay_for_dramatic_purposes
+      sleep 1.0
     end
   end
 end

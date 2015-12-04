@@ -12,15 +12,15 @@ module Dragon
       end
 
       def describe
-        @description ||= "#{player_description} attack #{enemy_description}!"
+        @description ||= "#{player_description} attack #{enemy_description}"
       end
 
       def player_description
-        "You (#{player.hp}/#{player.max_hp})"
+        "you (#{player.hp}/#{player.max_hp})"
       end
 
       def enemy_description
-        "#{enemy.describe} (#{enemy.hp}/#{enemy.max_hp})!"
+        "#{enemy.describe} (#{enemy.hp}/#{enemy.max_hp})"
       end
 
       def label

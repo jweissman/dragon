@@ -5,11 +5,16 @@ html
     link href="assets/css/application.css" rel='stylesheet' type='text/css'
 
   body class=@page
+    #bg
+
     .topnav
       h2.inline Dragon &nbsp;
       a.inline href="/" home
+      span &nbsp; | &nbsp;
+      a.inline href="play" play
 
     .container== yield
 
     script src="https://code.jquery.com/jquery-2.1.4.min.js"
+    script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"
     script src="assets/js/application.js"

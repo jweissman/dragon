@@ -25,20 +25,38 @@ module Dragon
     end
 
     def people
-      @people ||= Array.new(1) { Person.generate }
+      @people ||= generate_people
+    end
+
+    def generate_people
+      if populated?
+        Array.new([2,3].sample) { Person.generate }
+      else
+        []
+      end
     end
 
     def describe
-      "#{name} #{type_label}"
+      "#{name} #{label}"
     end
 
-    def type_label
+    def label
       self.class.name.split('::').last
+    end
+
+    def populated?
+      false
     end
   end
 
   class TownSquare < Area
-    def can_wander?; false end
+    def can_wander?
+      false
+    end
+
+    def populated?
+      true
+    end
   end
 
   class Forest < Area; end

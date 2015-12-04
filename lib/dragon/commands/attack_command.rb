@@ -6,10 +6,13 @@ module Dragon
       def initialize(player: nil, enemy: nil)
         @enemy = enemy
         @player = player
+
+        # TODO add part of the data of the command obj in retrospect
+        describe
       end
 
       def describe
-        "You (#{player.hp}/#{player.max_hp}) attack #{enemy.describe}"
+        @description ||= "You (#{player.hp}/#{player.max_hp}) attack #{enemy.describe}"
       end
 
       def label

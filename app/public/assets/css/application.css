@@ -27,7 +27,8 @@ a { color: green; font-weight: bold; }
 }
 
 .important { 
-  font-size: 110%;
+  font-size: 120%;
+  font-weight: bold;
 }
 
 .advice {

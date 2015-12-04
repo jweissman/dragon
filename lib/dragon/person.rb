@@ -1,5 +1,5 @@
 module Dragon
-  class Person < Entity
+  class Person < Combatant
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype
 

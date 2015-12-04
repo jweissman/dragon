@@ -9,8 +9,8 @@ module Dragon
 
       def events_for(place)
         [
-          ItemFoundEvent.new(item: Item.generate),
-          PersonEncounteredEvent.new(person: Person.generate),
+          # ItemFoundEvent.new(item: Item.generate),
+          # PersonEncounteredEvent.new(person: Person.generate),
           EnemyEncounteredEvent.new(enemy: Enemy.generate)
         ]
       end

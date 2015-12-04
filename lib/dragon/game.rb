@@ -25,7 +25,7 @@ module Dragon
     end
 
     def player
-      @player ||= PlayerCharacter.build(console)
+      @player ||= PlayerBuilder.construct(PlayerCharacter, console)
     end
 
     def terminal

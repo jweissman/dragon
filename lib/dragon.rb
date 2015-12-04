@@ -17,9 +17,9 @@ require 'dragon/item'
 require 'dragon/town'
 require 'dragon/world'
 
-require 'dragon/enemy'
-
+require 'dragon/combatant'
 require 'dragon/person'
+require 'dragon/enemy'
 
 require 'dragon/player_character'
 require 'dragon/player_builder'

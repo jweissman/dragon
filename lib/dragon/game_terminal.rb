@@ -31,7 +31,7 @@ module Dragon
       hr
       puts
 
-      describe world, prefix: "You (#{player.name}) are in the world of " if world
+      describe world, prefix: "You (#{player.describe}) are in the world of " if world
       describe town,  prefix: "The town you are in currently is " if town
 
       puts
@@ -72,19 +72,20 @@ module Dragon
 
     def narrate_scene(scene)
       describe scene, prefix: "You are currently "
-
+      
       command = scene.last_command
       if command
         describe command, important: true
       end
-      
+       
       events = scene.last_events
       narrate_events(events) if events.any?
     end
 
     def narrate_events events
       if events.any?
-        events.reverse.each do |event|
+        news = events.flatten.compact
+        news.each do |event|
           describe event, important: true
         end
       end

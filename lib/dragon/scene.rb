@@ -13,7 +13,6 @@ module Dragon
 
     def handle(action: nil, place: nil)
       engine.last_events = []
-      tick
       engine.last_events.push respond_to(action) #, place)
       self
     end
@@ -25,10 +24,6 @@ module Dragon
     def respond_to(action)
       handler = action.class.handler(engine)
       handler.handle(action)
-    end
-
-    def tick
-      # noop in most cases
     end
   end
 end

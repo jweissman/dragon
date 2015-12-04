@@ -26,7 +26,7 @@ module Dragon
     end
 
     def choose_job(player)
-      console.choose :profession, of: player, 
+      console.choose :profession, of: player,
         prompt: PLAYER_TYPE_PROMPT,
         choices: PlayerCharacter.professions
     end

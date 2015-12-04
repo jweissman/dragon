@@ -19,7 +19,7 @@ module Dragon
 
     def make_character
       clear
-      PlayerCharacter.build(console)
+      PlayerBuilder.construct PlayerCharacter, console
       send output if output
       self
     end
@@ -45,8 +45,8 @@ module Dragon
     protected
     def process_event(data)
       puts "---> processing event..."
-      action_record = data.detect do |record| 
-        record['name'] == 'action' 
+      action_record = data.detect do |record|
+        record['name'] == 'action'
       end
 
       profession_present = data.detect do |record|
@@ -73,7 +73,7 @@ module Dragon
     def output
       JSON.dump(content: content.join) if content
     end
-  
+
     def handle(label)
       puts "GameSession#handle label=#{label}"
       actions = last_prompted_actions
@@ -95,7 +95,7 @@ module Dragon
     private
     def console
       @console ||= StreamingVirtualConsole.new(self)
-    end 
+    end
 
     def terminal
       @terminal ||= GameTerminal.new(console)

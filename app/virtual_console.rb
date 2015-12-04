@@ -6,7 +6,6 @@ class VirtualConsole
     @session = session
   end
 
-
   def clear
     flush!
   end

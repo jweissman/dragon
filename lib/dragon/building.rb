@@ -23,7 +23,7 @@ module Dragon
     end
 
     def self.names
-      %w[ house library tavern church ]
+      %w[ house library tavern church hospital ]
     end
 
     def self.aspects

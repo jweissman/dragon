@@ -11,7 +11,7 @@ module Dragon
     attr_reader :world, :player, :terminal, :last_prompted_actions
 
     attr_reader :last_command
-    attr_accessor :last_event
+    attr_accessor :last_events
 
     def initialize(terminal: nil, world: World.generate, player: PlayerCharacter.new)
       @terminal = terminal
@@ -21,7 +21,7 @@ module Dragon
       @playing  = true
       @last_prompted_actions = nil
 
-      @last_event = nil
+      @last_events = []
       @last_command = nil
     end
 
@@ -49,9 +49,8 @@ module Dragon
     end
 
     def react(act)
-      puts "Engine#react act=#{act.label}"
       @last_command = act
-      handle action: act, place: place
+      handle action: act
       self
     end
 
@@ -72,9 +71,6 @@ module Dragon
     end
 
     def transition_to(scene)
-      # @last_command = @current_scene.last_command
-      # @last_event   = @current_scene.last_event
-
       @current_scene = scene
     end
 
@@ -86,7 +82,6 @@ module Dragon
       @town = new_town
       @current_place = new_town.areas.sample
     end
-
 
     def still_playing?
       @playing

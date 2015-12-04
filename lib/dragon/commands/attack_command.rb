@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "You attack #{enemy.describe}"
+        "You (#{player.hp}/#{player.max_hp}) attack #{enemy.describe}"
       end
 
       def label

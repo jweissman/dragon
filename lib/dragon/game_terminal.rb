@@ -22,9 +22,9 @@ module Dragon
       self
     end
 
-    def describe(entity, prefix: '', suffix: '')
+    def describe(entity, prefix: '', suffix: '', important: false)
       description = prefix + entity.describe + suffix # + '.'
-      say description
+      say description, important: important
     end
 
     def narrate(world: nil, town: nil, place: nil, scene: nil, player: nil)
@@ -39,10 +39,7 @@ module Dragon
       puts
 
       if scene
-        describe scene.last_command if scene.last_command
-        describe scene.last_event   if scene.last_event
-
-        narrate_scene(scene) 
+        narrate_scene scene
       end
 
       narrate_place(place) if place
@@ -60,10 +57,13 @@ module Dragon
     end
 
     def choose_action(player: nil, actions: nil)
-      choose :action, of: player,
+      labels = Hash[actions.zip(actions.map(&:label))]
+
+      choose :action, 
+        of: player,
         prompt: PLAYER_ACTION_PROMPT,
         choices: actions, 
-        labels: Hash[actions.zip(actions.map(&:label))]
+        labels: labels
 
       self
     end
@@ -72,6 +72,22 @@ module Dragon
 
     def narrate_scene(scene)
       describe scene, prefix: "You are currently "
+
+      command = scene.last_command
+      if command
+        describe command, important: true
+      end
+      
+      events = scene.last_events
+      narrate_events(events) if events.any?
+    end
+
+    def narrate_events events
+      if events.any?
+        events.reverse.each do |event|
+          describe event, important: true
+        end
+      end
     end
 
     def narrate_place(place)

@@ -1,9 +1,9 @@
 module Dragon
   class Scene
     include Dragon::Commands
-
     extend Forwardable
-    def_delegators :engine, :player, :last_command, :last_event
+
+    def_delegators :engine, :player, :last_command, :last_events
 
     attr_reader :engine
 
@@ -12,7 +12,9 @@ module Dragon
     end
 
     def handle(action: nil, place: nil)
-      engine.last_event = respond_to(action, place)
+      engine.last_events = []
+      tick
+      engine.last_events.push respond_to(action) #, place)
       self
     end
 
@@ -20,9 +22,13 @@ module Dragon
       [ ExitGameCommand.new ]
     end
 
-    def respond_to(action, *args)
+    def respond_to(action)
       handler = action.class.handler(engine)
       handler.handle(action)
+    end
+
+    def tick
+      # noop in most cases
     end
   end
 end

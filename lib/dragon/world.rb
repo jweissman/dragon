@@ -8,6 +8,14 @@ module Dragon
       @towns ||= Array.new(5) { Town.generate(self) }
     end
 
+    def random_hospital
+      hospitals = towns.flat_map(&:buildings).select do |building|
+        building.name == 'hospital'
+      end
+
+      hospitals.sample
+    end
+
     def self.generate
       new(names.sample, types.sample, subtypes.sample, wonders.sample)
     end

@@ -20,15 +20,33 @@ module Dragon
         ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })
 
         ws.on :open do |event|
-          create(ws)
+          begin
+            p [:open]
+            create(ws)
+          rescue => ex
+            puts ex.message
+            puts ex.backtrace
+          end
         end
 
         ws.on :message do |event|
-          update(ws, event)
+          begin
+            p [:msg, event.data]
+            update(ws, event)
+          rescue => ex
+            puts ex.message
+            puts ex.backtrace
+          end
         end
 
         ws.on :close do |event|
-          delete(ws)
+          begin
+            p [:close]
+            delete(ws)
+          rescue => ex
+            puts ex.message
+            puts ex.backtrace
+          end
         end
 
         # Return async Rack response

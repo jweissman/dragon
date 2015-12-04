@@ -6,8 +6,8 @@ module Dragon
       end
 
       def actions(place)
-        if last_event && last_event.actions.any?
-          last_event.actions
+        if last_events && last_events.any? { |evt| evt.actions.any? }
+          last_events.flat_map { |evt| evt.actions }
         else
           people_actions(place) +
             outdoor_actions(place) +

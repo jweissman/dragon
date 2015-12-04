@@ -2,7 +2,6 @@ body {
   color: white;
   background-color: #8abf8a;
   font-family: helvetica;
-  font-size: 120%;
 }
 
 body.index .container {
@@ -10,9 +9,7 @@ body.index .container {
 }
 
 h2 { color: black; }
-
-a { color: seashell; }
-a:visited { color: black; }
+a { color: green; font-weight: bold; }
 
 .topnav {
   margin-left: 80px;

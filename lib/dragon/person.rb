@@ -9,7 +9,6 @@ module Dragon
       name: Name.generate, 
       profession: professions.sample
     )
-
       person = new(name)
       person.profession = profession
       person.gender = %w[ male female other ].sample

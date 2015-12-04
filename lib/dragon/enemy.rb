@@ -7,6 +7,10 @@ module Dragon
       @hp = @max_hp = hp
     end
 
+    def attack_damage_against(target)
+      attack_rating - target.defense_rating
+    end
+
     def xp
       100
     end
@@ -20,7 +24,7 @@ module Dragon
     end
 
     def attack_rating
-      1
+      4
     end
 
     def defense_rating

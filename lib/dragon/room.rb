@@ -3,14 +3,14 @@ module Dragon
     attr_accessor :building, :people, :aspect
 
     def describe
-      "#{aspect} #{label}"
+      "#{aspect} #{name.gsub('_', ' ')}"
     end
 
     def self.generate_list(building, n)
       professions = associated_professions(building.name).sample(n)
 
       list = professions.zip(names(building.name).shuffle).collect do |profession, name|
-        generate(building, professions, name) 
+        generate(building, professions, name)
       end
 
       list.take(n)
@@ -20,7 +20,9 @@ module Dragon
       room  = new(name)
       room.building = building
       room.aspect   = aspects.sample
-      room.people   = Array.new(2) { Person.generate(profession: professions.sample) } 
+      room.people   = Array.new(2) do
+        Person.generate(profession: professions.sample)
+      end
       room
     end
 

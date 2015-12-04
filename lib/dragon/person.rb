@@ -43,7 +43,7 @@ module Dragon
     end
 
     def self.races
-      %w[ human elf dwarf halfling gnome orc ]
+      %w[ human elf dwarf halfling gnome orc goblin centaur ]
     end
 
     def self.subtypes
@@ -52,7 +52,7 @@ module Dragon
 
     def self.professions
       %w[ wife child husband grandmother professor student scribe professor
-          reader barkeep drunk waiter gambler bard ]
+          reader barkeep drunk waiter gambler bard priest nurse ]
     end
 
     def conversation_topics(place)

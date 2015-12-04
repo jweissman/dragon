@@ -8,7 +8,11 @@ module Dragon
 
       def travel(destination)
         engine.travel_to destination
-        PlayerTravelledToTownEvent.new(place: destination) 
+
+        [
+          PlayerTravelledToTownEvent.new(place: destination),
+          PlayerVisitedPlaceEvent.new(place: engine.place)
+        ]
       end
     end
   end

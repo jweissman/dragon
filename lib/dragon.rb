@@ -33,6 +33,9 @@ require_all 'lib/dragon/conversation_topics'
 require 'dragon/event'
 require_all 'lib/dragon/events'
 
+require 'dragon/event_listener'
+require_all 'lib/dragon/listeners'
+
 require 'dragon/command_handler'
 require_all 'lib/dragon/handlers'
 

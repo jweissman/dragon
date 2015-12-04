@@ -22,13 +22,5 @@ module Dragon
     def describe
       label
     end
-
-    def label
-      name.to_s.
-        gsub('_', ' ').
-        split(' ').
-        map(&:capitalize).
-        join(' ')
-    end
   end
 end

@@ -14,7 +14,7 @@ module Dragon
     end
 
     def attack_rating
-      5
+      6
     end
 
     def defense_rating
@@ -26,7 +26,7 @@ module Dragon
     end
 
     def describe
-      "#{subtype} #{species} (#{hp}/#{max_hp})"
+      "#{subtype} #{species}"
     end
 
     def self.species_list
@@ -35,10 +35,10 @@ module Dragon
 
     def self.max_hp_for_species(species)
       {
-        rat: 3,
-        snake: 4,
+        rat: 5,
+        snake: 6,
         wolf: 8,
-        slime: 4 
+        slime: 12
       }[species.to_sym]
     end
 

@@ -51,7 +51,14 @@ module Dragon
     def react(act)
       @last_command = act
       handle action: act
+      process last_events
       self
+    end
+
+    def process(events)
+      events.flatten.compact.each do |evt|
+        evt.class.listener.receive(evt) if evt.class.listener
+      end
     end
 
     def initial_scene

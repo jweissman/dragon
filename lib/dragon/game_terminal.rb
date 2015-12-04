@@ -18,12 +18,12 @@ module Dragon
     end
 
     def welcome(player)
-      say "Thanks for playing Dragon, #{player.label}!"
+      say "Thanks for playing Dragon, #{player.name}!"
       self
     end
 
     def describe(entity, prefix: '', suffix: '', important: false)
-      description = prefix + entity.describe + suffix # + '.'
+      description = prefix + entity.describe + suffix + '.'
       say description, important: important
     end
 

@@ -4,7 +4,10 @@ module Dragon
       def handle(command)
         enemy = command.enemy
         player = command.player
+        assemble_events(enemy, player)
+      end
 
+      def assemble_events(enemy, player)
         facts = []
         facts << player_attacks_enemy(enemy, player)
 
@@ -17,43 +20,82 @@ module Dragon
       end
 
       def player_attacks_enemy(enemy, player)
-        attack_succeeded = rand > player.chance_of_hitting(enemy)
-        if attack_succeeded
-          damage = player.attack!(enemy)
-          if enemy.alive?
-            EnemyTookDamageEvent.new(enemy: enemy, amount: damage)
-          else
-            engine.transition_to(engine.initial_scene)
-            EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
-          end
-        else
+        result = perform_attack(player, enemy)
+
+        if result.hit?
+          EnemyTookDamageEvent.new(enemy: enemy, amount: result.amount)
+        elsif result.dodge?
           EnemyDodgedAttackEvent.new(enemy: enemy)
+        elsif result.ko?
+          engine.transition_to(engine.initial_scene)
+          EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
         end
       end
 
       def enemy_attacks_player(enemy, player)
-        attack_succeeded = rand > enemy.chance_of_hitting(player)
+        result = perform_attack(enemy, player)
+
+        if result.hit?
+          PlayerTookDamageEvent.new(enemy: enemy, amount: result.amount)
+        elsif result.dodge?
+          PlayerDodgedAttackEvent.new(enemy: enemy)
+        elsif result.ko?
+          hospital = take_player_to_hospital(player)
+
+          PlayerPassedOutEvent.new(
+            player: player, 
+            place: hospital, 
+            cause: "the #{enemy.describe} defeated you"
+          )
+        end
+      end
+
+      def take_player_to_hospital(player)
+        hospital = engine.world.random_hospital
+
+        engine.move_to(hospital.rooms.sample)
+        engine.transition_to(engine.initial_scene)
+
+        player.heal!
+
+        hospital
+      end
+
+      protected
+      class AttackResult
+        def dodge?; false end
+        def ko?; false end
+        def hit?; false end
+      end
+
+      class Dodge < AttackResult
+        def dodge?; true end
+      end
+
+      class Knockout < AttackResult
+        def ko?; true end
+      end
+
+      class Damage < AttackResult
+        attr_reader :amount
+        def initialize(amount: nil)
+          @amount = amount
+        end
+
+        def hit?; true end
+      end
+
+      def perform_attack(a, b)
+        attack_succeeded = rand > a.chance_of_hitting(b)
         if attack_succeeded
-          damage = enemy.attack!(player)
-          if player.alive?
-            PlayerTookDamageEvent.new(enemy: enemy, amount: damage)
+          damage = a.attack!(b)
+          if b.alive?
+            Damage.new(amount: damage)
           else
-            player.heal!
-
-            hospital = engine.world.random_hospital
-
-            engine.move_to(hospital.rooms.sample)
-            engine.transition_to(engine.initial_scene)
-
-            #player_passed_out(player, hospital, enemy)
-            PlayerPassedOutEvent.new(
-              player: player, 
-              place: hospital, 
-              cause: "the #{enemy.describe} defeated you"
-            )
+            Knockout.new
           end
         else
-          PlayerDodgedAttackEvent.new(enemy: enemy)
+          Dodge.new
         end
       end
     end

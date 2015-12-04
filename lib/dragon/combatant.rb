@@ -20,7 +20,7 @@ module Dragon
     end
 
     def attack_damage_against(target)
-      (attack_rating - target.defense_rating)
+      attack_rating - target.defense_rating
     end
 
     def chance_of_hitting(target)

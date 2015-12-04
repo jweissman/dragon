@@ -1,7 +1,7 @@
 module Dragon
   class World < Struct.new(:name, :type, :subtype, :wonder)
     def describe
-      "#{name}, #{subtype} #{type} of #{wonder}"
+      "#{name.capitalize}, #{subtype} #{type} of #{wonder.capitalize}"
     end
 
     def towns

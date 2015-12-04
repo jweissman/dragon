@@ -1,6 +1,8 @@
 module Dragon
   module Events
     class WordsSpokenEvent < Event
+      attr_reader :person, :message
+
       def initialize(person: nil, message: nil)
         @person = person
         @message = message

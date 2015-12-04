@@ -1,6 +1,6 @@
 module Dragon
   module Events
-    class CombatEngagedEvent
+    class CombatEngagedEvent < Event
       attr_reader :enemy
 
       def initialize(enemy: nil)

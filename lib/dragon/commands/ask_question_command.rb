@@ -2,6 +2,7 @@ module Dragon
   module Commands
     class AskQuestionCommand < Command
       attr_reader :partner, :topic
+
       def initialize(partner: nil, topic: nil)
         @partner = partner
         @topic = topic
@@ -12,7 +13,7 @@ module Dragon
       end
 
       def label
-        "Ask #{@topic.describe}"
+        "Ask #{@partner.name} #{@topic.describe}"
       end
     end
   end

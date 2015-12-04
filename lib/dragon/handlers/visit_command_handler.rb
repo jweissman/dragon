@@ -8,8 +8,8 @@ module Dragon
 
       def visit(place)
         engine.move_to(place)
+
         PlayerVisitedPlaceEvent.new(place: place)
-        #"You visit #{place.describe}"
       end
 
       protected

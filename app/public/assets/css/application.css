@@ -1,7 +1,14 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
 body { 
   background-color: #8abf8a;
   font-family: helvetica;
   font-size: 120%;
+  margin: 0 0 30px;
 }
 
 a { color: green; font-weight: bold; }
@@ -23,8 +30,19 @@ a { color: green; font-weight: bold; }
   padding: 30px 50px 30px 50px;
   margin: 10px 80px 80px 80px;
 
-  border: 1px solid grey;
+  border: 1px solid black;
 }
+
+.footer {
+  background: rgba(250,250,250,0.5);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+
 
 .cta {
   font-size: 125%;

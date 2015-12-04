@@ -35,13 +35,13 @@ module Dragon
       describe town,  prefix: "The town you are in currently is " if town
       narrate_place(place) if place
 
-      puts
-      hr light: true
-      puts
-
       if scene
         narrate_scene scene
       end
+
+      puts
+      hr light: true
+      puts
 
       if player.inventory.any?
         say "Your inventory includes: "
@@ -70,8 +70,6 @@ module Dragon
     protected
 
     def narrate_scene(scene)
-      describe scene, prefix: "You are currently "
-      
       command = scene.last_command
       if command
         describe command, important: true
@@ -79,6 +77,8 @@ module Dragon
        
       events = scene.last_events
       narrate_events(events) if events.any?
+
+      describe scene, prefix: "You are currently "
     end
 
     def narrate_events events

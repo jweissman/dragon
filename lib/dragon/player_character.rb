@@ -1,6 +1,13 @@
 module Dragon
   class PlayerCharacter < Person
-    attr_accessor :action, :inventory
+    extend Forwardable
+    def_delegators :engine, :place
+
+    attr_accessor :action, :inventory, :engine
+    
+    def initialize(name=nil)
+      super(name)
+    end
 
     def max_hp
       @max_hp ||= PlayerCharacter.default_max_hp_for(profession: profession)

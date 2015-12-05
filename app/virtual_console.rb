@@ -26,9 +26,10 @@ class VirtualConsole
   end
 
   def ask(attr, prompt: nil, of: nil)
-    puts "---> ASK #{attr}"
-    
-    prompt_content = html_tag(:b, prompt || "What is your #{attr}?")
+    prompt_content = html_tag(:div,
+                             html_tag(:b, prompt || "What is your #{attr}?"), 
+                             options: { class: 'question' })
+
     input_content  = html_tag(:input, options: {type: 'text', name: attr, placeholder: attr})
 
 
@@ -37,14 +38,12 @@ class VirtualConsole
   end
 
   def choose(attr, of: nil, choices: [], prompt: nil, labels: nil)
-    puts "---> CHOOSE #{attr}"
-
     options_tags = choices.map do |choice|
       html_tag :option, labels ? labels[choice] : choice
     end
 
     options = '<br>' + columns(
-      html_tag(:b, prompt || attr),
+      html_tag(:div, html_tag(:b, prompt || attr), options: { class: 'question' }),
       html_tag(:select, options_tags.join, options: {name: attr})
     )
 
@@ -58,7 +57,7 @@ class VirtualConsole
 
     html_tag(:div,
     grid_contents,
-    options: { class: 'grid' })
+    options: { class: 'grid input-container' })
   end
 
   def html_tag(tag, content='', options: {})

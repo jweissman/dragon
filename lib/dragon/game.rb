@@ -12,6 +12,7 @@ module Dragon
 
     def play
       welcome player
+      player.engine = engine
       step while still_playing?
     end
 
@@ -25,7 +26,7 @@ module Dragon
     end
 
     def player
-      @player ||= PlayerBuilder.construct(PlayerCharacter, console)
+      @player ||= PlayerBuilder.construct(PlayerCharacter, console: console)
     end
 
     def terminal

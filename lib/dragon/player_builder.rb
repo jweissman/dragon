@@ -43,10 +43,15 @@ module Dragon
         choices: Person.subtypes
     end
 
-    def self.construct(klass, term=Console.new)
-      term.say "Let's get to know a little about you..."
-      player = new(term).character_for(klass.new)
-      term.say "Okay, that's enough! Let's get moving."
+    def self.construct(klass, console: Console.new)
+      console.say "Let's get to know a little about you...", 
+        heading: true
+
+      builder = new(console)
+      player = builder.character_for(klass.new(''))
+
+      console.say "Okay, that's enough! Let's get moving.", 
+        important: true
       player
     end
   end

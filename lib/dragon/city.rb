@@ -1,19 +1,15 @@
 module Dragon
-  class Town < Struct.new(:name, :type, :subtype, :feature)
+  class City < Struct.new(:name, :subtype, :feature)
     attr_accessor :world
 
     def self.generate(world)
-      town = new(Name.generate, types.sample, subtypes.sample, features.sample)
-      town.world = world
-      town
+      city = new(Name.generate, subtypes.sample, features.sample)
+      city.world = world
+      city
     end
 
     def self.subtypes
       %w[ imperial agricultural financial productive efficient quiet ]
-    end
-
-    def self.types
-      %w[ town metropolis capital hamlet village community trading_post ]
     end
 
     def self.features
@@ -22,6 +18,14 @@ module Dragon
 
     def describe
       "#{name}, #{subtype} #{type} of #{feature.to_s.gsub('_', ' ')}"
+    end
+
+    def unique
+      false
+    end
+
+    def type
+      self.class.name.split('::').last
     end
 
     def random_place
@@ -39,5 +43,24 @@ module Dragon
     def areas
       @areas ||= Area.generate_list(self, 2)
     end
+
+    def self.types
+      [ Hamlet, Village, Town, Metropolis, Capital ]
+    end
   end
+
+  class Capital < City
+    def unique?
+      true
+    end
+  end
+
+  class Metropolis < City
+  end
+
+  class Town < City; end
+
+  class Village < City; end
+
+  class Hamlet < City; end
 end

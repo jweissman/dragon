@@ -12,7 +12,7 @@ describe AskQuestionCommandHandler do
   let(:responses) { %w[ okay! what? ] }
 
   let(:partner) do
-    instance_spy('Person')
+    instance_double('Person')
   end
 
   describe '#handle' do

@@ -1,11 +1,12 @@
 module Dragon
   module Events
     class PlayerVisitedPlaceEvent < Event
-      attr_reader :place, :player
+      attr_reader :place, :player, :previous_place
 
-      def initialize(place: nil, player: nil)
+      def initialize(place: nil, previous_place: nil)
         @place = place
         @player = player
+        @previous_place = previous_place
       end
 
       def describe

@@ -13,7 +13,7 @@ module Dragon
     def responses
       [
         "I love it!",
-        "#{place.describe} is awesome",
+        "This #{place.describe} is awesome",
         "The town fathers built it!"
       ]
     end

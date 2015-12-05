@@ -1,24 +1,24 @@
 module Dragon
   class Area < Place
-    attr_accessor :town
+    attr_accessor :city
 
     def initialize
       super(Name.generate)
     end
 
-    def self.generate(town)
+    def self.generate(city)
       klass = AREA_TYPES.sample
       area = klass.new
-      area.town = town
+      area.city = city
       area
     end
 
-    def self.generate_list(town, n)
+    def self.generate_list(city, n)
       klasses = AREA_TYPES.sample(n)
       areas = klasses.map(&:new)
 
       areas.each do |area|
-        area.town = town
+        area.city = city
       end
 
       areas

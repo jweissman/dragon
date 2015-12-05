@@ -38,7 +38,7 @@ module Dragon
 
     def describe(deep: true)
       elements = { place: place, scene: scene, player: player }
-      elements.merge!(town: town, world: world) if deep
+      elements.merge!(city: city, world: world) if deep
 
       narrate elements
     end
@@ -85,21 +85,21 @@ module Dragon
       @current_place = place
     end
 
-    def travel_to(new_town)
-      @town = new_town
-      @current_place = new_town.areas.sample
+    def travel_to(new_city)
+      @city = new_city
+      @current_place = new_city.areas.sample
     end
 
     def still_playing?
       @playing
     end
 
-    def town
-      @town ||= world.towns.sample
+    def city
+      @city ||= world.cities.sample
     end
 
     def place
-      @current_place ||= town.random_place
+      @current_place ||= city.random_place
     end
 
     def scene

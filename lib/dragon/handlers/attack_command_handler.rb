@@ -63,6 +63,8 @@ module Dragon
 
       protected
       class AttackResult
+        attr_reader :amount
+
         def dodge?; false end
         def ko?; false end
         def hit?; false end
@@ -77,7 +79,6 @@ module Dragon
       end
 
       class Damage < AttackResult
-        attr_reader :amount
         def initialize(amount: nil)
           @amount = amount
         end
@@ -86,7 +87,7 @@ module Dragon
       end
 
       def perform_attack(a, b)
-        attack_succeeded = rand > a.chance_of_hitting(b)
+        attack_succeeded = rand < a.chance_of_hitting(b)
         if attack_succeeded
           damage = a.attack!(b)
           if b.alive?

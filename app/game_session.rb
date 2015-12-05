@@ -19,14 +19,12 @@ module Dragon
 
     def make_character
       clear
-      PlayerBuilder.construct PlayerCharacter, console
+      PlayerBuilder.construct PlayerCharacter, console: console
       send output if output
       self
     end
 
     def step!(data=nil)
-      puts "===> GameSession#step!"
-
       clear
       process_event(data) if data
       describe deep: @first_time
@@ -44,7 +42,6 @@ module Dragon
 
     protected
     def process_event(data)
-      puts "---> processing event..."
       action_record = data.detect do |record|
         record['name'] == 'action'
       end
@@ -57,16 +54,15 @@ module Dragon
         action = action_record['value']
         handle action
       elsif profession_present # assume we're creating a character
-        %w[ name profession race subtype age gender ].each do |attribute|
+        player_attributes = %w[ name profession race subtype age gender ]
+        player_attributes.each do |attribute|
           value = extract_attribute_from_record(data, attribute)
-          puts "---> setting #{attribute} to #{value}"
           player.send :"#{attribute}=", value
         end
       end
     end
 
     def extract_attribute_from_record(data, attr)
-      puts "---> extracting #{attr} from #{data}"
       data.detect { |r| r['name'] == attr }['value']
     end
 
@@ -75,17 +71,13 @@ module Dragon
     end
 
     def handle(label)
-      puts "GameSession#handle label=#{label}"
       actions = last_prompted_actions
-      if actions.nil?
-        puts "No last actions!"
-      else
-        puts "---> Attempting to find action..."
+
+      unless actions.nil?
         action  = actions.detect do |act|
           act.label == label
         end
 
-        puts "GameSession#handle react action=#{action}"
         react(action) if action
       end
 

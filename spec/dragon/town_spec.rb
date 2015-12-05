@@ -13,11 +13,10 @@ describe Town do
 
   describe '#describe' do
     let(:name)    { 'anytown' }
-    let(:type)    { 'village' }
     let(:subtype) { 'plausible' }
     let(:feature) { 'mockery' }
 
-    subject { Town.new(name, type, subtype, feature) }
+    subject { Town.new(name, subtype, feature) }
 
     it 'should indicate the name' do
       expect(subject.describe).to include(name)

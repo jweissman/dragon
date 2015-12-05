@@ -4,13 +4,13 @@ module Dragon
       "#{name.capitalize}, #{subtype} #{type} of #{wonder.capitalize}"
     end
 
-    def towns
-      @towns ||= Array.new(5) { Town.generate(self) }
+    def cities
+      @cities ||= Array.new(5) { City.generate(self) }
     end
 
     def random_hospital
-      hospitals = towns.flat_map(&:buildings).select do |building|
-        building.name == 'hospital'
+      hospitals = cities.flat_map(&:buildings).select do |building|
+        building.is_a?(Hospital)
       end
 
       hospitals.sample

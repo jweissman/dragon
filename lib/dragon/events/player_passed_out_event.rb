@@ -10,7 +10,7 @@ module Dragon
       end
 
       def describe
-        "#{@cause} and you lost consciousness! You awaken in a hospital in #{place.town.name}"
+        "#{cause} and you lost consciousness! You awaken in a hospital in #{place.city.name}"
       end
     end
   end

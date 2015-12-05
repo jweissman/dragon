@@ -4,19 +4,17 @@ module Dragon
 
     def initialize(name='unnamed')
       @name ||= name
-      Entity.register(self)
-      @id = Entity.all.count
+      self.class.register(self)
+      @id = self.class.all.count
     end
 
-    class << self
-      def register(place)
-        @_all ||= []
-        @_all.push(place)
-      end
+    def self.register(place)
+      @_all ||= []
+      @_all.push(place)
+    end
 
-      def all
-        @_all ||= []
-      end
+    def self.all
+      @_all ||= []
     end
 
     def describe

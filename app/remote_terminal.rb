@@ -14,11 +14,7 @@ class RemoteTerminal
 
   def push(msg)
     content.push(msg)
-    puts "===> SEND #{msg}"
-    puts content.join
-
     session.send(output)
-    #sleep 0.15
   end
 
   def output

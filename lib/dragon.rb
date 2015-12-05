@@ -1,4 +1,5 @@
-# require 'pry'
+require 'pry' if ENV['TEST'] == '1'
+
 require 'require_all'
 require 'forwardable'
 
@@ -10,11 +11,13 @@ require 'dragon/name'
 require 'dragon/place'
 require 'dragon/area'
 require 'dragon/room'
+
 require 'dragon/building'
+require_all 'lib/dragon/buildings'
 
 require 'dragon/item'
 
-require 'dragon/town'
+require 'dragon/city'
 require 'dragon/world'
 
 require 'dragon/combatant'
@@ -45,6 +48,7 @@ require_all 'lib/dragon/commands'
 require 'dragon/scene'
 require_all 'lib/dragon/scenes'
 
+require 'dragon/narrator'
 require 'dragon/engine'
 require 'dragon/game'
 

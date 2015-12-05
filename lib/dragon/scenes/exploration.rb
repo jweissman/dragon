@@ -43,12 +43,12 @@ module Dragon
       end
 
       def travel_actions(place)
-        towns = place.town.world.towns - [place.town]
-        towns.collect(&method(:travel))
+        cities = place.city.world.cities - [place.city]
+        cities.collect(&method(:travel))
       end
 
       def visit_building_actions(place)
-        buildings = place.town.buildings + (place.town.areas - [place])
+        buildings = place.city.buildings + (place.city.areas - [place])
         buildings.collect(&method(:visit))
       end
 

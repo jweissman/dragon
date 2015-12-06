@@ -31,9 +31,8 @@ module Dragon
       dramatize_place(place) if place
 
       if player.inventory.any?
-        player.inventory.each do |item|
-          describe item, prefix: " - A "
-        end
+        inventory_description = player.inventory.map(&:describe).join(', ')
+        say "Your inventory includes: #{inventory_description}."
       end
 
     end

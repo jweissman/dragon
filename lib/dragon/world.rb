@@ -5,7 +5,7 @@ module Dragon
     end
 
     def cities
-      @cities ||= Array.new(5) { City.generate(self) }
+      @cities ||= City.generate_list(7, world: self)
     end
 
     def random_hospital

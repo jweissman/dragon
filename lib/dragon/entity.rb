@@ -1,5 +1,10 @@
 module Dragon
   class Entity
+    class << self
+      extend Forwardable
+      def_delegators :all, :detect, :any?, :each
+    end
+
     attr_reader :name, :id
 
     def initialize(name='unnamed')
@@ -17,8 +22,22 @@ module Dragon
       @_all ||= []
     end
 
+    def type
+      self.class.name.split('::').last
+    end
+
     def describe
-      label
+      type
+    end
+
+    def self.available_types
+      types - unique_types_to_exclude
+    end
+
+    def self.unique_types_to_exclude
+      types.
+        select(&:any?).
+        select(&:unique?)
     end
   end
 end

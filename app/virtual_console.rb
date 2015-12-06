@@ -16,12 +16,14 @@ class VirtualConsole
   def say(message, heading: false, important: false)
     opts = if important
              { options: {class: 'important'}}
+           elsif heading
+             { options: { class: 'heading' }}
            else
              {}
            end
 
     output_html_content.push(
-      html_tag(heading ? :h4 : :p, message, opts)
+      html_tag(:p, message, opts)
     )
   end
 

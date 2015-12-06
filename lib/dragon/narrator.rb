@@ -16,6 +16,11 @@ module Dragon
     end
 
     def dramatize
+
+      if scene
+        dramatize_scene scene
+      end
+
       describe world, prefix: "You (#{player.describe}) are in the world of " if world
       describe city,  prefix: "You are visiting " if city
 
@@ -28,20 +33,17 @@ module Dragon
         end
       end
 
-      if scene
-        dramatize_scene scene
-      end
     end
 
-    def describe(entity, prefix: '', suffix: '', important: false)
+    def describe(entity, prefix: '', suffix: '', important: false, heading: false)
       description = prefix + entity.describe + suffix + '.'
-      say capitalize_first_word(description), important: important
+      say capitalize_first_word(description), important: important, heading: heading
     end
 
     def dramatize_scene(scene)
       command = scene.last_command
       if command
-        describe command, important: true
+        describe command, heading: true
       end
        
       events = scene.last_events

@@ -1,15 +1,40 @@
 module Dragon
-  class City < Struct.new(:name, :subtype, :feature)
-    attr_accessor :world
+  class City < Entity
+    attr_accessor :world, :subtype, :feature
 
-    def self.generate(world)
-      city = new(Name.generate, subtypes.sample, features.sample)
-      city.world = world
+    def initialize(name=Name.generate, 
+                   subtype: nil, feature: nil, world: nil)
+      @subtype = subtype
+      @feature = feature
+      @world = world
+      super(name)
+    end
+
+    def self.generate(world, type = available_types.sample)
+      type = available_types.sample
+      city = type.new world: world, subtype: subtypes.sample, feature: features.sample
       city
     end
 
+    def self.generate_list(n, world: world)
+      type_list = (required_types + types.shuffle).uniq.take(n)
+      type_list.map do |type|
+        generate(world,type)
+      end
+    end
+
+    def self.types_for(world)
+      required = required_types.reject do |type|
+        world.cities.map(&:type).include?(type)
+      end
+
+      return required unless required.empty?
+
+      available_types
+    end
+
     def self.subtypes
-      %w[ imperial agricultural financial productive efficient quiet ]
+      %w[ lost royal imperial agricultural financial productive efficient quiet ]
     end
 
     def self.features
@@ -20,12 +45,8 @@ module Dragon
       "#{name}, #{subtype} #{type} of #{feature.to_s.gsub('_', ' ')}"
     end
 
-    def unique
-      false
-    end
-
-    def type
-      self.class.name.split('::').last
+    def label
+      "#{name} [#{type}]"
     end
 
     def random_place
@@ -37,7 +58,7 @@ module Dragon
     end
 
     def buildings
-      @buildings ||= Building.generate_list(self, 4)
+      @buildings ||= Building.generate_list(self, 6)
     end
 
     def areas
@@ -45,12 +66,20 @@ module Dragon
     end
 
     def self.types
-      [ Hamlet, Village, Town, Metropolis, Capital ]
+      [ Outpost, Hamlet, Village, Metropolis, Capital ]
+    end
+ 
+    def self.required_types
+      [ Capital ]
+    end
+
+    def self.unique?
+      false
     end
   end
 
   class Capital < City
-    def unique?
+    def self.unique?
       true
     end
   end
@@ -58,9 +87,8 @@ module Dragon
   class Metropolis < City
   end
 
-  class Town < City; end
-
   class Village < City; end
-
   class Hamlet < City; end
+  class Outpost < City; end
 end
+

@@ -6,13 +6,23 @@ html {
 body { 
   background-color: #8abf8a;
   font-family: helvetica;
-  font-size: 120%;
+  font-size: 114%;
   margin: 0 0 18px;
 }
 
-a { color: green; font-weight: bold; }
+a { 
+  color: green; 
+  font-weight: bold; 
+}
 
-#bg { position: fixed; z-index: -99999; top: 0; left: 0; }
+a:visited { color: forestgreen; }
+
+#bg { 
+  position: fixed; 
+  z-index: -99999; 
+  top: 0; 
+  left: 0; 
+}
 
 .topnav {
   margin-top: 15px;
@@ -21,48 +31,47 @@ a { color: green; font-weight: bold; }
 }
 
 .container {
-  background-image: linear-gradient( 
-    45deg,
-    rgba(200,240,200,0.46), 
-    rgba(200,260,200,0.21)
-  );
-
-  padding: 30px 50px 30px 50px;
-  margin: 10px 80px 80px 80px;
-
-  border: 1px solid black;
+  background: rgba(139, 230, 139,0.2); 
+  padding: 10px;
+  margin-top: 15px;
 }
 
 .input-container {
   width: 67%;
   margin-left: 17%;
-  background: rgba(120,200,120,0.53);
-  border: 1px dashed black;
-  border-radius: 10px;
-  padding: 10px;
-
+  padding: 5px;
 }
 
 .input-container .question { 
   text-align: right; 
-  margin-right: 30px;
+  margin-right: 20px;
+  margin-top: 0px;
+  padding: 5px;
+}
+
+.outer-container {
+  margin: 10px;
+  padding: 12px;
+  padding-top: 2px;
+  background: rgba(186, 244, 186,0.3);
 }
 
 .inner-container {
   width: 67%;
-  margin-top: 30px;
+  margin: 20px;
   margin-left: 17%;
-  background: rgba(240,240,200,0.6);
-  padding: 8px;
+  padding: 10px;
+  padding-left: 40px;
+  padding-top: 15px;
   border: 1px solid black;
-  border-radius: 10px;
+  background: #FFF8D3;
 }
 
-.title {
-  text-align: center;
+.submit-area {
+  border: 2px dashed green;
 }
 
-.title h1 { margin-top: 0px; }
+.title h1 { margin-top: 10px; text-align: center; }
 
 .footer {
   background: rgba(250,250,250,0.5);
@@ -80,10 +89,21 @@ a { color: green; font-weight: bold; }
   font-size: 150%;
   font-weight: bold;
   text-align: center;
+  margin-left: 50px;
+}
+
+.faq {
+  margin-left: 8px;
+  padding: 2px;
+}
+
+.heading {
+  font-size: 150%;
+  font-weight: bold;
 }
 
 .important { 
-  font-size: 100%;
+  font-size: 110%;
   font-weight: bold;
 }
 
@@ -96,19 +116,26 @@ a { color: green; font-weight: bold; }
 
 .inline { display:inline; }
 
+.green { color: forestgreen; }
+
 input[type=submit] {
   width: 200px;
-  font-size: 110%;
-  background: rgba(160,240,160,0.6);
+  font-size: 120%;
+  background: rgba(65, 131, 126,0.0);
 }
 
 input[type=text] {
-  font-size: 18px;
+  font-size: 16px;
+  background: rgba(255,255,255,0.0);
+  min-width: 200px;
+  font-family: "Cedarville Cursive", serif;
 }
 
 select {
   font-size: 18px;
   min-width: 200px;
+  background: rgba(255,255,255,0.0);
+  font-family: "Cedarville Cursive", serif;
 }
 
 [class*='col-'] {

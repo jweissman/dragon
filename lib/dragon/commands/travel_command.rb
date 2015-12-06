@@ -12,7 +12,7 @@ module Dragon
       end
 
       def label
-        "Travel to #{destination.name}"
+        "Travel to #{destination.label}"
       end
     end
   end

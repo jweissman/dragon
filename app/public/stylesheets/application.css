@@ -56,23 +56,29 @@ a:visited { color: forestgreen; }
 }
 
 .inner-container {
-  background: #fffae3;
-  border: 1px dotted lightgrey;
   padding: 50px;
+  padding-top: 2px;
   margin: 35px;
   margin-left: 100px;
   margin-right: 100px;
+  min-height: 480px;
+  background-color: #fffae3; 
+  background-image: 
+  linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 3.1em;
 }
 
 .hero-container {
-  background: #fffae3;
   padding: 40px;
   margin: 5px;
+  background-color: #fffae3; 
+  background-image: 
+  linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 3.1em;
 }
 
 .title {
-  font-size: 70%;
-  border-bottom: 3px dashed gray;
+  border-bottom: 3px dashed grey;
   height: 58px;
 }
 
@@ -100,14 +106,16 @@ a:visited { color: forestgreen; }
 }
 
 .faq {
+  color: black;
   padding: 40px;
   background: rgba(250,250,250,0.5);
 }
 
 .heading {
-  font-size: 150%;
+  font-size: 36px;
   font-weight: bold;
-  border-bottom: 3px dashed grey;
+  border-bottom: 2px dashed darkred;
+  font-family: "Cedarville Cursive", serif;
 }
 
 .important {

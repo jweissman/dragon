@@ -31,7 +31,6 @@ module Dragon
       dramatize_place(place) if place
 
       if player.inventory.any?
-        say "Your inventory includes: "
         player.inventory.each do |item|
           describe item, prefix: " - A "
         end
@@ -45,7 +44,7 @@ module Dragon
     end
 
     def dramatize_scene(scene)
-      describe scene, prefix: "You are currently ", heading: true
+      describe scene, prefix: "You are ", heading: true
 
       command = scene.last_command
       if command

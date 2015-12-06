@@ -45,7 +45,7 @@ module Dragon
           PlayerPassedOutEvent.new(
             player: player, 
             place: hospital, 
-            cause: "the #{enemy.describe} defeated you"
+            cause: "#{enemy.describe} defeated you"
           )
         end
       end

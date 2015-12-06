@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "engaged in combat with #{enemy.describe}"
+        "fighting #{enemy.describe}"
       end
 
       def actions(_)

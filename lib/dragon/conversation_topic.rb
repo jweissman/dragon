@@ -8,5 +8,9 @@ module Dragon
     def about_activity?
       false
     end
+
+    def about_missions?
+      false
+    end
   end
 end

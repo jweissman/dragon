@@ -24,6 +24,9 @@ module Dragon
 
       active_session = find_active_session_for client 
       active_session.step!(parsed_event_data)
+    rescue => ex
+      puts ex.message
+      puts ex.backtrace
     end
 
     def delete(client)

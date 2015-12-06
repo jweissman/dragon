@@ -38,7 +38,8 @@ module Dragon
         rat: 5,
         snake: 6,
         wolf: 8,
-        slime: 12
+        slime: 12,
+        dragon: 200
       }[species.to_sym]
     end
 

@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "You greet #{person.name}."
+        "You greet #{person.name}"
       end
 
       def label

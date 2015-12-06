@@ -1,4 +1,8 @@
-require 'pry' if ENV['TEST'] == '1'
+def under_test?
+  ENV['TEST'] == '1'
+end
+
+require 'pry' if under_test?
 
 require 'require_all'
 require 'forwardable'
@@ -29,6 +33,7 @@ require 'dragon/enemy'
 require 'dragon/player_character'
 require 'dragon/player_builder'
 
+
 require 'dragon/console'
 require 'dragon/game_terminal'
 
@@ -40,6 +45,7 @@ require_all 'lib/dragon/events'
 
 require 'dragon/event_listener'
 # require_all 'lib/dragon/listeners'
+require 'dragon/quest'
 
 require 'dragon/command_handler'
 require_all 'lib/dragon/handlers'

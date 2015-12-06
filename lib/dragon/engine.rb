@@ -51,14 +51,25 @@ module Dragon
     def react(act)
       @last_command = act
       handle action: act
-      process last_events
+
+      @last_events += process(last_events)
+
       self
     end
 
     def process(events)
-      events.flatten.compact.each do |evt|
-        evt.class.listener.receive(evt) if evt.class.listener
+      additional_events = []
+
+      events.flatten.compact.each do |event|
+        if player.quests.any?
+          player.quests.each do |q| 
+            additional_events << q.receive(event)
+          end
+        end
+        additional_events << (event.class.listener.receive(event) if event.class.listener)
       end
+
+      additional_events
     end
 
     def initial_scene

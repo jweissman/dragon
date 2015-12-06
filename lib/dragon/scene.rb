@@ -12,13 +12,17 @@ module Dragon
     end
 
     def handle(action: nil, place: nil)
-      engine.last_events = []
-      engine.last_events.push respond_to(action) #, place)
+      engine.last_events = *respond_to(action)
       self
     end
 
     def base_actions
       [ ExitGameCommand.new ]
+    end
+
+    def event_actions
+      last_events.flatten.compact.
+        map(&:actions).flatten.compact
     end
 
     def respond_to(action)

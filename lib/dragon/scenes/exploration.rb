@@ -6,9 +6,8 @@ module Dragon
       end
 
       def actions(place)
-
-        if last_events && last_events.flatten.compact.any? { |evt| evt.actions.any? }
-          last_events.flatten.compact.flat_map { |evt| evt.actions }
+        if event_actions.any?
+          event_actions
         else
           outdoor_actions(place) +
             indoor_actions(place) +
@@ -33,7 +32,7 @@ module Dragon
         return [] unless place.is_a?(Area)
 
         wander_actions(place) +
-          visit_building_actions(place) + 
+          visit_building_actions(place) +
           travel_actions(place)
       end
 

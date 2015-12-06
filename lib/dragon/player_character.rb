@@ -3,10 +3,15 @@ module Dragon
     extend Forwardable
     def_delegators :engine, :place
 
-    attr_accessor :action, :inventory, :engine
+    attr_accessor :action, :inventory, :engine, :quests
 
     def initialize(name=nil)
+      @quests = []
       super(name)
+    end
+
+    def chance_of_hitting(*)
+      0.8
     end
 
     def label

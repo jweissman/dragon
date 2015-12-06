@@ -37,7 +37,7 @@ module Dragon
 
     def self.available_types_for_city(city)
       available_types.select do |type|
-        type.available_in?(city) 
+        type.available_in?(city)
       end
     end
 
@@ -46,8 +46,8 @@ module Dragon
     end
 
     def rooms
-      @rooms ||= Room.generate_list(room_count, 
-                                    building: self, 
+      @rooms ||= Room.generate_list(room_count,
+                                    building: self,
                                     professions: available_professions)
     end
 
@@ -56,8 +56,8 @@ module Dragon
     end
 
     def professions
-      required_professions + 
-        associated_professions.shuffle + 
+      required_professions +
+        associated_professions.shuffle +
         Profession.basic.shuffle +
         Profession.adventuring.shuffle
     end

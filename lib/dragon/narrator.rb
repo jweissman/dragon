@@ -35,6 +35,11 @@ module Dragon
         say "Your inventory includes: #{inventory_description}."
       end
 
+      if player.quests.any?
+        quest_description = player.quests.map(&:describe).join(', ')
+        say "Your quests include #{quest_description}."
+      end
+
     end
 
     def describe(entity, prefix: '', suffix: '', important: false, heading: false)
@@ -98,7 +103,7 @@ module Dragon
     end
 
     def simulate_delay_for_dramatic_purposes
-      sleep 1.0
+      sleep(0.8) unless under_test?
     end
   end
 end

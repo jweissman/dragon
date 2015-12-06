@@ -13,8 +13,12 @@ module Dragon
       end
 
       def actions(place)
-        personal_actions(place) + 
-          basic_conversational_actions(place)
+        if event_actions.any?
+          event_actions
+        else
+          personal_actions(place) + 
+            basic_conversational_actions(place)
+        end
       end
 
       protected

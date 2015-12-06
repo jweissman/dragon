@@ -15,7 +15,7 @@ module Dragon
       city
     end
 
-    def self.generate_list(n, world: world)
+    def self.generate_list(n, world: nil)
       type_list = (required_types + types.shuffle).uniq.take(n)
       type_list.map do |type|
         generate(world, type)
@@ -63,7 +63,7 @@ module Dragon
     end
 
     def building_count
-      @building_count ||= (4..6).to_a.sample
+      @building_count ||= (3..4).to_a.sample
     end
 
     def areas

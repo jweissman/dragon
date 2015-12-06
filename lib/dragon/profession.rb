@@ -7,7 +7,9 @@ module Dragon
     def label; type end
 
     def conversation_topics
-      []
+      [
+        AskForQuests.new
+      ]
     end
 
     def self.unique?
@@ -19,28 +21,28 @@ module Dragon
     end
 
     def self.basic
-      [ 
-        Student, Teacher, Drunk, Barkeep, Bard, Gambler, 
-        Priest, Conscript, Jester, Scribe, Acolyte, Trader, 
-        Beggar, Farmer, Constable 
+      [
+        Student, Teacher, Drunk, Barkeep, Bard, Gambler,
+        Priest, Conscript, Jester, Scribe, Acolyte, Trader,
+        Beggar, Farmer, Constable
       ]
     end
 
     def self.adventuring
-      [ 
-        Warrior, Wizard, Soldier, Rogue, Monk, Cleric, Paladin 
+      [
+        Warrior, Wizard, Soldier, Rogue, Monk, Cleric, Paladin
       ]
     end
 
     def self.epic
-      [ 
-        Archmage, Necromancer, Pyromancer, Sage, Ninja 
+      [
+        Archmage, Necromancer, Pyromancer, Sage, Ninja
       ]
     end
 
     def self.noble
-      [ 
-        Judge, Minister, Bishop, Princess, Prince, Queen, King 
+      [
+        Judge, Minister, Bishop, Princess, Prince, Queen, King
       ]
     end
   end
@@ -76,7 +78,7 @@ module Dragon
 
   class King < Noble
     def conversation_topics
-      [
+      super + [
         ConversationAboutPolitics.new
       ]
     end

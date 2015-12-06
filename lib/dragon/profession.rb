@@ -6,30 +6,42 @@ module Dragon
 
     def label; type end
 
+    def conversation_topics
+      []
+    end
+
+    def self.unique?
+      false
+    end
+
     def self.all
       basic + noble + adventuring + epic
     end
 
     def self.basic
-      [ Student, Teacher, Drunk, 
-        Barkeep, Bard, Gambler, 
-        Priest, Conscript, Jester, Scribe ]
-    end
-
-    def self.noble
-      [ Minister, Bishop, Princess, Prince, Queen, King ]
+      [ 
+        Student, Teacher, Drunk, Barkeep, Bard, Gambler, 
+        Priest, Conscript, Jester, Scribe, Acolyte, Trader, 
+        Beggar, Farmer, Constable 
+      ]
     end
 
     def self.adventuring
-      [ Warrior, Wizard, Soldier, Rogue, Monk, Cleric ]
+      [ 
+        Warrior, Wizard, Soldier, Rogue, Monk, Cleric, Paladin 
+      ]
     end
 
     def self.epic
-      [ Archmage, Necromancer, Sage, Ninja ]
+      [ 
+        Archmage, Necromancer, Pyromancer, Sage, Ninja 
+      ]
     end
 
-    def self.available_in?(room)
-      true
+    def self.noble
+      [ 
+        Judge, Minister, Bishop, Princess, Prince, Queen, King 
+      ]
     end
   end
 
@@ -44,6 +56,10 @@ module Dragon
   class Jester < Profession; end
   class Scribe < Profession; end
   class Acolyte < Profession; end
+  class Trader < Profession; end
+  class Beggar < Profession; end
+  class Farmer < Profession; end
+  class Constable < Profession; end
 
   class Noble < Profession
     def self.unique?
@@ -51,6 +67,7 @@ module Dragon
     end
   end
 
+  class Judge < Noble; end
   class Minister < Noble; end
   class Bishop < Noble; end
   class Princess < Noble; end
@@ -58,8 +75,10 @@ module Dragon
   class Queen < Noble; end
 
   class King < Noble
-    def self.required_in?(room)
-      room.is_a?(ThroneRoom)
+    def conversation_topics
+      [
+        ConversationAboutPolitics.new
+      ]
     end
   end
 
@@ -105,10 +124,16 @@ module Dragon
     end
   end
 
+  class Paladin < Adventurer
+    def default_max_hp
+      42
+    end
+  end
 
   class Epic < Adventurer; end
 
   class Necromancer < Epic; end
+  class Pyromancer < Epic; end
   class Sage < Epic; end
   class Archmage < Epic; end
   class Ninja < Epic; end

@@ -3,24 +3,24 @@ html {
   min-height: 100%;
 }
 
-body { 
+body {
   background-color: #8abf8a;
   font-family: helvetica;
   margin: 0 0 18px;
 }
 
-a { 
-  color: green; 
-  font-weight: bold; 
+a {
+  color: green;
+  font-weight: bold;
 }
 
 a:visited { color: forestgreen; }
 
-#bg { 
-  position: fixed; 
-  z-index: -99999; 
-  top: 0; 
-  left: 0; 
+#bg {
+  position: fixed;
+  z-index: -99999;
+  top: 0;
+  left: 0;
 }
 
 .topnav {
@@ -44,7 +44,7 @@ a:visited { color: forestgreen; }
 }
 
 .input-container .question {
-  text-align: right; 
+  text-align: right;
   margin-right: 10px;
   padding: 6px;
 }
@@ -57,7 +57,6 @@ a:visited { color: forestgreen; }
 
 .inner-container {
   background: #fffae3;
-  border-radius: 3px;
   border: 1px dotted lightgrey;
   padding: 50px;
   margin: 35px;
@@ -67,7 +66,6 @@ a:visited { color: forestgreen; }
 
 .hero-container {
   background: #fffae3;
-  border-radius: 3px;
   padding: 40px;
   margin: 5px;
 }
@@ -112,7 +110,7 @@ a:visited { color: forestgreen; }
   border-bottom: 3px dashed grey;
 }
 
-.important { 
+.important {
   font-size: 110%;
   font-weight: bold;
 }
@@ -126,13 +124,13 @@ a:visited { color: forestgreen; }
 
 .inline { display:inline; }
 
-.green { 
-  color: forestgreen; 
+.green {
+  color: forestgreen;
   font-size: 120%;
   font-family: "Cedarville Cursive", serif;
 }
 
-.submit-area { 
+.submit-area {
   margin-right: 10%;
 }
 
@@ -144,14 +142,14 @@ input[type=submit] {
 }
 
 input[type=text] {
-  font-size: 18px;
+  font-size: 16px;
   background: rgba(255,255,255,0.0);
   font-family: "Cedarville Cursive", serif;
   border: none;
 }
 
 select {
-  font-size: 18px;
+  font-size: 16px;
   background: rgba(255,255,255,0.0);
   font-family: "Cedarville Cursive", serif;
   border: none;

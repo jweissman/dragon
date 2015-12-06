@@ -17,6 +17,10 @@ module Dragon
       person
     end
 
+    def label
+      "#{profession.type} #{name}"
+    end
+
     def activity
       @activity ||= activities.sample
     end
@@ -40,8 +44,6 @@ module Dragon
 
     def describe
       "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity}"
-    rescue 
-      binding.pry
     end
 
     def self.races
@@ -53,7 +55,7 @@ module Dragon
     end
 
     def conversation_topics(place)
-      general_topics(place) + activity_topics
+      general_topics(place) + activity_topics + professional_topics
     end
 
     def general_topics(place)
@@ -62,6 +64,10 @@ module Dragon
         ConversationAboutWork.new(profession: profession),
         ConversationAboutLife.new
       ]
+    end
+
+    def professional_topics
+      profession.conversation_topics
     end
 
     def activity_topics

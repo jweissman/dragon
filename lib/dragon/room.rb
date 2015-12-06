@@ -7,13 +7,13 @@ module Dragon
     end
 
     def self.generate(building, 
-                      professions, 
+                      professions = building.associated_professions.shuffle, 
                       type = available_types_for_building(building).sample)
       room  = type.new
       room.building = building
       room.aspect   = aspects.sample
       room.people   = Array.new([2,3].sample) do
-        profession = building.associated_professions.sample
+        profession = professions.shift
         Person.generate(profession: profession)
       end
       room
@@ -33,8 +33,9 @@ module Dragon
     end
 
     def self.available_types_for_building(building)
-      building.room_types - 
-        building.room_types.select(&:any?).select(&:unique)
+      building.room_types.reject do |type|
+        type.unique? && type.any?
+      end
     end
 
     def self.aspects
@@ -60,6 +61,10 @@ module Dragon
   class ThroneRoom < Room
     def self.unique
       true
+    end
+
+    def self.required_professions
+      [ King, Queen ]
     end
   end
 

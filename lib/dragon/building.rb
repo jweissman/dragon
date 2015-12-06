@@ -9,10 +9,6 @@ module Dragon
       building
     end
 
-    def self.generate_list(city, n)
-      Array.new(n) { generate(city) }
-    end
-
     def self.types
       [ House, Castle, Library, Tavern,
         Church, Hospital, Castle ]
@@ -50,15 +46,30 @@ module Dragon
     end
 
     def rooms
-      @rooms ||= Room.generate_list(5, building: self, professions: associated_professions)
+      @rooms ||= Room.generate_list(room_count, 
+                                    building: self, 
+                                    professions: available_professions)
+    end
+
+    def room_count
+      @room_count ||= [3,4,5].sample
+    end
+
+    def professions
+      required_professions + 
+        associated_professions.shuffle + 
+        Profession.basic.shuffle +
+        Profession.adventuring.shuffle
+    end
+
+    def available_professions
+      professions.reject do |profession|
+        profession.unique? && Person.any? { |person| person.profession == profession }
+      end
     end
 
     def room_count
       @room_count ||= (3..6).to_a.sample
-    end
-
-    def required_room_types
-      []
     end
 
     def self.aspects
@@ -70,6 +81,10 @@ module Dragon
     end
 
     def required_professions
+      []
+    end
+
+    def required_room_types
       []
     end
 

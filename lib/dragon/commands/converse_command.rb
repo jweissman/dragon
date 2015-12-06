@@ -8,11 +8,11 @@ module Dragon
       end
 
       def describe
-        "You greet #{@person.name}."
+        "You greet #{person.name}."
       end
 
       def label
-        "Speak with #{@person.name}"
+        "Speak with #{person.label}"
       end
     end
   end

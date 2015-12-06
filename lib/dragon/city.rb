@@ -2,7 +2,7 @@ module Dragon
   class City < Entity
     attr_accessor :world, :subtype, :feature
 
-    def initialize(name=Name.generate, 
+    def initialize(name=Name.generate,
                    subtype: nil, feature: nil, world: nil)
       @subtype = subtype
       @feature = feature
@@ -57,7 +57,13 @@ module Dragon
     end
 
     def buildings
-      @buildings ||= Building.generate_list(self, 6)
+      @buildings ||= Array.new(building_count) do 
+        Building.generate(self)
+      end
+    end
+
+    def building_count
+      @building_count ||= (4..6).to_a.sample
     end
 
     def areas
@@ -67,7 +73,7 @@ module Dragon
     def self.types
       [ Outpost, Hamlet, Village, Metropolis, Capital ]
     end
- 
+
     def self.required_types
       [ Capital ]
     end

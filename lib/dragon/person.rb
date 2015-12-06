@@ -7,10 +7,10 @@ module Dragon
 
     def self.generate(
       name: Name.generate, 
-      profession: professions.sample
+      profession: Profession.all.sample
     )
       person = new(name)
-      person.profession = profession
+      person.profession = profession.new
       person.gender = %w[ male female other ].sample
       person.race = races.sample
       person.subtype = subtypes.sample
@@ -23,9 +23,9 @@ module Dragon
 
     def activities
       base = [ :sitting, :resting, :reading ]
-      professional = if profession == 'bard'
+      professional = if profession.is_a?(Bard) # == 'bard'
                        [:playing_music]
-                     elsif profession == 'gambler'
+                     elsif profession.is_a?(Gambler) # == 'gambler'
                        [:throwing_dice]
                      else
                        []
@@ -39,7 +39,9 @@ module Dragon
     end
 
     def describe
-      "#{name.capitalize}, a #{subtype} #{race} #{profession}, who is #{activity}"
+      "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity}"
+    rescue 
+      binding.pry
     end
 
     def self.races
@@ -48,11 +50,6 @@ module Dragon
 
     def self.subtypes
       %w[ wild mutant dark light sea forest sky weird quiet ]
-    end
-
-    def self.professions
-      %w[ wife child husband grandmother professor student scribe professor
-          reader barkeep drunk waiter gambler bard priest nurse ]
     end
 
     def conversation_topics(place)

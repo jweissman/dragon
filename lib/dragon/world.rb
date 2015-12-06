@@ -29,7 +29,7 @@ module Dragon
     end
 
     def self.subtypes
-      %w[ fearful fateful fell ominous glittering transcendent 
+      %w[ fearful fateful fell ominous glittering transcendent
           curious edenic verdant glorious precious golden luminous ]
     end
 

@@ -1,7 +1,7 @@
 module Dragon
   class Tavern < Building
     def associated_professions
-      %w[ barkeep drunk waiter gambler bard ]
+      [ Barkeep, Drunk, Gambler, Bard ]
     end
 
     def room_types

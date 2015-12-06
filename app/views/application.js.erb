@@ -5,10 +5,9 @@
   var ws       = null;
 
   var handleWebsocketMessage = function(message) {
-    console.log("----> ON MESSAGE");
     var data = JSON.parse(message.data);
     var content = data.content;
-    console.log("content from server", content);
+
     $(".content").html(content);
 
     if ($(".content select").length > 0) {
@@ -19,12 +18,10 @@
   };
 
   var submitFormOverWebsocket = function(event) {
-    console.log("SUBMIT");
     event.preventDefault();
 
     var form = $(".input-form");
     var data = JSON.stringify(form.serializeArray());
-    console.log("data to send", data);
     ws.send(data);
   };
 
@@ -39,36 +36,34 @@
     orchestrateWebsockets();
   }
 
-  var init_triangles = function() {
-    console.log("INIT TRIANGLES");
-    var height = window.innerHeight + 10;
-    var width = window.innerWidth + 10;
-    console.log('width', width);
-    console.log('height', height);
+  //var init_triangles = function() {
+  //  console.log("INIT TRIANGLES");
+  //  var height = window.innerHeight + 10;
+  //  var width = window.innerWidth + 10;
+  //  console.log('width', width);
+  //  console.log('height', height);
 
-    var pattern = Trianglify({
-      height: height,
-      width: width,
-      cell_size: 50,
-      x_colors: 'Greens',
-      y_colors: 'Greens'
-    });
+  //  var pattern = Trianglify({
+  //    height: height,
+  //    width: width,
+  //    cell_size: 50,
+  //    x_colors: 'Greens',
+  //    y_colors: 'Greens'
+  //  });
 
-    var bg = document.getElementById("bg");
-    while (bg.firstChild) { bg.removeChild(bg.firstChild); }
+  //  var bg = document.getElementById("bg");
+  //  while (bg.firstChild) { bg.removeChild(bg.firstChild); }
 
-    bg.appendChild(pattern.canvas());
-  };
+  //  bg.appendChild(pattern.canvas());
+  //};
 
   if ($('body').is('.play')) {
     $(document).on('page:load', init_ws);
     $(document).ready(init_ws);
   }
 
-  $(document).on('page:load', init_triangles);
-  //$(document).on('resize', init_triangles);
-  $(document).ready(init_triangles);
-  window.addEventListener('resize', init_triangles);
-
+  //$(document).on('page:load', init_triangles);
+  //$(document).ready(init_triangles);
+  //window.addEventListener('resize', init_triangles);
 
 }(jQuery, window));

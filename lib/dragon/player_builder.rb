@@ -26,9 +26,16 @@ module Dragon
     end
 
     def choose_job(player)
+      professions = Profession.adventuring.map(&:new)
+      profession_labels = professions.inject({}) do |hash, profession|
+        hash[profession] = profession.type
+        hash
+      end
+
       console.choose :profession, of: player,
         prompt: PLAYER_TYPE_PROMPT,
-        choices: PlayerCharacter.professions
+        choices: professions,
+        labels: profession_labels
     end
 
     def choose_race(player)
@@ -50,8 +57,8 @@ module Dragon
       builder = new(console)
       player = builder.character_for(klass.new(''))
 
-      console.say "Okay, that's enough! Let's get moving.", 
-        important: true
+      console.say "Okay, that's enough! Let's get moving.", important: true
+
       player
     end
   end

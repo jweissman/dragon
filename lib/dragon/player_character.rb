@@ -4,9 +4,13 @@ module Dragon
     def_delegators :engine, :place
 
     attr_accessor :action, :inventory, :engine
-    
+
     def initialize(name=nil)
       super(name)
+    end
+
+    def label
+      "#{name} the #{profession.type}"
     end
 
     def max_hp
@@ -30,17 +34,11 @@ module Dragon
     end
 
     def self.professions
-      %w[ warrior wizard soldier rogue cleric ]
+      Profession.adventuring
     end
 
     def self.default_max_hp_for(profession: nil)
-      {
-        warrior: 25,
-        wizard: 8,
-        soldier: 20,
-        rogue: 15,
-        cleric: 12
-      }[profession.to_sym]
+      profession.default_max_hp
     end
   end
 end

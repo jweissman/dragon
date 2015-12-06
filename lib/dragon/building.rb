@@ -40,7 +40,7 @@ module Dragon
     end
 
     def self.available_types_for_city(city)
-      available_types.select do |type| 
+      available_types.select do |type|
         type.available_in?(city) 
       end
     end

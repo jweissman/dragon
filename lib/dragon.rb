@@ -21,6 +21,8 @@ require 'dragon/city'
 require 'dragon/world'
 
 require 'dragon/combatant'
+
+require 'dragon/profession'
 require 'dragon/person'
 require 'dragon/enemy'
 

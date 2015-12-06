@@ -26,7 +26,7 @@ module Dragon
 
       def basic_conversational_actions(place)
         [
-          TellJokeCommand.new(subject: Person.professions.sample, partner: @partner),
+          TellJokeCommand.new(subject: Profession.all.sample.new, partner: @partner),
           SayGoodbyeCommand.new(partner: @partner)
         ]
       end

@@ -19,7 +19,7 @@ module Dragon
       room
     end
 
-    def self.generate_list(n, building: building, professions: professions)
+    def self.generate_list(n, building: nil, professions: nil)
       type_list = (building.required_room_types + building.room_types.shuffle)
         .uniq.take(n)
 

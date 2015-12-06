@@ -57,7 +57,6 @@ module Dragon
 
       say "Your choice: ", newline: false
 
-      # hard i/o block
       choice_index = gets.chomp.to_i
 
       valid_choice = choice_index > 0 && choice_index <= choices.count

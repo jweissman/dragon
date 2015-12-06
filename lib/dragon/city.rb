@@ -11,7 +11,6 @@ module Dragon
     end
 
     def self.generate(world, type = available_types.sample)
-      type = available_types.sample
       city = type.new world: world, subtype: subtypes.sample, feature: features.sample
       city
     end
@@ -19,7 +18,7 @@ module Dragon
     def self.generate_list(n, world: world)
       type_list = (required_types + types.shuffle).uniq.take(n)
       type_list.map do |type|
-        generate(world,type)
+        generate(world, type)
       end
     end
 

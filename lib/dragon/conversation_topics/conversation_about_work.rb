@@ -7,12 +7,12 @@ module Dragon
     end
 
     def describe
-      "about being a #{profession}"
+      "about being a #{profession.type}"
     end
     
     def responses
       [
-        "I really enjoy being a #{profession}",
+        "I really enjoy being a #{profession.type}",
         "It's okay, it's a living",
         "Can't complain!",
         "Difficult but good"

@@ -46,16 +46,21 @@ module Dragon
         record['name'] == 'action'
       end
 
-      profession_present = data.detect do |record|
+      profession_record = data.detect do |record|
         record['name'] == 'profession'
       end
 
       if action_record
         action = action_record['value']
         handle action
-      elsif profession_present # assume we're creating a character
-        player_attributes = %w[ name profession race subtype age gender ]
-        player_attributes.each do |attribute|
+      elsif profession_record # assume we're creating a character
+        player_class = Profession.adventuring.detect do |p| 
+          p.new.type == profession_record['value']
+        end
+        player.profession = player_class.new
+
+        other_player_attributes = %w[ name race subtype age gender ]
+        other_player_attributes.each do |attribute|
           value = extract_attribute_from_record(data, attribute)
           player.send :"#{attribute}=", value
         end

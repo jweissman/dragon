@@ -1,7 +1,7 @@
 module Dragon
   class Library < Building
     def associated_professions
-      %w[ student scribe professor reader ]
+      [ Student, Teacher, Minister, Wizard, Scribe ]
     end
 
     def room_types

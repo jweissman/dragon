@@ -9,6 +9,7 @@ module Dragon
 
     def initialize(name='unnamed')
       @name ||= name
+
       self.class.register(self)
       @id = self.class.all.count
     end
@@ -22,12 +23,13 @@ module Dragon
       @_all ||= []
     end
 
-    def type
-      self.class.name.split('::').last
+    def describe
+      return "#{subtype} #{type}" if subtype
+      type
     end
 
-    def describe
-      type
+    def type
+      self.class.name.split('::').last
     end
 
     def self.available_types

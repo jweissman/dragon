@@ -12,8 +12,13 @@ module Dragon
       city.class == Capital
     end
 
+    def required_professions
+      [ King, Queen ]
+    end
+
     def associated_professions
-      %w[ king queen nobleman noblewoman soldier ]
+      [ Prince, Princess, Bishop, Minister, 
+        Soldier, Wizard, Bard, Jester ]
     end
 
     def required_room_types

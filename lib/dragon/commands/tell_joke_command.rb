@@ -9,11 +9,11 @@ module Dragon
       end
 
       def describe
-        "You tell #{@partner.name} a joke about #{@subject}s"
+        "You tell #{@partner.name} a joke about #{@subject.label}s"
       end
 
       def label
-        "Joke about #{@subject}s"
+        "Joke about #{@subject.label}s"
       end
     end
   end

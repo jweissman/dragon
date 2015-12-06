@@ -1,7 +1,7 @@
 module Dragon
   class Hospital < Building
     def associated_professions
-      %w[ nurse priest student ]
+      [ Priest, Student ]
     end
 
     def room_types

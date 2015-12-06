@@ -37,11 +37,7 @@ module Dragon
     end
 
     def describe
-      "#{name} #{label}"
-    end
-
-    def label
-      self.class.name.split('::').last
+      "#{name} #{type}"
     end
 
     def populated?

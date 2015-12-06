@@ -1,6 +1,6 @@
 require 'spec_helper'
-
 require 'dragon'
+
 
 describe City do
   describe '#random_place' do

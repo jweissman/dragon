@@ -20,8 +20,12 @@ module Dragon
       if scene
         dramatize_scene scene
       end
+      
+      if world
+        describe player, prefix: "You are "
+        describe world, prefix: "You are in the world of "
+      end
 
-      describe world, prefix: "You (#{player.describe}) are in the world of " if world
       describe city,  prefix: "You are visiting " if city
 
       dramatize_place(place) if place
@@ -41,15 +45,15 @@ module Dragon
     end
 
     def dramatize_scene(scene)
+      describe scene, prefix: "You are currently ", heading: true
+
       command = scene.last_command
       if command
-        describe command, heading: true
+        describe command, important: true
       end
        
       events = scene.last_events
       dramatize_events(events) if events.any?
-
-      describe scene, prefix: "You are currently "
     end
 
     def dramatize_events events

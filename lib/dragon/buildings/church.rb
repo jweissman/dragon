@@ -1,7 +1,11 @@
 module Dragon
   class Church < Building
+    def required_professions
+      [ Priest ]
+    end
+
     def associated_professions
-      %w[ priest penitent acolyte ]
+      [ Acolyte, Cleric, Teacher, Bishop ]
     end
   
     def room_types

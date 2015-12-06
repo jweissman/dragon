@@ -7,12 +7,13 @@ module Dragon
     def label; type end
 
     def self.all
-      basic + noble + adventuring
+      basic + noble + adventuring + epic
     end
 
     def self.basic
-      [ Student, Teacher, Drunk, Barkeep,
-        Bard, Gambler, Priest, Conscript, Jester, Scribe ]
+      [ Student, Teacher, Drunk, 
+        Barkeep, Bard, Gambler, 
+        Priest, Conscript, Jester, Scribe ]
     end
 
     def self.noble
@@ -20,7 +21,15 @@ module Dragon
     end
 
     def self.adventuring
-      [ Warrior, Wizard, Soldier, Rogue, Cleric ]
+      [ Warrior, Wizard, Soldier, Rogue, Monk, Cleric ]
+    end
+
+    def self.epic
+      [ Archmage, Necromancer, Sage, Ninja ]
+    end
+
+    def self.available_in?(room)
+      true
     end
   end
 
@@ -47,7 +56,12 @@ module Dragon
   class Princess < Noble; end
   class Prince < Noble; end
   class Queen < Noble; end
-  class King < Noble; end
+
+  class King < Noble
+    def self.required_in?(room)
+      room.is_a?(ThroneRoom)
+    end
+  end
 
   class Adventurer < Profession
     def default_max_hp
@@ -84,4 +98,18 @@ module Dragon
       16
     end
   end
+
+  class Monk < Adventurer
+    def default_max_hp
+      30
+    end
+  end
+
+
+  class Epic < Adventurer; end
+
+  class Necromancer < Epic; end
+  class Sage < Epic; end
+  class Archmage < Epic; end
+  class Ninja < Epic; end
 end

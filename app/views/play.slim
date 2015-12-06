@@ -1,13 +1,13 @@
-.game.outer-container
+.game.inner-container
   form.input-form action="/play" method="POST"
-    .inner-container
-      .content 
-    .grid.submit-area
-      .col-2-3
-        .advice align='right'
-          small When you're ready, click "GO"
-          span &nbsp;
-          == "&rarr;"
-          span &nbsp;
-      .col-1-3
-        input.button type="submit" value="GO"
+    .content 
+    .submit-area
+      .grid
+        .col-2-3
+          .advice align='right'
+            small When you're ready, click "GO"
+            span &nbsp;
+            == "&rarr;"
+            span &nbsp;
+        .col-1-3
+          input.button type="submit" value="GO"

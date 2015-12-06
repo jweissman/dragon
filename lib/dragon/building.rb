@@ -69,6 +69,10 @@ module Dragon
       false
     end
 
+    def required_professions
+      []
+    end
+
     def associated_professions
       raise 'override Building#associated_professions in subclass'
     end

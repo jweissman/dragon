@@ -35,7 +35,7 @@ module Dragon
     end
 
     def activity
-      @activity ||= :exploring
+      @activity ||= Dragon::Activities::Exploring.new
     end
 
     def self.professions

@@ -27,7 +27,7 @@ module Dragon
         elsif result.dodge?
           EnemyDodgedAttackEvent.new(enemy: enemy)
         elsif result.ko?
-          engine.transition_to(engine.initial_scene)
+          transition_to initial_scene
           EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
         end
       end
@@ -51,10 +51,10 @@ module Dragon
       end
 
       def take_player_to_hospital(player)
-        hospital = engine.world.random_hospital
+        hospital = world.random_hospital
 
-        engine.move_to(hospital.rooms.sample)
-        engine.transition_to(engine.initial_scene)
+        move_to(hospital.rooms.sample)
+        transition_to(initial_scene)
 
         player.heal!
 

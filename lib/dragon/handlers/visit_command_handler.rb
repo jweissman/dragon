@@ -7,8 +7,8 @@ module Dragon
       end
 
       def visit(place)
-        previous_place = engine.place
-        engine.move_to(place)
+        previous_place = place
+        move_to(place)
 
         PlayerVisitedPlaceEvent.new(place: place, previous_place: previous_place)
       end

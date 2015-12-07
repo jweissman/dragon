@@ -26,6 +26,11 @@ require 'dragon/world'
 
 require 'dragon/combatant'
 
+require 'dragon/question'
+require_all 'lib/dragon/questions'
+
+require 'dragon/activity'
+
 require 'dragon/profession'
 require 'dragon/person'
 require 'dragon/enemy'
@@ -37,15 +42,16 @@ require 'dragon/player_builder'
 require 'dragon/console'
 require 'dragon/game_terminal'
 
-require 'dragon/conversation_topic'
-require_all 'lib/dragon/conversation_topics'
+# require 'dragon/conversation_topic'
+# require_all 'lib/dragon/conversation_topics'
 
 require 'dragon/event'
 require_all 'lib/dragon/events'
 
 require 'dragon/event_listener'
-# require_all 'lib/dragon/listeners'
+
 require 'dragon/quest'
+require_all 'lib/dragon/quests'
 
 require 'dragon/command_handler'
 require_all 'lib/dragon/handlers'
@@ -55,6 +61,7 @@ require_all 'lib/dragon/commands'
 
 require 'dragon/scene'
 require_all 'lib/dragon/scenes'
+
 
 require 'dragon/narrator'
 require 'dragon/engine'

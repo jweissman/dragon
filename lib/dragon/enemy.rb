@@ -35,7 +35,7 @@ module Dragon
 
     def self.max_hp_for_species(species)
       {
-        rat: 5,
+        rat: 2,
         snake: 6,
         wolf: 8,
         slime: 12,

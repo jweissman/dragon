@@ -4,7 +4,7 @@ module Dragon
       def handle(command)
         item = command.item
 
-        engine.inventory.push item
+        player.inventory.push item
 
         # TODO add to inventory?
         # TODO view inventory?

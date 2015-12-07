@@ -1,17 +1,16 @@
 require 'spec_helper'
-require 'dragon'
 
 describe AskQuestionCommand do
   subject do
-    AskQuestionCommand.new(topic: topic, partner: partner)
+    AskQuestionCommand.new(question: question, partner: partner)
   end
 
   let(:partner) do
     instance_double('Person', name: 'Alice')
   end
 
-  let(:topic) do
-    instance_double('ConversationTopic', describe: description)
+  let(:question) do
+    instance_double('Question', describe: description)
   end
 
   let(:description) do

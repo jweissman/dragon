@@ -7,12 +7,12 @@ module Dragon
       end
 
       def travel(destination)
-        previous_place = engine.place
-        engine.travel_to destination
+        previous_place = place
+        travel_to destination
 
         [
           PlayerTravelledToTownEvent.new(place: destination),
-          PlayerVisitedPlaceEvent.new(place: engine.place, previous_place: previous_place)
+          PlayerVisitedPlaceEvent.new(place: place, previous_place: previous_place)
         ]
       end
     end

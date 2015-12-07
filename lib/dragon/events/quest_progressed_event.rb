@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "#{cause}, making progress in your quest #{quest.label}"
+        "#{cause}, making progress in your quest #{quest.label} #{quest.progress}"
       end
     end
   end

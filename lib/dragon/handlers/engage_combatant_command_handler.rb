@@ -3,9 +3,8 @@ module Dragon
     class EngageCombatantCommandHandler < CommandHandler
       def handle(command)
         enemy = command.enemy
-        combat = engine.combat_with(enemy)
 
-        engine.transition_to(combat)
+        transition_to combat_with(enemy)
 
         Dragon::Events::CombatEngagedEvent.new(enemy: enemy)
       end

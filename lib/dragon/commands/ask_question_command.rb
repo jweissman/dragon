@@ -1,19 +1,19 @@
 module Dragon
   module Commands
     class AskQuestionCommand < Command
-      attr_reader :partner, :topic
+      attr_reader :partner, :question
 
-      def initialize(partner: nil, topic: nil)
+      def initialize(partner: nil, question: nil)
         @partner = partner
-        @topic = topic
+        @question = question
       end
 
       def describe
-        "You ask #{@partner.name} #{@topic.describe}"
+        "You ask #{partner.name} #{question.describe}"
       end
 
       def label
-        "Ask #{@partner.name} #{@topic.describe}"
+        "Ask #{partner.name} #{question.describe}"
       end
     end
   end

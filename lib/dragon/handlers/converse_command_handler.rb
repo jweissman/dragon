@@ -5,8 +5,9 @@ module Dragon
         person = command.person
 
         if rand > 0.1
-          conversation = engine.conversation_with(person)
-          engine.transition_to(conversation)
+          conversation = conversation_with(person)
+
+          transition_to(conversation)
 
           WordsSpokenEvent.new(person: person, message: 'Greetings!')
         else

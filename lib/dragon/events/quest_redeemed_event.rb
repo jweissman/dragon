@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "You gain #{quest.reward.describe} for completing the quest #{quest.label}!"
+        "You gain #{quest.reward.describe} for completing the quest #{quest.label}"
       end
     end
   end

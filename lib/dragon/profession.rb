@@ -1,12 +1,15 @@
 module Dragon
   class Profession
+    include Dragon::Activities
+    include Dragon::Questions
+
     def type
       self.class.name.split('::').last
     end
 
     def label; type end
 
-    def conversation_topics
+    def questions(*)
       [
         AskForQuests.new
       ]
@@ -51,7 +54,17 @@ module Dragon
   class Teacher < Profession; end
   class Drunk < Profession; end
   class Barkeep < Profession; end
-  class Bard < Profession; end
+  class Bard < Profession
+    def questions(person)
+      qs = if person.activity.is_a?(PlayingMusic)
+        [ AskToStop.new(activity: person.activity) ]
+      else
+        [ AskToStart.new(activity: PlayingMusic.new) ]
+      end
+
+      super + qs
+    end
+  end
   class Gambler < Profession; end
   class Priest < Profession; end
   class Conscript < Profession; end

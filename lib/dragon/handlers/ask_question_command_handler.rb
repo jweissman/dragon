@@ -3,47 +3,63 @@ module Dragon
     class AskQuestionCommandHandler < CommandHandler
       def handle(command)
         partner = command.partner
-        topic   = command.topic
+        question = command.question
 
-        response = topic.responses.sample
-        events = [ WordsSpokenEvent.new(person: partner, message: response) ]
+        response = question.responses.sample
+        events = [ say_response(partner, response) ]
 
-        if topic.about_activity?
-          partner.activity = topic.activity
+        if question.about?(Activity)
+          if question.is_a?(Dragon::Questions::AskToStop)
+            partner.activity = (partner.activities - [partner.activity.class]).sample.new
+          elsif question.is_a?(Dragon::Questions::AskToStart)
+            partner.activity = question.activity
+          else
+            raise "Unknown activity-related quesetion: #{question.class}"
+          end
         end
 
-        if topic.about_missions?
-
-          partner_quests = engine.player.quests.select { |q| q.requestor == partner }
-          if partner_quests.any?
-
-            completed_quests = partner_quests.select { |quest| quest.completed? }
-            if completed_quests.any?
-              events = completed_quests.map do |quest|
-                QuestRedemptionOfferedEvent.new(quest: quest)
-              end
-            else
-              # we need to clear out the above 'positive' message
-              events = [
-                WordsSpokenEvent.new(
-                  person: partner,
-                  message: "Don't you already have a quest from me?"
-                )
-              ]
-            end
-          else # no outstanding quests, complete or incomplete
-            events << offer_quest(quests_for(partner).sample)
-          end
+        if question.about?(Quest)
+          events = quest_events(partner, question)
         end
 
         events
       end
 
-      def quests_for(partner)
+      def quest_events(partner, question)
+        partner_quests = active_quests_for(partner)
+        if partner_quests.any?
+          completed_quests = partner_quests.select(&:completed?)
+          if completed_quests.any?
+            completed_quests.map do |quest|
+              WordsSpokenEvent.new(
+                person: partner,
+                message: "You've completed the quest #{quest.describe}! Why don't you redeem it for #{quest.reward.describe}?"
+              )
+            end
+          else
+            partner_quests.map do |quest|
+              WordsSpokenEvent.new(
+                person: partner,
+                message: "Didn't I already give you a quest #{quest.describe}?")
+            end
+          end
+        else # no outstanding quests, complete or incomplete
+          [
+            say_response(partner, question.responses.sample),
+            offer_quest(generate_quests_for(partner).sample)
+          ]
+        end
+      end
+
+      def active_quests_for(partner)
+        player.quests.select { |q| q.requestor == partner }
+      end
+
+      def generate_quests_for(partner)
         [
           KillEnemies.new(
-            count: [2,3].sample, 
-            species: Enemy.species_list.sample, 
+            count: (3..5).to_a.sample,
+            species: Enemy.species_list.sample,
             requestor: partner
           )
         ]
@@ -51,6 +67,11 @@ module Dragon
 
       def offer_quest(quest)
         QuestOfferedEvent.new(quest: quest)
+      end
+
+      def say_response(partner, response)
+        #response = topic.responses.sample
+        WordsSpokenEvent.new(person: partner, message: response)
       end
     end
   end

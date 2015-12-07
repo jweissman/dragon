@@ -16,22 +16,27 @@ module Dragon
         if event_actions.any?
           event_actions
         else
-          personal_actions(place) + 
+          partner.actions(player) +
+            questions_to_ask(place) + 
             basic_conversational_actions(place)
         end
       end
 
       protected
-      def personal_actions(place)
-        @partner.conversation_topics(place).map do |topic|
-          AskQuestionCommand.new(topic: topic, partner: @partner)
+      def questions_to_ask(place)
+        partner.questions(place).map do |question|
+          ask_question(question, partner)
         end
+      end
+
+      def ask_question(question, partner)
+        AskQuestionCommand.new(question: question, partner: partner)
       end
 
       def basic_conversational_actions(place)
         [
-          TellJokeCommand.new(subject: Profession.all.sample.new, partner: @partner),
-          SayGoodbyeCommand.new(partner: @partner)
+          TellJokeCommand.new(subject: Profession.all.sample.new, partner: partner),
+          SayGoodbyeCommand.new(partner: partner)
         ]
       end
     end

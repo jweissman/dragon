@@ -2,7 +2,8 @@ module Dragon
   module Handlers
     class ExitGameCommandHandler < CommandHandler
       def handle(command)
-        engine.halt!
+        halt!
+
         PlayerLeftRealmsEvent.new
       end
     end

@@ -5,7 +5,7 @@ module Dragon
         quest = command.quest
         # requestor = quest.requestor
 
-        engine.player.quests.push quest
+        player.quests.push quest
 
         QuestAcceptedEvent.new(quest: quest)
         # WordsSpokenEvent.new(

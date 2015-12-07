@@ -4,8 +4,8 @@ module Dragon
       def handle(command)
         quest = command.quest
 
-        engine.player.inventory.push quest.reward
-        engine.player.quests -= [quest]
+        player.inventory.push quest.reward
+        player.quests -= [quest]
 
         QuestRedeemedEvent.new(quest: quest)
       end

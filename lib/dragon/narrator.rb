@@ -16,20 +16,26 @@ module Dragon
     end
 
     def dramatize
-
-      if scene
-        dramatize_scene scene
-      end
-      
-      if world
-        describe player, prefix: "You are "
-        describe world, prefix: "You are in the world of "
-      end
+      dramatize_scene(scene) if scene
+      dramatize_world if world
 
       describe city,  prefix: "You are visiting " if city
 
       dramatize_place(place) if place
+      dramatize_player
+    end
 
+    def describe(entity, prefix: '', suffix: '', important: false, heading: false)
+      description = prefix + entity.describe + suffix + '.'
+      say capitalize_first_word(description), important: important, heading: heading
+    end
+
+    def dramatize_world
+      describe player, prefix: "You are "
+      describe world, prefix: "You are in the world of "
+    end
+
+    def dramatize_player
       if player.inventory.any?
         inventory_description = player.inventory.map(&:describe).join(', ')
         say "Your inventory includes: #{inventory_description}."
@@ -39,12 +45,6 @@ module Dragon
         quest_description = player.quests.map(&:describe).join(', ')
         say "Your quests include #{quest_description}."
       end
-
-    end
-
-    def describe(entity, prefix: '', suffix: '', important: false, heading: false)
-      description = prefix + entity.describe + suffix + '.'
-      say capitalize_first_word(description), important: important, heading: heading
     end
 
     def dramatize_scene(scene)

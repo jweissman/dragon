@@ -1,5 +1,8 @@
 module Dragon
   class Person < Combatant
+    include Dragon::Activities
+    include Dragon::Questions
+
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype
 
@@ -22,15 +25,18 @@ module Dragon
     end
 
     def activity
-      @activity ||= activities.sample
+      @activity ||= activities.sample.new
     end
 
     def activities
-      base = [ :sitting, :resting, :reading ]
-      professional = if profession.is_a?(Bard) # == 'bard'
-                       [:playing_music]
-                     elsif profession.is_a?(Gambler) # == 'gambler'
-                       [:throwing_dice]
+      base = [ Resting, Reading ]
+
+      professional = if profession.is_a?(Bard)
+                       [PlayingMusic, Singing]
+                     elsif profession.is_a?(Gambler)
+                       [ThrowingDice]
+                     elsif profession.is_a?(Jester)
+                       [Juggling]
                      else
                        []
                      end
@@ -43,7 +49,7 @@ module Dragon
     end
 
     def describe
-      "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity}"
+      "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity.describe}"
     end
 
     def self.races
@@ -54,30 +60,40 @@ module Dragon
       %w[ wild mutant dark light sea forest sky weird quiet ]
     end
 
-    def conversation_topics(place)
-      general_topics(place) + activity_topics + professional_topics
-    end
-
-    def general_topics(place)
-      [ 
-        ConversationAboutPlace.new(place: place),
-        ConversationAboutWork.new(profession: profession),
-        ConversationAboutLife.new
-      ]
-    end
-
-    def professional_topics
-      profession.conversation_topics
-    end
-
-    def activity_topics
-      if activity == :playing_music
-        [ AskToStopPlayingMusic.new ]
-      elsif profession == 'bard'
-        [ AskToPlayMusic.new ]
+    def actions(player)
+      quests = player.quests.select { |q| q.requestor == self }
+      if quests.any?
+        completed = quests.select(&:completed?)
+        if completed.any?
+          completed.map do |quest|
+            Dragon::Commands::RedeemQuestCommand.new(quest: quest)
+          end
+        else
+          []
+        end
       else
         []
       end
+    end
+
+    def questions(place)
+      general_questions(place) + professional_questions + activity_questions
+    end
+
+    def general_questions(place)
+      [
+        AskAboutPlace.new(place: place),
+        AskAboutWork.new(profession: profession),
+        AskAboutLife.new
+      ]
+    end
+
+    def professional_questions
+      profession.questions(self)
+    end
+
+    def activity_questions
+      [ ]
     end
   end
 end

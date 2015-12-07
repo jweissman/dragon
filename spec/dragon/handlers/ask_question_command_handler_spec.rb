@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AskQuestionCommandHandler do
   let(:ask_question_command) do
-    instance_double('AskQuestionCommand', partner: partner, topic: topic)
+    instance_double('AskQuestionCommand', partner: partner, question: question) # topic: topic)
   end
 
   let(:engine) do
@@ -15,12 +15,23 @@ describe AskQuestionCommandHandler do
 
   let(:quests) { [] }
 
-  let(:topic) do
-    instance_double('ConversationTopic', 
+  let(:question) do
+    instance_double('Question', 
                     responses: responses, 
-                    about_missions?: about_missions?,
-                    about_activity?: false)
+                    topic: conversation_topic,
+                    about?: false)
   end
+
+  let(:conversation_topic) do
+    instance_double('Object')
+  end
+
+  # let(:topic) do
+  #   instance_double('ConversationTopic',
+  #                   responses: responses, 
+  #                   about_missions?: about_missions?,
+  #                   about_activity?: false)
+  # end
 
   let(:about_missions?) { false } 
 
@@ -41,25 +52,35 @@ describe AskQuestionCommandHandler do
 
     it 'results in words being spoken' do
       expect(words_spoken.person).to eq(partner)
-      expect(topic.responses).to include(words_spoken.message)
+      expect(question.responses).to include(words_spoken.message)
     end
 
     context 'a question about missions' do
-      let(:about_missions?) { true }
-
       let(:quest_offered) do
         events.detect { |e| e.is_a? QuestOfferedEvent }
       end
 
       let(:quests) { [] }
+
       let(:quest) do
-        instance_double('Quest', requestor: partner, completed?: completed_quest)
+        instance_double('Quest', 
+                        requestor: partner, 
+                        completed?: completed_quest, 
+                        describe: "to do a thing",
+                        reward: reward)
       end
+
+      let(:reward) do
+        instance_double('Item', describe: "an awesome item")
+      end
+
       let(:completed_quest) { false }
 
       before do
         allow(subject).to receive(:engine).and_return(engine)
-        allow(subject).to receive(:quests_for).with(partner).and_return([quest])
+        allow(subject).to receive(:generate_quests_for).with(partner).and_return([quest])
+
+        allow(question).to receive(:about?).with(Quest).and_return(true)
       end
 
       it 'results in a quest offer' do
@@ -71,13 +92,12 @@ describe AskQuestionCommandHandler do
         let(:completed_quest) { true }
         let(:quests) { [ quest ] }
 
-        let(:quest_redemption_offered) do
-          events.detect { |e| e.is_a? QuestRedemptionOfferedEvent }
-        end
+        it 'should indicate it can be redeemed' do
+          expect(words_spoken).not_to be_nil
 
-        it 'should offer to redeem them' do
-          expect(quest_redemption_offered).not_to be_nil
-          expect(quest_redemption_offered.quest).to eql(quest)
+          expect(words_spoken.message).to include("redeem")
+          expect(words_spoken.message).to include(quest.describe)
+          expect(words_spoken.message).to include(quest.reward.describe)
         end
       end
     end

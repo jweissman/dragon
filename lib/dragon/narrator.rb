@@ -50,6 +50,10 @@ module Dragon
         quest_description = player.quests.map(&:describe).join(', ')
         say "Your quests include #{quest_description}."
       end
+
+      if player.gold > 0
+        say "You have #{player.gold} gold pieces"
+      end
     end
 
     def dramatize_scene(scene)

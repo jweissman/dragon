@@ -29,8 +29,11 @@ module Dragon
         elsif result.ko?
           transition_to exploration
 
+          player.xp += enemy.xp
+          player.gold += enemy.bounty
+
           events = [
-            EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
+            EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp, gold: enemy.bounty)
           ]
 
           if engine.last_destination

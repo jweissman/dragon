@@ -7,7 +7,6 @@ module Dragon
         @enemy  = enemy
         @player = player
 
-        # TODO add to part of the data of the command obj?
         describe
       end
 

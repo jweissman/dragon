@@ -1,15 +1,21 @@
 module Dragon
   class Item < Entity
-    attr_reader :quality, :kind
+    attr_reader :quality, :kind, :cost
 
-    def initialize(name, kind: nil, quality: nil)
+    def initialize(name, kind: nil, quality: nil, cost: 1)
       @kind = kind
       @quality = quality
+      @cost = cost
+
       super(name)
     end
 
     def describe
       "#{quality} #{kind}"
+    end
+
+    def label
+      describe
     end
 
     def self.generate

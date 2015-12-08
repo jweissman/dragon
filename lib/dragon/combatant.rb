@@ -46,5 +46,9 @@ module Dragon
     def xp
       @xp ||= 1
     end
+
+    def bounty
+      @bounty ||= 1
+    end
   end
 end

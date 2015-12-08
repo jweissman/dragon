@@ -15,6 +15,10 @@ module Dragon
       ]
     end
 
+    def conversation_topics
+      []
+    end
+
     def self.unique?
       false
     end
@@ -25,9 +29,9 @@ module Dragon
 
     def self.basic
       [
-        Student, Teacher, Drunk, Barkeep, Bard, Gambler,
-        Priest, Conscript, Jester, Scribe, Acolyte, Trader,
-        Beggar, Farmer, Constable
+        Trader, Student, Teacher, Drunk #, Barkeep, Bard, Gambler,
+        # Priest, Conscript, Jester, Scribe, Acolyte, Trader,
+        # Beggar, Farmer, Constable
       ]
     end
 
@@ -54,6 +58,7 @@ module Dragon
   class Teacher < Profession; end
   class Drunk < Profession; end
   class Barkeep < Profession; end
+
   class Bard < Profession
     def questions(person)
       qs = if person.activity.is_a?(PlayingMusic)
@@ -65,13 +70,24 @@ module Dragon
       super + qs
     end
   end
+
   class Gambler < Profession; end
   class Priest < Profession; end
   class Conscript < Profession; end
   class Jester < Profession; end
   class Scribe < Profession; end
   class Acolyte < Profession; end
-  class Trader < Profession; end
+
+  class Trader < Profession
+    def conversation_topics
+      [ Dragon::Commerce ]
+    end
+
+    def items_for_sale
+      Array.new(4) { Item.generate }
+    end
+  end
+
   class Beggar < Profession; end
   class Farmer < Profession; end
   class Constable < Profession; end
@@ -90,11 +106,15 @@ module Dragon
   class Queen < Noble; end
 
   class King < Noble
-    def conversation_topics
-      super + [
-        ConversationAboutPolitics.new
-      ]
+    def questions(*args)
+      super(*args) + [ AskAboutPolitics.new ]
     end
+
+    # def conversation_topics
+    #   super + [
+    #     ConversationAboutPolitics.new
+    #   ]
+    # end
   end
 
   class Adventurer < Profession

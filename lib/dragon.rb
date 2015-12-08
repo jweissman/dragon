@@ -29,6 +29,8 @@ require 'dragon/combatant'
 require 'dragon/question'
 require_all 'lib/dragon/questions'
 
+require 'dragon/conversation_topic'
+
 require 'dragon/activity'
 
 require 'dragon/profession'

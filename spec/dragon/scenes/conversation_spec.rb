@@ -12,7 +12,7 @@ describe Dragon::Scenes::Conversation do
   end
 
   let(:person) do
-    instance_double("Person", questions: [ question ], actions: [])
+    instance_double("Person", questions: [ question ], actions: [], conversation_topics: [])
   end
 
   let(:question) do

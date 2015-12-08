@@ -51,6 +51,10 @@ module Dragon
       base + professional
     end
 
+    def conversation_topics
+      profession.conversation_topics
+    end
+
     def self.generate_list(professions)
       professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
     end

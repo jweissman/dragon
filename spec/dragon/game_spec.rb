@@ -36,7 +36,7 @@ describe Dragon::Game do
 
   describe '#play' do
     after { subject.play }
-    it 'should welcome the player' do
+    xit 'should welcome the player' do
       expect(fake_term).to receive(:welcome).with(fake_player)
     end
 

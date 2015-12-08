@@ -10,12 +10,22 @@ module Dragon
       super(name)
     end
 
+    def self.generate(
+      profession: Profession.adventuring.sample
+    )
+      super(profession: profession)
+    end
+
     def chance_of_hitting(*)
       0.8
     end
 
     def label
       "#{name} the #{profession.type}"
+    end
+
+    def describe
+      "#{name.capitalize}, the #{subtype} #{race} #{profession.type}"
     end
 
     def max_hp

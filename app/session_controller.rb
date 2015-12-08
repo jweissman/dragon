@@ -13,8 +13,8 @@ module Dragon
       p [:create]
       session = GameSession.new(client: client, world: world)
       sessions.push session
-
-      session.make_character
+      session.step!
+      # session.make_character
     end
 
     def update(client, event)

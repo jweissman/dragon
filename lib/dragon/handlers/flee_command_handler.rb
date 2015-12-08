@@ -4,7 +4,7 @@ module Dragon
       def handle(command)
         enemy = command.enemy
 
-        transition_to(initial_scene)
+        transition_to(exploration)
 
         FledCombatEvent.new(enemy: enemy)
       end

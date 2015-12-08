@@ -6,73 +6,34 @@ module Dragon
 
     def_delegators :client, :send, :delete
     def_delegators :console, :content, :clear
-    def_delegators :engine, :last_prompted_actions, :describe, :prompt_player, :react
 
-    def initialize(world: nil, player: PlayerCharacter.new, client: nil, engine: nil)
+    def_delegators :engine,
+      :last_prompted_actions, :describe, :prompt_player, :react, :player
+
+    def initialize(world: nil, client: nil, engine: nil)
       @world  = world
-      @player = player
       @client = client
       @engine = engine
 
       @first_time = true
     end
 
-    def make_character
-      clear
-      PlayerBuilder.construct PlayerCharacter, console: console
-      send output if output
-      self
-    end
-
     def step!(data=nil)
       clear
-      process_event(data) if data
-      describe deep: @first_time
+
+      if data
+        action_label = process_event(data) 
+        handle(action_label) if action_label
+      end
+
+      describe
       prompt_player
       send output if output
 
       @first_time = false if @first_time
+      @params = {} # clear out params...
 
       self
-    end
-
-    def first_time?
-      @first_time
-    end
-
-    protected
-    def process_event(data)
-      action_record = data.detect do |record|
-        record['name'] == 'action'
-      end
-
-      profession_record = data.detect do |record|
-        record['name'] == 'profession'
-      end
-
-      if action_record
-        action = action_record['value']
-        handle action
-      elsif profession_record # assume we're creating a character
-        player_class = Profession.adventuring.detect do |p| 
-          p.new.type == profession_record['value']
-        end
-        player.profession = player_class.new
-
-        other_player_attributes = %w[ name race subtype age gender ]
-        other_player_attributes.each do |attribute|
-          value = extract_attribute_from_record(data, attribute)
-          player.send :"#{attribute}=", value
-        end
-      end
-    end
-
-    def extract_attribute_from_record(data, attr)
-      data.detect { |r| r['name'] == attr }['value']
-    end
-
-    def output
-      JSON.dump(content: content.join) if content
     end
 
     def handle(label)
@@ -83,11 +44,85 @@ module Dragon
           act.label == label
         end
 
+        augment(action) if params
         react(action) if action
       end
 
       self
     end
+
+    protected
+    def params
+      @params ||= {}
+    end
+
+    def whitelist
+      %w[ name race subtype age gender profession ]
+    end
+
+    def augment(command)
+      whitelist.each do |attribute|
+        if params.has_key?(attribute)
+          value = params[attribute]
+          puts "---> Augmenting command with #{attribute} == #{value}"
+          begin
+            command.send :"#{attribute}=", value
+          rescue NameError
+            # ignore..
+            puts "[warning] attempting to augment command #{command.class.name} with #{attribute}"
+          end
+        end
+      end
+      puts "===> After augmentation..."
+      p [:command, command]
+    end
+
+    def data_has_whitelisted_keys?(data)
+      whitelist.any? do |key|
+        data.detect do |record|
+          record['name'] == key
+        end
+      end
+    end
+
+    def process_event(data)
+      if data_has_whitelisted_keys?(data)
+        whitelist.each do |attribute|
+          value = extract_attribute_from_record(data, attribute)
+          params[attribute] = value
+        end
+      end
+
+      profession_record = data.detect do |record|
+        record['name'] == 'profession'
+      end
+
+      if profession_record # go ahead and dereference the value here
+        player_class = Profession.adventuring.detect do |p|
+          p.new.type == profession_record['value']
+        end
+
+        params['profession'] = player_class.new
+      end
+
+      action_record = data.detect do |record|
+        record['name'] == 'action'
+      end
+
+      if action_record
+        action = action_record['value']
+        return action
+      end
+    end
+
+    def extract_attribute_from_record(data, attr)
+      data.detect { |r| r['name'] == attr }['value']
+    end
+
+    def output
+      JSON.dump(content: content.join + "</div>") if content
+    end
+
 
     private
     def console
@@ -99,7 +134,11 @@ module Dragon
     end
 
     def engine
-      @engine ||= Engine.new(terminal: terminal, player: player, world: world)
+      @engine ||= Engine.new(terminal: terminal, world: world)
+    end
+
+    def first_time?
+      @first_time
     end
   end
 end

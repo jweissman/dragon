@@ -2,8 +2,7 @@ module Dragon
   module Handlers
     class ExitGameCommandHandler < CommandHandler
       def handle(command)
-        halt!
-
+        transition_to welcome
         PlayerLeftRealmsEvent.new
       end
     end

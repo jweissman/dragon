@@ -47,7 +47,7 @@ module Dragon
     end
 
     def create_websocket(env)
-      Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })
+      Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME})
     end
 
     def request_websocket?(env)

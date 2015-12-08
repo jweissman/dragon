@@ -40,13 +40,17 @@ a:visited { color: forestgreen; }
 
 .input-container {
   width: 67%;
+  margin: 0px;
   margin-left: 17%;
 }
 
 .input-container .question {
   text-align: right;
   margin-right: 10px;
-  padding: 6px;
+  margin-top: 6px;
+  padding: 8px;
+  font-size: 14pt;
+  font-weight: normal;
 }
 
 .outer-container {
@@ -56,12 +60,19 @@ a:visited { color: forestgreen; }
 }
 
 .inner-container {
-  padding: 50px;
-  padding-top: 2px;
   margin: 35px;
   margin-left: 100px;
   margin-right: 100px;
   min-height: 480px;
+  
+}
+
+.content-item {
+  padding: 40px;
+  padding-top: 2px;
+
+  margin: 10px;
+
   background-color: #fffae3; 
   background-image: 
   linear-gradient(#eee .1em, transparent .1em);
@@ -119,13 +130,11 @@ a:visited { color: forestgreen; }
 }
 
 .important {
-  font-size: 110%;
   font-weight: bold;
 }
 
 .advice {
   color: green;
-  font-size: 76%;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -143,21 +152,21 @@ a:visited { color: forestgreen; }
 }
 
 input[type=submit] {
-  font-size: 130%;
+  font-size: 24px;
   padding: 10px;
   width: 200px;
   background: rgba(203, 193, 208,1.0);
 }
 
 input[type=text] {
-  font-size: 16px;
+  font-size: 24px;
   background: rgba(255,255,255,0.0);
   font-family: "Cedarville Cursive", serif;
   border: none;
 }
 
 select {
-  font-size: 16px;
+  font-size: 24px;
   background: rgba(255,255,255,0.0);
   font-family: "Cedarville Cursive", serif;
   border: none;

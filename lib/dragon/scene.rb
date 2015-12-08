@@ -3,7 +3,8 @@ module Dragon
     include Dragon::Commands
     extend Forwardable
 
-    def_delegators :engine, :player, :last_command, :last_events
+    def_delegators :engine,
+      :player, :last_command, :last_events
 
     attr_reader :engine
 
@@ -14,6 +15,14 @@ module Dragon
     def handle(action: nil, place: nil)
       engine.last_events = *respond_to(action)
       self
+    end
+
+    def squelch_narration?
+      false
+    end
+
+    def permit_delays?
+      true
     end
 
     def base_actions

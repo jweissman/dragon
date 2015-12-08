@@ -10,7 +10,10 @@ module Dragon
 
     def self.generate(
       name: Name.generate, 
-      profession: Profession.all.sample
+      profession: Profession.all.sample,
+      age: (20..65).to_a.sample,
+      race: races.sample,
+      subtype: subtypes.sample
     )
       person = new(name)
       person.profession = profession.new
@@ -22,6 +25,10 @@ module Dragon
 
     def label
       "#{profession.type} #{name}"
+    end
+
+    def describe
+      "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity.describe}"
     end
 
     def activity
@@ -48,10 +55,7 @@ module Dragon
       professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
     end
 
-    def describe
-      "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity.describe}"
-    end
-
+    
     def self.races
       %w[ human elf dwarf halfling gnome orc goblin centaur ]
     end

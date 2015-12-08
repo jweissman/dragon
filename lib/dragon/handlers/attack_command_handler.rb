@@ -27,7 +27,7 @@ module Dragon
         elsif result.dodge?
           EnemyDodgedAttackEvent.new(enemy: enemy)
         elsif result.ko?
-          transition_to initial_scene
+          transition_to exploration
           EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
         end
       end
@@ -54,9 +54,9 @@ module Dragon
         hospital = world.random_hospital
 
         move_to(hospital.rooms.sample)
-        transition_to(initial_scene)
-
         player.heal!
+        transition_to(exploration)
+
 
         hospital
       end

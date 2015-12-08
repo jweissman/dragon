@@ -15,8 +15,11 @@ class VirtualConsole
 
   def say(message, heading: false, important: false)
     opts = if important
+
+
              { options: {class: 'important'}}
            elsif heading
+             output_html_content.push("</div><div class='content-item'>")
              { options: { class: 'heading' }}
            else
              {}
@@ -74,11 +77,11 @@ class VirtualConsole
   end
 
   def output_html_content
-    @content ||= []
+    @content ||= [ "<div class='content-item'>" ]
   end
 
   def flush!
-    @content = []
+    @content = [ "<div class='content-item>'" ]
   end
 end
 

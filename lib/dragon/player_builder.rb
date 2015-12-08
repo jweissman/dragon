@@ -6,6 +6,17 @@ module Dragon
       @console = console
     end
 
+    def self.construct(klass, console: Console.new)
+      console.say "Let's get to know a little about you...", heading: true
+
+      builder = new(console)
+      player = builder.character_for(klass.new(''))
+
+      # console.say "Okay, that's enough! Let's get moving.", important: true
+
+      player
+    end
+
     def character_for(player)
       ask_name player
 
@@ -50,16 +61,5 @@ module Dragon
         choices: Person.subtypes
     end
 
-    def self.construct(klass, console: Console.new)
-      console.say "Let's get to know a little about you...", 
-        heading: true
-
-      builder = new(console)
-      player = builder.character_for(klass.new(''))
-
-      console.say "Okay, that's enough! Let's get moving.", important: true
-
-      player
-    end
   end
 end

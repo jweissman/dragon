@@ -23,14 +23,6 @@ module Dragon
       self
     end
 
-    def narrate(world: nil, city: nil, place: nil, scene: nil, player: nil)
-      narrator = Narrator.new(terminal: self, world: world, city: city, place: place, scene: scene, player: player)
-
-      narrator.dramatize
-
-      self
-    end
-
     def choose_action(player: nil, actions: nil)
       labels = Hash[actions.zip(actions.map(&:label))]
 

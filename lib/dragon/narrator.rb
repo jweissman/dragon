@@ -15,14 +15,16 @@ module Dragon
       @player = player
     end
 
-    def dramatize
+    def dramatize(deep: true)
       dramatize_scene(scene) if scene
-      dramatize_world if world
 
-      describe city,  prefix: "You are visiting " if city
+      if deep
+        dramatize_world if world
+        describe city,  prefix: "You are visiting " if city
+      end
 
       dramatize_place(place) if place
-      dramatize_player
+      dramatize_player if player
     end
 
     def describe(entity, prefix: '', suffix: '', important: false, heading: false)
@@ -31,7 +33,10 @@ module Dragon
     end
 
     def dramatize_world
-      describe player, prefix: "You are "
+      if player
+        describe player, prefix: "You are "
+      end
+
       describe world, prefix: "You are in the world of "
     end
 
@@ -50,21 +55,28 @@ module Dragon
     def dramatize_scene(scene)
       describe scene, prefix: "You are ", heading: true
 
+      unless scene.last_command || scene.last_events.any?
+        say scene.default_narration
+      end
+
       command = scene.last_command
       if command
         describe command, important: true
       end
        
       events = scene.last_events
-      dramatize_events(events) if events.any?
+      dramatize_events(events, scene) if events.any?
     end
 
-    def dramatize_events events
+    def dramatize_events events, scene
       if events.any?
         news = events.flatten.compact
         news.each do |event|
-          simulate_delay_for_dramatic_purposes if news.length > 1
-          describe event, important: true
+          if scene.permit_delays?
+            simulate_delay_for_dramatic_purposes if news.length > 1
+          end
+
+          describe event, important: true if event.describe?
         end
       end
     end

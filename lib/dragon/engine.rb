@@ -5,7 +5,7 @@ module Dragon
     extend Forwardable
 
     def_delegators :player, :action, :inventory
-    def_delegators :terminal, :choose_action, :narrate, :say
+    def_delegators :terminal, :choose_action, :say
     def_delegators :scene, :actions, :handle
 
     attr_reader :world, :player, :terminal, :last_prompted_actions
@@ -37,10 +37,11 @@ module Dragon
     end
 
     def describe(deep: true)
-      elements = { place: place, scene: scene, player: player }
-      elements.merge!(city: city, world: world) if deep
-
-      narrate elements
+      if scene.squelch_narration?
+        narrator.dramatize_scene(scene)
+      else
+        narrator.dramatize(deep: deep)
+      end
     end
 
     def prompt_player
@@ -62,17 +63,26 @@ module Dragon
 
       events.flatten.compact.each do |event|
         if player.quests.any?
-          player.quests.each do |q| 
+          player.quests.each do |q|
             additional_events << q.receive(event)
           end
         end
-        additional_events << (event.class.listener.receive(event) if event.class.listener)
+
+        # binding.pry
+
+        if event.class.listener(self)
+          additional_events << event.class.listener(self).on(event)
+        end
       end
 
       additional_events
     end
 
-    def initial_scene
+    def welcome
+      Welcome.new(engine: self)
+    end
+
+    def exploration
       Exploration.new(engine: self)
     end
 
@@ -114,7 +124,11 @@ module Dragon
     end
 
     def scene
-      @current_scene ||= initial_scene
+      @current_scene ||= welcome
+    end
+
+    def narrator
+      Narrator.new(terminal: terminal, world: world, city: city, place: place, scene: scene, player: player)
     end
   end
 end

@@ -8,7 +8,7 @@ describe GameSession do
     GameSession.new client: client
   end
 
-  it 'should send down the character form' do
+  xit 'should send down the character form' do
     expect { subject.make_character }.not_to raise_error
     expect(client).to have_received(:send).with(an_instance_of(String)).at_least(:once)
   end

@@ -42,13 +42,11 @@ require 'dragon/player_builder'
 require 'dragon/console'
 require 'dragon/game_terminal'
 
-# require 'dragon/conversation_topic'
-# require_all 'lib/dragon/conversation_topics'
-
 require 'dragon/event'
 require_all 'lib/dragon/events'
 
 require 'dragon/event_listener'
+require_all 'lib/dragon/listeners'
 
 require 'dragon/quest'
 require_all 'lib/dragon/quests'

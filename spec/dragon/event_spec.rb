@@ -4,6 +4,7 @@ require 'dragon'
 describe Event do
   describe '.listener' do
     let(:fake_listener) { instance_double('EventListener') }
+    let(:engine) { instance_double('Engine') }
 
     it 'should indicate a reasonable listener class' do
       expect(Object).to receive(:const_get).
@@ -12,7 +13,7 @@ describe Event do
 
       expect(fake_listener).to receive(:new)
 
-      subject.class.listener
+      subject.class.listener(engine)
     end
   end
 end

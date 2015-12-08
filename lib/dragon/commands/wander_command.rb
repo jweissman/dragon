@@ -1,14 +1,11 @@
 module Dragon
   module Commands
     class WanderCommand < Command
-      attr_accessor :place
+      attr_accessor :place, :label
 
-      def initialize(place: nil)
+      def initialize(place: nil, label: nil)
         @place = place
-      end
-
-      def label
-        "Wander around #{place.describe}"
+        @label = label || "Wander around #{place.describe}"
       end
 
       def describe

@@ -60,6 +60,8 @@ require_all 'lib/dragon/commands'
 require 'dragon/scene'
 require_all 'lib/dragon/scenes'
 
+require 'dragon/random_event'
+
 
 require 'dragon/narrator'
 require 'dragon/engine'

@@ -28,7 +28,7 @@ module Dragon
     end
 
     def describe(entity, prefix: '', suffix: '', important: false, heading: false)
-      description = prefix + entity.describe + suffix + '.'
+      description = add_period_if_missing(prefix + entity.describe + suffix)
       say capitalize_first_word(description), important: important, heading: heading
     end
 
@@ -63,7 +63,7 @@ module Dragon
       if command
         describe command, important: true
       end
-       
+
       events = scene.last_events
       dramatize_events(events, scene) if events.any?
     end
@@ -91,7 +91,7 @@ module Dragon
                           end
 
       if place.is_a?(Room)
-        describe place, prefix: "You are #{place_preposition} the ", suffix: " of a #{place.building.describe}" 
+        describe place, prefix: "You are #{place_preposition} the ", suffix: " of a #{place.building.describe}"
       else
         describe place, prefix: "You are #{place_preposition} the "
       end
@@ -114,8 +114,20 @@ module Dragon
       [first, rest].flatten.join(' ')
     end
 
+    def add_period_if_missing(sentence)
+      unless punctuation.include?(sentence.chars.last)
+        sentence += '.'
+      end
+
+      sentence
+    end
+
+    def punctuation
+      %w[ . ? ! ]
+    end
+
     def simulate_delay_for_dramatic_purposes
-      sleep(0.8) unless under_test?
+      sleep(0.7) unless under_test?
     end
   end
 end

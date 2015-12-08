@@ -28,7 +28,16 @@ module Dragon
           EnemyDodgedAttackEvent.new(enemy: enemy)
         elsif result.ko?
           transition_to exploration
-          EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
+
+          events = [
+            EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp)
+          ]
+
+          if engine.last_destination
+            events.push(RandomEncounterResolvedEvent.new(destination: engine.last_destination, current_place: engine.place))
+          end
+
+          events
         end
       end
 

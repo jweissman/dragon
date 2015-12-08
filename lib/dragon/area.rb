@@ -6,15 +6,16 @@ module Dragon
       super(Name.generate)
     end
 
-    def self.generate(city)
-      klass = AREA_TYPES.sample
+    def self.generate(city, type=types.sample)
+      klass = type
       area = klass.new
       area.city = city
+      city.areas << area
       area
     end
 
     def self.generate_list(city, n)
-      klasses = AREA_TYPES.sample(n)
+      klasses = types.sample(n)
       areas = klasses.map(&:new)
 
       areas.each do |area|
@@ -43,6 +44,14 @@ module Dragon
     def populated?
       false
     end
+
+    def self.types
+      [ TownSquare, Forest, Lake, Cave ]
+    end
+
+    def self.types_for_discovery
+      [ Forest, Lake, Cave ]
+    end
   end
 
   class TownSquare < Area
@@ -53,10 +62,13 @@ module Dragon
     def populated?
       true
     end
+
+    def name
+      city.name
+    end
   end
 
   class Forest < Area; end
   class Lake < Area; end
-
-  AREA_TYPES = [ TownSquare, Forest, Lake ]
+  class Cave < Area; end
 end

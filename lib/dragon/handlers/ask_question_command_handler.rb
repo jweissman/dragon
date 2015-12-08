@@ -9,13 +9,7 @@ module Dragon
         events = [ say_response(partner, response) ]
 
         if question.about?(Activity)
-          if question.is_a?(Dragon::Questions::AskToStop)
-            partner.activity = (partner.activities - [partner.activity.class]).sample.new
-          elsif question.is_a?(Dragon::Questions::AskToStart)
-            partner.activity = question.activity
-          else
-            raise "Unknown activity-related quesetion: #{question.class}"
-          end
+          handle_activity(partner, question)
         end
 
         if question.about?(Quest)
@@ -23,6 +17,16 @@ module Dragon
         end
 
         events
+      end
+
+      def handle_activity(partner, question)
+        if question.is_a?(Dragon::Questions::AskToStop)
+          partner.activity = (partner.activities - [partner.activity.class]).sample.new
+        elsif question.is_a?(Dragon::Questions::AskToStart)
+          partner.activity = question.activity
+        else
+          raise "Unknown activity-related quesetion: #{question.class}"
+        end
       end
 
       def quest_events(partner, question)

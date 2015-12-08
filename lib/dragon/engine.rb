@@ -11,7 +11,7 @@ module Dragon
     attr_reader :world, :player, :terminal, :last_prompted_actions
 
     attr_reader :last_command
-    attr_accessor :last_events
+    attr_accessor :last_events, :last_destination
 
     def initialize(terminal: nil, world: World.generate, player: PlayerCharacter.new)
       @terminal = terminal
@@ -23,6 +23,8 @@ module Dragon
 
       @last_events = []
       @last_command = nil
+
+      @last_destination  = nil
     end
 
     def step
@@ -120,7 +122,7 @@ module Dragon
     end
 
     def place
-      @current_place ||= city.random_place
+      @current_place ||= city.areas.sample #random_place
     end
 
     def scene

@@ -1,18 +1,19 @@
 module Dragon
   module Commands
     class TravelCommand < Command
-      attr_reader :destination
+      attr_reader :destination, :label
 
-      def initialize(destination: nil)
+      def initialize(destination: nil, label: nil)
         @destination = destination
+        @label = label || "Travel to #{destination.label}"
       end
 
       def describe
-        "You travel to #{destination.describe}"
+        "You set out for #{destination.describe}"
       end
 
       def label
-        "Travel to #{destination.label}"
+        @label
       end
     end
   end

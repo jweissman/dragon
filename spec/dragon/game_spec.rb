@@ -36,10 +36,6 @@ describe Dragon::Game do
 
   describe '#play' do
     after { subject.play }
-    xit 'should welcome the player' do
-      expect(fake_term).to receive(:welcome).with(fake_player)
-    end
-
     context 'iterates gameplay until player exits' do
       it 'should call engine#step while still_playing? is true' do
         allow(fake_engine).to receive(:still_playing?).and_return(true, false)

@@ -76,7 +76,12 @@ module Dragon
     end
   end
 
-  class Gambler < Profession; end
+  class Gambler < Profession
+    def conversation_topics
+      [ Topics::Gambling ]
+    end
+  end
+
   class Priest < Profession; end
   class Conscript < Profession; end
   class Jester < Profession; end

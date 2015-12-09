@@ -127,7 +127,7 @@ module Dragon
     end
 
     def punctuation
-      %w[ . ? ! ]
+      %w[ . ? ! ' " ]
     end
 
     def simulate_delay_for_dramatic_purposes

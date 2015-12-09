@@ -28,9 +28,14 @@ module Dragon
 
         if original_destination && original_destination != origin_place
           if original_destination.is_a?(City)
-            action_list.push Dragon::Commands::TravelCommand.new(destination: original_destination, label: "Keep travelling to #{original_destination.name}")
+            action_list.push Dragon::Commands::TravelCommand.new(
+              destination: original_destination, 
+              label: "Keep travelling to #{original_destination.name}")
           elsif original_destination.is_a?(Area)
-            action_list.push Dragon::Commands::WanderCommand.new(place: original_destination, label: "Keep wandering around #{original_destination.name}")
+            action_list.push Dragon::Commands::WanderCommand.new(
+              place: original_destination,
+              label: "Keep wandering around #{original_destination.describe}"
+            )
           end
         end
 

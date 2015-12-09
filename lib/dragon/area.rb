@@ -15,8 +15,8 @@ module Dragon
     end
 
     def self.generate_list(city, n)
-      klasses = types.sample(n)
-      areas = klasses.map(&:new)
+      classes = required_types + types_for_discovery.shuffle
+      areas = classes.take(n).map(&:new)
 
       areas.each do |area|
         area.city = city
@@ -46,7 +46,11 @@ module Dragon
     end
 
     def self.types
-      [ TownSquare, Forest, Lake, Cave ]
+      [ Square, Forest, Lake, Cave ]
+    end
+
+    def self.required_types
+      [ Square ]
     end
 
     def self.types_for_discovery
@@ -54,7 +58,7 @@ module Dragon
     end
   end
 
-  class TownSquare < Area
+  class Square < Area
     def can_wander?
       false
     end

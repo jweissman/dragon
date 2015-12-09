@@ -9,7 +9,7 @@ module Dragon
     attr_accessor :activity
 
     def self.generate(
-      name: Name.generate, 
+      name: Name.generate,
       profession: Profession.all.sample,
       age: (20..65).to_a.sample,
       race: races.sample,
@@ -59,7 +59,6 @@ module Dragon
       professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
     end
 
-    
     def self.races
       %w[ human elf dwarf halfling gnome orc goblin centaur ]
     end

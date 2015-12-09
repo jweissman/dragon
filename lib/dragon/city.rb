@@ -93,31 +93,31 @@ module Dragon
     end
 
     def building_count_range
-      (10..15)
+      (7..8)
     end
   end
 
   class Metropolis < City
     def building_count_range
-      (9..14)
+      (5..7)
     end
   end
 
   class Village < City
     def building_count_range
-      (8..12)
+      (3..5)
     end
   end
 
   class Hamlet < City
     def building_count_range
-      (6..10)
+      (2..3)
     end
   end
 
   class Outpost < City
     def building_count_range
-      (5..8)
+      (1..2)
     end
   end
 end

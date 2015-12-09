@@ -10,8 +10,7 @@ module Dragon
     end
 
     def self.types
-      [ House, Castle, Library, Tavern,
-        Church, Hospital, Castle ]
+      [ House, Library, Tavern, Church, Hospital, Castle ]
     end
 
     def self.available_in?(*)

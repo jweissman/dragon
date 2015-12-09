@@ -19,10 +19,10 @@ module Dragon
       def wager_actions
         outcomes.map do |outcome|
           Dragon::Commands::PlaceWagerCommand.new(
-            outcome: outcome,
+            outcome:     outcome,
             outcome_set: outcomes,
-            amount: wager_amount,
-            partner: partner
+            amount:      wager_amount,
+            partner:     partner
           )
         end
       end

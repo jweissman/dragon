@@ -7,7 +7,7 @@ module Dragon
         player.inventory.push item
 
         events = [
-          ItemTakenEvent.new(item: item)
+          ItemTakenEvent.new(item: item, cause: "you took #{item.describe}")
         ]
 
         if engine.last_destination

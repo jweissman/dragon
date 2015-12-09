@@ -6,12 +6,13 @@ module Dragon
 
       def with(partner: nil)
         @partner = partner
-        @topic = NullTopic.new
+        @topic = Topics::NullTopic.new(partner: @partner)
+
         self
       end
 
       def describe
-        topic.describe(partner)
+        topic.describe
       end
 
       def change_topic!(new_topic)
@@ -24,16 +25,22 @@ module Dragon
         elsif topic_actions.any?
           (topic_actions + change_topic_actions).flatten.compact
         else
-          partner.actions(player) +
-            questions_to_ask(place) +
-            basic_conversational_actions(place) +
-            change_topic_actions
+          core_actions(place).flatten.compact
         end
+      end
+
+      def core_actions(place)
+        [
+          partner.actions(player),
+          change_topic_actions,
+          questions_to_ask(place),
+          basic_conversational_actions(place),
+        ]
       end
 
       protected
       def topic_actions
-        topic.actions(partner)
+        topic.actions(world)
       end
 
       def questions_to_ask(place)
@@ -54,21 +61,22 @@ module Dragon
       end
 
       def change_topic_actions
-        topics = ((partner.conversation_topics - [topic]) + [NullTopic]).uniq
-
-        topic_actions = topics.map do |topic_class|
+        topics.map do |topic_class|
           if !topic.is_a?(topic_class)
             ChangeConversationSubjectCommand.new(
               partner: partner,
-              new_subject: topic_class.new,
+              new_subject: topic_class.new(conversation: self, partner: partner),
               conversation: self
             )
           else
             nil
           end
         end
+      end
 
-        topic_actions.compact
+      private
+      def topics
+        ((partner.conversation_topics - [topic]) + [Topics::NullTopic]).uniq
       end
     end
   end

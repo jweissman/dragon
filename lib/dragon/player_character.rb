@@ -3,7 +3,7 @@ module Dragon
     extend Forwardable
     def_delegators :engine, :place
 
-    attr_accessor :action, :inventory, :engine, 
+    attr_accessor :action, :inventory, :engine,
       :quests, :gold, :xp
 
     def initialize(name=nil)

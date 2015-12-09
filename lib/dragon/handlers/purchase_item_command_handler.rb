@@ -9,7 +9,8 @@ module Dragon
         if engine.player.gold >= cost
           engine.player.inventory.push(item)
           engine.player.gold -= cost
-          ItemTakenEvent.new(item: item)
+
+          ItemTakenEvent.new(item: item, cause: "you gave #{merchant.name} #{cost} gold")
         else
           WordsSpokenEvent.new(person: merchant, message: "You cannot afford the #{item.describe}! It costs #{item.cost} gold, but you only have #{engine.player.gold}")
         end

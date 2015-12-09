@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "#{@person.name} says \"#{@message}\""
+        "#{person.name} says \"#{message}\""
       end
     end
   end

@@ -11,7 +11,7 @@ module Dragon
 
     def questions(*)
       [
-        AskForQuests.new
+        # ...
       ]
     end
 
@@ -29,9 +29,16 @@ module Dragon
 
     def self.basic
       [
-        Trader, Student, Teacher, Drunk #, Barkeep, Bard, Gambler,
-        # Priest, Conscript, Jester, Scribe, Acolyte, Trader,
-        # Beggar, Farmer, Constable
+        Sage, Trader, Student, Teacher,
+        Drunk, Barkeep, Bard, Gambler, Priest,
+        Conscript, Jester, Scribe, Acolyte,
+        Beggar, Farmer, Constable
+      ]
+    end
+
+    def self.noble
+      [
+        Judge, Minister, Bishop, Princess, Prince, Queen, King
       ]
     end
 
@@ -43,13 +50,7 @@ module Dragon
 
     def self.epic
       [
-        Archmage, Necromancer, Pyromancer, Sage, Ninja
-      ]
-    end
-
-    def self.noble
-      [
-        Judge, Minister, Bishop, Princess, Prince, Queen, King
+        Archmage, Necromancer, Pyromancer, Ninja, Pirate
       ]
     end
   end
@@ -69,6 +70,10 @@ module Dragon
 
       super + qs
     end
+
+    def conversation_topics
+      [ Topics::Lore ]
+    end
   end
 
   class Gambler < Profession; end
@@ -78,9 +83,15 @@ module Dragon
   class Scribe < Profession; end
   class Acolyte < Profession; end
 
+  class Sage < Profession
+    def conversation_topics
+      [ Topics::Lore ]
+    end
+  end
+
   class Trader < Profession
     def conversation_topics
-      [ Dragon::Commerce ]
+      [ Topics::Commerce ]
     end
 
     def items_for_sale
@@ -95,6 +106,10 @@ module Dragon
   class Noble < Profession
     def self.unique?
       true
+    end
+
+    def questions(*)
+      [ AskForQuests.new ]
     end
   end
 
@@ -165,11 +180,11 @@ module Dragon
     end
   end
 
-  class Epic < Adventurer; end
 
-  class Necromancer < Epic; end
-  class Pyromancer < Epic; end
-  class Sage < Epic; end
-  class Archmage < Epic; end
-  class Ninja < Epic; end
+  class Necromancer < Wizard; end
+  class Pyromancer < Wizard; end
+  class Archmage < Wizard; end
+
+  class Ninja < Rogue; end
+  class Pirate < Rogue; end
 end

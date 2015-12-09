@@ -4,7 +4,7 @@ module Dragon
     extend Forwardable
 
     def_delegators :engine,
-      :player, :last_command, :last_events
+      :player, :last_command, :last_events, :world
 
     attr_reader :engine
 

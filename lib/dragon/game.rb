@@ -11,23 +11,16 @@ module Dragon
     end
 
     def play
-      # welcome player
-      # player.engine = engine
       step while still_playing?
     end
 
     private
     def engine
       @engine ||= Dragon::Engine.new(
-        # player: player,
         terminal: terminal,
         world: world
       )
     end
-
-    # def player
-    #   @player ||= PlayerBuilder.construct(PlayerCharacter, console: console)
-    # end
 
     def terminal
       @terminal ||= GameTerminal.new(console)
@@ -38,7 +31,7 @@ module Dragon
     end
 
     def world
-      @world ||= World.generate
+      @world ||= World.new
     end
   end
 end

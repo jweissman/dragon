@@ -9,9 +9,9 @@ module Dragon
         if event_actions.any?
           event_actions
         else
-          outdoor_actions(place) +
+          people_actions(place) +
+            outdoor_actions(place) +
             indoor_actions(place) +
-            people_actions(place) +
             base_actions
         end
       end

@@ -63,7 +63,11 @@ module Dragon
     end
 
     def building_count
-      @building_count ||= (3..4).to_a.sample
+      @building_count ||= building_count_range.to_a.sample
+    end
+
+    def building_count_range
+      (4..7)
     end
 
     def areas
@@ -87,13 +91,34 @@ module Dragon
     def self.unique?
       true
     end
+
+    def building_count_range
+      (10..15)
+    end
   end
 
   class Metropolis < City
+    def building_count_range
+      (9..14)
+    end
   end
 
-  class Village < City; end
-  class Hamlet < City; end
-  class Outpost < City; end
+  class Village < City
+    def building_count_range
+      (8..12)
+    end
+  end
+
+  class Hamlet < City
+    def building_count_range
+      (6..10)
+    end
+  end
+
+  class Outpost < City
+    def building_count_range
+      (5..8)
+    end
+  end
 end
 

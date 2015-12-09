@@ -10,14 +10,14 @@ module Dragon
       end
 
       def describe
-        "You are #{new_subject.describe(partner)}"
+        "You are #{new_subject.describe}"
       end
 
       def label
-        if new_subject.is_a?(NullTopic)
-          "Stop #{conversation.topic.describe(partner)}"
+        if new_subject.is_a?(Topics::NullTopic)
+          "Stop #{conversation.topic.describe}"
         else
-          "Start #{new_subject.describe(partner)}"
+          "Start #{new_subject.describe}"
         end
       end
     end

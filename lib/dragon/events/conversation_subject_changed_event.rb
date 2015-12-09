@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "The topic of your conversation with #{partner.name} has shifted to #{subject.describe(partner)}"
+        "The topic of your conversation with #{partner.name} has shifted to #{subject.describe}"
       end
     end
   end

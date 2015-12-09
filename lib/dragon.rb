@@ -30,6 +30,7 @@ require 'dragon/question'
 require_all 'lib/dragon/questions'
 
 require 'dragon/conversation_topic'
+require_all 'lib/dragon/topics'
 
 require 'dragon/activity'
 

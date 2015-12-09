@@ -27,7 +27,6 @@ describe City do
     let(:world) { instance_double('World') }
     it 'should be of the expected types' do
       expect(City.types).to include(subject.class)
-
     end
   end
 end

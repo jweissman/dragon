@@ -13,7 +13,7 @@ module Dragon
     attr_reader :last_command
     attr_accessor :last_events, :last_destination
 
-    def initialize(terminal: nil, world: World.generate, player: PlayerCharacter.new)
+    def initialize(terminal: nil, world: World.new, player: PlayerCharacter.new)
       @terminal = terminal
       @world    = world
       @player   = player

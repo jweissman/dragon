@@ -11,7 +11,7 @@ module Dragon
     def initialize(app)
       @app = app
       @sessions = []
-      @world = World.generate
+      @world = World.new
     end
 
     def call(env)
@@ -25,7 +25,6 @@ module Dragon
     protected
     def setup_websocket(env)
       ws = create_websocket(env)
-
       ws.on :open    do |_| 
         create(ws) 
       end

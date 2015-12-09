@@ -1,14 +1,15 @@
 module Dragon
   module Events
     class ItemTakenEvent < Event
-      attr_reader :item
+      attr_reader :item, :cause
 
-      def initialize(item: nil)
+      def initialize(item: nil, cause: nil)
         @item = item
+        @cause = cause
       end
       
       def describe
-        "The #{@item.describe} was added to your inventory"
+        "#{cause}, and added #{item.describe} to your inventory"
       end
     end
   end

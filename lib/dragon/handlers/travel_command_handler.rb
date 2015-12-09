@@ -35,7 +35,7 @@ module Dragon
       end
 
       def random_encounter?
-        rand >= 0.4
+        rand >= 0.8
       end
     end
   end

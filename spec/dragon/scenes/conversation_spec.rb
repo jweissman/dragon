@@ -20,7 +20,11 @@ describe Dragon::Scenes::Conversation do
   end
 
   let(:engine) do
-    instance_double("Engine", last_events: [], player: player)
+    instance_double("Engine", last_events: [], player: player, world: world)
+  end
+
+  let(:world) do
+    instance_double("World")
   end
 
   let(:player) do

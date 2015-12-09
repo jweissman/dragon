@@ -14,7 +14,7 @@ module Dragon
       end
 
       def describe
-        "You ask #{merchant.name} about #{item.describe}"
+        "You ask #{merchant.name} if you can buy #{item.describe}"
       end
     end
   end

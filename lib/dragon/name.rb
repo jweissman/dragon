@@ -14,21 +14,38 @@ module Dragon
 
     protected
     def self.perform_generation
-      count = (1..3).to_a.sample
+      count = (2..3).to_a.sample
       components.sample(count).join.capitalize
     end
 
     def self.components
       %w[
-        ad edsel quox saff ged tef ben chi smyt cor lin sep tim
-        ag lem sen klu ef med fer wyrk ben snel set gon cad lery
-        astyr aeon erath emp ko fu li sho nu ga tor mann fel
-        cad iz rak nor cer lai tan ech nas grin borough tine leaf
-        leg ment jed de fer lis camp hel est wry al gon smar
-        mu alef bet vet gim el dal ed hay alpha beta gamma
-        phi gar ef len tyg lan af nel ekru stam seg mar ald werj
-        sed var veris lemm warke kru sel dric cap stel sep mer
-        ka
+        ad ae aei aeon af ag al ald alef alpha astyr ation
+        ba be bei ben bet beta bi bil bo borough
+        ca cad camp cap ce cer ci chi cor
+        da dal de di dric
+        ea ech ed edsel ef ef ekru el emp erath est
+        fa fai fei fel fer fu
+        ga gamma gar ge gei ged gi gim go gon grin gu
+        ha he hei hoi hi hay hel
+        ia io in ist iz ius ion
+        ja jae jai jan je jed jer jil jex
+        ka kai ke ki klu ko kru ku
+        lai lan leaf leg lem lemm len lery li lin lis ly lyt
+        mann mar med ment mer mu
+        nas nel nor nu nim nem nil
+        oa oe oi ou oy os ost
+        pa pal pe pi po pou pu phi
+        qua qui quo que quox quay
+        ra rak rag rai re rei reg ro rou ru ria ros
+        sa saf se sed seg sei sel sen sep sep set si shi sho smar smy snel stam stel
+        tan tef tim tine tor tyg tis the tion
+        ua ue ui uo uy uis ug
+        var veris vet
+        wa wo war werj wry wyrk
+        xa xe xi xo xaio
+        ya ye yi yo yu yr
+        za zo zed
       ]
     end
   end

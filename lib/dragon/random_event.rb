@@ -1,22 +1,18 @@
 module Dragon
   class RandomEvent
+    extend Random
     include Dragon::Events
 
-    def self.sample(destination, origin)
-      [
-        ItemFoundEvent.new(item: Item.generate),
-
-        PersonEncounteredEvent.new(person: Person.generate),
-
-        EnemyEncounteredEvent.new(enemy: Enemy.generate),
-        EnemyEncounteredEvent.new(enemy: Enemy.generate),
-        EnemyEncounteredEvent.new(enemy: Enemy.generate),
-
-        place_discovered(destination, origin)
-      ].sample
+    def self.sample(destination, origin, cause=nil)
+      sample_percentages({
+        5  => -> { ItemFoundEvent.new(item: Item.generate) },
+        25 => -> { PersonEncounteredEvent.new(person: Person.generate) },
+        50 => -> { EnemyEncounteredEvent.new(enemy: Enemy.generate) },
+        2  => -> { place_discovered(destination, origin, cause) }
+      }).call
     end
 
-    def self.place_discovered(destination, origin)
+    def self.place_discovered(destination, origin, cause)
       place = if destination.is_a?(Area)
         Area.generate(destination.city, Area.types_for_discovery.sample)
       elsif destination.is_a?(City)
@@ -26,7 +22,8 @@ module Dragon
       PlaceDiscoveredEvent.new(
         place: place,
         original_destination: destination,
-        origin: origin
+        origin: origin,
+        cause: cause
       )
     end
   end

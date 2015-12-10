@@ -7,5 +7,9 @@ module Dragon
     def room_types
       [ Ward, Surgery, Nursery, Hall ]
     end
+
+    def self.unique
+      false
+    end
   end
 end

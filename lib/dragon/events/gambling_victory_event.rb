@@ -1,9 +1,9 @@
 module Dragon
   module Events
     class GamblingVictoryEvent < Event
-      attr_reader :amount, :outcome, :outcome_set
+      attr_reader :amount, :outcome
 
-      def initialize(amount: nil, outcome: nil, outcome_set: outcome_set)
+      def initialize(amount: nil, outcome: nil)
         @amount = amount
         @outcome = outcome
       end

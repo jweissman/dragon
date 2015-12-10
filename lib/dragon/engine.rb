@@ -110,7 +110,7 @@ module Dragon
 
     def travel_to(new_city)
       @city = new_city
-      @current_place = new_city.areas.sample
+      @current_place = new_city.areas.select(&:common_area?).sample
     end
 
     def still_playing?

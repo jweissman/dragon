@@ -9,8 +9,10 @@ module Dragon
     def self.generate(city, type=types.sample)
       klass = type
       area = klass.new
+
       area.city = city
       city.areas << area
+
       area
     end
 
@@ -31,10 +33,21 @@ module Dragon
 
     def generate_people
       if populated?
-        Array.new([2,3].sample) { Person.generate }
+        people_count = population_range.to_a.sample
+        professions.take(people_count).map do |job|
+          Person.generate profession: job
+        end
       else
         []
       end
+    end
+
+    def population_range
+      (1..3)
+    end
+
+    def professions
+      Profession.basic.shuffle
     end
 
     def describe
@@ -46,7 +59,7 @@ module Dragon
     end
 
     def self.types
-      [ Square, Forest, Lake, Cave ]
+      [ Square, Alley, Forest, Lake, Cave, Shore, Hill, Swamp ]
     end
 
     def self.required_types
@@ -54,13 +67,17 @@ module Dragon
     end
 
     def self.types_for_discovery
-      [ Forest, Lake, Cave ]
+      [ Forest, Lake, Cave, Shore, Hill, Swamp ]
     end
   end
 
   class Square < Area
     def can_wander?
       false
+    end
+
+    def common_area?
+      true
     end
 
     def populated?
@@ -70,9 +87,21 @@ module Dragon
     def name
       city.name
     end
+
+    def professions
+      [ Trader ] + super
+    end
   end
+
+  class Alley < Area; end
 
   class Forest < Area; end
   class Lake < Area; end
   class Cave < Area; end
+
+  # maybe should be a more 'explorable' building-type
+  class Shore < Area; end
+  class Swamp < Area; end
+
+  class Hill < Area; end
 end

@@ -1,16 +1,16 @@
 module Dragon
   module Events
     class PlaceDiscoveredEvent < Event
-      attr_reader :place, :original_destination, :origin
+      attr_reader :place, :original_destination, :origin, :cause
 
-      def initialize(place: nil, original_destination: nil, origin: nil)
+      def initialize(place: nil, original_destination: nil, origin: nil, cause: "While exploring")
         @place = place
         @original_destination = original_destination
         @origin = origin
       end
 
       def describe
-        "While travelling from #{origin.describe} to #{original_destination.describe}, you discover #{place.describe}"
+        "#{cause} you discover #{place.describe}"
       end
 
       def origin_place
@@ -27,20 +27,25 @@ module Dragon
         ]
 
         if original_destination && original_destination != origin_place
+
           if original_destination.is_a?(City)
             action_list.push Dragon::Commands::TravelCommand.new(
-              destination: original_destination, 
+              destination: original_destination,
               label: "Keep travelling to #{original_destination.name}")
+
           elsif original_destination.is_a?(Area)
             action_list.push Dragon::Commands::WanderCommand.new(
               place: original_destination,
-              label: "Keep wandering around #{original_destination.describe}"
+              label: "Keep exploring #{original_destination.describe}"
             )
           end
         end
 
         action_list.push(
-          Dragon::Commands::TravelCommand.new(destination: origin_place, label: "Return to #{origin_place.name}")
+          Dragon::Commands::TravelCommand.new(
+            destination: origin_place, 
+            label: "Return to #{origin_place.name}"
+          )
         )
 
         action_list

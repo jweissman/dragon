@@ -24,18 +24,24 @@ module Dragon
       def handle_encounter(destination)
         previous_place = place
         engine.last_destination = destination
-        encounter_area = place.city.areas.sample
 
-        move_to encounter_area
+        random_event = RandomEvent.sample(destination, previous_place, "while travelling from #{previous_place.name} to #{destination.name}")
 
-        [
-          PlayerVisitedPlaceEvent.new(place: encounter_area, previous_place: previous_place),
-          RandomEvent.sample(destination, previous_place)
-        ]
+        if random_event.is_a?(PlaceDiscoveredEvent)
+          move_to random_event.place
+          [ random_event ]
+        else
+          encounter_area = place.city.areas.sample
+          move_to encounter_area
+          [
+            PlayerVisitedPlaceEvent.new(place: encounter_area, previous_place: previous_place),
+            random_event
+          ]
+        end
       end
 
       def random_encounter?
-        rand >= 0.8
+        rand <= RANDOM_ENCOUNTER_RATE
       end
     end
   end

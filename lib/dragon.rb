@@ -9,6 +9,8 @@ require 'forwardable'
 
 require 'dragon/version'
 
+require 'dragon/random'
+
 require 'dragon/entity'
 require 'dragon/name'
 
@@ -78,6 +80,8 @@ module Dragon
   PLAYER_TYPE_PROMPT    = "What sort of adventurer are you?"
   PLAYER_SUBTYPE_PROMPT = "What are your people like?"
   PLAYER_ACTION_PROMPT  = "What would you like to do?"
+
+  RANDOM_ENCOUNTER_RATE = 0.28
 
   def self.play!
     game.boot!

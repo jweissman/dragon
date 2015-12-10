@@ -6,8 +6,8 @@ module Dragon
       "#{aspect} #{type}"
     end
 
-    def self.generate(building, 
-                      professions = building.associated_professions.shuffle, 
+    def self.generate(building,
+                      professions = building.associated_professions.shuffle,
                       type = available_types_for_building(building).sample)
       room  = type.new
       room.building = building
@@ -53,6 +53,10 @@ module Dragon
   class Kitchen < Room; end
   class SunRoom < Room; end
   class Hall < Room; end
+  class DrawingRoom < Room; end
+
+  class CommonRoom < Room; end
+  class Lobby < Room; end
 
   class Tower < Room; end
   class GreatHall < Room; end
@@ -77,4 +81,7 @@ module Dragon
   class Nave < Room; end
   class Sanctuary < Room; end
   class Refectory < Room; end
+
+  # for communing with the dead!
+  class Psychomanteum < Room; end
 end

@@ -1,9 +1,10 @@
 module Dragon
   module Handlers
-    class WanderCommandHandler < CommandHandler
+    class StayHereCommandHandler < CommandHandler
       def handle(command)
         place = command.place
-        RandomEvent.sample(place, place.city, 'while wandering')
+
+        PlayerVisitedPlaceEvent.new(place: place)
       end
     end
   end

@@ -2,6 +2,7 @@ module Dragon
   class Person < Combatant
     include Dragon::Activities
     include Dragon::Questions
+    include Dragon::Professions
 
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype

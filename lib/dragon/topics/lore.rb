@@ -2,7 +2,7 @@ module Dragon
   module Topics
     class Lore < ConversationTopic
       def describe
-        "discussing history and lore"
+        "discussing lore with #{partner.name}"
       end
 
       def actions(world)

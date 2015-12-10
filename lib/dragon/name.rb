@@ -15,7 +15,7 @@ module Dragon
     protected
     def self.perform_generation
       count = (2..3).to_a.sample
-      components.sample(count).join.capitalize
+      (components.sample(count)).join.capitalize
     end
 
     def self.components

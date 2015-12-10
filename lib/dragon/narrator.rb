@@ -1,9 +1,13 @@
+require 'dragon/narration/exposition'
+
 module Dragon
   class Narrator
     extend Forwardable
     def_delegators :terminal, :say
 
     attr_reader :terminal, :world, :city, :place, :scene, :player
+
+    include Narration::Exposition
 
     def initialize(terminal: nil, world: nil, city: nil, place: nil, scene: nil, player: nil)
       @terminal = terminal
@@ -15,45 +19,39 @@ module Dragon
       @player = player
     end
 
-    def dramatize(deep: true)
+    def dramatize(deep: false)
       dramatize_scene(scene) if scene
 
-      if deep
-        dramatize_world if world
-        describe city,  prefix: "You are visiting " if city
+      dramatize_player(deep: deep) if player
+      dramatize_surroundings(deep: deep)
+    end
+
+    def dramatize_surroundings(deep: false)
+      if deep && world
+        dramatize_world
       end
 
+      describe city,  prefix: "You are visiting " if city
       dramatize_place(place) if place
-      dramatize_player if player
     end
 
-    def describe(entity, prefix: '', suffix: '', important: false, heading: false)
-      description = add_period_if_missing(prefix + entity.describe + suffix)
-      say capitalize_first_word(description), important: important, heading: heading
-    end
-
-    def dramatize_world
-      if player
-        describe player, prefix: "You are "
-      end
-
+    def dramatize_world(deep: false)
       describe world, prefix: "You are in the world of "
     end
 
-    def dramatize_player
-      if player.inventory.any?
+    def dramatize_player(deep: false, display_gold: true, display_quests: true, display_items: true)
+      if display_items && player.inventory.any?
         inventory_description = player.inventory.map(&:describe).join(', ')
-        say "Your inventory includes: #{inventory_description}."
-      end
-
-      if player.quests.any?
-        quest_description = player.quests.map(&:describe).join(', ')
-        say "Your quests include #{quest_description}."
-      end
-
-      if player.gold > 0
+        say "You have #{player.gold} gold pieces, and your inventory includes: #{inventory_description}"
+      else
         say "You have #{player.gold} gold pieces"
       end
+
+      if display_quests && player.quests.any?
+        quest_description = player.quests.map(&:describe).join(', ')
+        say "Your quests include #{quest_description}"
+      end
+
     end
 
     def dramatize_scene(scene)
@@ -95,39 +93,18 @@ module Dragon
                           end
 
       if place.is_a?(Room)
-        describe place, prefix: "You are #{place_preposition} the ", suffix: " of a #{place.building.describe}"
+        describe place,
+          prefix: "You are #{place_preposition} the ",
+          suffix: " of a #{place.building.describe}"
       else
         describe place, prefix: "You are #{place_preposition} the "
       end
 
       if place.people.any?
-        say "There are people here."
+        descriptor = describe_number_of_people(place.people.count)
 
-        place.people.each do |person|
-          describe person, prefix: "There is a person "
-        end
+        say "There #{descriptor} here: #{describe_people(place.people)}."
       end
-    end
-
-    private
-    def capitalize_first_word(sentence)
-      words = sentence.split(' ')
-      first = words.first.capitalize
-      rest  = words[1..-1]
-
-      [first, rest].flatten.join(' ')
-    end
-
-    def add_period_if_missing(sentence)
-      unless punctuation.include?(sentence.chars.last)
-        sentence += '.'
-      end
-
-      sentence
-    end
-
-    def punctuation
-      %w[ . ? ! ' " ]
     end
 
     def simulate_delay_for_dramatic_purposes

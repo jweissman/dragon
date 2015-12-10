@@ -1,5 +1,7 @@
 module Dragon
   class Building < Place
+    include Dragon::Professions
+
     attr_accessor :city, :aspect
 
     def self.generate(city, type=types_for_city(city).sample)

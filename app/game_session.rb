@@ -14,23 +14,20 @@ module Dragon
       @world  = world
       @client = client
       @engine = engine
-
-      @first_time = true
     end
 
     def step!(data=nil)
       clear
 
       if data
-        action_label = process_event(data) 
+        action_label = process_event(data)
         handle(action_label) if action_label
       end
 
-      describe
+      describe deep: engine.scene.deep_narration?
       prompt_player
       send output if output
 
-      @first_time = false if @first_time
       @params = {} # clear out params...
 
       self
@@ -44,8 +41,10 @@ module Dragon
           act.label == label
         end
 
-        augment(action) if params
-        react(action) if action
+        if action
+          hydrate(action) if params
+          react(action)
+        end
       end
 
       self
@@ -60,7 +59,7 @@ module Dragon
       %w[ name race subtype age gender profession ]
     end
 
-    def augment(command)
+    def hydrate(command)
       whitelist.each do |attribute|
         if params.has_key?(attribute)
           value = params[attribute]
@@ -73,8 +72,6 @@ module Dragon
           end
         end
       end
-      puts "===> After augmentation..."
-      p [:command, command]
     end
 
     def data_has_whitelisted_keys?(data)

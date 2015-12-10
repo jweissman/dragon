@@ -1,5 +1,7 @@
 module Dragon
   class Area < Place
+    include Dragon::Professions
+
     attr_accessor :city
 
     def initialize

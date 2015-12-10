@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "#{player.describe} entered the realms"
+        "You are #{player.describe}"
       end
     end
   end

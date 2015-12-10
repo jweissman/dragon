@@ -8,6 +8,7 @@ require 'require_all'
 require 'forwardable'
 
 require 'dragon/version'
+require 'dragon/modules'
 
 require 'dragon/random'
 
@@ -37,6 +38,8 @@ require_all 'lib/dragon/topics'
 require 'dragon/activity'
 
 require 'dragon/profession'
+require_all 'lib/dragon/professions'
+
 require 'dragon/person'
 require 'dragon/enemy'
 
@@ -77,7 +80,7 @@ module Dragon
 
   PLAYER_NAME_PROMPT    = "What is thy name, wanderer? "
   PLAYER_RACE_PROMPT    = 'Who are your people? '
-  PLAYER_TYPE_PROMPT    = "What sort of adventurer are you?"
+  PLAYER_TYPE_PROMPT    = "What is your job?"
   PLAYER_SUBTYPE_PROMPT = "What are your people like?"
   PLAYER_ACTION_PROMPT  = "What would you like to do?"
 

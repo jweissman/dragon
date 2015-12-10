@@ -2,7 +2,7 @@ module Dragon
   module Topics
     class Commerce < ConversationTopic
       def describe
-        "trading"
+        "engaging in commerce"
       end
 
       def actions(*)

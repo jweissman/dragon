@@ -30,19 +30,19 @@ describe Narrator do
     let(:fake_scene)   { instance_spy('Scene') }
 
     before do
-      subject.dramatize
+      subject.dramatize(deep: true)
     end
 
     it 'should dramatize surroundings' do
-      aggregate_failures 'describe the world and town' do
+      aggregate_failures 'describe the world, town and particular location' do
         expect(fake_world).to have_received(:describe)
         expect(fake_city).to  have_received(:describe)
         expect(fake_place).to have_received(:describe)
-
-        expect(fake_scene).to have_received(:describe).at_least(:once)
-
-        expect(fake_player).to have_received(:describe)
       end
+    end
+
+    it 'should dramatize the scene' do
+      expect(fake_scene).to have_received(:describe).at_least(:once)
     end
   end
 end

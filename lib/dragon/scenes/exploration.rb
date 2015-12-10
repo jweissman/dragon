@@ -1,6 +1,20 @@
 module Dragon
   module Scenes
     class Exploration < Scene
+      def initialize(*args)
+        @first_time = true
+        super(*args)
+      end
+
+      def deep_narration?
+        if @first_time
+          @first_time = false
+          true
+        else
+          false
+        end
+      end
+
       def describe
         "exploring"
       end

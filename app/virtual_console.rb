@@ -38,7 +38,7 @@ class VirtualConsole
     input_content  = html_tag(:input, options: {type: 'text', name: attr, placeholder: attr})
 
 
-    question = "<br>" + columns(prompt_content, input_content)
+    question = columns(prompt_content, input_content)
     output_html_content.push(question)
   end
 
@@ -47,7 +47,7 @@ class VirtualConsole
       html_tag :option, labels ? labels[choice] : choice
     end
 
-    options = '<br>' + columns(
+    options = columns(
       html_tag(:div, html_tag(:b, prompt || attr), options: { class: 'question' }),
       html_tag(:select, options_tags.join, options: {name: attr})
     )
@@ -57,8 +57,8 @@ class VirtualConsole
 
   private
   def columns(a, b)
-    grid_contents = html_tag(:div, a, options: { class: 'col-2-3' }) +
-                    html_tag(:div, b,  options: { class: 'col-1-3' })
+    grid_contents = html_tag(:div, a, options: { class: 'col-1-3' }) +
+                    html_tag(:div, b,  options: { class: 'col-2-3' })
 
     html_tag(:div,
     grid_contents,

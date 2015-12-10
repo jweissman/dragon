@@ -6,12 +6,13 @@ module Dragon
     def_delegators :engine, :step, :still_playing?
 
     def boot!
-      banner and play
-      say 'Thanks for playing!'
+      banner 
+      play
     end
 
     def play
       step while still_playing?
+      say 'Thanks for playing!'
     end
 
     private

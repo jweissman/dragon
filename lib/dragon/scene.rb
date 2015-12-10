@@ -21,6 +21,10 @@ module Dragon
       false
     end
 
+    def deep_narration?
+      false
+    end
+
     def permit_delays?
       true
     end

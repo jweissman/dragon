@@ -28,7 +28,7 @@ module Dragon
     end
 
     def step
-      describe
+      describe deep: scene.deep_narration?
       interact
       self
     end
@@ -38,7 +38,7 @@ module Dragon
       react(action)
     end
 
-    def describe(deep: true)
+    def describe(deep: false)
       if scene.squelch_narration?
         narrator.dramatize_scene(scene)
       else

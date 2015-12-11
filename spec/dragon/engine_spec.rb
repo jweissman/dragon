@@ -30,11 +30,13 @@ describe Engine do
   end
 
   describe "#process" do
-    let(:listener) { instance_spy('EventListener') }
+    let(:listener)    { instance_spy('EventListener', on: []) }
 
-    let(:event_class) { instance_double('EventListener.class', listener: listener, name: '') }
-    let(:event)    { instance_spy('Event', class: event_class) }
-    let(:events)   { [event] }
+    let(:event_class) { instance_double('EventListener.class',
+                                        listener: listener,
+                                        name: '') }
+    let(:event)       { instance_spy('Event', class: event_class) }
+    let(:events)      { [event] }
 
     it 'should check events against listeners' do
       subject.process(events)
@@ -42,12 +44,11 @@ describe Engine do
     end
 
     context 'processing known saga groups' do
-      let(:player) { instance_double('Player', quests: quests) }
-      let(:quests) { [ quest ] }
-      let(:quest) { instance_spy('Quest') }
+      let(:quest) { instance_spy('Quest', receive: nil) }
+
       it 'should process events against player quests' do
-        allow(subject).to receive(:player).and_return(player)
-        subject.process(events)
+        subject.process(events, sagas: [ quest ])
+
         expect(quest).to have_received(:receive).with(event)
       end
     end

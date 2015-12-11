@@ -2,28 +2,26 @@ require 'dragon/narration/exposition'
 
 module Dragon
   class Narrator
+    include Narration::Exposition
     extend Forwardable
+
     def_delegators :terminal, :say
 
     attr_reader :terminal, :world, :city, :place, :scene, :player
 
-    include Narration::Exposition
-
     def initialize(terminal: nil, world: nil, city: nil, place: nil, scene: nil, player: nil)
       @terminal = terminal
-
-      @world  = world
-      @city   = city
-      @place  = place
-      @scene  = scene
-      @player = player
+      @world    = world
+      @city     = city
+      @place    = place
+      @scene    = scene
+      @player   = player
     end
 
     def dramatize(deep: false)
       dramatize_scene(scene) if scene
-
-      dramatize_player(deep: deep) if player
       dramatize_surroundings(deep: deep)
+      dramatize_player(deep: deep) if player
     end
 
     def dramatize_surroundings(deep: false)
@@ -31,8 +29,8 @@ module Dragon
         dramatize_world
       end
 
-      describe city,  prefix: "You are visiting " if city
-      dramatize_place(place) if place
+      describe city,  prefix: "You are visiting "
+      dramatize_place(place)
     end
 
     def dramatize_world(deep: false)
@@ -44,7 +42,7 @@ module Dragon
         inventory_description = player.inventory.map(&:describe).join(', ')
         say "You have #{player.gold} gold pieces, and your inventory includes: #{inventory_description}"
       else
-        say "You have #{player.gold} gold pieces"
+        say "You have #{player.gold} gold pieces."
       end
 
       if display_quests && player.quests.any?

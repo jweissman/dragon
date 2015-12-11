@@ -20,13 +20,13 @@ module Dragon
         case number
         when 0 then
           'is nobody'
-        when 1 then 
+        when 1 then
           'is one person'
-        when 2 then 
+        when 2 then
           'are two people'
-        when (3..4).to_a then 
+        when (3..4) then
           'are a few people'
-        when (5..6).to_a then
+        when (5..6) then
           'are a bunch of people'
         else
           'is a crowd of people'

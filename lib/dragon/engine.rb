@@ -55,29 +55,26 @@ module Dragon
       @last_command = act
       handle action: act
 
-      @last_events += process(last_events)
+      @last_events = process(last_events.flatten.compact)
 
       self
     end
 
-    def process(events)
-      additional_events = []
+    def process(events, sagas: Saga.all)
+      events.each do |event|
+        addl_events = bus.process_event(event,
+                                        sagas: sagas,
+                                        player: player)
 
-      events.flatten.compact.each do |event|
-        if player.quests.any?
-          player.quests.each do |q|
-            additional_events << q.receive(event)
-          end
-        end
-
-        # binding.pry
-
-        if event.class.listener(self)
-          additional_events << event.class.listener(self).on(event)
+        if addl_events.any?
+          events << addl_events
+          events.flatten!.compact!
         end
       end
+    end
 
-      additional_events
+    def bus
+      @bus ||= EventBus.new(engine: self)
     end
 
     def welcome

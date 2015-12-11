@@ -56,8 +56,11 @@ require_all 'lib/dragon/events'
 require 'dragon/event_listener'
 require_all 'lib/dragon/listeners'
 
+require 'dragon/saga'
 require 'dragon/quest'
 require_all 'lib/dragon/quests'
+
+require 'dragon/event_bus'
 
 require 'dragon/command_handler'
 require_all 'lib/dragon/handlers'

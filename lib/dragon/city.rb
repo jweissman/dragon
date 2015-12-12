@@ -1,5 +1,6 @@
 module Dragon
   class City < Entity
+    include Dragon::Cities
     attr_accessor :world, :subtype, :feature
 
     def initialize(name=Name.generate,
@@ -57,7 +58,7 @@ module Dragon
     end
 
     def buildings
-      @buildings ||= Array.new(building_count) do 
+      @buildings ||= Array.new(building_count) do
         Building.generate(self)
       end
     end
@@ -84,40 +85,6 @@ module Dragon
 
     def self.unique?
       false
-    end
-  end
-
-  class Capital < City
-    def self.unique?
-      true
-    end
-
-    def building_count_range
-      (7..8)
-    end
-  end
-
-  class Metropolis < City
-    def building_count_range
-      (5..7)
-    end
-  end
-
-  class Village < City
-    def building_count_range
-      (3..5)
-    end
-  end
-
-  class Hamlet < City
-    def building_count_range
-      (2..3)
-    end
-  end
-
-  class Outpost < City
-    def building_count_range
-      (1..2)
     end
   end
 end

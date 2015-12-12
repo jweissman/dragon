@@ -28,8 +28,11 @@ require_all 'lib/dragon/buildings'
 require 'dragon/item'
 
 require 'dragon/city'
+require_all 'lib/dragon/cities'
+
 require 'dragon/world'
 
+require 'dragon/attack_result'
 require 'dragon/combatant'
 
 require 'dragon/question'

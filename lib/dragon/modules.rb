@@ -1,5 +1,6 @@
 module Dragon
   module Buildings; end
+  module Cities; end
   module Commands; end
   module Events; end
   module Handlers; end

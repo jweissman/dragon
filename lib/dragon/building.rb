@@ -1,6 +1,7 @@
 module Dragon
   class Building < Place
     include Dragon::Professions
+    include Dragon::Cities
 
     attr_accessor :city, :aspect
 

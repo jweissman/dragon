@@ -11,10 +11,6 @@ module Dragon
         self
       end
 
-      def squelch_narration?
-        true
-      end
-
       def show_gold?
         topic.show_gold?
       end

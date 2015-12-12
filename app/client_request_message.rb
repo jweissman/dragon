@@ -19,7 +19,7 @@ module Dragon
             command.send :"#{attribute}=", value
           rescue NameError
             # ignore..
-            puts "[warning] attempting to augment command #{command.class.name} with #{attribute}"
+            puts "[warning] attempted to augment command #{command.class.name} with #{attribute}"
           end
         end
       end

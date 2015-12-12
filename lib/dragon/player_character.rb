@@ -60,5 +60,9 @@ module Dragon
     def self.default_max_hp_for(profession: nil)
       profession.default_max_hp
     end
+
+    def narrator(terminal)
+      PlayerNarrator.new(self, terminal: terminal)
+    end
   end
 end

@@ -1,8 +1,5 @@
-require 'dragon/narration/exposition'
-
 module Dragon
   class Narrator
-    include Narration::Exposition
     extend Forwardable
 
     def_delegators :terminal, :say
@@ -12,5 +9,38 @@ module Dragon
       @model    = model
       @terminal = terminal
     end
+
+    def describe(prefix: '', suffix: '', important: false, heading: false)
+      description = assemble_description(prefix: prefix, suffix: suffix)
+      say description, important: important, heading: heading
+    end
+
+    protected
+    def assemble_description(prefix: '', suffix: '')
+      description = add_period_if_missing(prefix + model.describe + suffix)
+      capitalize_first_word(description)
+    end
+
+    private
+    def capitalize_first_word(sentence)
+      words = sentence.split(' ')
+      first = words.first.capitalize
+      rest  = words[1..-1]
+
+      [first, rest].flatten.join(' ')
+    end
+
+    def add_period_if_missing(sentence)
+      unless punctuation.include?(sentence.chars.last)
+        sentence += '.'
+      end
+
+      sentence
+    end
+
+    def punctuation
+      %w[ . ? ! ' " ]
+    end
+
   end
 end

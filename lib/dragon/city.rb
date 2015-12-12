@@ -75,6 +75,10 @@ module Dragon
       @areas ||= Area.generate_list(self, 2)
     end
 
+    def narrator(terminal)
+      CityNarrator.new(self, terminal: terminal)
+    end
+
     def self.types
       [ Outpost, Hamlet, Village, Metropolis, Capital ]
     end

@@ -10,10 +10,6 @@ module Dragon
       @game = game
     end
 
-    def squelch_narration?
-      false
-    end
-
     def show_gold?
       false
     end

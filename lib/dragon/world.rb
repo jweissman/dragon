@@ -44,5 +44,8 @@ module Dragon
       hospitals.sample
     end
 
+    def narrator(terminal)
+      WorldNarrator.new(self, terminal: terminal)
+    end
   end
 end

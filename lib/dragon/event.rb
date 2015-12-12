@@ -17,5 +17,9 @@ module Dragon
     def actions
       []
     end
+
+    def narrator(terminal)
+      EventNarrator.new(self, terminal: terminal)
+    end
   end
 end

@@ -10,8 +10,10 @@ module Dragon
     end
 
     def describe
-      game_narrator.narrate(engine.last_command, engine.last_events,
-        deep: game.scene.deep_narration?)
+      game_narrator.narrate(
+        engine.last_command, 
+        engine.last_events
+      )
     end
 
     def terminal

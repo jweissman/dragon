@@ -33,16 +33,14 @@ describe GameNarrator do
       allow(narrator).to receive(:narrate).with(command, [event])
     end
 
-    it 'should narrate the scene' do
-      expect(narrator).to receive(:narrate).with(command, [event])
-    end
-
     it 'should narrate the world' do
-      expect(world).to receive(:describe)
+      world_narrator = instance_double 'WorldNarrator'
+      expect(world).to receive(:narrator).and_return(world_narrator)
+      expect(world_narrator).to receive(:narrate)
     end
 
     after do
-      game_narrator.narrate(command, [event], deep: true)
+      game_narrator.narrate(command, [event])
     end
   end
 end

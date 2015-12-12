@@ -3,32 +3,27 @@ module Dragon
     alias_method :scene, :model
 
     def narrate(last_command, last_events)
-      describe scene, prefix: "You are ", heading: true
+      describe prefix: "You are ", heading: true
 
-      unless last_command || last_events.any?
+      if last_command || last_events.any?
+        last_command.narrator(terminal).narrate if last_command
+        describe_events(last_events, scene) if last_events.any?
+      else
         say scene.default_narration
       end
-
-      command = last_command
-      if command
-        describe command, important: true
-      end
-
-      events = last_events
-      describe_events(events, scene) if events.any?
     end
 
     def describe_events events, scene
-      if events.any?
-        news = events.flatten.compact
-        news.each do |event|
-          if scene.permit_delays?
-            simulate_delay_for_dramatic_purposes if news.length > 1
-          end
-
-          describe event, important: true if event.describe?
-        end
+      news = events.flatten.compact
+      news.each do |event|
+        delay = scene.permit_delays? && news.length > 1
+        describe_event(event, delay: delay) if event.describe?
       end
+    end
+
+    def describe_event(event, delay: false)
+      simulate_delay_for_dramatic_purposes if delay
+      event.narrator(terminal).narrate
     end
 
     def simulate_delay_for_dramatic_purposes

@@ -6,5 +6,13 @@ module Dragon
       @partner = partner
       @conversation = conversation
     end
+
+    def show_gold?
+      false
+    end
+
+    def show_items?
+      false
+    end
   end
 end

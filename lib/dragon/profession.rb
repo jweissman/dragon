@@ -18,6 +18,10 @@ module Dragon
       []
     end
 
+    def activities
+      []
+    end
+
     def self.unique?
       false
     end
@@ -56,7 +60,13 @@ module Dragon
 
   class Priest < Profession; end
   class Conscript < Profession; end
-  class Jester < Profession; end
+
+  class Jester < Profession
+    def activities
+      [ Juggling ]
+    end
+  end
+
   class Scribe < Profession; end
   class Acolyte < Profession; end
   class Beggar < Profession; end

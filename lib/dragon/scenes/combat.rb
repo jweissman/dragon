@@ -8,6 +8,10 @@ module Dragon
         self
       end
 
+      def squelch_narration?
+        true
+      end
+
       def describe
         "fighting #{enemy.describe}"
       end

@@ -38,18 +38,7 @@ module Dragon
 
     def activities
       base = [ Resting, Reading ]
-
-      professional = if profession.is_a?(Bard)
-                       [PlayingMusic, Singing]
-                     elsif profession.is_a?(Gambler)
-                       [ThrowingDice]
-                     elsif profession.is_a?(Jester)
-                       [Juggling]
-                     else
-                       []
-                     end
-
-      base + professional
+      base + profession.activities
     end
 
     def conversation_topics
@@ -69,19 +58,13 @@ module Dragon
     end
 
     def actions(player)
-      quests = player.quests.select { |q| q.requestor == self }
-      if quests.any?
-        completed = quests.select(&:completed?)
-        if completed.any?
-          completed.map do |quest|
-            Dragon::Commands::RedeemQuestCommand.new(quest: quest)
-          end
-        else
-          []
-        end
-      else
-        []
+      my_quests_for(player).select(&:completed?).map do |quest|
+        Dragon::Commands::RedeemQuestCommand.new(quest: quest)
       end
+    end
+
+    def my_quests_for(player)
+      player.quests.select { |q| q.requestor == self }
     end
 
     def questions(place)

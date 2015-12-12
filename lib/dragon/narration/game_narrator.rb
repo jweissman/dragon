@@ -11,8 +11,9 @@ module Dragon
 
       unless scene.squelch_narration?
         dramatize_surroundings(deep: deep)
-        dramatize_player(deep: deep) if player
       end
+
+      dramatize_player if player
     end
 
     def dramatize_surroundings(deep: false)
@@ -20,19 +21,24 @@ module Dragon
         dramatize_world
       end
 
-      describe city,  prefix: "You are visiting "
-      dramatize_place(place)
+      unless scene.squelch_narration?
+        describe city,  prefix: "You are visiting "
+        dramatize_place(place)
+      end
     end
 
     def dramatize_world(deep: false)
       describe world, prefix: "You are in the world of "
     end
 
-    def dramatize_player(deep: false, display_gold: true, display_quests: true, display_items: true)
+    def dramatize_player(display_gold: scene.show_gold?, 
+                         display_quests: scene.show_quests?, 
+                         display_items: scene.show_items?)
+      
       if display_items && player.inventory.any?
         inventory_description = player.inventory.map(&:describe).join(', ')
         say "You have #{player.gold} gold pieces, and your inventory includes: #{inventory_description}"
-      else
+      elsif display_gold && player.gold > 0
         say "You have #{player.gold} gold pieces."
       end
 
@@ -40,7 +46,6 @@ module Dragon
         quest_description = player.quests.map(&:describe).join(', ')
         say "Your quests include #{quest_description}"
       end
-
     end
 
 

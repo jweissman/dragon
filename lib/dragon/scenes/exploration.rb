@@ -57,7 +57,7 @@ module Dragon
       end
 
       def visit_building_actions(place)
-        buildings = place.city.buildings + (place.city.areas - [place])
+        buildings = (place.city.areas - [place]) + place.city.buildings 
         buildings.collect(&method(:visit))
       end
 

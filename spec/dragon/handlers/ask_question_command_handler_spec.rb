@@ -1,22 +1,15 @@
 require 'spec_helper'
 
 describe AskQuestionCommandHandler do
+  subject(:ask_question_command_handler) { AskQuestionCommandHandler.new }
+
   let(:ask_question_command) do
-    instance_double('AskQuestionCommand', partner: partner, question: question) # topic: topic)
+    instance_double('AskQuestionCommand', partner: partner, question: question)
   end
 
-  let(:engine) do
-    instance_double('Engine', game: game)
-  end
-
-  let(:game) do
-    instance_double('Game', player: player)
-  end
-
-
-  let(:player) do
-    instance_double('Player', quests: quests)
-  end
+  let(:engine) { instance_double('Engine', game: game) }
+  let(:game)   { instance_double('Game', player: player) }
+  let(:player) { instance_double('Player', quests: quests) }
 
   let(:quests) { [] }
 
@@ -32,7 +25,6 @@ describe AskQuestionCommandHandler do
   end
 
   let(:about_missions?) { false } 
-
   let(:responses) { %w[ okay! what? ] }
 
   let(:partner) do
@@ -41,7 +33,7 @@ describe AskQuestionCommandHandler do
 
   describe '#handle' do
     let(:events) do
-      subject.handle(ask_question_command)
+      ask_question_command_handler.handle(ask_question_command)
     end
     
     let(:words_spoken) do
@@ -75,8 +67,8 @@ describe AskQuestionCommandHandler do
       let(:completed_quest) { false }
 
       before do
-        allow(subject).to receive(:engine).and_return(engine)
-        allow(subject).to receive(:generate_quests_for).with(partner).and_return([quest])
+        allow(ask_question_command_handler).to receive(:engine).and_return(engine)
+        allow(ask_question_command_handler).to receive(:generate_quests_for).with(partner).and_return([quest])
 
         allow(question).to receive(:about?).with(Quest).and_return(true)
       end

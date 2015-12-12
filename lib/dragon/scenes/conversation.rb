@@ -11,6 +11,18 @@ module Dragon
         self
       end
 
+      def squelch_narration?
+        true
+      end
+
+      def show_gold?
+        topic.show_gold?
+      end
+
+      def show_items?
+        topic.show_items?
+      end
+
       def describe
         topic.describe
       end

@@ -11,7 +11,7 @@ describe Person do
     end
 
     let(:profession) do
-      instance_double('Profession', type: profession_type, questions: [])
+      instance_double('Profession', type: profession_type, questions: [], activities: [])
     end
 
     let(:name) { 'Aloysius' }

@@ -11,21 +11,17 @@ module Dragon
     def self.generate(city, type=types.sample)
       klass = type
       area = klass.new
-
       area.city = city
       city.areas << area
-
       area
     end
 
     def self.generate_list(city, n)
       classes = required_types + types_for_discovery.shuffle
       areas = classes.take(n).map(&:new)
-
       areas.each do |area|
         area.city = city
       end
-
       areas
     end
 
@@ -96,14 +92,10 @@ module Dragon
   end
 
   class Alley < Area; end
-
   class Forest < Area; end
   class Lake < Area; end
   class Cave < Area; end
-
-  # maybe should be a more 'explorable' building-type
   class Shore < Area; end
   class Swamp < Area; end
-
   class Hill < Area; end
 end

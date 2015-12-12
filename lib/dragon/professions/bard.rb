@@ -1,6 +1,10 @@
 module Dragon
   module Professions
     class Bard < Profession
+      def activities
+        [ PlayingMusic, Singing ]
+      end
+
       def questions(person)
         qs = if person.activity.is_a?(PlayingMusic)
                [ AskToStop.new(activity: person.activity) ]

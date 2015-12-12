@@ -2,7 +2,15 @@ module Dragon
   module Topics
     class Commerce < ConversationTopic
       def describe
-        "engaging in commerce"
+        "trading with #{partner.name}"
+      end
+
+      def show_gold?
+        true
+      end
+
+      def show_items?
+        true
       end
 
       def actions(*)

@@ -14,6 +14,18 @@ module Dragon
       false
     end
 
+    def show_gold?
+      false
+    end
+
+    def show_quests?
+      false
+    end
+
+    def show_items?
+      false
+    end
+
     def deep_narration?
       false
     end

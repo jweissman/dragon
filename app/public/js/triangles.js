@@ -9,7 +9,7 @@
     var pattern = Trianglify({
       height: height,
       width: width,
-      cell_size: 50,
+      cell_size: 36,
       x_colors: 'Greens',
       y_colors: 'Greens'
     });

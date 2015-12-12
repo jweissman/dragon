@@ -1,38 +1,68 @@
 module Dragon
   class Game
-    extend Forwardable
-    def_delegators :terminal, :say, :banner, :welcome, :narrate
+    include Dragon::Scenes
 
-    def_delegators :engine, :step, :still_playing?
+    attr_reader :world, :player, :scene, :city, :current_place
 
-    def boot!
-      banner 
-      play
+    def initialize(
+      world: World.new,
+      player: PlayerCharacter.new,
+      scene: welcome,
+      city: world.cities.sample,
+      place: city.areas.sample
+    )
+      @world         = world
+      @player        = player
+      @scene         = scene
+      @city          = city
+      @current_place = place
+
+      @playing = true
     end
 
-    def play
-      step while still_playing?
-      say 'Thanks for playing!'
+    def actions(place, last_events)
+      if event_actions(last_events).any?
+        event_actions(last_events)
+      else
+        scene.actions(place)
+      end
     end
 
-    private
-    def engine
-      @engine ||= Dragon::Engine.new(
-        terminal: terminal,
-        world: world
-      )
+    def event_actions(events)
+      events.map(&:actions).flatten.compact
     end
 
-    def terminal
-      @terminal ||= GameTerminal.new(console)
+    def still_playing?
+      @playing
     end
 
-    def console
-      @console ||= Console.new
+    def welcome
+      Welcome.new(game: self)
     end
 
-    def world
-      @world ||= World.new
+    def exploration
+      Exploration.new(game: self)
+    end
+
+    def conversation_with(partner)
+      Conversation.new(game: self).with(partner: partner)
+    end
+
+    def combat_with(enemy)
+      Combat.new(game: self).with(enemy: enemy)
+    end
+
+    def transition_to(scene)
+      @scene = scene
+    end
+
+    def move_to(place)
+      @current_place = place
+    end
+
+    def travel_to(new_city)
+      @city = new_city
+      @current_place = new_city.areas.select(&:common_area?).sample
     end
   end
 end

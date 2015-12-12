@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe Dragon::Scenes::Conversation do
-  subject do
-    Conversation.new(engine: engine).with(partner: person)
+  subject(:conversation) do
+    Conversation.new(game: game).with(partner: person)
   end
 
-  let(:actions) { subject.actions(place) }
+
+  let(:game) { instance_double("Game", world: world, player: player) }
+
+  let(:actions) { conversation.actions(place) }
 
   let(:place) do
     instance_double("Place")
@@ -20,7 +23,7 @@ describe Dragon::Scenes::Conversation do
   end
 
   let(:engine) do
-    instance_double("Engine", last_events: [], player: player, world: world)
+    instance_double("Engine", last_events: [])
   end
 
   let(:world) do

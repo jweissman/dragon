@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'dragon'
-Dragon.play!
+require 'dragon/single_player_driver'
+Dragon.single_player.boot!

@@ -1,7 +1,7 @@
 module Dragon
   module Scenes
     class Welcome < Scene
-      def describe
+      def describe(*)
         "entering the Realms"
       end
 
@@ -18,14 +18,10 @@ module Dragon
       end
 
       def actions(*)
-        if event_actions.any?
-          event_actions
-        else
-          [
-            NewPlayerCharacterCommand.new,
-            GeneratePlayerCharacterCommand.new
-          ]
-        end
+        [
+          NewPlayerCharacterCommand.new,
+          GeneratePlayerCharacterCommand.new
+        ]
       end
     end
   end

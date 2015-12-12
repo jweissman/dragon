@@ -2,30 +2,18 @@ require 'spec_helper'
 require 'dragon'
 
 describe Engine do
-  describe '#describe' do
-    let(:scene) { instance_double('Scene', squelch_narration?: true) }
-    let(:narrator) { instance_double('Narrator') }
+  subject(:engine) { Engine.new }
 
-    it 'should narrate the scene' do
-      allow(subject).to receive(:scene).and_return(scene)
-      allow(subject).to receive(:narrator).and_return(narrator)
+  describe "#react" do
+    let(:event) { instance_double("Event") }
+    let(:handler) { instance_double("CommandHandler", handle: [ event ]) }
+    let(:command_class) { instance_double("Command.class", handler: handler, name: 'synthetic') }
+    let(:action) { instance_double("Command", class: command_class)  }
 
-      expect(narrator).to receive(:dramatize_scene).with(scene)
-
-      subject.describe
-    end
-  end
-
-  describe '#step' do
-    subject do
-      Engine.new
-    end
-
-    after { subject.step }
-
-    it 'should describe the world and permit player interaction' do
-      expect(subject).to receive(:describe)
-      expect(subject).to receive(:interact)
+    it 'remembers the action' do
+      expect(engine).to receive(:process).with([event])
+      engine.react(action)
+      expect(engine.last_command).to eq(action)
     end
   end
 
@@ -39,7 +27,7 @@ describe Engine do
     let(:events)      { [event] }
 
     it 'should check events against listeners' do
-      subject.process(events)
+      engine.process(events)
       expect(listener).to have_received(:on).with(event)
     end
 
@@ -47,7 +35,7 @@ describe Engine do
       let(:quest) { instance_spy('Quest', receive: nil) }
 
       it 'should process events against player quests' do
-        subject.process(events, sagas: [ quest ])
+        engine.process(events, sagas: [ quest ])
 
         expect(quest).to have_received(:receive).with(event)
       end

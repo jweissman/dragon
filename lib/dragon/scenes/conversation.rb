@@ -20,9 +20,7 @@ module Dragon
       end
 
       def actions(place)
-        if event_actions.any?
-          event_actions
-        elsif topic_actions.any?
+        if topic_actions.any?
           (topic_actions + change_topic_actions).flatten.compact
         else
           core_actions(place).flatten.compact

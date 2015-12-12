@@ -10,6 +10,9 @@ require 'forwardable'
 require 'dragon/version'
 require 'dragon/modules'
 
+require 'dragon/narrator'
+require_all 'lib/dragon/narration'
+
 require 'dragon/random'
 
 require 'dragon/entity'
@@ -73,10 +76,9 @@ require_all 'lib/dragon/scenes'
 
 require 'dragon/random_event'
 
-
-require 'dragon/narrator'
-require 'dragon/engine'
 require 'dragon/game'
+require 'dragon/engine'
+require 'dragon/driver'
 
 module Dragon
   BANNER = "\n             ~~~~~~~<<< DRAGON v#{Dragon::VERSION} >>>~~~~~~~~\n\n"
@@ -88,12 +90,4 @@ module Dragon
   PLAYER_ACTION_PROMPT  = "What would you like to do?"
 
   RANDOM_ENCOUNTER_RATE = 0.28
-
-  def self.play!
-    game.boot!
-  end
-
-  def self.game
-    @game ||= Game.new
-  end
 end

@@ -7,7 +7,7 @@ module Dragon
         @label = label
       end
 
-      def describe
+      def describe(*)
         "You shall tell a tale of a random adventurer"
       end
     end

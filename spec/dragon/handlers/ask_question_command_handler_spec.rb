@@ -6,8 +6,13 @@ describe AskQuestionCommandHandler do
   end
 
   let(:engine) do
-    instance_double('Engine', player: player)
+    instance_double('Engine', game: game)
   end
+
+  let(:game) do
+    instance_double('Game', player: player)
+  end
+
 
   let(:player) do
     instance_double('Player', quests: quests)
@@ -25,13 +30,6 @@ describe AskQuestionCommandHandler do
   let(:conversation_topic) do
     instance_double('Object')
   end
-
-  # let(:topic) do
-  #   instance_double('ConversationTopic',
-  #                   responses: responses, 
-  #                   about_missions?: about_missions?,
-  #                   about_activity?: false)
-  # end
 
   let(:about_missions?) { false } 
 

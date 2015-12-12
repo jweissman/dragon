@@ -1,17 +1,12 @@
 module Dragon
   module Narration
     module Exposition
-      def describe(entity, prefix: '', suffix: '', important: false, heading: false)
-        description = assemble_description(entity, prefix: prefix, suffix: suffix)
+      def describe(object, prefix: '', suffix: '', important: false, heading: false)
+        description = prefix + object.describe + suffix #(prefix: prefix, suffix: suffix)
         say description, important: important, heading: heading
       end
 
       protected
-      def assemble_description(entity, prefix: '', suffix: '')
-        description = add_period_if_missing(prefix + entity.describe + suffix)
-        capitalize_first_word(description)
-      end
-
       def describe_people(people)
         people.map(&:describe).join('; ')
       end
@@ -31,27 +26,6 @@ module Dragon
         else
           'is a crowd of people'
         end
-      end
-
-      private
-      def capitalize_first_word(sentence)
-        words = sentence.split(' ')
-        first = words.first.capitalize
-        rest  = words[1..-1]
-
-        [first, rest].flatten.join(' ')
-      end
-
-      def add_period_if_missing(sentence)
-        unless punctuation.include?(sentence.chars.last)
-          sentence += '.'
-        end
-
-        sentence
-      end
-
-      def punctuation
-        %w[ . ? ! ' " ]
       end
     end
   end

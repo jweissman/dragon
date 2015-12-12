@@ -15,6 +15,9 @@ module Dragon
       sessions.push session
       session.step!
       # session.make_character
+    rescue => ex
+      puts ex.message
+      puts ex.backtrace
     end
 
     def update(client, event)

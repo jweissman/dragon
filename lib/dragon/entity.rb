@@ -25,6 +25,10 @@ module Dragon
       self.class.name.split('::').last
     end
 
+    def decorate
+      @decorator ||= EntityDecorator.new(self)
+    end
+
     def self.available_types
       types - unique_types_to_exclude
     end

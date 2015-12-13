@@ -20,9 +20,9 @@ module Dragon
       end
 
       def handle_activity(partner, question)
-        if question.is_a?(Dragon::Questions::AskToStop)
+        if question.is_a?(AskToStop)
           partner.activity = (partner.activities - [partner.activity.class]).sample.new
-        elsif question.is_a?(Dragon::Questions::AskToStart)
+        elsif question.is_a?(AskToStart)
           partner.activity = question.activity
         else
           raise "Unknown activity-related quesetion: #{question.class}"
@@ -63,7 +63,7 @@ module Dragon
         [
           KillEnemies.new(
             count: (3..5).to_a.sample,
-            species: Enemy.species_list.sample,
+            species: Creature.categories.sample.new,
             requestor: partner
           )
         ]
@@ -74,7 +74,6 @@ module Dragon
       end
 
       def say_response(partner, response)
-        #response = topic.responses.sample
         WordsSpokenEvent.new(person: partner, message: response)
       end
     end

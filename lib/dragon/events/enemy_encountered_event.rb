@@ -8,13 +8,11 @@ module Dragon
       end
 
       def describe
-        "you encounter #{enemy.describe(prefix: 'a(n)')}"
+        "you encounter #{enemy.label}"
       end
 
       def actions
-        [
-          Dragon::Commands::EngageCombatantCommand.new(enemy: enemy)
-        ]
+        [ engage(enemy) ]
       end
     end
   end

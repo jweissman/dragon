@@ -13,8 +13,8 @@ module Dragon
 
       def actions
         [
-          Dragon::Commands::AcceptQuestCommand.new(quest: quest),
-          Dragon::Commands::RejectQuestCommand.new(quest: quest)
+          AcceptQuestCommand.new(quest: quest),
+          RejectQuestCommand.new(quest: quest)
         ]
       end
     end

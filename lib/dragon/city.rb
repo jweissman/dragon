@@ -1,6 +1,6 @@
 module Dragon
   class City < Entity
-    include Dragon::Cities
+    include Cities
     attr_accessor :world, :subtype, :feature
 
     def initialize(name=Name.generate,
@@ -9,6 +9,48 @@ module Dragon
       @feature = feature
       @world = world
       super(name)
+    end
+
+    def describe
+      "#{name}, #{subtype} #{type} of #{feature.to_s.gsub('_', ' ')}"
+    end
+
+    def label
+      "#{name} [#{type}]"
+    end
+
+    def random_place
+      places.sample
+    end
+
+    def common_areas
+      areas.select { |area| area.class.common_area? }
+    end
+
+    def places
+      buildings.map(&:rooms).flatten + areas
+    end
+
+    def buildings
+      @buildings ||= Array.new(building_count) do
+        Building.generate(self)
+      end
+    end
+
+    def building_count_range
+      (4..7)
+    end
+
+    def areas
+      @areas ||= Area.generate_list(self, 2)
+    end
+
+    def building_count
+      @building_count ||= building_count_range.to_a.sample
+    end
+
+    def narrator(terminal)
+      @narrator ||= CityNarrator.new(self, terminal: terminal)
     end
 
     def self.generate(world, type = available_types.sample)
@@ -39,48 +81,6 @@ module Dragon
 
     def self.features
       %w[ secret_police dreams love many_goats too_many_books ]
-    end
-
-    def describe
-      "#{name}, #{subtype} #{type} of #{feature.to_s.gsub('_', ' ')}"
-    end
-
-    def label
-      "#{name} [#{type}]"
-    end
-
-    def random_place
-      places.sample
-    end
-
-    def places
-      buildings.map(&:rooms).flatten + areas
-    end
-
-    def buildings
-      @buildings ||= Array.new(building_count) do
-        Building.generate(self)
-      end
-    end
-
-    def building_count
-      @building_count ||= building_count_range.to_a.sample
-    end
-
-    def building_count_range
-      (4..7)
-    end
-
-    def areas
-      @areas ||= Area.generate_list(self, 2)
-    end
-
-    def narrator(terminal)
-      CityNarrator.new(self, terminal: terminal)
-    end
-
-    def self.types
-      [ Outpost, Hamlet, Village, Metropolis, Capital ]
     end
 
     def self.required_types

@@ -12,10 +12,7 @@ module Dragon
       end
 
       def actions
-        [
-          Dragon::Commands::ConverseCommand.new(person: person),
-          Dragon::Commands::IgnorePersonCommand.new(person: person)
-        ]
+        [ converse_with(person), ignore(person) ]
       end
     end
   end

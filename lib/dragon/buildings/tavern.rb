@@ -1,7 +1,11 @@
 module Dragon
   class Tavern < Building
+    def required_professions
+      [ Barkeep ]
+    end
+
     def associated_professions
-      [ Barkeep, Drunk, Gambler, Bard ]
+      [ Drunk, Gambler, Bard ]
     end
 
     def room_types

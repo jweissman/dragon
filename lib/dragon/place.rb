@@ -1,10 +1,10 @@
 module Dragon
   class Place < Entity
-    def can_wander?
+    def self.can_wander?
       true 
     end
 
-    def common_area?
+    def self.common_area?
       false 
     end
 

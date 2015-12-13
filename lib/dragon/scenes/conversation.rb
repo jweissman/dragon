@@ -55,25 +55,17 @@ module Dragon
         end
       end
 
-      def ask_question(question, partner)
-        AskQuestionCommand.new(question: question, partner: partner)
-      end
-
       def basic_conversational_actions(place)
         [
-          TellJokeCommand.new(subject: Profession.all.sample.new, partner: partner),
-          SayGoodbyeCommand.new(partner: partner)
+          tell_joke(partner),
+          say_goodbye(partner)
         ]
       end
 
       def change_topic_actions
         topics.map do |topic_class|
           if !topic.is_a?(topic_class)
-            ChangeConversationSubjectCommand.new(
-              partner: partner,
-              new_subject: topic_class.new(conversation: self, partner: partner),
-              conversation: self
-            )
+            change_subject(partner, self, topic_class)
           else
             nil
           end

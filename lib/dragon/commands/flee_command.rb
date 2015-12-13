@@ -8,11 +8,11 @@ module Dragon
       end
 
       def describe
-        "You flee from the #{enemy.describe}"
+        "You flee from #{enemy.label}"
       end
 
       def label
-        "Flee #{enemy.describe}"
+        "Flee #{enemy.label}"
       end
     end
   end

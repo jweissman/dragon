@@ -1,5 +1,8 @@
 module Dragon
   class Event
+    include Commands
+    include Helpers::CommandHelpers
+
     def self.listener(engine)
       klass = Object.const_get("Dragon::Listeners::" + self.name.split('::').last + "Listener") rescue nil
       return klass.new(engine) if klass

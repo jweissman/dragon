@@ -15,13 +15,7 @@ module Dragon
 
       def actions(*)
         partner.profession.items_for_sale.map do |item|
-          [
-            Dragon::Commands::PurchaseItemCommand.new(
-              item: item,
-              cost: item.cost * 2,
-              merchant: partner
-          )
-          ]
+          purchase_item(item, partner)
         end
       end
     end

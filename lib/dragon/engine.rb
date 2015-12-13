@@ -1,6 +1,6 @@
 module Dragon
   class Engine
-    include Dragon::Scenes
+    include Scenes
     extend Forwardable
 
     def_delegators :game, :world, :player, :scene, :city, :current_place

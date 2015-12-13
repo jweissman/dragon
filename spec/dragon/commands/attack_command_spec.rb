@@ -6,7 +6,9 @@ describe AttackCommand do
   end
 
   let(:player) { instance_double('Player', hp: 1, max_hp: 2) }
-  let(:enemy)  { instance_double('Enemy', hp: 3, max_hp: 4, describe: enemy_description) }
+  let(:enemy)  do 
+    instance_double('Enemy', hp: 3, max_hp: 4, describe: enemy_description, label: enemy_description)
+  end 
 
   let(:enemy_description) { "a baddie" }
 

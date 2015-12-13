@@ -9,6 +9,7 @@ require 'forwardable'
 
 require 'dragon/version'
 require 'dragon/modules'
+require_all 'lib/dragon/helpers'
 
 require 'dragon/narrator'
 require_all 'lib/dragon/narration'
@@ -20,6 +21,8 @@ require 'dragon/name'
 
 require 'dragon/place'
 require 'dragon/area'
+require_all 'lib/dragon/areas'
+
 require 'dragon/room'
 
 require 'dragon/building'
@@ -34,6 +37,8 @@ require 'dragon/world'
 
 require 'dragon/attack_result'
 require 'dragon/combatant'
+require 'dragon/creature'
+require_all 'lib/dragon/creatures'
 
 require 'dragon/question'
 require_all 'lib/dragon/questions'
@@ -47,14 +52,20 @@ require 'dragon/profession'
 require_all 'lib/dragon/professions'
 
 require 'dragon/person'
+
 require 'dragon/enemy'
 
 require 'dragon/player_character'
 require 'dragon/player_builder'
 
-
 require 'dragon/console'
 require 'dragon/game_terminal'
+
+require 'dragon/command_handler'
+require_all 'lib/dragon/handlers'
+
+require 'dragon/command'
+require_all 'lib/dragon/commands'
 
 require 'dragon/event'
 require_all 'lib/dragon/events'
@@ -68,12 +79,6 @@ require_all 'lib/dragon/quests'
 
 require 'dragon/event_bus'
 
-require 'dragon/command_handler'
-require_all 'lib/dragon/handlers'
-
-require 'dragon/command'
-require_all 'lib/dragon/commands'
-
 require 'dragon/scene'
 require_all 'lib/dragon/scenes'
 
@@ -84,7 +89,7 @@ require 'dragon/engine'
 require 'dragon/driver'
 
 module Dragon
-  BANNER = "\n             ~~~~~~~<<< DRAGON v#{Dragon::VERSION} >>>~~~~~~~~\n\n"
+  BANNER = "\n             ~~~~~~~<<< DRAGON v#{VERSION} >>>~~~~~~~~\n\n"
 
   PLAYER_NAME_PROMPT    = "What is thy name, wanderer? "
   PLAYER_RACE_PROMPT    = 'Who are your people? '

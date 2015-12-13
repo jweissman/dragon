@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "You struck #{enemy.describe} for #{amount} damage"
+        "You struck #{enemy.label} for #{amount} damage"
       end
     end
   end

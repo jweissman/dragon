@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "you dodge #{enemy.describe}'s attack"
+        "you dodge #{enemy.label}'s attack"
       end
     end
   end

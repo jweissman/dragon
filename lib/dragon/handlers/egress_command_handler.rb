@@ -4,7 +4,10 @@ module Dragon
       def handle(command)
         previous_place = place
 
-        area = command.place.building.city.areas.select(&:common_area?).sample
+        area = command.place.building.city.common_areas.sample
+
+        binding.pry unless area
+
         move_to area
 
         PlayerVisitedPlaceEvent.new(place: area, previous_place: previous_place)

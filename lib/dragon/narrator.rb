@@ -41,6 +41,5 @@ module Dragon
     def punctuation
       %w[ . ? ! ' " ]
     end
-
   end
 end

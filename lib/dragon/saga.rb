@@ -1,5 +1,7 @@
 module Dragon
   class Saga < Entity
+    include Events
+
     def on(event)
       raise "override EventListener#on(event) in subclass"
     end

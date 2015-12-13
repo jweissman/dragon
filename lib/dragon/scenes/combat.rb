@@ -9,13 +9,13 @@ module Dragon
       end
 
       def describe
-        "fighting #{enemy.describe}"
+        "fighting #{enemy.label}"
       end
 
       def actions(_)
         [
-          AttackCommand.new(enemy: enemy, player: player),
-          FleeCommand.new(enemy: enemy)
+          attack(enemy, player),
+          flee(enemy)
         ]
       end
     end

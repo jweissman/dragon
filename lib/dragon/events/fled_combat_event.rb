@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "You safely fled from the #{enemy.describe}"
+        "You safely fled from #{enemy.label}"
       end
     end
   end

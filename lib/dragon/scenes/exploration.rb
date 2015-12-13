@@ -1,6 +1,8 @@
 module Dragon
   module Scenes
     class Exploration < Scene
+      include Helpers::CommandHelpers
+
       def initialize(*args)
         @first_time = true
         super(*args)
@@ -47,8 +49,8 @@ module Dragon
       end
 
       def wander_actions(place)
-        return [] unless place.can_wander?
-        [ WanderCommand.new(place: place) ]
+        return [] unless place.class.can_wander?
+        [ wander_around(place) ]
       end
 
       def travel_actions(place)
@@ -57,25 +59,8 @@ module Dragon
       end
 
       def visit_building_actions(place)
-        buildings = (place.city.areas - [place]) + place.city.buildings 
+        buildings = (place.city.areas - [place]) + place.city.buildings
         buildings.collect(&method(:visit))
-      end
-
-      private
-      def converse_with(person)
-        ConverseCommand.new(person: person)
-      end
-
-      def visit(place)
-        VisitCommand.new(place: place)
-      end
-
-      def egress_from(place)
-        EgressCommand.new(place: place)
-      end
-
-      def travel(place)
-        TravelCommand.new(destination: place)
       end
     end
   end

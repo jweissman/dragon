@@ -8,25 +8,16 @@ module Dragon
       end
 
       def describe
-        "Has the story of #{player.describe} just begun?" 
-      rescue 
+        "Has the story of #{player.describe} just begun?"
+      rescue
         "A new story has begun..."
       end
 
       def actions
         [
-          Dragon::Commands::CreatePlayerCharacterCommand.new(
-            name: player.name,
-            age: player.age,
-            gender: player.gender,
-            race: player.race,
-            subtype: player.subtype,
-            profession: player.profession
-          ),
-
-          Dragon::Commands::NewPlayerCharacterCommand.new(label: "Make a different hero"),
-
-          Dragon::Commands::GeneratePlayerCharacterCommand.new(label: "Make up a different hero for me")
+          create_pc(player),
+          new_pc(label: "Make a new hero"),
+          generate_pc(label: "Make up a different hero for me")
         ]
       end
     end

@@ -1,8 +1,8 @@
 module Dragon
   class Profession
-    include Dragon::Activities
-    include Dragon::Questions
-    include Dragon::Professions
+    include Activities
+    include Questions
+    include Professions
 
     def type
       self.class.name.split('::').last

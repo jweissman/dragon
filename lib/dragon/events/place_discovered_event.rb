@@ -22,27 +22,25 @@ module Dragon
       end
 
       def actions
-        action_list = [
-          Dragon::Commands::WanderCommand.new(place: place),
-        ]
+        action_list = []
+
+        if place.class.can_wander?
+          action_list.push(wander_around(place)) 
+        end
 
         if original_destination && original_destination != origin_place
 
           if original_destination.is_a?(City)
-            action_list.push Dragon::Commands::TravelCommand.new(
-              destination: original_destination,
-              label: "Keep travelling to #{original_destination.name}")
-
+            keep_travelling = travel(original_destination, "Keep travelling to #{original_destination.name}")
+            action_list.push(keep_travelling)
           elsif original_destination.is_a?(Area)
-            action_list.push Dragon::Commands::WanderCommand.new(
-              place: original_destination,
-              label: "Keep exploring #{original_destination.describe}"
-            )
+            keep_wandering = wander_around(original_destination, "Keep exploring #{original_destination.describe}")
+            action_list.push keep_wandering
           end
         end
 
         action_list.push(
-          Dragon::Commands::TravelCommand.new(
+          TravelCommand.new(
             destination: origin_place, 
             label: "Return to #{origin_place.name}"
           )

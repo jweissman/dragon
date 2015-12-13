@@ -21,32 +21,32 @@ module Dragon
 
     def self.components
       %w[
-        ad ae aei aeon af ag al ald alef alpha astyr ation asp an am
-        ba be bei ben bet beta bi bil bo borough bird bee box bic
-        ca cad camp cap ce cer ci chi cor core care card cairn
+        ad ae aei aeon af ag al ald alef alpha am an asp astyr ation
+        ba be bee bei ben ber bet beta bi bic bil bird bo borough box
+        ca cad cairn camp cap card care ce cer chi ci cor core
         da dal de di dric dar deg din dell
-        ea ech ed edsel ef ef ekru el emp erath est
+        ea ech ed edsel ef ef ekru el emp en erath est
         fa fai fei fel fer fu finch fet full fem
-        ga gamma gar ge gei ged gi gim go gon grin gu
-        ha he hei hoi hi hay hel
-        ia io in ist iz ius ion ie ian ier
-        ja jae jai jan je jed jer jil jex joy jem
-        ka kai ke ki klu ko kru ku kor kae klee
-        lai lan leaf leg lem lemm len lery li lin lis ly lyt
-        mann mar med ment mer mu mei mo my myr
-        nas nel nor nu nim nem nil nei na no nox
-        oa oe oi ou oy os ost ol ola
-        pa pal pe pi po pou pu phi pit
+        ga gamma gar ge ged gei gi gim go gon grin gu
+        ha hai hay he hei hel her hey hi him hoi hyn
+        ia ial ian ie ien ier in io ion ist iu ius iya iz
+        ja jae jai jan je jei jed jem jer jex ji jim jil joy
+        ka kai ke ki klu kei ko kru ku kor kae klee
+        lai lan leaf leg lem lemm len lery li lin lis luth ly lyt
+        mann mar med mei ment mer mo mu my myr
+        na nas ne nei nel nem ni nil nim no nor nox nu nul nuth nugh ny nym
+        oa oal oar oe oem oen oi ol ola oo os ost ou our oul oy
+        pa pae pai pal pe pei pel phi pi pir pit po por pou pu pun pur
         qua qui quo que quox quay
-        ra rak rag rai re rei reg ro rou ru ria ros
-        sa saf se sed seg sei sel sen sep sep set si shi sho smar smy snel stam stel
+        ra rae rag rai rak re reg rei ria ro roi ros rou ru rua
+        sa saf sai sae se sed seg sei sel sen sep sep set shi sho si sim sin sid sig sif smar smy snel stam stel
         tan tef tim tine tor tyg tis the tion
         ua ue ui uo uy uis ug
         var veris vet vei va vo vi voy
         wa wo war werj wry wyrk wa wei wen wam wol
         xa xe xi xo xaio
         ya ye yi yo yu yr
-        za zo zed ze zi
+        za ze zed zi zo
       ]
     end
   end

@@ -1,6 +1,6 @@
 module Dragon
   class Scene
-    include Dragon::Commands
+    include Helpers::CommandHelpers
     extend Forwardable
 
     def_delegators :game, :world, :player
@@ -31,7 +31,7 @@ module Dragon
     end
 
     def base_actions
-      [ ExitGameCommand.new ]
+      [ exit_game ]
     end
 
     def narrator(terminal)

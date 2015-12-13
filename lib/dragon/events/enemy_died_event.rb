@@ -11,7 +11,7 @@ module Dragon
       end
 
       def describe
-        "#{enemy.describe} was defeated, earning you #{xp} experience and #{gold} gold"
+        "#{enemy.label} was defeated, earning you #{xp} experience and #{gold} gold"
       end 
     end
   end

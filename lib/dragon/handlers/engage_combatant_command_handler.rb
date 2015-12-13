@@ -6,7 +6,7 @@ module Dragon
 
         transition_to combat_with(enemy)
 
-        Dragon::Events::CombatEngagedEvent.new(enemy: enemy)
+        CombatEngagedEvent.new(enemy: enemy)
       end
     end
   end

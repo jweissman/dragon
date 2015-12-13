@@ -1,50 +1,28 @@
 module Dragon
   class Building < Place
-    include Dragon::Professions
-    include Dragon::Cities
+    include Professions
+    include Cities
 
     attr_accessor :city, :aspect
 
-    def self.generate(city, type=types_for_city(city).sample)
-      building = type.new
-      building.city = city
-      building.aspect = aspects.sample
-      building
-    end
-
-    def self.types
-      [ Store, House, Library, Tavern, Church, Hospital, Castle ]
-    end
-
-    def self.available_in?(*)
-      true
-    end
-
-    def self.required_in?(*)
-      false
-    end
-
-    def self.types_for_city(city)
-      required_types = required_types_for_city(city)
-      return required_types unless required_types.empty?
-
-      available_types_for_city(city)
-    end
-
-    def self.required_types_for_city(city)
-      available_types.select do |type|
-        type.required_in?(city)
-      end
-    end
-
-    def self.available_types_for_city(city)
-      available_types.select do |type|
-        type.available_in?(city)
-      end
-    end
-
     def describe
       "#{aspect} #{type}"
+    end
+
+    def required_professions
+      []
+    end
+
+    def required_room_types
+      []
+    end
+
+    def associated_professions
+      Profession.basic
+    end
+
+    def room_types
+      Room.types
     end
 
     def rooms
@@ -74,6 +52,40 @@ module Dragon
       @room_count ||= (3..6).to_a.sample
     end
 
+
+    def self.generate(city, type=types_for_city(city).sample)
+      building = type.new
+      building.city = city
+      building.aspect = aspects.sample
+      building
+    end
+
+    def self.available_in?(*)
+      true
+    end
+
+    def self.required_in?(*)
+      false
+    end
+
+    def self.types_for_city(city)
+      required_types = required_types_for_city(city)
+      return required_types unless required_types.empty?
+
+      available_types_for_city(city)
+    end
+
+    def self.required_types_for_city(city)
+      available_types.select do |type|
+        type.required_in?(city)
+      end
+    end
+
+    def self.available_types_for_city(city)
+      available_types.select do |type|
+        type.available_in?(city)
+      end
+    end
     def self.aspects
       %w[ red orange grey blue green white tiny large small huge dingy quaint palatial glorious quaint modern ]
     end
@@ -82,20 +94,5 @@ module Dragon
       false
     end
 
-    def required_professions
-      []
-    end
-
-    def required_room_types
-      []
-    end
-
-    def associated_professions
-      raise 'override Building#associated_professions in subclass'
-    end
-
-    def room_types
-      raise 'override Building#room_types in subclass'
-    end
   end
 end

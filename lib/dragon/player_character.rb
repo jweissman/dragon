@@ -1,28 +1,34 @@
 module Dragon
   class PlayerCharacter < Person
+    include Activities
+
     extend Forwardable
     def_delegators :engine, :place
 
     attr_accessor :action, :inventory, :engine,
       :quests, :gold, :xp
 
-    def initialize(name=nil)
+    def initialize(name=nil, *args)
       @quests = []
-
-      @gold = 10
-      @xp = 0
-
-      super(name)
+      @gold   = 10
+      @xp     = 0
+      super(name, *args)
     end
 
-    def self.generate(
-      profession: Profession.adventuring.sample
-    )
+    def self.generate(profession: Profession.adventuring.sample)
       super(profession: profession)
     end
 
     def chance_of_hitting(*)
       0.8
+    end
+
+    def attack_rating
+      8
+    end
+
+    def defense_rating
+      4
     end
 
     def label
@@ -34,15 +40,7 @@ module Dragon
     end
 
     def max_hp
-      @max_hp ||= PlayerCharacter.default_max_hp_for(profession: profession)
-    end
-
-    def attack_rating
-      5
-    end
-
-    def defense_rating
-      2
+      @max_hp ||= profession.default_max_hp
     end
 
     def inventory
@@ -50,19 +48,15 @@ module Dragon
     end
 
     def activity
-      @activity ||= Dragon::Activities::Exploring.new
+      @activity ||= Exploring.new
+    end
+
+    def narrator(terminal)
+      @narrator ||= PlayerNarrator.new(self, terminal: terminal)
     end
 
     def self.professions
       Profession.adventuring
-    end
-
-    def self.default_max_hp_for(profession: nil)
-      profession.default_max_hp
-    end
-
-    def narrator(terminal)
-      PlayerNarrator.new(self, terminal: terminal)
     end
   end
 end

@@ -1,8 +1,9 @@
 module Dragon
-  class Person < Combatant
-    include Dragon::Activities
-    include Dragon::Questions
-    include Dragon::Professions
+  class Person < Creatures::Human
+    include Activities
+    include Questions
+    include Professions
+    include Dragon::Helpers::CommandHelpers
 
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype
@@ -28,12 +29,8 @@ module Dragon
       "#{profession.type} #{name}"
     end
 
-    def describe
+    def describe(*)
       "#{name.capitalize}, a #{subtype} #{race} #{profession.type}, who is #{activity.describe}"
-    end
-
-    def activity
-      @activity ||= activities.sample.new
     end
 
     def activities
@@ -45,26 +42,14 @@ module Dragon
       profession.conversation_topics
     end
 
-    def self.generate_list(professions)
-      professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
-    end
-
-    def self.races
-      %w[ human elf dwarf halfling gnome orc goblin centaur ]
-    end
-
-    def self.subtypes
-      %w[ wild mutant dark light sea forest sky weird quiet ]
-    end
-
     def actions(player)
-      my_quests_for(player).select(&:completed?).map do |quest|
-        Dragon::Commands::RedeemQuestCommand.new(quest: quest)
-      end
+      completed_quests_for(player).map { |quest| redeem_quest quest }
     end
 
-    def my_quests_for(player)
-      player.quests.select { |q| q.requestor == self }
+    def completed_quests_for(player)
+      player.quests.
+        select { |q| q.requestor == self }.
+        select(&:completed?)
     end
 
     def questions(place)
@@ -84,7 +69,23 @@ module Dragon
     end
 
     def activity_questions
-      [ ]
+      []
+    end
+
+    def activity
+      @activity ||= activities.sample.new
+    end
+
+    def self.generate_list(professions)
+      professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
+    end
+
+    def self.races
+      %w[ human elf dwarf halfling gnome orc goblin centaur ]
+    end
+
+    def self.subtypes
+      %w[ wild mutant dark light sea forest sky weird quiet ]
     end
   end
 end

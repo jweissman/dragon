@@ -4,7 +4,7 @@ module Dragon
       def on(event)
         player = PlayerBuilder.construct( PlayerCharacter, console: engine.terminal.console)
 
-        Dragon::Events::NewPlayerCharacterReadyForAcceptanceEvent.new(player: player)
+        NewPlayerCharacterReadyForAcceptanceEvent.new(player: player)
       end
     end
   end

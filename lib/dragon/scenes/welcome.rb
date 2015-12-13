@@ -14,10 +14,7 @@ module Dragon
       end
 
       def actions(*)
-        [
-          NewPlayerCharacterCommand.new,
-          GeneratePlayerCharacterCommand.new
-        ]
+        [ new_pc, generate_pc ]
       end
     end
   end

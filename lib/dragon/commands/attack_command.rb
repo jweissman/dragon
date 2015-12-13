@@ -19,11 +19,11 @@ module Dragon
       end
 
       def enemy_description
-        "#{enemy.describe} (#{enemy.hp}/#{enemy.max_hp})"
+        "#{enemy.label} (#{enemy.hp}/#{enemy.max_hp})"
       end
 
       def label
-        "Attack #{enemy.describe}"
+        "Attack #{enemy.label}"
       end
     end
   end

@@ -55,9 +55,9 @@ module Dragon
           hospital = take_player_to_hospital(player)
 
           PlayerPassedOutEvent.new(
-            player: player, 
-            place: hospital, 
-            cause: "#{enemy.describe} defeated you"
+            player: player,
+            place: hospital,
+            cause: "#{enemy.label} defeated you"
           )
         end
       end

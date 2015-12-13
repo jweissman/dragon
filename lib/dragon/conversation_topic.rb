@@ -2,6 +2,10 @@ module Dragon
   class ConversationTopic
     attr_reader :partner, :conversation
 
+    include ::Dragon::Commands
+    include Questions
+    include ::Dragon::Helpers::CommandHelpers
+
     def initialize(partner: nil, conversation: nil)
       @partner = partner
       @conversation = conversation

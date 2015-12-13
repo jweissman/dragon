@@ -1,13 +1,11 @@
 module Dragon
   class Game
-    include Dragon::Scenes
-
     attr_reader :world, :player, :scene, :city, :current_place
 
     def initialize(
       world: World.new,
       player: PlayerCharacter.new,
-      scene: welcome,
+      scene: Dragon::Scenes::Welcome.new(game: self),
       city: world.cities.sample,
       place: city.areas.sample
     )
@@ -15,8 +13,8 @@ module Dragon
       @player        = player
       @scene         = scene
       @city          = city
-      @current_place = place
 
+      @current_place = place
       @playing = true
     end
 
@@ -36,22 +34,6 @@ module Dragon
       @playing
     end
 
-    def welcome
-      Welcome.new(game: self)
-    end
-
-    def exploration
-      Exploration.new(game: self)
-    end
-
-    def conversation_with(partner)
-      Conversation.new(game: self).with(partner: partner)
-    end
-
-    def combat_with(enemy)
-      Combat.new(game: self).with(enemy: enemy)
-    end
-
     def transition_to(scene)
       @scene = scene
     end
@@ -62,7 +44,7 @@ module Dragon
 
     def travel_to(new_city)
       @city = new_city
-      @current_place = new_city.areas.select(&:common_area?).sample
+      @current_place = new_city.common_areas.sample
     end
   end
 end

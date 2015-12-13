@@ -71,8 +71,8 @@ a:visited { color: forestgreen; }
 
   box-shadow: 3px 3px 0px 0px #333;
 
-  background-color: #fffae3; 
-  background-image: 
+  background-color: #fffae3;
+  background-image:
   linear-gradient(#eee .05em, transparent .05em);
   background-size: 100% 1.85em;
 }
@@ -80,8 +80,8 @@ a:visited { color: forestgreen; }
 .hero-container {
   padding: 40px;
   margin: 10px;
-  background-color: #fffae3; 
-  background-image: 
+  background-color: #fffae3;
+  background-image:
   linear-gradient(#eee .1em, transparent .1em);
   background-size: 100% 1.85em;
   min-width: 330px;

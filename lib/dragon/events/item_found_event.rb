@@ -17,10 +17,7 @@ module Dragon
       end
 
       def actions
-        [
-          Dragon::Commands::TakeItemCommand.new(item: item),
-          Dragon::Commands::LeaveItemCommand.new(item: item)
-        ]
+        [ take_item(item), leave_item(item) ]
       end
     end
   end

@@ -8,11 +8,11 @@ module Dragon
       end
 
       def label
-        "Engage #{enemy.describe}"
+        "Engage #{enemy.label}"
       end
 
       def describe
-        "you engage #{enemy.describe}"
+        "you engage #{enemy.label}"
       end
     end
   end

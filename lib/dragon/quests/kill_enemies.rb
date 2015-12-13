@@ -5,42 +5,39 @@ module Dragon
     def initialize(requestor: nil, count: nil, species: nil)
       @count   = count
       @species = species
-
       @tally = 0
-
       super(requestor: requestor)
     end
 
-    def self.listening_for; [ Dragon::Events::EnemyDiedEvent ] end
+    def self.listening_for
+      [ EnemyDiedEvent ]
+    end
 
     def is_relevant?(event)
-      relevant = event.enemy.species == species
-      relevant
+      event.enemy.is_a?(species.class)
     end
 
     def on(event)
       events = []
       @tally += 1
       events.push quest_progressed
-
       if met_target?
         @completed = true
         events.push quest_completed
       end
-
       events
     end
 
     def quest_progressed
-      Dragon::Events::QuestProgressedEvent.new(
-        quest: self, 
-        cause: "You defeated a #{species}")
+      QuestProgressedEvent.new(
+        quest: self,
+        cause: "You defeated a #{species.type}")
     end
 
     def quest_completed
-      Dragon::Events::QuestCompletedEvent.new(
-        quest: self, 
-        cause: "You defeated #{count} #{species}")
+      QuestCompletedEvent.new(
+        quest: self,
+        cause: "You defeated #{count} #{species.type}")
     end
 
     def met_target?
@@ -48,12 +45,12 @@ module Dragon
     end
 
     def label
-      "to defeat #{count} #{species}s"
+      "to defeat #{count} #{species.type}s"
     end
 
     def describe
       complete_badge = (completed? ? ' [complete]' : '')
-      "defeating #{count} #{species}s #{progress}#{complete_badge} for #{requestor.label}"
+      "defeating #{count} #{species.type}s #{progress}#{complete_badge} for #{requestor.label}"
     end
 
     def progress

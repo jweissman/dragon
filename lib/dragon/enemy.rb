@@ -1,50 +1,29 @@
 module Dragon
-  class Enemy < Combatant
-    attr_reader :species, :subtype
+  class Enemy
+    extend Random
+    extend Forwardable
 
-    def initialize(name, species: nil, subtype: nil)
-      @species = species
-      @subtype = subtype
+    def_delegators :entity, :is_a?,
+      :subtype, :label, :describe, :hp, :max_hp, :xp, :bounty, 
+      :defense_rating, :attack_rating, :take_damage!, :alive?, 
+      :chance_of_hitting, :attack!
+
+    attr_reader :entity
+
+    def initialize(entity)
+      @entity = entity
     end
 
     def self.generate
-      new('unnamed', 
-        species: species_list.sample,
-        subtype: subtypes.sample)
+      entity = sample_percentages(type_percentages).call
+      new(entity)
     end
 
-    def attack_rating
-      6
-    end
-
-    def defense_rating
-      2
-    end
-
-    def max_hp
-      @map_hp ||= Enemy.max_hp_for_species(species)
-    end
-
-    def describe(prefix: 'the')
-      "#{prefix} #{subtype} #{species}"
-    end
-
-    def self.species_list
-      %w[ rat snake wolf slime ]
-    end
-
-    def self.max_hp_for_species(species)
-      {
-        rat: 2,
-        snake: 6,
-        wolf: 8,
-        slime: 12,
-        dragon: 200
-      }[species.to_sym]
-    end
-
-    def self.subtypes
-      %w[ mutant forest feral angry weird uncanny toxic glowing strange ]
+    def self.type_percentages
+      @type_distro ||= { 
+        80 => -> { Creature.generate }, 
+        20 => -> { Person.generate }
+      }
     end
   end
 end

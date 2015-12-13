@@ -38,5 +38,17 @@ module Dragon
         select(&:any?).
         select(&:unique?)
     end
+
+    def self.categories
+      types(exclude_nodes: true, nodes_only: false)
+    end
+
+    def self.types(nodes_only: true, exclude_nodes: false)
+      descendants = []
+      ObjectSpace.each_object(singleton_class) do |k|
+        descendants.unshift k unless k == self || (nodes_only && k.types.any?) || (exclude_nodes && !k.types.any?)
+      end
+      descendants
+    end
   end
 end

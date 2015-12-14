@@ -7,7 +7,7 @@ module Dragon
       sample_percentages({
         30 => -> { ItemFoundEvent.new(item: Item.generate) },
         15 => -> { PersonEncounteredEvent.new(person: Person.generate) },
-        60 => -> { EnemyEncounteredEvent.new(enemy: Enemy.generate) },
+        60 => -> { EnemyEncounteredEvent.new(enemy: Enemy.generate(destination)) },
         5  => -> { place_discovered(destination, origin, cause) }
       }).call
     end

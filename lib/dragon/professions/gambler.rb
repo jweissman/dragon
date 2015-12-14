@@ -1,6 +1,8 @@
 module Dragon
   module Professions
     class Gambler < Profession
+      tagged :games, :commerce
+
       def activities
         [ ThrowingDice ]
       end

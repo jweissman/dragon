@@ -1,12 +1,10 @@
 module Dragon
   module Buildings
     class School < Building
+      tagged :learning, :magic, :lore, :music
+
       def required_professions
         [ Teacher ]
-      end
-
-      def associated_professions
-        [ Sage, Wizard, Bard ]
       end
 
       def room_types

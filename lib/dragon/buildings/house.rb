@@ -1,5 +1,6 @@
 module Dragon
   class House < Building
+
     def associated_professions
       Profession.basic
     end

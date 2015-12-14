@@ -36,7 +36,7 @@ module Dragon
     end
 
     def describe
-      "#{name.capitalize}, the #{subtype} #{race} #{profession.type}"
+      "#{name.capitalize}, the #{race} #{profession.type}"
     end
 
     def max_hp

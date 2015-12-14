@@ -16,8 +16,11 @@ require_all 'lib/dragon/narration'
 
 require 'dragon/random'
 
+require 'dragon/taggable'
 require 'dragon/entity'
 require 'dragon/name'
+require 'dragon/race'
+require 'dragon/subtype'
 
 require 'dragon/place'
 require 'dragon/area'

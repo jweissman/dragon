@@ -1,5 +1,7 @@
 module Dragon
   module Professions
-    class Drunk < Profession; end
+    class Drunk < Profession
+      tagged :alcohol
+    end
   end
 end

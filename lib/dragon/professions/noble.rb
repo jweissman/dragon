@@ -1,6 +1,8 @@
 module Dragon
   module Professions
     class Noble < Profession
+      tagged :royal
+
       def self.unique?
         true
       end

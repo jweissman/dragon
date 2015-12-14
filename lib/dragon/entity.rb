@@ -1,5 +1,7 @@
 module Dragon
   class Entity
+    extend Taggable
+
     class << self
       extend Forwardable
       def_delegators :all, :detect, :any?, :each
@@ -49,6 +51,16 @@ module Dragon
         descendants.unshift k unless k == self || (nodes_only && k.types.any?) || (exclude_nodes && !k.types.any?)
       end
       descendants
+    end
+
+    def self.types_tagged_with(tag)
+      types.select { |type| type.tagged_with?(tag) }
+    end
+
+    def self.associated(klass)
+      tags.map do |tag|
+        klass.types_tagged_with(tag)
+      end.flatten.uniq
     end
   end
 end

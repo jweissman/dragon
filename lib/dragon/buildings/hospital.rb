@@ -1,7 +1,9 @@
 module Dragon
   class Hospital < Building
-    def associated_professions
-      [ Priest, Student ]
+    tagged :healing, :learning
+
+    def required_types
+      [ Nurse ]
     end
 
     def room_types

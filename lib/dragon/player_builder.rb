@@ -58,8 +58,7 @@ module Dragon
     def choose_subtype(player)
       console.choose :subtype, of: player, 
         prompt: PLAYER_SUBTYPE_PROMPT,
-        choices: Person.subtypes
+        choices: RacialSubtype.types.map(&:new)
     end
-
   end
 end

@@ -1,14 +1,19 @@
 module Dragon
   class Creature < Combatant
-    attr_reader :subtype
+    attr_accessor :subtype
 
     def initialize(name=nil, subtype: nil)
       @subtype = subtype
       super(name)
     end
 
-    def self.generate(type: types.sample, subtype: subtypes.sample)
-      type.new('(animal)', subtype: subtype)
+    def self.generate(type: types.sample, place: nil)
+      if place && (associated=place.class.associated(Creature)).any?
+        type = associated.sample
+      end
+      creature = type.new
+      creature.subtype = Subtype.generate_for(creature)
+      creature
     end
 
     def attack_rating
@@ -33,10 +38,6 @@ module Dragon
 
     def describe(prefix: 'the')
       "#{prefix} #{subtype} #{type}"
-    end
-
-    def self.subtypes
-      %w[ mutant forest feral angry weird uncanny toxic glowing strange ]
     end
   end
 end

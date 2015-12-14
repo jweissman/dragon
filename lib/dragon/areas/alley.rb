@@ -1,6 +1,8 @@
 module Dragon
   module Areas
     class Alley < Area
+      tagged :urban
+
       def self.can_wander?
         false
       end

@@ -1,5 +1,7 @@
 module Dragon
   class Castle < Building
+    tagged :royal, :entertainment, :army, :law, :holy
+
     def self.unique?
       true
     end

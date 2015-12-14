@@ -18,7 +18,7 @@ module Dragon
     end
 
     def associated_professions
-      Profession.basic
+      self.class.associated(Profession)
     end
 
     def room_types
@@ -86,6 +86,7 @@ module Dragon
         type.available_in?(city)
       end
     end
+
     def self.aspects
       %w[ red orange grey blue green white tiny large small huge dingy quaint palatial glorious quaint modern ]
     end
@@ -93,6 +94,5 @@ module Dragon
     def self.unique?
       false
     end
-
   end
 end

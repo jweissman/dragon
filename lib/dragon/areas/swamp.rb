@@ -1,5 +1,7 @@
 module Dragon
   module Areas
-    class Swamp < Area; end
+    class Swamp < Area
+      tagged :nature, :evil, :water
+    end
   end
 end

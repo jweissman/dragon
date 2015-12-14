@@ -1,5 +1,7 @@
 module Dragon
   module Creatures
-    class Barbarian < Human; end
+    class Barbarian < Human
+      tagged :wilderness
+    end
   end
 end

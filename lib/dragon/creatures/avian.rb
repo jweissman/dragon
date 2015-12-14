@@ -1,5 +1,7 @@
 module Dragon
   module Creatures
-    class Avian < Creature; end
+    class Avian < Creature
+      tagged :sky
+    end
   end
 end

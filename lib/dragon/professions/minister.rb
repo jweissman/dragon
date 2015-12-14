@@ -1,5 +1,7 @@
 module Dragon
   module Professions
-    class Minister < Noble; end
+    class Minister < Noble
+      tagged :court
+    end
   end
 end

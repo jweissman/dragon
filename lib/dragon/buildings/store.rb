@@ -1,11 +1,9 @@
 module Dragon
   class Store < Building
+    tagged :commerce
+
     def required_professions
       [ Trader ]
-    end
-
-    def associated_professions
-      [ Trader, Rogue, Gambler, Constable ]
     end
 
     def room_types

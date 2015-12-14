@@ -1,6 +1,8 @@
 module Dragon
   module Professions
     class Bard < Profession
+      tagged :music, :lore
+
       def activities
         [ PlayingMusic, Singing ]
       end

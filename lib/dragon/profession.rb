@@ -1,5 +1,5 @@
 module Dragon
-  class Profession
+  class Profession < Entity
     include Activities
     include Questions
     include Professions
@@ -58,18 +58,38 @@ module Dragon
     end
   end
 
-  class Priest < Profession; end
+  class Priest < Profession
+    tagged :healing
+  end
+
   class Conscript < Profession; end
 
   class Jester < Profession
+    tagged :comedy, :entertainment
+
     def activities
       [ Juggling ]
     end
   end
 
-  class Scribe < Profession; end
-  class Acolyte < Profession; end
+  class Scribe < Profession
+    tagged :books, :lore
+
+    def conversation_topics
+      [ Topics::Lore ]
+    end
+  end
+  
+  class Acolyte < Profession
+    tagged :holy, :books, :learning
+  end
+
   class Beggar < Profession; end
   class Farmer < Profession; end
-  class Constable < Profession; end
+
+  class Constable < Profession
+    tagged :law
+  end
+
+  class Nurse < Profession; end
 end

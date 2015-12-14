@@ -1,5 +1,7 @@
 module Dragon
   module Professions
-    class Judge < Noble; end
+    class Judge < Noble
+      tagged :law
+    end
   end
 end

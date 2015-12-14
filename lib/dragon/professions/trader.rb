@@ -1,6 +1,8 @@
 module Dragon
   module Professions
     class Trader < Profession
+      tagged :commerce
+
       def conversation_topics
         [ Topics::Commerce ]
       end

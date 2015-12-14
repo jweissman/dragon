@@ -1,11 +1,9 @@
 module Dragon
   class Church < Building
+    tagged :holy, :lore, :learning
+
     def required_professions
       [ Priest ]
-    end
-
-    def associated_professions
-      [ Acolyte, Cleric, Teacher, Bishop ]
     end
   
     def room_types

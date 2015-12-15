@@ -21,6 +21,7 @@ module Dragon
       person.profession = profession.new
       person.gender = %w[ male female other ].sample
       person.race = race
+      person.subtype = Subtype.generate_for(race)
       person
     end
 
@@ -29,7 +30,7 @@ module Dragon
     end
 
     def describe(*)
-      "#{name.capitalize}, a #{race} #{profession.type}, who is #{activity.describe}"
+      "#{name.capitalize}, a #{subtype} #{race} #{profession}, who is #{activity.describe}"
     end
 
     def activities

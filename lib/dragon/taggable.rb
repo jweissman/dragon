@@ -5,7 +5,7 @@ module Dragon
     end
 
     def tagged_with?(tag)
-      tags.include?(tag) || 
+      tags.include?(tag) ||
         (superclass.respond_to?(:tagged_with?) && superclass.tagged_with?(tag))
     end
 

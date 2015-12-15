@@ -1,6 +1,6 @@
 module Dragon
   class Castle < Building
-    tagged :royal, :entertainment, :army, :law, :holy
+    tagged :royal, :entertainment, :army, :law, :holy, :sky, :big
 
     def self.unique?
       true
@@ -25,10 +25,6 @@ module Dragon
 
     def required_room_types
       [ ThroneRoom ]
-    end
-
-    def room_types
-      [ Tower, GreatHall, Courtyard, Study, Kitchen ]
     end
   end
 end

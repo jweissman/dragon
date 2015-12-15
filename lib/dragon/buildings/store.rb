@@ -1,13 +1,9 @@
 module Dragon
   class Store < Building
-    tagged :commerce
+    tagged :commerce, :meeting
 
     def required_professions
       [ Trader ]
-    end
-
-    def room_types
-      [ Lobby, Hall, Study, CommonRoom ]
     end
   end
 end

@@ -1,12 +1,9 @@
 module Dragon
   class House < Building
+    tagged :family, :home, :domestic, :meeting, :sleep
 
     def associated_professions
       Profession.basic
-    end
-
-    def room_types
-      [ LivingRoom, Bedroom, Study, Kitchen, SunRoom, Hall ]
     end
   end
 end

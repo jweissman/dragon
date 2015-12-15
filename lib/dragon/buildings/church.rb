@@ -1,13 +1,9 @@
 module Dragon
   class Church < Building
-    tagged :holy, :lore, :learning
+    tagged :holy, :learning, :meeting, :praying
 
     def required_professions
       [ Priest ]
-    end
-  
-    def room_types
-      [ Nave, Sanctuary, Refectory, Study, Hall, Courtyard ]
     end
   end
 end

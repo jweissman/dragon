@@ -1,15 +1,5 @@
 module Dragon
   class Race < Entity
-    attr_reader :subtype
-
-    def initialize
-      @subtype ||= Subtype.generate_for(self)
-      super
-    end
-
-    def to_s
-      "#{subtype.type} #{type}"
-    end
   end
 
   class Human   < Race; end

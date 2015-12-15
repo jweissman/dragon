@@ -9,9 +9,17 @@ module Dragon
 
     attr_reader :name, :id
 
-    def initialize(name='unnamed')
-      @name ||= name
-      @id = self.class.all.count
+    def initialize(name=nil)
+      @name = name
+      @id   = self.class.all.count
+    end
+
+    def to_s
+      label
+    end
+
+    def label
+      name || type
     end
 
     def self.all
@@ -61,6 +69,10 @@ module Dragon
       tags.map do |tag|
         klass.types_tagged_with(tag)
       end.flatten.uniq
+    end
+
+    def self.all_tags
+      types.map(&:tags).flatten.uniq.sort
     end
   end
 end

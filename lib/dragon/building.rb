@@ -2,6 +2,7 @@ module Dragon
   class Building < Place
     include Professions
     include Cities
+    include Rooms
 
     attr_accessor :city, :aspect
 
@@ -22,7 +23,7 @@ module Dragon
     end
 
     def room_types
-      Room.types
+      self.class.associated(Room)
     end
 
     def rooms

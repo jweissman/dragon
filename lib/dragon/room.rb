@@ -47,40 +47,6 @@ module Dragon
     end
   end
 
-  class LivingRoom < Room; end
-  class Bedroom < Room; end
-  class Study < Room; end
-  class Kitchen < Room; end
-  class SunRoom < Room; end
-  class Hall < Room; end
-  class DrawingRoom < Room; end
-
-  class CommonRoom < Room; end
-  class Lobby < Room; end
-
-  class Tower < Room; end
-  class GreatHall < Room; end
-  class Courtyard < Room; end
-
-  class ThroneRoom < Room
-    def self.unique
-      true
-    end
-
-    def self.required_professions
-      [ King, Queen ]
-    end
-  end
-
-  class Archive < Room; end
-
-  class Ward < Room; end
-  class Surgery < Room; end
-  class Nursery < Room; end
-
-  class Nave < Room; end
-  class Sanctuary < Room; end
-  class Refectory < Room; end
 
   # for communing with the dead!
   class Psychomanteum < Room; end

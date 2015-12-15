@@ -27,6 +27,7 @@ require 'dragon/area'
 require_all 'lib/dragon/areas'
 
 require 'dragon/room'
+require_all 'lib/dragon/rooms'
 
 require 'dragon/building'
 require_all 'lib/dragon/buildings'

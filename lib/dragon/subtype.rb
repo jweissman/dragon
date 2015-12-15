@@ -13,8 +13,6 @@ module Dragon
     def self.generate_for(object)
       class_for(object).types.sample.new
     end
-
-    def to_s; type end
   end
 
   class CreatureSubtype < Subtype; end

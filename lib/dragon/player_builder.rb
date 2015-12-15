@@ -52,7 +52,7 @@ module Dragon
     def choose_race(player)
       console.choose :race, of: player,
         prompt: PLAYER_RACE_PROMPT,
-        choices: Person.races
+        choices: Race.types.map(&:new)
     end
 
     def choose_subtype(player)

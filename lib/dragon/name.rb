@@ -15,7 +15,7 @@ module Dragon
     protected
     def self.perform_generation
       (components.sample(2)).join.
-        gsub(/([aeiou]{3})[aeiou]+/i,'\1').
+        gsub(/([aeiou]{3})[aeiou]+/i,'\1'). # truncate runs of 3+ vowels
         capitalize
     end
 

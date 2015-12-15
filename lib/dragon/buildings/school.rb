@@ -6,10 +6,6 @@ module Dragon
       def required_professions
         [ Teacher ]
       end
-
-      def room_types
-        [ Study, Hall, Courtyard ]
-      end
     end
   end
 end

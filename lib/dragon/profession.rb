@@ -4,11 +4,11 @@ module Dragon
     include Questions
     include Professions
 
-    def type
-      self.class.name.split('::').last
-    end
+    # def type
+    #   self.class.name.split('::').last
+    # end
 
-    def label; type end
+    # def label; type end
 
     def questions(*)
       []

@@ -10,6 +10,7 @@ module Dragon
   module Listeners; end
   module Professions; end
   module Questions; end
+  module Rooms; end
   module Scenes; end
   module Topics; end
 end

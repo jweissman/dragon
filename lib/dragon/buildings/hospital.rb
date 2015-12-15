@@ -1,17 +1,9 @@
 module Dragon
   class Hospital < Building
-    tagged :healing, :learning
+    tagged :medicine, :healing, :learning, :meeting
 
-    def required_types
+    def required_professions
       [ Nurse ]
-    end
-
-    def room_types
-      [ Ward, Surgery, Nursery, Hall ]
-    end
-
-    def self.unique
-      false
     end
   end
 end

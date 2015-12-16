@@ -2,6 +2,7 @@ module Dragon
   class Room < Place
     attr_accessor :building, :people, :aspect
 
+
     def describe
       "#{aspect} #{type}"
     end

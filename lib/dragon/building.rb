@@ -4,7 +4,17 @@ module Dragon
     include Cities
     include Rooms
 
+    tagged :meeting
+
+    attr_reader :rooms
     attr_accessor :city, :aspect
+
+    def initialize(name=nil)
+      @rooms = Room.generate_list(room_count,
+                                  building: self,
+                                  professions: available_professions)
+      super(name)
+    end
 
     def describe
       "#{aspect} #{type}"
@@ -24,12 +34,6 @@ module Dragon
 
     def room_types
       self.class.associated(Room)
-    end
-
-    def rooms
-      @rooms ||= Room.generate_list(room_count,
-                                    building: self,
-                                    professions: available_professions)
     end
 
     def room_count
@@ -53,12 +57,13 @@ module Dragon
       @room_count ||= (3..6).to_a.sample
     end
 
-
     def self.generate(city, type=types_for_city(city).sample)
-      building = type.new
+      building = type.new # types_for_city(city).sample.new
       building.city = city
       building.aspect = aspects.sample
       building
+    rescue
+      binding.pry
     end
 
     def self.available_in?(*)
@@ -77,23 +82,41 @@ module Dragon
     end
 
     def self.required_types_for_city(city)
-      available_types.select do |type|
-        type.required_in?(city)
+      types.select do |type|
+        type.required_in?(city) && !city.any_buildings_of_type?(type)
       end
     end
 
     def self.available_types_for_city(city)
-      available_types.select do |type|
-        type.available_in?(city)
+      available = types.select do |type|
+        if type.unique?
+          !city.any_buildings_of_type?(type) &&
+            type.available_in?(city)
+        else
+          type.available_in?(city)
+        end
+      end
+
+      associated_and_available = associated_types_for_city(city) & available
+      associated_and_available
+    end
+
+    def self.associated_types_for_city(city)
+      (city.class.associated(Building) +
+        city.subtype.class.associated(Building)).sort_by do |klass|
+        klass.tags_in_common_with(Building)
       end
     end
 
     def self.aspects
-      %w[ red orange grey blue green white tiny large small huge dingy quaint palatial glorious quaint modern ]
+      %w[ red orange grey blue green white
+          tiny large small huge dingy quaint
+          palatial glorious quaint modern ]
     end
 
+    # more than 1 in the town
     def self.unique?
-      false
+      true
     end
   end
 end

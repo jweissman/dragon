@@ -1,7 +1,7 @@
 module Dragon
   module Professions
     class Soldier < Adventurer
-      tagged :army
+      tagged :military
 
       def default_max_hp
         35

@@ -1,14 +1,14 @@
 module Dragon
   module Buildings
-    class Hospital < Building
-      tagged :medicine, :healing, :learning, :meeting
+    class Market < Building
+      tagged :commerce
 
       def self.unique?
         true
       end
 
       def required_professions
-        [ Nurse ]
+        [ Trader ]
       end
     end
   end

@@ -42,7 +42,5 @@ describe Console do
     it 'should gather the user choice and assign selection' do
       expect(fake_object).to receive(:"#{fake_attribute}=").with(expected_choice)
     end
-
   end
 end
-

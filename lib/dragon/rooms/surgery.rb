@@ -1,7 +1,7 @@
 module Dragon
   module Rooms
     class Surgery < Room
-      tagged :medicine, :healing
+      tagged :injury, :medicine, :healing, :learning
     end
   end
 end

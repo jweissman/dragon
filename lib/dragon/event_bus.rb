@@ -20,9 +20,6 @@ module Dragon
       end
 
       additional_events.flatten.compact
-    rescue => ex
-      binding.pry
-      raise ex
     end
   end
 end

@@ -1,6 +1,8 @@
 module Dragon
   module Cities
     class Capital < City
+      tagged :royal, :urban, :government
+
       def self.unique?
         true
       end

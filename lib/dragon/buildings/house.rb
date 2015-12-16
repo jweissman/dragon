@@ -1,9 +1,15 @@
 module Dragon
-  class House < Building
-    tagged :family, :home, :domestic, :meeting, :sleep
+  module Buildings
+    class House < Building
+      tagged :family, :home, :domestic
 
-    def associated_professions
-      Profession.basic
+      def associated_professions
+        Profession.basic
+      end
+
+      def self.unique
+        false
+      end
     end
   end
 end

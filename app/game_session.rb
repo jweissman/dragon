@@ -46,11 +46,6 @@ module Dragon
       self
     end
 
-    protected
-    def actions
-      engine.last_prompted_Actions
-    end
-
     def output
       JSON.dump(content: content.join + "</div>") if content
     end

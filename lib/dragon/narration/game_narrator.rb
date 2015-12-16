@@ -25,12 +25,12 @@ module Dragon
 
     def narrate_scene(last_command, last_events)
       narrator_for(scene).narrate(last_command, last_events)
-      narrate_surroundings
+      narrate_surroundings if deep?
     end
 
     def narrate_surroundings
-      narrate_world_and_city if deep?
-      narrate_place if deep?
+      narrate_world_and_city
+      narrate_place
     end
 
     def narrate_world_and_city

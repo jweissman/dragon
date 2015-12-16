@@ -1,7 +1,9 @@
 module Dragon
   module Taggable
     def tagged(*syms)
-      @tags = syms
+      @tags ||= []
+      @tags << syms
+      @tags.flatten!.uniq!
     end
 
     def tagged_with?(tag)
@@ -11,6 +13,7 @@ module Dragon
 
     def tags
       @tags ||= []
+      (@tags + (superclass.tags rescue [])) #.flatten.uniq
     end
   end
 end

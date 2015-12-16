@@ -14,7 +14,6 @@ module Dragon
       session = GameSession.new(client: client, world: world)
       sessions.push session
       session.step!
-      # session.make_character
     rescue => ex
       puts ex.message
       puts ex.backtrace
@@ -25,7 +24,7 @@ module Dragon
 
       parsed_event_data = JSON.parse(event.data)
 
-      active_session = find_active_session_for client 
+      active_session = find_active_session_for client
       active_session.step!(parsed_event_data)
     rescue => ex
       puts ex.message
@@ -42,13 +41,10 @@ module Dragon
     def find_active_session_for(client)
       selector = method(:session_client_is?).curry.(client)
       sessions.find(&selector)
-      # do |session|
-      #   session.client == client
-      # end
     end
 
     def destroy_active_session_for(client)
-      sessions.delete_if do |session| 
+      sessions.delete_if do |session|
         session.client == client
       end
     end

@@ -25,15 +25,15 @@ module Dragon
     protected
     def setup_websocket(env)
       ws = create_websocket(env)
-      ws.on :open    do |_| 
-        create(ws) 
+      ws.on :open    do |_|
+        create(ws)
       end
 
-      ws.on :message do |event| 
-        update(ws, event) 
+      ws.on :message do |event|
+        update(ws, event)
       end
 
-      ws.on :close   do |event| 
+      ws.on :close   do |event|
         delete(ws)
       end
 

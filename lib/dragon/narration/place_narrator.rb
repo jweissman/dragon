@@ -4,7 +4,7 @@ module Dragon
 
     def narrate
       if place.is_a?(Room)
-        describe place, prefix: prefix, suffix: " of a #{place.building.describe}"
+        describe prefix: prefix, suffix: " of a #{place.building.describe}"
       else
         describe prefix: prefix
       end

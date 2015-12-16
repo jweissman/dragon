@@ -13,11 +13,13 @@ module Dragon
     end
 
     def self.place_discovered(destination, origin, cause)
-      place = if destination.is_a?(Area)
-        Area.generate(destination.city, Area.types_for_discovery.sample)
+      city = if destination.is_a?(Area)
+        destination.city
       elsif destination.is_a?(City)
-        Area.generate(destination, Area.types_for_discovery.sample)
+        destination
       end
+
+      place = Area.generate(city)
 
       PlaceDiscoveredEvent.new(
         place: place,

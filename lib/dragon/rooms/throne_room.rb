@@ -1,7 +1,7 @@
 module Dragon
   module Rooms
     class ThroneRoom < Room
-      tagged :royal, :court, :law, :drafting, :writing
+      tagged :royal, :court, :drafting, :writing, :law, :good
 
       def self.unique
         true

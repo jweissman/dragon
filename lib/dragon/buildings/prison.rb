@@ -1,7 +1,7 @@
 module Dragon
   module Buildings
     class Prison < Building
-      tagged :evil, :games, :law, :crime, :meeting
+      tagged :government, :evil, :crime, :law
 
       def required_professions
         [ Constable ]

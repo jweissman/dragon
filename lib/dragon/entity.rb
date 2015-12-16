@@ -35,30 +35,27 @@ module Dragon
       self.class.name.split('::').last
     end
 
-    def decorate
-      @decorator ||= EntityDecorator.new(self)
-    end
-
-    def self.available_types
-      types - unique_types_to_exclude
-    end
-
-    def self.unique_types_to_exclude
-      types.
-        select(&:any?).
-        select(&:unique?)
-    end
-
     def self.categories
       types(exclude_nodes: true, nodes_only: false)
     end
 
-    def self.types(nodes_only: true, exclude_nodes: false)
+    def self.descendants
+      @descendants ||= compute_descendants
+    end
+
+    def self.compute_descendants
       descendants = []
       ObjectSpace.each_object(singleton_class) do |k|
-        descendants.unshift k unless k == self || (nodes_only && k.types.any?) || (exclude_nodes && !k.types.any?)
+        descendants.unshift k unless k == self
       end
       descendants
+    end
+
+    def self.types(nodes_only: true, exclude_nodes: false)
+      descendants.reject do |k|
+        is_a_node = k.types.any?
+        (nodes_only && is_a_node) || (exclude_nodes && !is_a_node)
+      end
     end
 
     def self.types_tagged_with(tag)
@@ -66,9 +63,17 @@ module Dragon
     end
 
     def self.associated(klass)
-      tags.map do |tag|
+      associated_classes = tags.map do |tag|
         klass.types_tagged_with(tag)
       end.flatten.uniq
+
+      associated_classes.sort_by do |c|
+        c.tags_in_common_with(self)
+      end.reverse
+    end
+
+    def self.tags_in_common_with(klass)
+      (klass.tags - tags).count
     end
 
     def self.all_tags

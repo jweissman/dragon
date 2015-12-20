@@ -1,7 +1,7 @@
 module Dragon
   module Areas
     class Isle < Area
-      tagged :water, :sea
+      tagged :water, :ocean
     end
   end
 end

@@ -1,7 +1,7 @@
 module Dragon
   module Professions
     class Trader < Profession
-      tagged :commerce
+      tagged :commerce, :urban
 
       def conversation_topics
         [ Topics::Commerce ]

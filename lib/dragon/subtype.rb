@@ -32,7 +32,7 @@ module Dragon
   end
 
   class Port < CitySubtype
-    tagged :sea, :commerce, :trade, :urban, :shipping, :crime, :ocean, :goods
+    tagged :commerce, :trade, :urban, :shipping, :crime, :ocean, :goods
   end
 
   class Agricultural < CitySubtype

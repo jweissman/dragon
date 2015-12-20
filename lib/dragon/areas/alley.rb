@@ -1,10 +1,10 @@
 module Dragon
   module Areas
     class Alley < Area
-      tagged :urban
+      tagged :urban, :alcohol, :dice
 
       def self.can_wander?
-        false
+        true
       end
 
       def self.common_area?
@@ -15,9 +15,9 @@ module Dragon
         true
       end
 
-      def professions
-        [ Gambler ] + super
-      end
+      # def professions
+      #   [ Gambler, Drunk ] + super
+      # end
     end
   end
 end

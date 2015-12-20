@@ -1,11 +1,7 @@
 module Dragon
   module Professions
-    class Cleric < Adventurer
+    class Priest < Profession
       tagged :holy, :healing, :praying, :religious
-
-      def default_max_hp
-        16
-      end
     end
   end
 end

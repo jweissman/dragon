@@ -2,6 +2,7 @@ module Dragon
   class City < Place
     include Cities
     attr_accessor :world, :subtype, :feature
+    attr_reader :buildings, :areas
 
     def initialize(name=Name.generate,
                    subtype: nil, feature: nil, world: nil)
@@ -9,16 +10,9 @@ module Dragon
       @subtype   = Subtype.generate_for(self)
       @feature   = feature
       @world     = world
-
+      @areas     = Area.generate_list(area_count, city: self)
+      @buildings = Building.generate_list(building_count, city: self)
       super(name)
-    end
-
-    def buildings
-      @buildings ||= Building.generate_list(building_count, city: self)
-    end
-
-    def areas
-      @areas ||= Area.generate_list(area_count, city: self)
     end
 
     def any_buildings_of_type?(klass)

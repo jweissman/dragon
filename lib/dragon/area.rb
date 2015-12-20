@@ -50,7 +50,10 @@ module Dragon
     def self.generate(city, insert: false)
       valid_types = (required_types_for_city(city) +
                      available_types_for_city(city) +
-                     types_for_discovery.shuffle).uniq
+                     types_for_discovery.shuffle).uniq.reject do |type|
+        city.areas.any? { |area| area.is_a?(type) }
+      end
+
       klass = valid_types.first
 
       area = klass.new

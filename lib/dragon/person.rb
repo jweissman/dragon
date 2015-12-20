@@ -12,7 +12,7 @@ module Dragon
 
     def self.generate(
       name: Name.generate,
-      profession: Profession.all.sample,
+      profession: Profession.available.sample,
       age: (20..65).to_a.sample,
       place: nil,
       race: Race.types.sample.new

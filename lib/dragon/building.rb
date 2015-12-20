@@ -40,18 +40,7 @@ module Dragon
     end
 
     def professions
-      required_professions +
-        associated_professions +
-        Profession.basic.shuffle +
-        Profession.adventuring.shuffle
-    end
-
-    def available_professions
-      professions.reject do |profession|
-        profession.unique? && Person.any? do |person|
-          person.profession.is_a?(profession)
-        end
-      end
+      (required_professions + associated_professions) & Profession.available
     end
 
     def room_count

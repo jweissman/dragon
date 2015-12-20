@@ -9,12 +9,29 @@ module Dragon
       room           = type.new
       room.building  = building
       room.people    = []
-      professions = building.available_professions
-      (1..2).to_a.sample.times do
-        profession = professions.shift
+      professions = building.professions.zip(room.professions).flatten.uniq.compact
+      professions.take(room.people_count).each do |profession|
         room.people << Person.generate(profession: profession)
       end
       room
+    rescue
+      binding.pry
+    end
+
+    def people_count
+      @people_sample ||= (2..4).to_a.sample
+    end
+
+    def required_professions
+      []
+    end
+
+    def associated_professions
+      self.class.associated(Profession)
+    end
+
+    def professions
+      (required_professions + associated_professions) & Profession.available
     end
 
     def self.generate_list(n, building: nil)

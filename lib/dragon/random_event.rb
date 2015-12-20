@@ -5,10 +5,10 @@ module Dragon
 
     def self.sample(destination, origin, cause=nil)
       sample_percentages({
-        30 => -> { ItemFoundEvent.new(item: Item.generate) },
-        15 => -> { PersonEncounteredEvent.new(person: Person.generate) },
-        60 => -> { EnemyEncounteredEvent.new(enemy: Enemy.generate(destination)) },
-        5  => -> { place_discovered(destination, origin, cause) }
+        12 => -> { ItemFoundEvent.new(item: Item.generate) },
+        38 => -> { PersonEncounteredEvent.new(person: Person.generate) },
+        90 => -> { EnemyEncounteredEvent.new(enemy: Enemy.generate(destination)) },
+        3  => -> { place_discovered(destination, origin, cause) }
       }).call
     end
 

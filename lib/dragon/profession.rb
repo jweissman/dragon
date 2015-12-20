@@ -4,6 +4,14 @@ module Dragon
     include Questions
     include Professions
 
+    def self.available
+      all.reject do |profession|
+        profession.unique? && Person.any? do |person|
+          person.profession.is_a?(profession)
+        end
+      end
+    end
+
     def questions(*)
       []
     end
@@ -51,41 +59,4 @@ module Dragon
       ]
     end
   end
-
-  class Priest < Profession
-    tagged :healing
-  end
-
-  class Conscript < Profession
-    tagged :military, :fighting 
-  end
-
-  class Jester < Profession
-    tagged :comedy, :entertainment
-
-    def activities
-      [ Juggling ]
-    end
-  end
-
-  class Scribe < Profession
-    tagged :books, :lore, :writing, :drafting
-
-    def conversation_topics
-      [ Topics::Lore ]
-    end
-  end
-  
-  class Acolyte < Profession
-    tagged :holy, :books, :learning
-  end
-
-  class Beggar < Profession; tagged :poverty end
-  class Farmer < Profession; tagged :agriculture, :farming end
-
-  class Constable < Profession
-    tagged :law
-  end
-
-  class Nurse < Profession; tagged :medicine, :healing end
 end

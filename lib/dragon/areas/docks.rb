@@ -1,7 +1,7 @@
 module Dragon
   module Areas
     class Docks < Area
-      tagged :urban, :sea, :shipping, :work
+      tagged :urban, :ocean, :shipping, :work
 
       def self.can_wander?
         true

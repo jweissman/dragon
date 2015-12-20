@@ -31,7 +31,7 @@ module Dragon
           move_to random_event.place
           [ random_event ]
         else
-          encounter_area = place.city.areas.sample
+          encounter_area = place.city.areas.select { |area| area.class.can_wander? }.sample
           move_to encounter_area
           [
             PlayerVisitedPlaceEvent.new(place: encounter_area, previous_place: previous_place),

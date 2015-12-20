@@ -9,6 +9,10 @@ module Dragon
         super(*args)
       end
 
+      def label
+        "gambling"
+      end
+
       def describe
         "gambling with #{partner.name}"
       end

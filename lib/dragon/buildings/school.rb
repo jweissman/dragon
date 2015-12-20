@@ -1,7 +1,7 @@
 module Dragon
   module Buildings
     class School < Building
-      tagged :education, :learning, :magic, :lore, :music
+      tagged :writing, :reading, :education, :learning, :magic, :lore, :music
 
       def required_professions
         [ Teacher ]

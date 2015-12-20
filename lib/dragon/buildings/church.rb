@@ -1,11 +1,7 @@
 module Dragon
   module Buildings
     class Church < Building
-      tagged :rural, :religious, :meeting, :praying
-
-      def self.unique?
-        true
-      end
+      tagged :rural, :religious, :praying, :kneeling
 
       def required_professions
         [ Priest ]

@@ -14,9 +14,7 @@ module Dragon
 
       def responses
         [
-          "I love #{place.describe}!",
-          "This #{place.describe} is great",
-          "So happy about #{place.describe}!"
+          "I love #{place.describe} because its so #{place.aspects.sample.label}"
         ]
       end
     end

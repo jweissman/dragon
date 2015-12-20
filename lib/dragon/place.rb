@@ -1,7 +1,9 @@
 module Dragon
   class Place < Entity
+    include Aspects 
+
     def self.can_wander?
-      true 
+      true
     end
 
     def self.common_area?

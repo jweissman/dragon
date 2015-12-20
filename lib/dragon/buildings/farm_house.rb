@@ -1,7 +1,7 @@
 module Dragon
   module Buildings
     class FarmHouse < Building
-      tagged :farming
+      tagged :farming, :work, :agriculture, :rural
     end
   end
 end

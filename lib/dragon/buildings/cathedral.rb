@@ -1,7 +1,11 @@
 module Dragon
   module Buildings
     class Cathedral < Building
-      tagged :religious, :learning, :meeting, :praying
+      tagged :urban, :religious, :praying, :kneeling
+
+      def self.unique?
+        true
+      end
     end
   end
 end

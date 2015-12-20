@@ -1,6 +1,10 @@
 module Dragon
   module Topics
     class Lore < ConversationTopic
+      def label
+        "discussing lore"
+      end
+
       def describe
         "discussing lore with #{partner.name}"
       end

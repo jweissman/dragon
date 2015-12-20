@@ -1,5 +1,7 @@
 module Dragon
   class Building < Place
+    include Aspects
+
     include Professions
     include Cities
     include Rooms
@@ -7,29 +9,14 @@ module Dragon
     tagged :meeting
 
     attr_reader :rooms
-    attr_accessor :city, :aspect
+    attr_accessor :city
 
-    def initialize(name=nil)
-      @rooms = Room.generate_list(room_count,
-                                  building: self,
-                                  professions: available_professions)
-      super(name)
-    end
-
-    def describe
-      "#{aspect} #{type}"
-    end
-
-    def required_professions
-      []
+    def rooms
+      @rooms ||= Room.generate_list(room_count, building: self)
     end
 
     def required_room_types
       []
-    end
-
-    def associated_professions
-      self.class.associated(Profession)
     end
 
     def room_types
@@ -40,16 +27,30 @@ module Dragon
       @room_count ||= [3,4,5].sample
     end
 
+    def required_professions
+      []
+    end
+
+    def associated_professions
+      return self.class.associated(Profession) unless city # FIXME concession for castle_spec
+
+      self.class.associated(Profession).
+        zip(city.class.associated(Profession)).
+        flatten.compact
+    end
+
     def professions
       required_professions +
-        associated_professions.shuffle +
+        associated_professions +
         Profession.basic.shuffle +
         Profession.adventuring.shuffle
     end
 
     def available_professions
       professions.reject do |profession|
-        profession.unique? && Person.any? { |person| person.profession == profession }
+        profession.unique? && Person.any? do |person|
+          person.profession.is_a?(profession)
+        end
       end
     end
 
@@ -58,12 +59,17 @@ module Dragon
     end
 
     def self.generate(city, type=types_for_city(city).sample)
-      building = type.new # types_for_city(city).sample.new
+      building = type.new
       building.city = city
-      building.aspect = aspects.sample
       building
-    rescue
-      binding.pry
+    end
+
+    def self.generate_list(n, city: nil)
+      valid_types = types_for_city(city).uniq
+      valid_types.take(n).map(&:new).map do |building|
+        building.city = city
+        building
+      end
     end
 
     def self.available_in?(*)
@@ -75,26 +81,18 @@ module Dragon
     end
 
     def self.types_for_city(city)
-      required_types = required_types_for_city(city)
-      return required_types unless required_types.empty?
-
-      available_types_for_city(city)
+      required_types_for_city(city) + available_types_for_city(city)
     end
 
     def self.required_types_for_city(city)
       types.select do |type|
-        type.required_in?(city) && !city.any_buildings_of_type?(type)
+        type.required_in?(city)
       end
     end
 
     def self.available_types_for_city(city)
       available = types.select do |type|
-        if type.unique?
-          !city.any_buildings_of_type?(type) &&
-            type.available_in?(city)
-        else
-          type.available_in?(city)
-        end
+        type.available_in?(city)
       end
 
       associated_and_available = associated_types_for_city(city) & available
@@ -108,15 +106,9 @@ module Dragon
       end
     end
 
-    def self.aspects
-      %w[ red orange grey blue green white
-          tiny large small huge dingy quaint
-          palatial glorious quaint modern ]
-    end
-
-    # more than 1 in the town
+    # more than 1 in the world
     def self.unique?
-      true
+      false
     end
   end
 end

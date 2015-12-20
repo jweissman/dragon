@@ -4,12 +4,6 @@ module Dragon
     include Questions
     include Professions
 
-    # def type
-    #   self.class.name.split('::').last
-    # end
-
-    # def label; type end
-
     def questions(*)
       []
     end
@@ -62,7 +56,9 @@ module Dragon
     tagged :healing
   end
 
-  class Conscript < Profession; end
+  class Conscript < Profession
+    tagged :military, :fighting 
+  end
 
   class Jester < Profession
     tagged :comedy, :entertainment
@@ -73,7 +69,7 @@ module Dragon
   end
 
   class Scribe < Profession
-    tagged :books, :lore
+    tagged :books, :lore, :writing, :drafting
 
     def conversation_topics
       [ Topics::Lore ]
@@ -84,12 +80,12 @@ module Dragon
     tagged :holy, :books, :learning
   end
 
-  class Beggar < Profession; end
-  class Farmer < Profession; end
+  class Beggar < Profession; tagged :poverty end
+  class Farmer < Profession; tagged :agriculture, :farming end
 
   class Constable < Profession
     tagged :law
   end
 
-  class Nurse < Profession; end
+  class Nurse < Profession; tagged :medicine, :healing end
 end

@@ -1,7 +1,7 @@
 module Dragon
   module Rooms
     class Ward < Room
-      tagged :healing, :sleep
+      tagged :medicine, :healing, :sleep, :injury
     end
   end
 end

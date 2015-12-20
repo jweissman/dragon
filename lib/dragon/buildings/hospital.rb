@@ -1,11 +1,7 @@
 module Dragon
   module Buildings
     class Hospital < Building
-      tagged :medicine, :healing, :learning, :meeting
-
-      def self.unique?
-        true
-      end
+      tagged :medicine, :healing, :learning, :injury
 
       def required_professions
         [ Nurse ]

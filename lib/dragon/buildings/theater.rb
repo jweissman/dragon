@@ -1,7 +1,7 @@
 module Dragon
   module Buildings
     class Theater < Building
-      tagged :education, :entertainment, :music, :meeting, :urban
+      tagged :education, :entertainment, :music
     end
   end
 end

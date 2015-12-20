@@ -1,10 +1,7 @@
 module Dragon
-  class City < Entity
+  class City < Place
     include Cities
-
     attr_accessor :world, :subtype, :feature
-
-    attr_reader :buildings, :areas
 
     def initialize(name=Name.generate,
                    subtype: nil, feature: nil, world: nil)
@@ -13,13 +10,15 @@ module Dragon
       @feature   = feature
       @world     = world
 
-      @buildings = []
-      building_count.times { @buildings << Building.generate(self) }
-
-      @areas = []
-      area_count.times { @areas << Area.generate(self, insert: false) }
-
       super(name)
+    end
+
+    def buildings
+      @buildings ||= Building.generate_list(building_count, city: self)
+    end
+
+    def areas
+      @areas ||= Area.generate_list(area_count, city: self)
     end
 
     def any_buildings_of_type?(klass)
@@ -29,7 +28,7 @@ module Dragon
     end
 
     def describe
-      "#{name}, #{subtype} #{type} of #{feature.to_s.gsub('_', ' ')}"
+      "#{name}, #{primary_aspect.label} #{subtype} #{type} of #{feature.to_s.gsub('_', ' ')}"
     end
 
     def label
@@ -53,7 +52,7 @@ module Dragon
     end
 
     def area_count_range
-      (2..5)
+      (2..3)
     end
 
     def building_count
@@ -95,11 +94,11 @@ module Dragon
     end
 
     def self.excluded_types_for(world)
-      types.select(&:any?).select(&:unique?)
+      types.select(&:unique?).select(&:any?)
     end
 
     def self.features
-      %w[ secret_police dreams love many_goats too_many_books ]
+      %w[ the_future destiny light secret_police dreams love hope stone too_many_books ]
     end
 
     def self.required_types

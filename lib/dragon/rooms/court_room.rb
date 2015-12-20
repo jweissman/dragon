@@ -1,18 +1,18 @@
 module Dragon
   module Rooms
-    class ThroneRoom < Room
-      tagged :royal, :court, :drafting, :writing, :law, :good
+    class CourtRoom < Room
+      tagged :government, :law, :crime
 
       def self.unique
         true
       end
 
       def self.required_professions
-        [ King, Queen ]
+        [ Judge, Constable ]
       end
 
       def self.available_in?(building)
-        building.is_a?(Castle)
+        building.is_a?(Courthouse)
       end
     end
   end

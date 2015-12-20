@@ -1,6 +1,7 @@
 module Dragon
   class Entity
     extend Taggable
+    include Aspects
 
     class << self
       extend Forwardable
@@ -14,21 +15,32 @@ module Dragon
       @id   = self.class.all.count
     end
 
+    def aspects
+      @aspects ||= AspectGroup.for(self).generate
+    end
+
+    def primary_aspect
+      @primary_aspect ||= aspects.sample
+    end
+
+    def describe
+      "#{primary_aspect.label} #{labelized_type}"
+    end
+
     def to_s
       label
     end
 
     def label
-      name || type
+      name || labelized_type
+    end
+
+    def labelized_type
+      type.split(/(?=[A-Z])/).compact.map(&:downcase).join(' ')
     end
 
     def self.all
       ObjectSpace.each_object(self)
-    end
-
-    def describe
-      return "#{subtype} #{type}" if subtype
-      type
     end
 
     def type
@@ -58,6 +70,10 @@ module Dragon
       end
     end
 
+    def self.node_types
+      types(nodes_only: true)
+    end
+
     def self.types_tagged_with(tag)
       types.select { |type| type.tagged_with?(tag) }
     end
@@ -69,7 +85,7 @@ module Dragon
 
       associated_classes.sort_by do |c|
         c.tags_in_common_with(self)
-      end.reverse
+      end #.reverse
     end
 
     def self.tags_in_common_with(klass)

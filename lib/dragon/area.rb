@@ -47,19 +47,31 @@ module Dragon
       true
     end
 
-    def self.generate(city, insert: true)
+    def self.generate(city, insert: false)
       valid_types = (required_types_for_city(city) +
                      available_types_for_city(city) +
                      types_for_discovery.shuffle).uniq
       klass = valid_types.first
+
       area = klass.new
       area.city = city
       city.areas << area if insert
       area
     end
 
+    def self.generate_list(n, city: nil)
+      valid_types = (required_types_for_city(city) +
+                     available_types_for_city(city) +
+                     types_for_discovery.shuffle).uniq
+
+      valid_types.take(n).map(&:new).map do |area|
+        area.city = city
+        area
+      end
+    end
+
     def self.required_types_for_city(city)
-      required_types - city.areas.map(&:class)
+      required_types # - city.areas.map(&:class)
     end
 
     def self.required_types
@@ -67,7 +79,7 @@ module Dragon
     end
 
     def self.available_types_for_city(city)
-      city.subtype.class.associated(Area) - city.areas.map(&:class)
+      city.subtype.class.associated(Area) # - city.areas.map(&:class)
     end
 
     def self.types_for_discovery

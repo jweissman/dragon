@@ -19,7 +19,7 @@ module Dragon
         destination
       end
 
-      place = Area.generate(city)
+      place = Area.generate(city, insert: true)
 
       PlaceDiscoveredEvent.new(
         place: place,

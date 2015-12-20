@@ -20,28 +20,32 @@ module Dragon
   ##
   class CitySubtype < Subtype
     # all cities have these..
-    tagged :law, :medicine, :entertainment, :music, :eating, :family, :education, :crime
+    tagged :family #, :law #, :medicine, :education, :crime # :music, :eating, :family, :education, :crime
+  end
+
+  class Cultural < CitySubtype
+    tagged :culture, :music, :entertainment, :alcohol, :books, :cooking
   end
 
   class Industrial < CitySubtype
-    tagged :industry, :commerce, :urban
+    tagged :industry, :commerce, :work, :urban, :production, :goods
   end
 
   class Port < CitySubtype
-    tagged :sea, :commerce, :urban
+    tagged :sea, :commerce, :trade, :urban, :shipping, :crime, :ocean, :goods
   end
 
   class Agricultural < CitySubtype
-    tagged :farming, :rural, :domestic, :agriculture
+    tagged :farming, :rural, :domestic, :agriculture, :work, :food, :poverty, :arboreal
   end
 
   class Holy < CitySubtype
-    tagged :urban, :healing, :holy, :praying, :religious
+    tagged :healing, :holy, :praying, :religious, :life, :writing, :education
   end
 
-  # class Imperial < CitySubtype
-  #   tagged :royal, :urban
-  # end
+  class Imperial < CitySubtype
+    tagged :royal, :court, :urban, :military, :government, :wealth, :industry, :commerce
+  end
 
   ##
   class CreatureSubtype < Subtype; end
@@ -62,7 +66,7 @@ module Dragon
     tagged :toxic
   end
 
-  class Wood < RacialSubtype
+  class Forest < RacialSubtype
     tagged :nature, :arboreal
   end
 

@@ -44,4 +44,20 @@ describe City do
       expect(squares.count).to eq(1)
     end
   end
+
+  City.types.each do |city_type|
+    CitySubtype.types.each do |subtype|
+      context "#{subtype.name.split('::').last} #{city_type.name.split('::').last} should generate buildings/areas" do
+        subject(:city) { city_type.new(subtype: subtype) }
+        describe "should have buildings" do
+          let(:buildings) { city.buildings }
+          it 'has more than one building' do
+            expect(buildings).not_to be_empty
+            expect(buildings.size).to be > 1
+            expect(buildings).to all(be_a(Building))
+          end
+        end
+      end
+    end
+  end
 end

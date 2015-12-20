@@ -1,6 +1,10 @@
 module Dragon
   module Topics
     class Commerce < ConversationTopic
+      def label
+        "trading"
+      end
+
       def describe
         "trading with #{partner.name}"
       end

@@ -1,31 +1,28 @@
 module Dragon
   class Room < Place
-    attr_accessor :building, :people, :aspect
+    include Aspects
 
-
-    def describe
-      "#{aspect} #{type}"
-    end
+    attr_accessor :building, :people
 
     def self.generate(building,
-                      professions = building.associated_professions.shuffle,
                       type = available_types_for_building(building).sample)
-      room  = type.new
-      room.building = building
-      room.aspect   = aspects.sample
-      room.people   = Array.new([2,3].sample) do
+      room           = type.new
+      room.building  = building
+      room.people    = []
+      professions = building.available_professions
+      (1..2).to_a.sample.times do
         profession = professions.shift
-        Person.generate(profession: profession)
+        room.people << Person.generate(profession: profession)
       end
       room
     end
 
-    def self.generate_list(n, building: nil, professions: nil)
+    def self.generate_list(n, building: nil)
       type_list = (building.required_room_types + building.room_types.shuffle)
         .uniq.take(n)
 
       type_list.map do |type|
-        generate(building, professions, type)
+        generate(building, type)
       end
     end
 
@@ -35,20 +32,18 @@ module Dragon
 
     def self.available_types_for_building(building)
       building.room_types.reject do |type|
-        type.unique? && type.any?
+        !type.available_in?(building) ||
+          (type.unique? && type.any?)
       end
     end
 
-    def self.aspects
-      %w[ dusty dingy clean well-kept beautiful cold warm dirty ]
+    def self.available_in?(*)
+      true
     end
+
 
     def self.unique
       false
     end
   end
-
-
-  # for communing with the dead!
-  class Psychomanteum < Room; end
 end

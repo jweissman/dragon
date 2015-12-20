@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "You and #{partner.name} are #{subject.describe}"
+        "You and #{partner.name} are #{subject.label}"
       end
     end
   end

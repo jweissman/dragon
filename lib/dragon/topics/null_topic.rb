@@ -2,7 +2,11 @@ module Dragon
   module Topics
     class NullTopic < ConversationTopic
       def describe
-        "talking with #{partner.name}"
+        "talking casually with #{partner.name}"
+      end
+
+      def label
+        "talking casually"
       end
 
       def actions(*)

@@ -1,5 +1,7 @@
 module Dragon
+  module Items; end
   module Areas; end
+  module Aspects; end
   module Buildings; end
   module Cities; end
   module Commands; end

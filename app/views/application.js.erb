@@ -13,6 +13,7 @@
 
   var sendFormOverWebsocket = function(event) {
     console.log("event", event);
+
     event.preventDefault();
     var context = $(this).context;
     var action = context.value.replace(/^([0-9]+: )/, "")
@@ -28,7 +29,7 @@
 
       key = evt.keyCode;
       if (key >= 49 && key <= 57) {
-        actionChoice = key - 48; 
+        actionChoice = key - 48;
         var selector = "input[value^='"+actionChoice+":']";
         button = $(selector);
         button.click();
@@ -50,7 +51,6 @@
     console.log("Welcome to Dragon!");
     orchestrateWebsockets();
   }
-
 
   if ($('body').is('.play')) {
     $(document).on('page:load', init_ws);

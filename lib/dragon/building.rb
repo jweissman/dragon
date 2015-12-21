@@ -25,7 +25,7 @@ module Dragon
     end
 
     def room_count
-      @room_count ||= [3,4,5].sample
+      @room_count ||= [2,3].sample
     end
 
     def required_professions
@@ -33,11 +33,9 @@ module Dragon
     end
 
     def associated_professions
-      return self.class.associated(Profession) unless city # FIXME concession for castle_spec
+      return Profession.sorted_types_by_tags(self.class.tags) unless city
 
-      self.class.associated(Profession).
-        zip(city.class.associated(Profession)).
-        flatten.compact.uniq
+      Profession.sorted_types_by_tags(self.class.tags + city.class.tags)
     end
 
     def professions
@@ -90,10 +88,9 @@ module Dragon
     end
 
     def self.associated_types_for_city(city)
-      (city.class.associated(Building) +
-        city.subtype.class.associated(Building)).sort_by do |klass|
-        klass.tags_in_common_with(Building)
-      end
+      Building.sorted_types_by_tags(
+        city.class.tags + city.subtype.class.tags #.compact.flatten.uniq
+      )
     end
 
     # more than 1 in the world

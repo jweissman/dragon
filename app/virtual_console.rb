@@ -30,7 +30,7 @@ class VirtualConsole
 
   def ask(attr, prompt: nil, of: nil)
     prompt_content = html_tag(:div,
-                             html_tag(:b, prompt || "What is your #{attr}?"), 
+                             html_tag(:b, prompt || "What is your #{attr}?"),
                              options: { class: 'question' })
 
     input_content  = html_tag(:input, options: {type: 'text', name: attr, placeholder: attr})
@@ -58,13 +58,15 @@ class VirtualConsole
   end
 
   def choose_action(choices: [], prompt: nil, labels: nil)
-    buttons = choices.each_with_index.map do |choice, i|
-      label = labels ? labels[choice] : choice
-      opts = { type: 'submit', value: "#{i+1}: #{label}", class: 'action-choice' }
-      html_tag :input, nil, options: opts
+    choices.each_with_index.each_slice(1).each do |row|
+      row_buttons = row.map do |choice, i|
+        label = labels ? labels[choice] : choice
+        opts = { type: 'submit', value: "#{i+1}: #{label}", class: "action-choice" }
+        html_tag :input, nil, options: opts
+      end
+      row = html_tag(:div, row_buttons.join, options: { class: "choice-row" })
+      output_html_content.push(row)
     end
-
-    output_html_content.push buttons
   end
 
   private

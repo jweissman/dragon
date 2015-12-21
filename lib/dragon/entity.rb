@@ -79,13 +79,17 @@ module Dragon
     end
 
     def self.associated(klass)
-      associated_classes = tags.map do |tag|
-        klass.types_tagged_with(tag)
+      klass.sorted_types_by_tags(tags)
+    end
+
+    def self.sorted_types_by_tags(*query_tags)
+      types = query_tags.flatten.map do |tag|
+        types_tagged_with(tag)
       end.flatten.uniq
 
-      associated_classes.sort_by do |c|
-        c.tags_in_common_with(self)
-      end #.reverse
+      types.sort_by do |klass|
+        (klass.tags & query_tags).count
+      end
     end
 
     def self.tags_in_common_with(klass)

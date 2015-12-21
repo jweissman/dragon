@@ -1,6 +1,8 @@
 module Dragon
   module Handlers
     class AskQuestionCommandHandler < CommandHandler
+      include Questions
+
       def handle(command)
         partner = command.partner
         question = command.question

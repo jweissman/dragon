@@ -3,12 +3,8 @@ module Dragon
     class ThroneRoom < Room
       tagged :royal, :court, :drafting, :writing, :law, :good
 
-      def self.unique
+      def self.unique?
         true
-      end
-
-      def self.required_professions
-        [ King, Queen ]
       end
 
       def self.available_in?(building)

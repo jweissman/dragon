@@ -1,5 +1,6 @@
 module Dragon
   class World
+    include Buildings
     attr_reader :name, :type, :subtype, :wonder, :cities, :created_at
 
     def initialize(name: Name.generate,
@@ -10,8 +11,7 @@ module Dragon
       @type = type
       @subtype = subtype
       @wonder = wonder
-      @cities = City.generate_list(7, world: self)
-
+      @cities = City.generate_list(4, world: self)
       @created_at = Time.now
     end
 

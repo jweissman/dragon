@@ -1,4 +1,5 @@
 module Dragon
+  
   class Combatant < Entity
     def attack!(enemy)
       damage = attack_damage_against(enemy)

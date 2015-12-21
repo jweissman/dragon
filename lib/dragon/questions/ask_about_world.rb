@@ -9,7 +9,7 @@ module Dragon
       end
 
       def describe
-        "about the world of #{world.name}"
+        "about #{world.name}"
       end
 
       def responses

@@ -19,6 +19,10 @@ module Dragon
         [ King, Queen ]
       end
 
+      def people_count
+        3
+      end
+
       def required_room_types
         [ ThroneRoom ]
       end

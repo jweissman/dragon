@@ -10,8 +10,9 @@ module Dragon
 
     def initialize(name=nil, *args)
       @quests = []
-      @gold   = 10
-      @xp     = 0
+      @gold   = 250
+      @xp     = 1_000
+      @profession = Profession.adventuring.sample.new
 
       super(name, *args)
     end

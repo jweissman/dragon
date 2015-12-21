@@ -19,7 +19,7 @@ module Dragon
     end
 
     def people_count
-      @people_sample ||= (3..5).to_a.sample
+      @people_sample ||= 2 # (3..4).to_a.sample
     end
 
     def required_professions

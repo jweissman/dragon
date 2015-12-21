@@ -8,7 +8,7 @@ module Dragon
       end
 
       def building_count_range
-        (7..8)
+        (5..6)
       end
     end
   end

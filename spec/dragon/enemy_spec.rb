@@ -10,12 +10,14 @@ describe Enemy do
 
   describe '.generate' do
     let(:generator) { -> { entity }}
-    let(:place) { instance_spy 'Place' }
-    it 'should sample percentages' do
-      expect(Enemy).to receive(:sample_percentages).
-        with(Enemy.type_percentages(place)).and_return(generator)
 
+    let(:place) { instance_spy 'Place', class: place_type }
+    let(:place_type) { instance_double 'Place.class', populated?: false }
+
+    it 'should sample percentages' do
+      expect(Enemy).to receive(:sample_percentages).and_return(generator)
       expect(Enemy).to receive(:new).with(entity).and_return(enemy)
+
       expect(described_class.generate(place)).to eq(enemy)
     end
   end

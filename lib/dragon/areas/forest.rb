@@ -1,7 +1,7 @@
 module Dragon
   module Areas
     class Forest < Area
-      tagged :nature, :arboreal
+      tagged :nature, :arboreal, :trees, :woods
     end
   end
 end

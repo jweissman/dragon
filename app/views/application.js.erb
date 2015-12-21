@@ -1,6 +1,5 @@
 (function($, global) {
   var scheme   = "<%= @scheme %>";
-
   var uri      = scheme + window.document.location.host + "/";
   var ws       = null;
 
@@ -9,26 +8,42 @@
     var content = data.content;
 
     $(".content").html(content);
-
-    if ($(".content select").length > 0) {
-      $(".button").prop('disabled', false);
-    } else {
-      $(".button").prop('disabled', true);
-    }
+    $(".action-choice").click(sendFormOverWebsocket);
   };
 
-  var submitFormOverWebsocket = function(event) {
+  var sendFormOverWebsocket = function(event) {
+    console.log("event", event);
     event.preventDefault();
-
+    var context = $(this).context;
+    var action = context.value.replace(/^([0-9]+: )/, "")
     var form = $(".input-form");
-    var data = JSON.stringify(form.serializeArray());
-    ws.send(data);
+    var data = (form.serializeArray());
+    data.push({name: 'action', value: action});
+    var stringifiedData = JSON.stringify(data);
+    ws.send(stringifiedData);
   };
+
+  var handleKeypress = function(evt) {
+    if (evt.target.tagName.toLowerCase() !== 'input' && evt.target.tagName.toLowerCase() !== 'textarea') {
+
+      key = evt.keyCode;
+      if (key >= 49 && key <= 57) {
+        actionChoice = key - 48; 
+        var selector = "input[value^='"+actionChoice+":']";
+        button = $(selector);
+        button.click();
+      }
+
+    }
+  }
 
   var orchestrateWebsockets = function() {
     ws = new WebSocket(uri);
     ws.onmessage = handleWebsocketMessage;
-    $(".input-form").on("submit", submitFormOverWebsocket);
+
+    $(".action-choice").click(sendFormOverWebsocket);
+
+    $(document).keypress(handleKeypress);
   };
 
   var init_ws = function() {
@@ -36,34 +51,9 @@
     orchestrateWebsockets();
   }
 
-  //var init_triangles = function() {
-  //  console.log("INIT TRIANGLES");
-  //  var height = window.innerHeight + 10;
-  //  var width = window.innerWidth + 10;
-  //  console.log('width', width);
-  //  console.log('height', height);
-
-  //  var pattern = Trianglify({
-  //    height: height,
-  //    width: width,
-  //    cell_size: 50,
-  //    x_colors: 'Greens',
-  //    y_colors: 'Greens'
-  //  });
-
-  //  var bg = document.getElementById("bg");
-  //  while (bg.firstChild) { bg.removeChild(bg.firstChild); }
-
-  //  bg.appendChild(pattern.canvas());
-  //};
 
   if ($('body').is('.play')) {
     $(document).on('page:load', init_ws);
     $(document).ready(init_ws);
   }
-
-  //$(document).on('page:load', init_triangles);
-  //$(document).ready(init_triangles);
-  //window.addEventListener('resize', init_triangles);
-
 }(jQuery, window));

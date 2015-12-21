@@ -1,7 +1,7 @@
 module Dragon
   module Professions
     class Wizard < Adventurer
-      tagged :magic
+      tagged :magic, :spellcasting, :lore
 
       def default_max_hp
         14

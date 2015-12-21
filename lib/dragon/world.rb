@@ -1,6 +1,6 @@
 module Dragon
   class World
-    attr_reader :name, :type, :subtype, :wonder, :created_at
+    attr_reader :name, :type, :subtype, :wonder, :cities, :created_at
 
     def initialize(name: Name.generate,
                    type: self.class.types.sample, 
@@ -10,6 +10,7 @@ module Dragon
       @type = type
       @subtype = subtype
       @wonder = wonder
+      @cities = City.generate_list(7, world: self)
 
       @created_at = Time.now
     end
@@ -30,10 +31,6 @@ module Dragon
 
     def describe
       "#{name.capitalize}, #{subtype} #{type} of #{wonder.capitalize}"
-    end
-
-    def cities
-      @cities ||= City.generate_list(7, world: self)
     end
 
     def random_hospital

@@ -15,8 +15,6 @@ class VirtualConsole
 
   def say(message, heading: false, important: false)
     opts = if important
-
-
              { options: {class: 'important'}}
            elsif heading
              output_html_content.push("</div><div class='content-item'>")
@@ -43,16 +41,30 @@ class VirtualConsole
   end
 
   def choose(attr, of: nil, choices: [], prompt: nil, labels: nil)
-    options_tags = choices.map do |choice|
-      html_tag :option, labels ? labels[choice] : choice
+    if attr == :action
+      choose_action(choices: choices, prompt: prompt, labels: labels)
+    else
+      options_tags = choices.map do |choice|
+        html_tag :option, labels ? labels[choice] : choice
+      end
+
+      options = columns(
+        html_tag(:div, html_tag(:b, prompt || attr), options: { class: 'question' }),
+        html_tag(:select, options_tags.join, options: {name: attr})
+      )
+
+      output_html_content.push(options)
+    end
+  end
+
+  def choose_action(choices: [], prompt: nil, labels: nil)
+    buttons = choices.each_with_index.map do |choice, i|
+      label = labels ? labels[choice] : choice
+      opts = { type: 'submit', value: "#{i+1}: #{label}", class: 'action-choice' }
+      html_tag :input, nil, options: opts
     end
 
-    options = columns(
-      html_tag(:div, html_tag(:b, prompt || attr), options: { class: 'question' }),
-      html_tag(:select, options_tags.join, options: {name: attr})
-    )
-
-    output_html_content.push(options)
+    output_html_content.push buttons
   end
 
   private

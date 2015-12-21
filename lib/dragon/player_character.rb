@@ -12,6 +12,7 @@ module Dragon
       @quests = []
       @gold   = 10
       @xp     = 0
+
       super(name, *args)
     end
 

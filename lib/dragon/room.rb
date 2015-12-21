@@ -9,17 +9,17 @@ module Dragon
       room           = type.new
       room.building  = building
       room.people    = []
-      professions = building.professions.zip(room.professions).flatten.uniq.compact
+
+      professions = building.professions.zip(room.professions).flatten.compact.uniq
       professions.take(room.people_count).each do |profession|
         room.people << Person.generate(profession: profession)
       end
+
       room
-    rescue
-      binding.pry
     end
 
     def people_count
-      @people_sample ||= (2..4).to_a.sample
+      @people_sample ||= (3..5).to_a.sample
     end
 
     def required_professions

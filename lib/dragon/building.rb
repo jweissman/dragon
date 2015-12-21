@@ -11,8 +11,9 @@ module Dragon
     attr_reader :rooms
     attr_accessor :city
 
-    def rooms
-      @rooms ||= Room.generate_list(room_count, building: self)
+    def initialize(name=nil)
+      @rooms = Room.generate_list(room_count, building: self)
+      super(name)
     end
 
     def required_room_types
@@ -36,7 +37,7 @@ module Dragon
 
       self.class.associated(Profession).
         zip(city.class.associated(Profession)).
-        flatten.compact
+        flatten.compact.uniq
     end
 
     def professions

@@ -16,7 +16,7 @@ module Dragon
     end
 
     def aspects
-      @aspects ||= AspectGroup.for(self).generate
+      @aspects ||= if AspectGroup.for(self) then AspectGroup.for(self).generate else [] end
     end
 
     def primary_aspect

@@ -42,7 +42,9 @@ require_all 'lib/dragon/cities'
 require 'dragon/world'
 
 require 'dragon/attack_result'
+require 'dragon/combat_attributes'
 require 'dragon/combatant'
+
 require 'dragon/creature'
 require_all 'lib/dragon/creatures'
 

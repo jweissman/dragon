@@ -16,20 +16,32 @@ module Dragon
       creature
     end
 
-    def attack_rating
-      6
+    def base_range
+      (5..8)
     end
 
-    def defense_rating
-      2
+    def power_range
+      (9..12)
     end
 
-    def max_hp
-      @map_hp ||= self.class.max_hp
+    def intellect_range
+      (4..5)
     end
 
-    def self.max_hp
-      20
+    def calm_range
+      (4..5)
+    end
+
+    def focus_range
+      (7..10)
+    end
+
+    def coordination_range
+      (7..10)
+    end
+
+    def resilience_range
+      (5..7)
     end
 
     def label

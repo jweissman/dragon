@@ -3,12 +3,16 @@ module Dragon
     include Activities
 
     extend Forwardable
+
     def_delegators :engine, :place
+    def_delegators :profession, :base_range, 
+      :power_range, :intellect_range, :coordination_range, 
+      :resilience_range, :focus_range, :calm_range
 
     attr_accessor :action, :inventory, :engine,
       :quests, :gold, :xp
 
-    def initialize(name=nil, *args)
+    def initialize(name=Name.generate, *args)
       @quests = []
       @gold   = 250
       @xp     = 1_000
@@ -25,24 +29,12 @@ module Dragon
       0.8
     end
 
-    def attack_rating
-      8
-    end
-
-    def defense_rating
-      4
-    end
-
     def label
       "#{name} the #{profession.type}"
     end
 
     def describe
       "#{name.capitalize}, the #{race} #{profession.type}"
-    end
-
-    def max_hp
-      @max_hp ||= profession.default_max_hp
     end
 
     def inventory

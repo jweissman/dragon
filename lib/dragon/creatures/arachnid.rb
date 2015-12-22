@@ -3,8 +3,8 @@ module Dragon
     class Arachnid < Creature
       tagged :poison, :dark, :evil
 
-      def self.max_hp
-        25
+      def resilience_range
+        (2..3)
       end
     end
   end

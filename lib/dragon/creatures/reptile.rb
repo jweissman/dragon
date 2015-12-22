@@ -3,8 +3,8 @@ module Dragon
     class Reptile < Creature
       tagged :water
 
-      def self.max_hp
-        14
+      def resilience_range
+        (10..13)
       end
     end
   end

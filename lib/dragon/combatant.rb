@@ -1,6 +1,7 @@
 module Dragon
-  
   class Combatant < Entity
+    include CombatAttributes
+
     def attack!(enemy)
       damage = attack_damage_against(enemy)
       enemy.take_damage!(damage)
@@ -21,7 +22,8 @@ module Dragon
     end
 
     def attack_damage_against(target)
-      attack_rating - target.defense_rating
+      damage = attack_rating - (target.defense_rating)
+      damage > 0 ? damage : 1
     end
 
     def chance_of_hitting(target)
@@ -30,18 +32,6 @@ module Dragon
 
     def hp
       @hp ||= max_hp
-    end
-
-    def max_hp
-      @max_hp ||= 2
-    end
-
-    def attack_rating
-      @attack_rating ||= 4
-    end
-
-    def defense_rating
-      @defense_rating ||= 1
     end
 
     def xp

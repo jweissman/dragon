@@ -3,8 +3,8 @@ module Dragon
     class Cleric < Adventurer
       tagged :holy, :healing, :praying, :religious
 
-      def default_max_hp
-        16
+      def resilience_range
+        (8..10)
       end
     end
   end

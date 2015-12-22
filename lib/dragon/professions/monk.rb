@@ -3,8 +3,8 @@ module Dragon
     class Monk < Adventurer
       tagged :holy, :praying, :kneeling, :religious, :clergy
 
-      def default_max_hp
-        30
+      def resilience_range
+        (12..14)
       end
     end
   end

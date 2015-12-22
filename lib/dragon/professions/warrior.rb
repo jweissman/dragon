@@ -3,8 +3,12 @@ module Dragon
     class Warrior < Adventurer
       tagged :fighting, :brawling
 
-      def default_max_hp
-        60
+      def resilience_range
+        (15..18)
+      end
+
+      def power_range
+        (16..19)
       end
     end
   end

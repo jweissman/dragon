@@ -1,8 +1,8 @@
 module Dragon
   module Creatures
     class Tarantula < Arachnid
-      def self.max_hp
-        40
+      def resilence_range
+        (4..6)
       end
     end
   end

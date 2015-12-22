@@ -3,8 +3,8 @@ module Dragon
     class Soldier < Adventurer
       tagged :military, :army, :fighting, :brawling, :law
 
-      def default_max_hp
-        35
+      def resilience_range
+        (13..15)
       end
     end
   end

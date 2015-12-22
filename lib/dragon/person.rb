@@ -33,11 +33,6 @@ module Dragon
       "#{name.capitalize}, a #{subtype} #{race} #{profession}, who is #{activity.describe}"
     end
 
-    def activities
-      base = [ Resting, Reading ]
-      base + profession.activities
-    end
-
     def conversation_topics
       profession.conversation_topics
     end
@@ -74,6 +69,11 @@ module Dragon
 
     def activity
       @activity ||= activities.sample.new
+    end
+
+    def activities
+      base = [ Resting, Reading ]
+      base + profession.activities
     end
 
     def self.generate_list(professions)

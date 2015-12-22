@@ -1,8 +1,8 @@
 module Dragon
   module Creatures
     class Rodent < Mammal
-      def self.max_hp
-        3
+      def resilience_range
+        (0..1)
       end
     end
   end

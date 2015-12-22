@@ -1,8 +1,12 @@
 module Dragon
   module Professions
     class Adventurer < Profession
-      def default_max_hp
-        50
+      include CombatAttributes
+
+      tagged :wandering, :quests
+
+      def base_range # for stats...
+        (8..14)
       end
     end
   end

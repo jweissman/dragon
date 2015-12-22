@@ -3,8 +3,8 @@ module Dragon
     class Rogue < Adventurer
       tagged :crime, :dark, :evil, :stealing
 
-      def default_max_hp
-        26
+      def resilience_range
+        (11..13)
       end
     end
   end

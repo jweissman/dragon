@@ -112,6 +112,10 @@ module Dragon
         TravelCommand.new(destination: place, label: label)
       end
 
+      def reflect(player)
+        ReflectCommand.new(player: player)
+      end
+
       def exit_game
         ExitGameCommand.new
       end

@@ -15,135 +15,29 @@ module Dragon
     end
   end
 
+  class Poor < Quality
+    def cost_multiplier
+      0.8
+    end
+  end
+
   class Mediocre < Quality; end
+
   class Good     < Quality
     def cost_multiplier
       1.3
     end
   end
 
-  class Superior < Quality
+  class Fine < Quality
     def cost_multiplier
       1.6
     end
   end
 
-  class Material
+  class Superior < Quality
     def cost_multiplier
-      1.0
-    end
-
-    def describe
-      self.class.name.split('::').last.downcase
-    end
-
-    def self.basic
-      [ Wood, Iron, Stone, Bronze ]
-    end
-
-    def self.metallic
-      [ Iron, Bronze, Steel, Gold, Silver, Copper ]
-    end
-
-    def self.gemstone
-      [ Ruby, Pearl, Sapphire, Onyx, Emerald, Diamond ]
-    end
-  end
-
-  class Wood < Material
-    def cost_multiplier
-      0.4
-    end
-  end
-
-  class Stone < Material
-    def cost_multiplier
-      0.6
-    end
-  end
-
-  class Leather < Material
-    def cost_multiplier
-      0.75
-    end
-  end
-
-  class Bronze < Material
-    def cost_multiplier
-      0.8
-    end
-  end
-
-  class Iron < Material
-    def cost_multiplier
-      1.0
-    end
-  end
-
-  class Steel < Material
-    def cost_multiplier
-      1.8
-    end
-  end
-
-  class Copper < Material
-    def cost_multiplier
-      1.5
-    end
-  end
-
-  class Silver < Material
-    def cost_multiplier
-      2.0
-    end
-  end
-
-  class Gold < Material
-    def cost_multiplier
-      2.5
-    end
-  end
-
-
-  class Pearl < Material
-    def cost_multiplier
-      2.3
-    end
-  end
-
-  class Emerald < Material
-    def cost_multiplier
-      2.5
-    end
-  end
-
-  class Onyx < Material
-    def cost_multiplier
-      2.6
-    end
-  end
-
-  class Ruby < Material
-    def cost_multiplier
-      2.8
-    end
-  end
-
-  class Sapphire < Material
-    def cost_multiplier
-      3.1
-    end
-  end
-
-  class Diamond < Material
-    def cost_multiplier
-      3.5
-    end
-  end
-
-  class Crystal < Material
-    def cost_multiplier
-      3.2
+      2.2
     end
   end
 
@@ -173,8 +67,18 @@ module Dragon
       "#{quality.describe} #{primary_aspect.label} #{material.describe} #{labelized_type}"
     end
 
-    def self.generate
-      node_types.sample.new
+    def self.generate(exclude_types: [])
+      included_types = node_types.reject do |type|
+        if exclude_types.empty?
+          false
+        else
+          exclude_types.any? do |excluded|
+            type.new.is_a?(excluded)
+          end
+        end
+      end
+
+      included_types.sample.new
     end
 
     def self.qualities
@@ -184,5 +88,9 @@ module Dragon
     def self.materials
       [] # override..
     end
+
+    # def self.colors
+    #   Color.all
+    # end
   end
 end

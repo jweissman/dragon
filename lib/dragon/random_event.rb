@@ -2,10 +2,11 @@ module Dragon
   class RandomEvent
     extend Random
     include Events
+    include Items
 
     def self.sample(destination, origin, cause=nil)
       sample_percentages({
-        12 => -> { ItemFoundEvent.new(item: Item.generate) },
+        12 => -> { ItemFoundEvent.new(item: Item.generate(exclude_types: [NaturalWeapon, NaturalArmor])) },
         38 => -> { PersonEncounteredEvent.new(person: Person.generate) },
         90 => -> { EnemyEncounteredEvent.new(enemy: Enemy.generate(destination)) },
         3  => -> { place_discovered(destination, origin, cause) }

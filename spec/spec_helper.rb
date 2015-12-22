@@ -12,3 +12,5 @@ include Dragon::Events
 include Dragon::Scenes
 
 include Dragon::Buildings
+
+include Dragon::Items

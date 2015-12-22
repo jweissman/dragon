@@ -33,6 +33,7 @@ require_all 'lib/dragon/rooms'
 require 'dragon/building'
 require_all 'lib/dragon/buildings'
 
+require 'dragon/material'
 require 'dragon/item'
 require 'dragon/items'
 
@@ -95,6 +96,16 @@ require 'dragon/random_event'
 require 'dragon/game'
 require 'dragon/engine'
 require 'dragon/driver'
+
+class Range
+  def +(value)
+    if value.is_a?(Integer)
+      return ((self.begin+value)..(self.end+value))
+    else
+      raise "Can't add #{value.class.name} to range"
+    end
+  end
+end
 
 module Dragon
   BANNER = "\n             ~~~~~~~<<< DRAGON v#{VERSION} >>>~~~~~~~~\n\n"

@@ -3,6 +3,10 @@ module Dragon
     class Wizard < Adventurer
       tagged :magic, :spellcasting, :lore
 
+      def default_weapon
+        @default_weapon ||= Staff.new
+      end
+
       def focus_range
         (15..18)
       end

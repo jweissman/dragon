@@ -3,6 +3,10 @@ module Dragon
     class Primate < Mammal
       tagged :trees, :forest
 
+      def default_weapon
+        @default_weapon ||= Fists.new
+      end
+
       def resilience_range
         (12..15)
       end

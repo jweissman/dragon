@@ -11,7 +11,7 @@ module Dragon
       end
 
       def describe
-        @description ||= "#{player_description} attack #{enemy_description}"
+        @description ||= "#{player_description} attack #{enemy_description} with #{player.weapon.label}"
       end
 
       def player_description
@@ -23,7 +23,11 @@ module Dragon
       end
 
       def label
-        "Attack #{enemy.label}"
+        "Attack #{enemy.label} (#{chance_of_hitting}%)"
+      end
+
+      def chance_of_hitting
+        (player.chance_of_hitting(enemy)*100).floor
       end
     end
   end

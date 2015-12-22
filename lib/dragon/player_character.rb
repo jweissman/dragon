@@ -14,7 +14,7 @@ module Dragon
 
     def initialize(name=Name.generate, *args)
       @quests = []
-      @gold   = 250
+      @gold   = 1_500
       @xp     = 1_000
       @profession = Profession.adventuring.sample.new
 

@@ -4,7 +4,7 @@ module Dragon
     extend Forwardable
 
     def_delegators :entity, :is_a?,
-      :subtype, :label, :describe, :hp, :max_hp, :xp, :bounty,
+      :subtype, :label, :describe, :hp, :max_hp, :xp, :bounty, :weapon,
       :defense_rating, :attack_rating, :take_damage!, :alive?,
       :chance_of_hitting, :attack!
 

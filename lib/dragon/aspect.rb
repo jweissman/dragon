@@ -6,6 +6,7 @@ module Dragon
   end
 
   module Aspects
+
     class Illumination < Aspect; end
     class PoorlyLit < Illumination; tagged :dark end
     class WellLit < Illumination; tagged :light end
@@ -52,8 +53,9 @@ module Dragon
 
 
     class AspectGroup
+      include Items
+
       def self.for(entity)
-        # Object.const_get("Dragon::Aspects::" + entity.class.name.split("::").last + "Aspects") rescue NullAspectGroup
         if entity.is_a?(City)
           CityAspects
         elsif entity.is_a?(Building)
@@ -62,6 +64,8 @@ module Dragon
           AreaAspects
         elsif entity.is_a?(Room)
           RoomAspects
+        elsif entity.is_a?(Weapon)
+          WeaponAspects
         elsif entity.is_a?(Item)
           ItemAspects
         end
@@ -106,6 +110,12 @@ module Dragon
     class ItemAspects < AspectGroup
       def self.list
         [ Cleanliness, Color ]
+      end
+    end
+
+    class WeaponAspects < AspectGroup
+      def self.list
+        [ Cleanliness ]
       end
     end
   end

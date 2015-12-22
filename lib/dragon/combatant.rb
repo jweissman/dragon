@@ -1,6 +1,31 @@
 module Dragon
   class Combatant < Entity
     include CombatAttributes
+    include Items
+
+    def armor
+      @armor ||= default_armor
+    end
+
+    def weapon
+      @weapon ||= default_weapon
+    end
+
+    def wield!(weapon)
+      @weapon = weapon
+    end
+
+    def wear!(armor)
+      @armor = armor
+    end
+
+    def default_armor
+      raise 'override'
+    end
+
+    def default_weapon
+      raise 'override'
+    end
 
     def attack!(enemy)
       damage = attack_damage_against(enemy)
@@ -22,7 +47,7 @@ module Dragon
     end
 
     def attack_damage_against(target)
-      damage = attack_rating - (target.defense_rating)
+      damage = attack_rating.to_a.sample - (target.defense_rating.to_a.sample)
       damage > 0 ? damage : 1
     end
 
@@ -35,11 +60,11 @@ module Dragon
     end
 
     def xp
-      @xp ||= 1
+      @xp ||= (total_stat_value ** 0.5).ceil
     end
 
     def bounty
-      @bounty ||= 1
+      @bounty ||= (total_stat_value * 0.75).floor
     end
   end
 end

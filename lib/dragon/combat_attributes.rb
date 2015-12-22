@@ -3,8 +3,8 @@ module Dragon
     def bonus_for(value)
       case value
         when 0..1   then -5
-        when 1..2   then -4 
-        when 2..4   then -3 
+        when 1..2   then -4
+        when 2..4   then -3
         when 4..6   then -2 
         when 6..8   then -1 
         when 8..10  then 0
@@ -19,15 +19,16 @@ module Dragon
     end
 
     def base_attack_rating
-      (3..4).to_a.sample # fists
+      weapon.damage_range #.to_a.sample # fists
     end
 
     def attack_rating
-      2 + base_attack_rating + bonus_for(power)
+      base_attack_rating + bonus_for(power)
     end
 
     def base_defense_rating
-      3 # light clothing/fur...
+      armor.deflect_range #.to_a.sample
+      # 3 # light clothing/fur...
     end
 
     def defense_rating
@@ -73,6 +74,10 @@ module Dragon
         focus: focus,
         calm: calm
       }
+    end
+
+    def total_stat_value
+      power + intellect + coordination + resilience + focus + calm
     end
 
     def power

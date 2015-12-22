@@ -3,6 +3,10 @@ module Dragon
     class Monk < Adventurer
       tagged :holy, :praying, :kneeling, :religious, :clergy
 
+      def default_weapon
+        @default_weapon ||= Fists.new
+      end
+
       def resilience_range
         (12..14)
       end

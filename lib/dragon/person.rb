@@ -33,6 +33,10 @@ module Dragon
       "#{name.capitalize}, a #{subtype} #{race} #{profession}, who is #{activity.describe}"
     end
 
+    def default_weapon
+      @default_weapon ||= profession.default_weapon || super
+    end
+
     def conversation_topics
       profession.conversation_topics
     end

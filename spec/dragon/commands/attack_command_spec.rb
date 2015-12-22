@@ -5,11 +5,12 @@ describe AttackCommand do
     AttackCommand.new player: player, enemy: enemy
   end
 
-  let(:player) { instance_double('Player', hp: 1, max_hp: 2) }
+  let(:player) { instance_double(PlayerCharacter, hp: 1, max_hp: 2, weapon: player_weapon, chance_of_hitting: 1.0) }
+  let(:player_weapon) { instance_double Weapon, label: 'fists' }
+
   let(:enemy)  do 
     instance_double('Enemy', hp: 3, max_hp: 4, describe: enemy_description, label: enemy_description)
   end 
-
   let(:enemy_description) { "a baddie" }
 
   describe '#label' do
@@ -21,6 +22,10 @@ describe AttackCommand do
   describe "#describe" do
     it 'should include the player description' do
       expect(subject.describe).to include(subject.player_description)
+    end
+
+    it 'should include the player weapon' do
+      expect(subject.describe).to include(player_weapon.label)
     end
 
     it 'should include the enemy description' do

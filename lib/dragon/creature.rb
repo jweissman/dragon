@@ -7,6 +7,14 @@ module Dragon
       super(name)
     end
 
+    def default_weapon
+      @default_weapon ||= Teeth.new
+    end
+
+    def default_armor
+      @default_armor ||= Fur.new
+    end
+
     def self.generate(type: types.sample, place: nil)
       if place && (associated=place.class.associated(Creature)).any?
         type = associated.sample

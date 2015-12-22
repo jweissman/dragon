@@ -3,6 +3,7 @@ module Dragon
     include Activities
     include Questions
     include Professions
+    include Items
 
     def self.available
       all.reject do |profession|
@@ -22,6 +23,10 @@ module Dragon
 
     def activities
       []
+    end
+
+    def default_weapon
+      nil
     end
 
     def self.unique?

@@ -1,11 +1,6 @@
 module Dragon
   module Items
     class Treasure < Item; end
-    # class Coin < Treasure
-    #   def self.materials
-    #     Material.metallic
-    #   end
-    # end
 
     class Figurine < Treasure
       def base_cost
@@ -51,59 +46,200 @@ module Dragon
       end
     end
 
+    class Helm < Equipment
+      def base_cost
+        50
+      end
+    end
+
     class Armor < Equipment
       def self.materials
         [ Steel, Bronze, Iron, Leather ]
       end
+
+      def deflect_range
+        base_absorption + material.strength #.to_a.sample
+      end
     end
 
-    class Helm < Armor
+    class Clothing < Armor
+      def self.materials
+        [ Cloth, Leather ]
+      end
+
       def base_cost
-        600
+        10
+      end
+
+      def base_absorption
+        (0..1)
       end
     end
 
     class Plate < Armor
+      def self.materials
+        [ Iron, Bronze, Steel ]
+      end
+
       def base_cost
-        900
+        250
+      end
+
+      def base_absorption
+        (5..8)
       end
     end
 
     class Suit < Armor
       def base_cost
-        1_500
+        400
+      end
+
+      def base_absorption
+        (7..10)
       end
     end
 
-    class Weapon < Equipment; end
+    class NaturalArmor < Armor
+      def quality
+        Good.new
+      end
+    end
+
+    class Fur < NaturalArmor
+      def base_absorption
+        (2..3)
+      end
+    end
+
+    class Scales < NaturalArmor
+      def base_absorption
+        (4..6)
+      end
+    end
+
+    class Weapon < Equipment
+      def damage_range
+        base_damage + material.strength
+      end
+    end
+
     class Staff < Weapon
       def self.materials
         [ Wood, Iron, Bronze, Steel ]
       end
 
+      def base_damage
+        (2..4)
+      end
+
       def base_cost
-        500
+        150
       end
     end
 
     class Dagger < Weapon
       def base_cost
-        275
+        75
+      end
+
+      def base_damage
+        (1..4)
       end
     end
 
     class Sword < Weapon
       def base_cost
-        2_000
+        200
+      end
+
+      def base_damage
+        (3..8)
+      end
+    end
+
+    class GreatSword < Weapon
+      def base_cost
+        350
+      end
+
+      def base_damage
+        (4..12)
       end
     end
 
     class Axe < Weapon
       def base_cost
-        2_500
+        150
+      end
+
+      def base_damage
+        (3..8)
       end
     end
 
+    class WarHammer < Weapon
+      def base_cost
+        125
+      end
 
+      def base_damage
+        (2..11)
+      end
+    end
+
+    class NaturalWeapon < Weapon
+      def quality
+        Good.new
+      end
+
+      def self.materials
+        [ Bone ]
+      end
+    end
+
+    class Claws < NaturalWeapon
+      def base_damage
+        (1..8)
+      end
+    end
+
+    class Talons < NaturalWeapon
+      def base_damage
+        (2..10)
+      end
+    end
+
+    class Teeth < NaturalWeapon
+      def base_damage
+        (3..7)
+      end
+    end
+
+    class Stinger < NaturalWeapon
+      def base_damage
+        (1..12)
+      end
+    end
+
+    class AcidBreath < NaturalWeapon
+      def base_damage
+        (2..10)
+      end
+    end
+
+    class Fists < NaturalWeapon
+      def self.materials
+        [ Flesh ]
+      end
+
+      def describe
+        "fists"
+      end
+
+      def base_damage
+        (1..3)
+      end
+    end
   end
 end

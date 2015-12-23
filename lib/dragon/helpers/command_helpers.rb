@@ -87,6 +87,14 @@ module Dragon
         )
       end
 
+      def accept_quest(quest)
+        AcceptQuestCommand.new(quest: quest)
+      end
+
+      def reject_quest(quest)
+        RejectQuestCommand.new(quest: quest)
+      end
+
       def change_subject(partner, conversation, topic_class)
         new_subject = topic_class.new(conversation: conversation, partner: partner)
         ChangeConversationSubjectCommand.new(
@@ -122,6 +130,14 @@ module Dragon
 
       def wear_armor(player, armor)
         WearArmorCommand.new(player: player, armor: armor) if player.armor != armor
+      end
+
+      def level_up(player)
+        LevelUpCommand.new(player: player)
+      end
+
+      def upgrade_statistic(player, stat_name)
+        UpgradeStatisticCommand.new(player: player, stat_name: stat_name)
       end
 
       def continue_game

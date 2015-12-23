@@ -6,7 +6,7 @@ module Dragon
     include Dragon::Helpers::CommandHelpers
 
     extend Forwardable
-    def_delegators :race, :base_bonus, :calm_bonus, :focus_bonus, :intellect_bonus, :coordination_bonus, :resilience_bonus, :power_bonus
+    def_delegators :race, :base_modifier, :calm_modifier, :focus_modifier, :intellect_modifier, :coordination_modifier, :resilience_modifier, :power_modifier
 
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype
@@ -17,9 +17,9 @@ module Dragon
       name: Name.generate,
       profession: Profession.available.sample,
       age: (20..65).to_a.sample,
-      place: nil,
       race: Race.types.sample.new
     )
+
       person = new(name)
       person.profession = profession.new
       person.gender = %w[ male female other ].sample

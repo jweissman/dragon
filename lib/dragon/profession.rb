@@ -13,6 +13,18 @@ module Dragon
       end
     end
 
+    def level
+      @level ||= 1
+    end
+
+    def upgrade!
+      @level += 1
+    end
+
+    def xp_for_upgrade
+      25 * ((level + 1) ** 2)
+    end
+
     def questions(*)
       []
     end

@@ -12,10 +12,7 @@ module Dragon
       end
 
       def actions
-        [
-          AcceptQuestCommand.new(quest: quest),
-          RejectQuestCommand.new(quest: quest)
-        ]
+        [ accept_quest(quest), reject_quest(quest) ]
       end
     end
   end

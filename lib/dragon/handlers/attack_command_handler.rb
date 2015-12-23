@@ -32,9 +32,14 @@ module Dragon
           player.xp += enemy.xp
           player.gold += enemy.bounty
 
+
           events = [
             EnemyDiedEvent.new(enemy: enemy, xp: enemy.xp, gold: enemy.bounty)
           ]
+
+          if player.xp > player.xp_for_upgrade
+            events.push(LevelUpRequirementsMetEvent.new(player: player))
+          end
 
           if engine.last_destination
             events.push(RandomEncounterResolvedEvent.new(destination: engine.last_destination, current_place: engine.place))

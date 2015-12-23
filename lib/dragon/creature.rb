@@ -15,10 +15,29 @@ module Dragon
       @default_armor ||= Fur.new
     end
 
-    def self.generate(type: types.sample, place: nil)
-      if place && (associated=place.class.associated(Creature)).any?
-        type = associated.sample
+    def self.generate(type: nil,
+                      place: nil,
+                      types_to_sample: [],
+                      excluded_types: [])
+
+      if type.nil?
+        if place && (associated=place.class.associated(Creature)).any?
+          types_to_sample = associated
+        else
+          types_to_sample = types(nodes_only: true)
+        end
+
+        if excluded_types.any?
+          types_to_sample.reject! do |type_to_sample|
+            excluded_types.any? do |excluded_type|
+              type_to_sample.new.is_a?(excluded_type)
+            end
+          end
+        end
+
+        type = types_to_sample.sample
       end
+
       creature = type.new
       creature.subtype = Subtype.generate_for(creature)
       creature

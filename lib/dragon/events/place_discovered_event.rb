@@ -39,12 +39,7 @@ module Dragon
           end
         end
 
-        action_list.push(
-          TravelCommand.new(
-            destination: origin_place, 
-            label: "Return to #{origin_place.name}"
-          )
-        )
+        action_list.push(travel(origin_place, "Return to #{origin_place.name}"))
 
         action_list
       end

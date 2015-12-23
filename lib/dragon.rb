@@ -34,7 +34,9 @@ require 'dragon/building'
 require_all 'lib/dragon/buildings'
 
 require 'dragon/material'
+require 'dragon/quality'
 require 'dragon/item'
+require_all 'lib/dragon/items'
 require 'dragon/items'
 
 require 'dragon/city'

@@ -1,51 +1,51 @@
 module Dragon
   class Race < Entity
-    def base_bonus
+    def base_modifier
       0
     end
 
-    def power_bonus;        base_bonus end
-    def intellect_bonus;    base_bonus end
-    def coordination_bonus; base_bonus end
-    def resilience_bonus;   base_bonus end
-    def focus_bonus;        base_bonus end
-    def calm_bonus;         base_bonus end
+    def power_modifier;        base_modifier end
+    def intellect_modifier;    base_modifier end
+    def coordination_modifier; base_modifier end
+    def resilience_modifier;   base_modifier end
+    def focus_modifier;        base_modifier end
+    def calm_modifier;         base_modifier end
   end
 
   class Human    < Race
-    def base_bonus
+    def base_modifier
       1
     end
 
-    def focus_bonus
+    def focus_modifier
       2
     end
   end
 
   class Dwarf    < Race
-    def resilience_bonus
+    def resilience_modifier
       4
     end
 
-    def power_bonus
+    def power_modifier
       2
     end
 
-    def calm_bonus
+    def calm_modifier
       -1
     end
   end
 
   class Elf      < Race
-    def calm_bonus
+    def calm_modifier
       4
     end
 
-    def intellect_bonus
+    def intellect_modifier
       2
     end
 
-    def power_bonus
+    def power_modifier
       -1
     end
   end

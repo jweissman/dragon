@@ -11,8 +11,19 @@ module Dragon
       }
     end
 
+    def upgrade_statistic!(name: nil)
+      case name
+      when :power then @power += 1
+      when :intellect then @intellect += 1
+      when :coordination then @coordination += 1
+      when :resilience then @resilience += 1
+      when :focus then @focus += 1
+      when :calm then @calm += 1
+      end
+    end
 
-    def bonus_for(value)
+
+    def modifier_for(value)
       case value
         when 0..1   then -5
         when 1..2   then -4
@@ -44,7 +55,7 @@ module Dragon
     end
 
     def attack_rating
-      base_attack_rating + bonus_for(power)
+      base_attack_rating + modifier_for(power)
     end
 
 
@@ -53,7 +64,7 @@ module Dragon
     end
 
     def defense_rating
-      base_defense_rating + bonus_for(resilience)
+      base_defense_rating + modifier_for(resilience)
     end
 
     def chance_of_hitting(target)
@@ -66,7 +77,7 @@ module Dragon
     end
 
     def accuracy
-      base_accuracy + bonus_for(coordination)
+      base_accuracy + modifier_for(coordination)
     end
 
     # again really prop of armor (and maybe size class?)
@@ -75,7 +86,7 @@ module Dragon
     end
 
     def resistance
-      base_resistance + bonus_for(calm)
+      base_resistance + modifier_for(calm)
     end
 
 
@@ -87,36 +98,34 @@ module Dragon
       (resilience + power) / 2
     end
 
-    ##
-
     def power
       @power ||= power_range.to_a.sample
-      @power + power_bonus
+      @power + power_modifier
     end
 
     def intellect
       @intellect ||= intellect_range.to_a.sample
-      @intellect + intellect_bonus
+      @intellect + intellect_modifier
     end
 
     def coordination
       @coordination ||= coordination_range.to_a.sample
-      @coordination + coordination_bonus
+      @coordination + coordination_modifier
     end
 
     def resilience
       @resilience ||= resilience_range.to_a.sample
-      @resilience + resilience_bonus
+      @resilience + resilience_modifier
     end
 
     def focus
       @focus ||= focus_range.to_a.sample
-      @focus + focus_bonus
+      @focus + focus_modifier
     end
 
     def calm
       @calm ||= calm_range.to_a.sample
-      @calm + calm_bonus
+      @calm + calm_modifier
     end
 
     def power_range; base_range end
@@ -132,16 +141,16 @@ module Dragon
       (0..20)
     end
 
-    def power_bonus; base_bonus end
-    def resilience_bonus; base_bonus end
+    def power_modifier; base_modifier end
+    def resilience_modifier; base_modifier end
 
-    def intellect_bonus; base_bonus end
-    def coordination_bonus; base_bonus end
+    def intellect_modifier; base_modifier end
+    def coordination_modifier; base_modifier end
 
-    def focus_bonus; base_bonus end
-    def calm_bonus; base_bonus end
+    def focus_modifier; base_modifier end
+    def calm_modifier; base_modifier end
 
-    def base_bonus
+    def base_modifier
       0
     end
   end

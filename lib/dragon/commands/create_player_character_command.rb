@@ -17,7 +17,7 @@ module Dragon
       end
 
       def describe
-        "This is the tale of #{name}'s heroic deeds"
+        "#{name} entered the Realms"
       end
     end
   end

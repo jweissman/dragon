@@ -3,19 +3,19 @@ module Dragon
     include Activities
 
     extend Forwardable
-
     def_delegators :engine, :place
-    def_delegators :profession, :base_range, 
-      :power_range, :intellect_range, :coordination_range, 
+
+    def_delegators :profession, :base_range, :level, :xp_for_upgrade,
+      :power_range, :intellect_range, :coordination_range,
       :resilience_range, :focus_range, :calm_range
 
     attr_accessor :action, :inventory, :engine,
       :quests, :gold, :xp
 
-    def initialize(name=Name.generate, *args)
+    def initialize(name=nil, *args) #Name.generate, *args)
       @quests = []
-      @gold   = 1_500
-      @xp     = 1_000
+      @gold   = 200
+      @xp     = 0
       @profession = Profession.adventuring.sample.new
 
       super(name, *args)
@@ -34,7 +34,7 @@ module Dragon
     end
 
     def describe
-      "#{name.capitalize}, the #{race} #{profession.type}"
+      "#{name.capitalize}, a lvl-#{level} #{subtype} #{race} #{profession.type}"
     end
 
     def inventory

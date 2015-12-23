@@ -12,7 +12,7 @@ module Dragon
 
           ItemTakenEvent.new(item: item, cause: "you gave #{merchant.name} #{cost} gold")
         else
-          WordsSpokenEvent.new(person: merchant, message: "You cannot afford the #{item.describe}! It costs #{item.cost} gold, but you only have #{engine.player.gold}")
+          WordsSpokenEvent.new(person: merchant, message: "You cannot afford the #{item.describe}! You would have to pay #{cost} gold, but you only have #{engine.player.gold}")
         end
       end
     end

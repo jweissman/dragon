@@ -13,7 +13,7 @@ describe AttackCommand do
                     chance_of_hitting: 1.0)
   end
 
-  let(:player_weapon) { instance_double Weapon, label: 'fists' }
+  let(:player_weapon) { instance_double Weapon, describe: 'fists', label: 'fists' }
 
   let(:enemy)  do
     instance_double('Enemy', hp: 3, max_hp: 4, describe: enemy_description, label: enemy_description)

@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "#{enemy.label} attacked with #{enemy.weapon.label}"
+        "#{enemy.label} attacked with #{enemy.weapon.describe(prefix: 'a')}"
       end
     end
   end

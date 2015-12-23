@@ -48,7 +48,19 @@ module Dragon
         ps['profession'] = profession.new
       end
 
+      if race_record
+        ps['race'] = race.new
+      end
+
+      if subtype_record
+        ps['subtype'] = subtype.new
+      end
+
       ps
+
+    rescue => ex
+      binding.pry
+      raise ex
     end
 
     def profession
@@ -65,6 +77,41 @@ module Dragon
     def profession_record
       find_record_with_name('profession')
     end
+
+
+    def subtype
+      name = subtype_record['value']
+      find_subtype_with_name(name)
+    end
+
+    def find_subtype_with_name(name)
+      RacialSubtype.types.detect do |st|
+        st.new.label == name
+      end
+    end
+
+    def subtype_record
+      find_record_with_name('subtype')
+    end
+
+
+
+    def race
+      name = race_record['value']
+      find_race_with_name(name)
+    end
+
+    def find_race_with_name(name)
+      Race.types.detect do |r|
+        r.new.label == name
+      end
+    end
+
+    def race_record
+      find_record_with_name('race')
+    end
+
+
 
     def action
       extract_attribute_from_record('action')

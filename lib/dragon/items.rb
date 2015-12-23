@@ -1,17 +1,5 @@
 module Dragon
   module Items
-    class Treasure < Item; end
-
-    class Figurine < Treasure
-      def base_cost
-        15
-      end
-
-      def self.materials
-        Material.basic + Material.gemstone
-      end
-    end
-
     class Gem < Treasure
       def base_cost
         1_000
@@ -58,7 +46,7 @@ module Dragon
       end
 
       def deflect_range
-        base_absorption + material.strength #.to_a.sample
+        base_absorption + material.strength + quality.modifier
       end
     end
 
@@ -120,7 +108,7 @@ module Dragon
 
     class Weapon < Equipment
       def damage_range
-        base_damage + material.strength
+        base_damage + material.strength + quality.modifier
       end
     end
 
@@ -193,6 +181,10 @@ module Dragon
         Good.new
       end
 
+      def describe(*)
+        label
+      end
+
       def self.materials
         [ Bone ]
       end
@@ -220,6 +212,10 @@ module Dragon
       def base_damage
         (1..12)
       end
+
+      def describe(*)
+        "a stinger"
+      end
     end
 
     class AcidBreath < NaturalWeapon
@@ -231,10 +227,6 @@ module Dragon
     class Fists < NaturalWeapon
       def self.materials
         [ Flesh ]
-      end
-
-      def describe
-        "fists"
       end
 
       def base_damage

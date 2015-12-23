@@ -23,7 +23,7 @@ describe AttackCommandHandler do
   end
 
   let(:player) do
-    instance_double('Player', alive?: true, chance_of_hitting: 1.0, attack!: damage, xp: 1_000_000, :'xp=' => nil, gold: 1_000_000_000, :'gold=' => nil)
+    instance_double('Player', alive?: true, chance_of_hitting: 1.0, attack!: damage, xp: 1_000_000, :'xp=' => 0, gold: 1_000_000_000, :'gold=' => nil, :xp_for_upgrade => 1_000)
   end
 
   let(:enemy_alive?) { true }

@@ -22,15 +22,19 @@ module Dragon
     def self.type_percentages(place)
       if place.class.populated?
         {
-          25 => -> { Creature.generate(place: place) },
+          25 => -> { generate_creature(place) },
           75 => -> { Person.generate }
         }
       else
         {
-          85 => -> { Creature.generate(place: place) },
+          85 => -> { generate_creature(place) },
           15 => -> { Person.generate }
         }
       end
+    end
+
+    def self.generate_creature(place)
+      Creature.generate(place: place, excluded_types: [Person]) 
     end
   end
 end

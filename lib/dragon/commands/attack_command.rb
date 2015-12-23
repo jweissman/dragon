@@ -11,7 +11,7 @@ module Dragon
       end
 
       def describe
-        @description ||= "#{player_description} attack #{enemy_description} with #{player.weapon.label}"
+        @description ||= "#{player_description} attack #{enemy_description} with #{player.weapon.describe(prefix: 'a')}"
       end
 
       def player_description

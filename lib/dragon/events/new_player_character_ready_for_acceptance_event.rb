@@ -8,9 +8,11 @@ module Dragon
       end
 
       def describe
-        "Has the story of #{player.describe} just begun?"
-      rescue
-        "A new story has begun..."
+        if player.name.nil?
+          "Is this the story of #{player.describe}?"
+        else
+          "Has a new story just begun?"
+        end
       end
 
       def actions

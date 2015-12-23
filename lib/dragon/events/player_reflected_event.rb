@@ -10,11 +10,19 @@ module Dragon
       end
 
       def actions
-        equip_weapon_actions + wear_armor_actions + base_actions
+        equip_weapon_actions + wear_armor_actions + professional_actions + base_actions
       end
 
       def base_actions
         [ continue_game, exit_game ]
+      end
+
+      def professional_actions
+        if player.xp > player.xp_for_upgrade
+          [ level_up(player) ]
+        else
+          []
+        end
       end
 
       def wear_armor_actions
@@ -31,8 +39,14 @@ module Dragon
         end
       end
 
+      # TODO would be nice to use a narrator here
+      #      would mean decoupling them from terminals...
+      #
       def describe
-        description = "You are #{player.name}, a #{player.subtype} #{player.race} #{player.profession.type}."
+        description = "You are #{player.describe}"
+
+        description += " You have #{player.xp} experience points (you need #{player.xp_for_upgrade} XP to advance to level #{player.level+1})."
+
         description += " You are wielding #{player.weapon.describe(prefix: 'a')} (your attack rating is #{player.attack_rating})."
         description += " You are wearing #{player.armor.describe} (your defense rating is #{player.defense_rating})."
         player.stats.each do |name, value|

@@ -1,6 +1,6 @@
 module Dragon
   module Creatures
-    class Human < Ape
+    class Hominid < Ape
       def default_weapon
         @default_weapon ||= Weapon.generate(exclude_types: [ NaturalWeapon ])
       end
@@ -9,7 +9,7 @@ module Dragon
         @default_armor ||= Clothing.new
       end
 
-      def intellect_range
+      def base_range
         (8..12)
       end
     end

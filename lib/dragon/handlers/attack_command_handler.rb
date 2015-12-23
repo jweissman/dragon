@@ -16,7 +16,7 @@ module Dragon
           events << enemy_attacks_player(enemy, player)
         end
 
-        events
+        events.flatten
       end
 
       def player_attacks_enemy(enemy, player)
@@ -75,8 +75,7 @@ module Dragon
 
       protected
       def perform_attack(a, b)
-        attack_succeeded = rand < a.chance_of_hitting(b)
-        if attack_succeeded
+        if attack_succeeds?(a,b)
           damage = a.attack!(b)
           if b.alive?
             Damage.new(amount: damage)
@@ -86,6 +85,10 @@ module Dragon
         else
           Dodge.new
         end
+      end
+
+      def attack_succeeds?(a,b)
+        rand < a.chance_of_hitting(b)
       end
     end
   end

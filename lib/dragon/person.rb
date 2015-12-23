@@ -1,9 +1,12 @@
 module Dragon
-  class Person < Creatures::Human
+  class Person < Creatures::Hominid
     include Activities
     include Questions
     include Professions
     include Dragon::Helpers::CommandHelpers
+
+    extend Forwardable
+    def_delegators :race, :base_bonus, :calm_bonus, :focus_bonus, :intellect_bonus, :coordination_bonus, :resilience_bonus, :power_bonus
 
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype

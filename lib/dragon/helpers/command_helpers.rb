@@ -116,6 +116,18 @@ module Dragon
         ReflectCommand.new(player: player)
       end
 
+      def wield_weapon(player, weapon)
+        WieldWeaponCommand.new(player: player, weapon: weapon)
+      end
+
+      def wear_armor(player, armor)
+        WearArmorCommand.new(player: player, armor: armor) if player.armor != armor
+      end
+
+      def continue_game
+        ContinueAdventureCommand.new
+      end
+
       def exit_game
         ExitGameCommand.new
       end

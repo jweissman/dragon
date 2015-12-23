@@ -1,19 +1,53 @@
 require 'spec_helper'
 
 describe AttackCommandHandler do
+  subject(:attack_command_handler) do
+    AttackCommandHandler.new(engine)
+  end
+
+  let(:engine) do
+    instance_double Engine, game: game, last_destination: nil
+  end
+
+  let(:game) do
+    instance_double Game, transition_to: true
+  end
+
   let(:command) do
     instance_double('AttackCommand', enemy: enemy, player: player)
   end
+  
 
   let(:enemy) do
-    instance_double('Enemy', alive?: true, chance_of_hitting: 1.0, attack!: true)
+    instance_double('Enemy', alive?: enemy_alive?, chance_of_hitting: 1.0, attack!: true, xp: 1_000_000, :'xp=' => nil, bounty: 1_000)
   end
 
   let(:player) do
-    instance_double('Player', alive?: true, chance_of_hitting: 1.0, attack!: damage)
+    instance_double('Player', alive?: true, chance_of_hitting: 1.0, attack!: damage, xp: 1_000_000, :'xp=' => nil, gold: 1_000_000_000, :'gold=' => nil)
   end
 
+  let(:enemy_alive?) { true }
+
   describe '#handle' do
+    context 'with a lethal attack that hits' do
+      let(:events) do
+        subject.handle(command)
+      end
+
+      let(:damage) { 1_000 }
+      let(:enemy_alive?) { false }
+
+      let(:enemy_died) do
+        events.detect do |event|
+          event.is_a?(EnemyDiedEvent)
+        end
+      end
+
+      it 'results in the enemy dying' do
+        expect(events.first).to eq(enemy_died)
+      end
+    end
+
     context 'with a non-lethal attack that hits' do
       let(:damage) { 1 }
 

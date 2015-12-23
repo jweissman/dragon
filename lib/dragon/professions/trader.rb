@@ -10,7 +10,19 @@ module Dragon
       end
 
       def items_for_sale
-        Array.new(4) { Equipment.generate(exclude_types: [NaturalWeapon, NaturalArmor]) }
+        weapons + armor + accessories
+      end
+
+      def weapons
+        Array.new(2) { Equipment.generate(exclude_types: [NaturalWeapon], only_types: [Weapon]) }
+      end
+
+      def armor
+        Array.new(2) { Equipment.generate(exclude_types: [NaturalArmor], only_types: [Armor]) }
+      end
+
+      def accessories
+        Array.new(3) { Equipment.generate(only_types: [Accessory]) }
       end
     end
   end

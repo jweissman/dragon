@@ -1,6 +1,6 @@
 module Dragon
   module Creatures
-    class Barbarian < Human
+    class Barbarian < Hominid
       tagged :wilderness
     end
   end

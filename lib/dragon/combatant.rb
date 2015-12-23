@@ -1,5 +1,7 @@
 module Dragon
   class Combatant < Entity
+    attr_writer :armor, :weapon
+
     include CombatAttributes
     include Items
 
@@ -60,11 +62,11 @@ module Dragon
     end
 
     def xp
-      @xp ||= (total_stat_value ** 0.5).ceil
+      @xp ||= (challenge_rating ** 0.5).ceil
     end
 
     def bounty
-      @bounty ||= (total_stat_value * 0.75).floor
+      @bounty ||= (challenge_rating * 0.75).floor
     end
   end
 end

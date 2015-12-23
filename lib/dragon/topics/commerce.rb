@@ -18,6 +18,14 @@ module Dragon
       end
 
       def actions(*)
+        purchase_actions + sale_actions
+      end
+
+      def sale_actions
+        []
+      end
+
+      def purchase_actions
         partner.profession.items_for_sale.map do |item|
           purchase_item(item, partner)
         end

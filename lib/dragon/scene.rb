@@ -31,7 +31,7 @@ module Dragon
     end
 
     def base_actions
-      [ reflect(player), exit_game ]
+      [ reflect(player) ]
     end
 
     def narrator(terminal)

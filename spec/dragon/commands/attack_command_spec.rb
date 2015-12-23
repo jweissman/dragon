@@ -5,12 +5,19 @@ describe AttackCommand do
     AttackCommand.new player: player, enemy: enemy
   end
 
-  let(:player) { instance_double(PlayerCharacter, hp: 1, max_hp: 2, weapon: player_weapon, chance_of_hitting: 1.0) }
+  let(:player) do
+    instance_double(PlayerCharacter,
+                    hp: 1,
+                    max_hp: 2,
+                    weapon: player_weapon,
+                    chance_of_hitting: 1.0)
+  end
+
   let(:player_weapon) { instance_double Weapon, label: 'fists' }
 
-  let(:enemy)  do 
+  let(:enemy)  do
     instance_double('Enemy', hp: 3, max_hp: 4, describe: enemy_description, label: enemy_description)
-  end 
+  end
   let(:enemy_description) { "a baddie" }
 
   describe '#label' do

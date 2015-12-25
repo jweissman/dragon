@@ -2,16 +2,16 @@ module Dragon
   class PlaceNarrator < Narrator
     alias_method :place, :model
 
-    def narrate
+    def narrate(terminal)
       if place.is_a?(Room)
-        describe prefix: prefix, suffix: " of a #{place.building.describe}"
+        describe prefix: prefix, suffix: " of a #{place.building.describe}", terminal: terminal
       else
-        describe prefix: prefix
+        describe prefix: prefix, terminal: terminal
       end
 
       if place.people.any?
         descriptor = describe_number_of_people(place.people.count)
-        say "There #{descriptor} here: #{describe_people(place.people)}."
+        terminal.say "There #{descriptor} here: #{describe_people(place.people)}."
       end
     end
 

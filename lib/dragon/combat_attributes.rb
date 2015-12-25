@@ -58,9 +58,12 @@ module Dragon
       base_attack_rating + modifier_for(power)
     end
 
-
     def base_defense_rating
-      armor.deflect_range
+      if accessories.values.flatten.any?
+        armor.deflect_range + deflection_from_accessories
+      else
+        armor.deflect_range
+      end
     end
 
     def defense_rating

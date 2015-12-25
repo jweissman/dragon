@@ -21,8 +21,8 @@ module Dragon
       []
     end
 
-    def narrator(terminal)
-      EventNarrator.new(self, terminal: terminal)
+    def narrator
+      EventNarrator.new(self)
     end
   end
 end

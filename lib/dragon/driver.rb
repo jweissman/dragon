@@ -11,6 +11,7 @@ module Dragon
 
     def describe
       game_narrator.narrate(
+        terminal, 
         engine.last_command, 
         engine.last_events
       )
@@ -29,7 +30,7 @@ module Dragon
     end
 
     def game_narrator
-      @game_narrator ||= GameNarrator.new(game, terminal: terminal)
+      @game_narrator ||= GameNarrator.new(game) #, terminal: terminal)
     end
 
     def engine

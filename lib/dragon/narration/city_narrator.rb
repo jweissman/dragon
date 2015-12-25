@@ -1,7 +1,7 @@
 module Dragon
   class CityNarrator < Narrator
-    def narrate
-      describe prefix: "You are visiting "
+    def narrate(terminal)
+      describe prefix: "You are visiting ", terminal: terminal
     end
   end
 end

@@ -18,25 +18,91 @@ module Dragon
 
     class Accessory < Equipment
       def self.materials
-        Material.metallic + Material.gemstone
+        [ Steel, Bronze, Iron, Leather ]
+      end
+
+      def self.maximum_equippable
+        1
+      end
+
+      def base_absorption
+        (0..0)
+      end
+
+      def deflect_range
+        base_absorption + material.strength + quality.modifier
       end
     end
 
     class Ring < Accessory
+      def self.materials
+        Material.metallic + Material.gemstone
+      end
+
       def base_cost
         200
+      end
+
+      def self.maximum_equippable
+        2
+      end
+
+      def deflect_range
+        (0..0)
       end
     end
 
     class Necklace < Accessory
+      def self.materials
+        Material.metallic + Material.gemstone
+      end
+
       def base_cost
         450
       end
+
+      def deflect_range
+        (0..0)
+      end
     end
 
-    class Helm < Equipment
+    class Helm < Accessory
       def base_cost
         50
+      end
+
+      def base_absorption
+        (2..4)
+      end
+    end
+
+    class Cloak < Accessory
+      def base_cost
+        125
+      end
+
+      def base_absorption
+        (1..3)
+      end
+    end
+
+    class Gloves < Accessory
+      def base_cost
+        35
+      end
+
+      def base_absorption
+        (0..2)
+      end
+    end
+
+    class Boots < Accessory
+      def base_cost
+        65
+      end
+      
+      def base_absorption
+        (0..2)
       end
     end
 
@@ -50,6 +116,7 @@ module Dragon
       end
     end
 
+
     class Clothing < Armor
       def self.materials
         [ Cloth, Leather ]
@@ -60,7 +127,7 @@ module Dragon
       end
 
       def base_absorption
-        (0..1)
+        (0..2)
       end
     end
 
@@ -103,6 +170,20 @@ module Dragon
     class Scales < NaturalArmor
       def base_absorption
         (4..6)
+      end
+    end
+
+    class Skin < NaturalArmor
+      def describe(*)
+        "no clothes"
+      end
+
+      def base_absorption
+        (0..1)
+      end
+
+      def self.materials
+        [ Flesh ]
       end
     end
 

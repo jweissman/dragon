@@ -6,26 +6,27 @@ module Dragon
     include Dragon::Helpers::CommandHelpers
 
     extend Forwardable
-    def_delegators :race, :base_modifier, :calm_modifier, :focus_modifier, :intellect_modifier, :coordination_modifier, :resilience_modifier, :power_modifier
 
     attr_accessor :name, :profession
     attr_accessor :gender, :age, :race, :subtype
-
     attr_accessor :activity
 
     def self.generate(
       name: Name.generate,
       profession: Profession.available.sample,
       age: (20..65).to_a.sample,
-      race: Race.types.sample.new
+      race: Race.types.sample
     )
-
       person = new(name)
       person.profession = profession.new
-      person.gender = %w[ male female other ].sample
-      person.race = race
-      person.subtype = Subtype.generate_for(race)
+      person.gender     = %w[ male female other ].sample
+      person.race       = race.new
+      person.subtype    = Subtype.generate_for(person.race)
       person
+    end
+
+    def self.generate_list(professions)
+      professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
     end
 
     def label
@@ -38,6 +39,14 @@ module Dragon
 
     def default_weapon
       @default_weapon ||= profession.default_weapon || super
+    end
+
+    def unarmed_weapon
+      @unarmed_weapon ||= Fists.new
+    end
+
+    def unarmed_armor
+      @unarmed_armor ||= Skin.new
     end
 
     def conversation_topics
@@ -83,8 +92,32 @@ module Dragon
       base + profession.activities
     end
 
-    def self.generate_list(professions)
-      professions.zip(names.shuffle).collect { |p,n| generate(n, p) }
+    def base_modifier
+      race.base_modifier + subtype.base_modifier
+    end
+
+    def calm_modifier
+      race.calm_modifier + subtype.calm_modifier
+    end
+
+    def focus_modifier
+      race.focus_modifier + subtype.focus_modifier
+    end
+
+    def intellect_modifier
+      race.intellect_modifier + subtype.intellect_modifier
+    end
+
+    def coordination_modifier
+      race.coordination_modifier + subtype.coordination_modifier
+    end
+
+    def resilience_modifier
+      race.resilience_modifier + subtype.resilience_modifier
+    end
+
+    def power_modifier
+      race.power_modifier + subtype.power_modifier
     end
   end
 end

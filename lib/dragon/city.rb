@@ -57,8 +57,8 @@ module Dragon
       @area_count ||= area_count_range.to_a.sample
     end
 
-    def narrator(terminal)
-      @narrator ||= CityNarrator.new(self, terminal: terminal)
+    def narrator
+      @narrator ||= CityNarrator.new(self)
     end
 
     def self.generate(world, type = available_city_types.sample)

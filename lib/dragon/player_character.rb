@@ -9,12 +9,11 @@ module Dragon
       :power_range, :intellect_range, :coordination_range,
       :resilience_range, :focus_range, :calm_range
 
-    attr_accessor :action, :inventory, :engine,
-      :quests, :gold, :xp
+    attr_accessor :action, :engine, :quests, :gold, :xp
 
-    def initialize(name=nil, *args) #Name.generate, *args)
+    def initialize(name=nil, *args)
       @quests = []
-      @gold   = 200
+      @gold   = 2_000
       @xp     = 0
       @profession = Profession.adventuring.sample.new
 
@@ -37,16 +36,12 @@ module Dragon
       "#{name.capitalize}, a lvl-#{level} #{subtype} #{race} #{profession.type}"
     end
 
-    def inventory
-      @inventory ||= []
-    end
-
     def activity
       @activity ||= Exploring.new
     end
 
-    def narrator(terminal)
-      @narrator ||= PlayerNarrator.new(self, terminal: terminal)
+    def narrator
+      @narrator ||= PlayerNarrator.new(self)
     end
 
     def self.professions

@@ -13,12 +13,43 @@ module Dragon
       @weapon ||= default_weapon
     end
 
+    def accessories
+      @accessories ||= {}
+    end
+
+    def deflection_from_accessories
+      accessories.values.flatten.map(&:deflect_range).inject(&:+)
+    end
+
     def wield!(weapon)
       @weapon = weapon
     end
 
     def wear!(armor)
       @armor = armor
+    end
+
+    def equip!(accessory)
+      @accessories ||= {}
+      @accessories[accessory.type] ||= []
+      @accessories[accessory.type].push(accessory)
+    end
+
+    def take_off!(accessory)
+      @accessories[accessory.type].delete(accessory)
+    end
+
+    def can_equip?(accessory)
+      return true unless accessories.has_key?(accessory.type)
+
+      !(accessories[accessory.type].include?(accessory)) &&
+        accessories[accessory.type].count < accessory.class.maximum_equippable
+    end
+
+    def inventory
+      @inventory ||= [ default_armor, default_weapon ].reject do |item|
+        item.is_a?(NaturalWeapon) || item.is_a?(NaturalArmor)
+      end
     end
 
     def default_armor

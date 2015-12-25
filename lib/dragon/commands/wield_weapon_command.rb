@@ -10,17 +10,18 @@ module Dragon
       end
 
       def label
+        pc = player.clone
+        pc.wield!(weapon)
+
         if weapon.is_a?(NaturalWeapon)
-          "Stop wielding a weapon"
+          "Stop wielding a weapon (#{pc.attack_rating})"
         else
-          pc = player.clone
-          pc.wield!(weapon)
           "Wield #{weapon.describe} (#{pc.attack_rating})"
         end
       end
 
       def describe
-        "You equip the #{weapon.describe}"
+        "You wield #{weapon.describe}"
       end
     end
   end

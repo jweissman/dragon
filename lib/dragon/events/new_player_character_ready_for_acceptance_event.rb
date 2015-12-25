@@ -8,10 +8,10 @@ module Dragon
       end
 
       def describe
-        if player.name.nil?
-          "Is this the story of #{player.describe}?"
-        else
+        if player.name.empty?
           "Has a new story just begun?"
+        else
+          "Is this the story of #{player.describe}?"
         end
       end
 

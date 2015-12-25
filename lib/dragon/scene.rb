@@ -34,8 +34,8 @@ module Dragon
       [ reflect(player) ]
     end
 
-    def narrator(terminal)
-      SceneNarrator.new(self, terminal: terminal)
+    def narrator
+      SceneNarrator.new(self) #, terminal: terminal)
     end
   end
 end

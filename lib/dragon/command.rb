@@ -14,8 +14,8 @@ module Dragon
       raise 'override Command#label in subclass'
     end
 
-    def narrator(terminal)
-      CommandNarrator.new(self, terminal: terminal)
+    def narrator
+      CommandNarrator.new(self)
     end
   end
 end

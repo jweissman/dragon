@@ -5,7 +5,7 @@ require 'dragon/game_terminal'
 describe GameNarrator do
   describe '#dramatize' do
     subject(:game_narrator) do
-      GameNarrator.new(game, terminal: terminal)
+      GameNarrator.new(game) #, terminal: terminal)
     end
 
     let(:terminal) do
@@ -28,9 +28,9 @@ describe GameNarrator do
     let(:narrator) { instance_double("Narrator") }
 
     before do
-      allow(scene).to receive(:narrator).with(terminal).and_return(narrator)
+      allow(scene).to receive(:narrator).and_return(narrator)
       allow(scene).to receive(:squelch_narration?).and_return(false)
-      allow(narrator).to receive(:narrate).with(command, [event])
+      allow(narrator).to receive(:narrate).with(terminal, command, [event])
     end
 
     it 'should narrate the world' do
@@ -40,7 +40,7 @@ describe GameNarrator do
     end
 
     after do
-      game_narrator.narrate(command, [event])
+      game_narrator.narrate(terminal, command, [event])
     end
   end
 end

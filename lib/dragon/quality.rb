@@ -1,5 +1,5 @@
 module Dragon
-  class Quality < Entity # TODO weird we really just need the inheritance stuff -- maybe factor it out?
+  class Quality < Entity
     def describe
       self.class.name.split('::').last.downcase
     end
@@ -13,7 +13,7 @@ module Dragon
     end
   end
 
-  class Inferior < Quality
+  class Terrible < Quality
     def cost_multiplier
       0.5
     end
@@ -55,13 +55,23 @@ module Dragon
     end
   end
 
-  class Superior < Quality
+  class Exceptional < Quality
     def cost_multiplier
       2.2
     end
 
     def modifier
       3
+    end
+  end
+
+  class Superb < Quality
+    def cost_multiplier
+      2.8
+    end
+
+    def modifier
+      4
     end
   end
 end

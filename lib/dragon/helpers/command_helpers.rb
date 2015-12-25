@@ -129,7 +129,15 @@ module Dragon
       end
 
       def wear_armor(player, armor)
-        WearArmorCommand.new(player: player, armor: armor) if player.armor != armor
+        WearArmorCommand.new(player: player, armor: armor)
+      end
+
+      def equip_accessory(player, accessory)
+        EquipAccessoryCommand.new(player: player, accessory: accessory)
+      end
+
+      def remove_accessory(player, accessory)
+        RemoveAccessoryCommand.new(player: player, accessory: accessory)
       end
 
       def level_up(player)

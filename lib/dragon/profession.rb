@@ -22,7 +22,7 @@ module Dragon
     end
 
     def xp_for_upgrade
-      25 * ((level + 1) ** 2)
+      100 * (level+9) * ((level) ** 2)
     end
 
     def questions(*)

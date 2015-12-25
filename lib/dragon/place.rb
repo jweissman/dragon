@@ -14,8 +14,8 @@ module Dragon
       false 
     end
 
-    def narrator(terminal)
-      PlaceNarrator.new(self, terminal: terminal)
+    def narrator
+      PlaceNarrator.new(self)
     end
   end
 end

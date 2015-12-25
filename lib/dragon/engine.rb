@@ -26,7 +26,7 @@ module Dragon
     end
 
     def narrator
-      @narrator ||= GameNarrator.new(game, terminal: terminal)
+      @narrator ||= GameNarrator.new(game) #, terminal: terminal)
     end
 
     def interact

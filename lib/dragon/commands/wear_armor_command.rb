@@ -12,11 +12,12 @@ module Dragon
       def label
         pc = player.clone
         pc.wear!(armor)
+
         "Wear #{armor.describe} (#{pc.defense_rating})"
       end
 
       def describe
-        "You equip the #{armor.describe}"
+        "You wear #{armor.describe}"
       end
     end
   end

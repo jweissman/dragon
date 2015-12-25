@@ -57,10 +57,6 @@ module Dragon
       end
 
       ps
-
-    rescue => ex
-      binding.pry
-      raise ex
     end
 
     def profession

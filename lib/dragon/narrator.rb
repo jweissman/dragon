@@ -2,17 +2,22 @@ module Dragon
   class Narrator
     extend Forwardable
 
-    def_delegators :terminal, :say
+    # def_delegators :terminal, :say
 
-    attr_reader :terminal, :model
-    def initialize(model, terminal: nil)
+    attr_reader :model
+    def initialize(model) #, terminal: nil)
       @model    = model
-      @terminal = terminal
+      # @terminal = terminal
     end
 
-    def describe(prefix: '', suffix: '', important: false, heading: false)
+    def describe(prefix: '', suffix: '', important: false, heading: false, terminal: nil)
       description = assemble_description(prefix: prefix, suffix: suffix)
-      say description, important: important, heading: heading
+
+      if terminal
+        terminal.say description, important: important, heading: heading
+      end
+
+      description
     end
 
     protected

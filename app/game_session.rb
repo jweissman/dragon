@@ -20,12 +20,12 @@ module Dragon
         handle(message) if message.action_record
       end
 
-      describe
-      engine.prompt_player
-      send output if output
+      Thread.new do
+        describe
+        engine.prompt_player
+      end
 
       @params = {} # clear out params...
-
       self
     end
 

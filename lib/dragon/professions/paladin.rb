@@ -8,11 +8,11 @@ module Dragon
       end
 
       def resilience_range
-        (14..16)
+        (12..14)
       end
 
       def focus_range
-        (14..16)
+        (15..18)
       end
     end
   end

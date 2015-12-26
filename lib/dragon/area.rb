@@ -54,6 +54,9 @@ module Dragon
         city.areas.any? { |area| area.is_a?(type) }
       end
 
+      return city.areas.sample if valid_types.empty? # TODO add more types, detect
+                                                     # this condition in random event...?
+
       klass = valid_types.first
 
       area = klass.new

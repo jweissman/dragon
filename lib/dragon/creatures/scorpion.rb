@@ -1,10 +1,10 @@
 module Dragon
   module Creatures
     class Scorpion < Arachnid
-      def resilience_range
-        (5..8)
+      def self.size_class
+        Small
       end
-
+      
       def default_weapon
         Stinger.new
       end

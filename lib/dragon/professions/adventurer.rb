@@ -10,7 +10,7 @@ module Dragon
       end
 
       def base_range # for stats...
-        (8..14)
+        (10..12)
       end
     end
   end

@@ -7,8 +7,8 @@ module Dragon
         Scales.new
       end
 
-      def resilience_range
-        (10..13)
+      def self.size_class
+        VerySmall
       end
     end
   end

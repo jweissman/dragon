@@ -5,7 +5,6 @@ describe Dragon::Scenes::Conversation do
     Conversation.new(game: game).with(partner: person)
   end
 
-
   let(:game) { instance_double("Game", world: world, player: player) }
 
   let(:actions) { conversation.actions(place) }

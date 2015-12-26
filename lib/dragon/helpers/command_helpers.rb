@@ -75,7 +75,7 @@ module Dragon
       end
 
       def tell_joke(partner)
-        TellJokeCommand.new(subject: Profession.all.sample.new, partner: partner)
+        TellJokeCommand.new(subject: Profession.all.sample.new(nil), partner: partner)
       end
 
       def wager(outcome, outcomes, amount, partner)

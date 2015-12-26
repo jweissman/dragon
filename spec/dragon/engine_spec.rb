@@ -2,7 +2,15 @@ require 'spec_helper'
 require 'dragon'
 
 describe Engine do
-  subject(:engine) { Engine.new }
+  let(:game) do
+    instance_double(Game, player: player)
+  end
+
+  let(:player) do
+    instance_double(PlayerCharacter)
+  end
+
+  subject(:engine) { Engine.new(game: game) }
 
   describe "#react" do
     let(:event) { instance_double("Event") }

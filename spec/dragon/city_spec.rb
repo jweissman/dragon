@@ -4,7 +4,7 @@ require 'dragon'
 include Dragon::Cities
 include Dragon::Areas
 
-describe City do
+describe City, speed: 'slow' do
   describe '#random_place' do
     it 'selects a place in town randomly' do
       place = subject.random_place

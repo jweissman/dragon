@@ -27,7 +27,7 @@ module Dragon
     end
 
     def strength
-      2
+      1
     end
   end
 
@@ -39,7 +39,7 @@ module Dragon
 
   class Cloth < Material
     def strength
-      0
+      -1
     end
   end
 
@@ -50,7 +50,7 @@ module Dragon
 
 
     def strength
-      1
+      0
     end
   end
 
@@ -60,7 +60,7 @@ module Dragon
     end
 
     def strength
-      3
+      2
     end
   end
 
@@ -70,17 +70,17 @@ module Dragon
     end
 
     def strength
-      2
+      1
     end
   end
 
   class Flesh < Material
     def cost_multiplier
-      0.5
+      0.15
     end
 
     def strength
-      -1
+      1
     end
   end
 
@@ -90,7 +90,7 @@ module Dragon
     end
 
     def strength
-      4
+      2
     end
   end
 
@@ -100,7 +100,7 @@ module Dragon
     end
 
     def strength
-      6
+      3
     end
   end
 

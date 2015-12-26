@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Building do
+describe Building, speed: 'slow' do
   let(:world) { instance_double("World") }
 
   Building.types.each do |type|

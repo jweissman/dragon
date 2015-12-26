@@ -3,8 +3,8 @@ module Dragon
     class Ooze < Creature
       tagged :evil
 
-      def self.max_hp
-        15
+      def self.size_class
+        VerySmall
       end
 
       def default_weapon

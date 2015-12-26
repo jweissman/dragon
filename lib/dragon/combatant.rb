@@ -49,7 +49,7 @@ module Dragon
     def inventory
       @inventory ||= [ default_armor, default_weapon ].reject do |item|
         item.is_a?(NaturalWeapon) || item.is_a?(NaturalArmor)
-      end
+      end + accessories.values.flatten
     end
 
     def default_armor
@@ -93,11 +93,11 @@ module Dragon
     end
 
     def xp
-      @xp ||= (challenge_rating ** 0.5).ceil
+      @xp ||= 1 + (1.15 * ((1+challenge_rating) ** 2)).floor
     end
 
     def bounty
-      @bounty ||= (challenge_rating * 0.75).floor
+      @bounty ||= 3 + (2.5 * ((1+challenge_rating) ** 2)).floor
     end
   end
 end

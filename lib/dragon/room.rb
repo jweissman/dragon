@@ -58,6 +58,9 @@ module Dragon
       true
     end
 
+    def self.can_wander?
+      false
+    end
 
     def self.unique
       false

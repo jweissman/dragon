@@ -3,7 +3,7 @@ module Dragon
     attr_reader :quality, :cost, :material
 
     def initialize(name=nil,
-                   quality:  self.class.qualities.sample.new,
+                   quality:  Normal.new, #self.class.qualities.sample.new,
                    material: self.class.materials.sample.new)
       @material  = material
       @quality   = quality
@@ -21,7 +21,12 @@ module Dragon
     end
 
     def describe(prefix: nil)
-      content = "#{quality.describe} #{material.describe} #{labelized_type}"
+      content = if quality.is_a?(Normal)
+        "#{material.describe} #{labelized_type}"
+      else
+        "#{quality.describe} #{material.describe} #{labelized_type}"
+      end
+
       (prefix.nil? ? '' : (prefix+' ')) + content
     end
 

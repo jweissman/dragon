@@ -15,6 +15,16 @@ module Dragon
 
   class Terrible < Quality
     def cost_multiplier
+      0.2
+    end
+
+    def modifier
+      -3
+    end
+  end
+
+  class Poor < Quality
+    def cost_multiplier
       0.5
     end
 
@@ -23,7 +33,7 @@ module Dragon
     end
   end
 
-  class Poor < Quality
+  class Mediocre < Quality
     def cost_multiplier
       0.8
     end
@@ -33,7 +43,7 @@ module Dragon
     end
   end
 
-  class Mediocre < Quality; end
+  class Normal < Quality; end
 
   class Good     < Quality
     def cost_multiplier

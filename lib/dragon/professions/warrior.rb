@@ -8,11 +8,11 @@ module Dragon
       end
 
       def resilience_range
-        (15..18)
+        (12..14)
       end
 
       def power_range
-        (16..19)
+        (15..18)
       end
     end
   end

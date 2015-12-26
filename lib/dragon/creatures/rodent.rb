@@ -1,8 +1,8 @@
 module Dragon
   module Creatures
     class Rodent < Mammal
-      def resilience_range
-        (0..1)
+      def self.size_class
+        Tiny
       end
     end
   end

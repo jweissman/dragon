@@ -22,6 +22,9 @@ require 'dragon/taggable'
 require 'dragon/entity'
 require 'dragon/aspect'
 require 'dragon/name'
+
+require 'dragon/combat_attributes'
+
 require 'dragon/race'
 require 'dragon/subtype'
 
@@ -39,7 +42,6 @@ require 'dragon/material'
 require 'dragon/quality'
 require 'dragon/item'
 require_all 'lib/dragon/items'
-require 'dragon/items'
 
 require 'dragon/city'
 require_all 'lib/dragon/cities'
@@ -47,7 +49,6 @@ require_all 'lib/dragon/cities'
 require 'dragon/world'
 
 require 'dragon/attack_result'
-require 'dragon/combat_attributes'
 require 'dragon/combatant'
 
 require 'dragon/creature'
@@ -100,6 +101,8 @@ require 'dragon/random_event'
 require 'dragon/game'
 require 'dragon/engine'
 require 'dragon/driver'
+require 'dragon/support/inspector'
+
 module Dragon
   BANNER = "\n             ~~~~~~~<<< DRAGON v#{VERSION} >>>~~~~~~~~\n\n"
 
@@ -110,27 +113,30 @@ module Dragon
   PLAYER_ACTION_PROMPT  = "What would you like to do?"
 
   RANDOM_ENCOUNTER_RATE = 0.28
-
+  
   def self.introspect
+    inspector = Support::Inspector.new
     puts
     puts "(introspecting over the Dragon engine as currently configured, please wait)"
     puts
+    puts
+    puts "----> Creatures (challenge rating)"
+    puts
+    inspector.creatures
+    puts
+    puts
     puts "----> GATHERING ALL TAGS..."
-    print Dragon::Entity.all_tags.join(', ') + "\n"
+    puts
+    inspector.tags
     puts
     puts "----> CITIES : BUILDINGS"
-    CitySubtype.types.each do |city_type|
-      buildings = city_type.associated(Building).map(&:new).map(&:type).join(', ')
-      puts "#{city_type.new.type.rjust(20)} => #{buildings}"
-    end
     puts
+    inspector.cities
     puts
     puts "----> BUILDINGS : ROOMS"
-    Building.types.each do |building_type|
-      rooms = building_type.associated(Room).map(&:new).map(&:type).join(', ')
-      puts "#{building_type.new.type.rjust(20)} => #{rooms}"
-    end
     puts
+    inspector.buildings
     puts
+   puts
   end
 end

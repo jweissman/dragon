@@ -1,5 +1,9 @@
 module Dragon
   module Creatures
-    class Monkey < Primate; end
+    class Monkey < Primate
+      def self.size_class
+        VerySmall
+      end
+    end
   end
 end

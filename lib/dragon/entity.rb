@@ -63,10 +63,10 @@ module Dragon
       descendants
     end
 
-    def self.types(nodes_only: true, exclude_nodes: false)
+    def self.types(nodes_only: true, exclude_nodes: false, exclude_types: [])
       descendants.reject do |k|
         is_a_node = k.types.any?
-        (nodes_only && is_a_node) || (exclude_nodes && !is_a_node)
+        (nodes_only && is_a_node) || (exclude_nodes && !is_a_node) || (!exclude_types.empty? && exclude_types.any? { |excluded| k.new.is_a?(excluded) })
       end
     end
 

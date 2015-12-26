@@ -11,12 +11,6 @@ module Dragon
     class PoorlyLit < Illumination; tagged :dark end
     class WellLit < Illumination; tagged :light end
 
-    class Size < Aspect; end
-    class Tiny < Size; end
-    class Small < Size; end
-    class Large < Size; end
-    class Huge < Size; end
-
     class Cleanliness < Aspect; end
     class Dirty < Cleanliness; end
     class Dusty < Cleanliness; end
@@ -97,13 +91,13 @@ module Dragon
 
     class AreaAspects < AspectGroup
       def self.list
-        [ Size ]
+        [ Temperature ]
       end
     end
 
     class RoomAspects < AspectGroup
       def self.list
-        [ Temperature, Size, Cleanliness ]
+        [ Temperature, Cleanliness ]
       end
     end
 

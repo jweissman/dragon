@@ -1,9 +1,20 @@
 module Dragon
   class Profession < Entity
+    include CombatAttributes
     include Activities
     include Questions
     include Professions
     include Items
+
+    attr_reader :person
+
+    def initialize(person)
+      @person = person
+    end
+
+    def weapon
+      person.weapon
+    end
 
     def self.available
       all.reject do |profession|

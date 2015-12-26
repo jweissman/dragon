@@ -11,17 +11,21 @@ module Dragon
     attr_accessor :gender, :age, :race, :subtype
     attr_accessor :activity
 
+    def initialize(name, profession=Profession.available.sample, race=Race.types.sample)
+      @profession = profession.new(self)
+      @race = race.new
+      super(name, subtype: Subtype.generate_for(@race))
+    end
+
     def self.generate(
       name: Name.generate,
       profession: Profession.available.sample,
       age: (20..65).to_a.sample,
       race: Race.types.sample
     )
-      person = new(name)
-      person.profession = profession.new
-      person.gender     = %w[ male female other ].sample
-      person.race       = race.new
-      person.subtype    = Subtype.generate_for(person.race)
+      person         = new(name, profession, race)
+      person.gender  = %w[ male female other ].sample
+      person.age     = age
       person
     end
 
@@ -93,31 +97,45 @@ module Dragon
     end
 
     def base_modifier
-      race.base_modifier + subtype.base_modifier
+      super + 
+        race.base_modifier +
+        profession.base_modifier
     end
 
     def calm_modifier
-      race.calm_modifier + subtype.calm_modifier
+      super +
+        race.calm_modifier +
+        profession.calm_modifier
     end
 
     def focus_modifier
-      race.focus_modifier + subtype.focus_modifier
+      super +
+        race.focus_modifier +
+        profession.focus_modifier
     end
 
     def intellect_modifier
-      race.intellect_modifier + subtype.intellect_modifier
+      super + 
+        race.intellect_modifier +
+        profession.intellect_modifier
     end
 
     def coordination_modifier
-      race.coordination_modifier + subtype.coordination_modifier
+      super + 
+        race.coordination_modifier +
+        profession.coordination_modifier
     end
 
     def resilience_modifier
-      race.resilience_modifier + subtype.resilience_modifier
+      super + 
+        race.resilience_modifier +
+        profession.resilience_modifier
     end
 
     def power_modifier
-      race.power_modifier + subtype.power_modifier
+      super +
+        race.power_modifier +
+        profession.power_modifier
     end
   end
 end

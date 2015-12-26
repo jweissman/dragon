@@ -37,7 +37,7 @@ module Dragon
     end
 
     def choose_job(player)
-      professions = Profession.adventuring.map(&:new)
+      professions = Profession.adventuring.map { |p| p.new(player) } #(&:new)
       profession_labels = professions.inject({}) do |hash, profession|
         hash[profession] = profession.type
         hash

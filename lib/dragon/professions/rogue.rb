@@ -7,8 +7,12 @@ module Dragon
         @default_weapon ||= Dagger.new
       end
 
-      def resilience_range
-        (11..13)
+      def power_range
+        (12..14)
+      end
+
+      def coordination_range
+        (15..18)
       end
     end
   end

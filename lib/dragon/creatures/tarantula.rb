@@ -1,8 +1,8 @@
 module Dragon
   module Creatures
     class Tarantula < Arachnid
-      def resilence_range
-        (4..6)
+      def self.size_class
+        Large
       end
     end
   end

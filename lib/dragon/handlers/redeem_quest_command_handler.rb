@@ -4,10 +4,18 @@ module Dragon
       def handle(command)
         quest = command.quest
 
-        player.inventory.push quest.reward
+        player.inventory.push quest.item_rewards
+        player.xp += quest.xp_reward
+        player.bounty += 
+
         player.quests -= [quest]
 
-        QuestRedeemedEvent.new(quest: quest)
+        events = [ QuestRedeemedEvent.new(quest: quest) ]
+        if player.xp > player.xp_for_upgrade
+          events.push(LevelUpRequirementsMetEvent.new(player: player))
+        end
+
+        events
       end
     end
   end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'dragon/single_player_driver'
 
-describe "Dragon" do
+describe "Dragon", speed: 'slow' do
   context 'should play a game which' do
     before do
       expect(Dragon.single_player).to receive(:play)

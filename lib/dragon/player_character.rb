@@ -15,13 +15,19 @@ module Dragon
       @quests = []
       @gold   = 2_000
       @xp     = 0
-      @profession = Profession.adventuring.sample.new
+      @profession = Profession.adventuring.sample.new(self)
 
       super(name, *args)
     end
 
     def self.generate(profession: Profession.adventuring.sample)
       super(profession: profession)
+    end
+
+    def accessories
+      @accessories ||= Accessory.types.
+        map { |t| { t.new.type => [t.new] } }.
+        reduce(&:merge)
     end
 
     def chance_of_hitting(*)

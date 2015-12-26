@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe Enemy do
-  let(:entity) { instance_double("Entity") }
-  subject(:enemy) { Enemy.new(entity) }
+  let(:entity) { instance_double("Entity", challenge_rating: 1) }
+  subject(:enemy) do
+    Enemy.new(entity)
+  end
 
   it 'should have an entity' do
     expect(enemy.entity).to eq(entity)

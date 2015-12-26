@@ -7,8 +7,12 @@ module Dragon
         @default_weapon ||= WarHammer.new
       end
 
-      def resilience_range
-        (8..10)
+      def focus_range
+        (12..14)
+      end
+
+      def intellect_range
+        (15..18)
       end
     end
   end

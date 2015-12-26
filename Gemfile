@@ -1,4 +1,4 @@
-ruby '2.2.3'
+ruby '2.3.0'
 source 'https://rubygems.org'
 
 gemspec
@@ -12,7 +12,4 @@ gem 'slim'
 group :development do
   gem 'rake'
   gem 'pry'
-  gem 'guard-shotgun', :git => 'https://github.com/rchampourlier/guard-shotgun.git'
 end
-
-

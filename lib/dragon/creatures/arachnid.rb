@@ -3,8 +3,8 @@ module Dragon
     class Arachnid < Creature
       tagged :poison, :dark, :evil
 
-      def resilience_range
-        (2..3)
+      def self.size_class
+        Tiny
       end
     end
   end

@@ -1,15 +1,17 @@
 module Dragon
   class Race < Entity
-    def base_modifier
-      0
-    end
+    include CombatAttributes
 
-    def power_modifier;        base_modifier end
-    def intellect_modifier;    base_modifier end
-    def coordination_modifier; base_modifier end
-    def resilience_modifier;   base_modifier end
-    def focus_modifier;        base_modifier end
-    def calm_modifier;         base_modifier end
+    # def base_modifier
+    #   0
+    # end
+
+    # def power_modifier;        base_modifier end
+    # def intellect_modifier;    base_modifier end
+    # def coordination_modifier; base_modifier end
+    # def resilience_modifier;   base_modifier end
+    # def focus_modifier;        base_modifier end
+    # def calm_modifier;         base_modifier end
   end
 
   class Human    < Race

@@ -7,12 +7,8 @@ module Dragon
         @default_weapon ||= Fists.new
       end
 
-      def resilience_range
-        (12..15)
-      end
-
-      def intellect_range
-        (7..8)
+      def self.size_class
+        Small
       end
     end
   end

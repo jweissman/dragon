@@ -7,7 +7,7 @@ module Dragon
         coordination: coordination,
         resilience: resilience,
         focus: focus,
-        calm: calm
+        calm: calm,
       }
     end
 
@@ -46,8 +46,12 @@ module Dragon
       power + intellect + coordination + resilience + focus + calm
     end
 
+    # normalize for 0-20 roughly matching levels
     def challenge_rating
-      base_challenge_rating + attack_rating.end + defense_rating.end
+      ((
+        ((base_challenge_rating / 6).floor +
+         (attack_rating.end + defense_rating.end))
+      ) / 2) - 5
     end
 
     def base_attack_rating

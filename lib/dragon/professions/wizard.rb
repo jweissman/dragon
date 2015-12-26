@@ -8,23 +8,23 @@ module Dragon
       end
 
       def focus_range
-        (15..18)
+        (12..14)
       end
 
       def intellect_range
         (15..18)
       end
 
-      def calm_range
-        (13..16)
+      def power_modifier
+        super + staff_bonus
       end
 
-      def resilience_range
-        (10..12)
-      end
-
-      def power_range
-        (10..12)
+      def staff_bonus
+        if weapon.is_a?(Staff)
+          modifier_for(intellect)
+        else
+          -2
+        end
       end
     end
   end

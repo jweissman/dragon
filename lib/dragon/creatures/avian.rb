@@ -6,6 +6,10 @@ module Dragon
       def default_weapon
         Talons.new
       end
+
+      def self.size_class
+        VerySmall
+      end
     end
   end
 end

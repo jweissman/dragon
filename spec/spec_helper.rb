@@ -14,3 +14,9 @@ include Dragon::Scenes
 include Dragon::Buildings
 
 include Dragon::Items
+
+include Dragon::Professions
+
+def under_test?
+  true
+end

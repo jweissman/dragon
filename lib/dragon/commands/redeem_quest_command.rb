@@ -8,7 +8,7 @@ module Dragon
       end
 
       def describe
-        "#{quest.requestor.name} gives you #{quest.reward.describe} for quest #{quest.label}"
+        "#{quest.requestor.name} gives you #{quest.describe_rewards} for quest #{quest.label}"
       end
 
       def label

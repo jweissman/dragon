@@ -48,24 +48,71 @@ module Dragon
   end
 
   ##
-  class CreatureSubtype < Subtype; end
+  class CreatureSubtype < Subtype
+    include CombatAttributes
+  end
 
-  class Glowing < CreatureSubtype; end
-  class Furious < CreatureSubtype; end
-  class Zombie < CreatureSubtype; tagged :evil end
+  class Glowing < CreatureSubtype
+    def focus_modifier
+      2
+    end
+  end
+
+  class Furious < CreatureSubtype
+    def calm_modifier
+      -2
+    end
+  end
+
+  class Zombie < CreatureSubtype
+    tagged :evil
+
+    def base_modifier
+      -1
+    end
+  end
+
+  class Toxic < CreatureSubtype
+    tagged :poison
+
+    def power_modifier
+      2
+    end
+  end
+
+  class Demon < CreatureSubtype
+    tagged :evil
+
+    def base_modifier
+      1
+    end
+  end
+
+  class Clockwork < CreatureSubtype
+    tagged :mechanical
+
+    def coordination_modifier
+      2
+    end
+
+    def resilience_modifier
+      3
+    end
+  end
 
   ##
   class RacialSubtype < Subtype
-    def base_modifier
-      0
-    end
+    include CombatAttributes
+    # def base_modifier
+    #   0
+    # end
 
-    def power_modifier;        base_modifier end
-    def intellect_modifier;    base_modifier end
-    def coordination_modifier; base_modifier end
-    def resilience_modifier;   base_modifier end
-    def focus_modifier;        base_modifier end
-    def calm_modifier;         base_modifier end
+    # def power_modifier;        base_modifier end
+    # def intellect_modifier;    base_modifier end
+    # def coordination_modifier; base_modifier end
+    # def resilience_modifier;   base_modifier end
+    # def focus_modifier;        base_modifier end
+    # def calm_modifier;         base_modifier end
   end
 
   class Wild < RacialSubtype

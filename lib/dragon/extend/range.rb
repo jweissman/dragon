@@ -8,6 +8,10 @@ class Range
       raise "Can't add #{value.class.name} to range"
     end
   end
+
+  def to_s
+    "#{self.begin}-#{self.end}"
+  end
 end
 
 

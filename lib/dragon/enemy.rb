@@ -16,7 +16,7 @@ module Dragon
 
     def self.generate(place, challenge_level=1)
       entity = sample_percentages(type_percentages(place)).call
-      until challenge_rating_range(challenge_level).include?(entity.challenge_rating)
+      until entity.challenge_rating == challenge_level # challenge_rating_range(challenge_level).include?(entity.challenge_rating)
         entity = sample_percentages(type_percentages(place)).call
       end
       new(entity)

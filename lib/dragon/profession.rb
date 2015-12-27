@@ -6,7 +6,7 @@ module Dragon
     include Professions
     include Items
 
-    attr_reader :person
+    attr_accessor :person
 
     def initialize(person)
       @person = person
@@ -22,6 +22,10 @@ module Dragon
           person.profession.is_a?(profession)
         end
       end
+    end
+
+    def base_range
+      0..0 # no bonus by default
     end
 
     def level

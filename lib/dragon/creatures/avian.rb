@@ -7,6 +7,14 @@ module Dragon
         Talons.new
       end
 
+      def self.spirit_class
+        VeryHighSpirited
+      end
+
+      def self.mind_class
+        Simple
+      end
+
       def self.size_class
         VerySmall
       end

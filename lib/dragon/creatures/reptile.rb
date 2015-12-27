@@ -7,8 +7,16 @@ module Dragon
         Scales.new
       end
 
+      def self.mind_class
+        Dimwitted
+      end
+
       def self.size_class
-        VerySmall
+        Small
+      end
+
+      def self.spirit_class
+        VeryLowSpirited
       end
     end
   end

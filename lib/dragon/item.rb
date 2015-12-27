@@ -3,7 +3,7 @@ module Dragon
     attr_reader :quality, :cost, :material
 
     def initialize(name=nil,
-                   quality:  Normal.new, #self.class.qualities.sample.new,
+                   quality:  Normal.new,
                    material: self.class.materials.sample.new)
       @material  = material
       @quality   = quality
@@ -30,7 +30,7 @@ module Dragon
       (prefix.nil? ? '' : (prefix+' ')) + content
     end
 
-    def self.generate(exclude_types: [], only_types: [])
+    def self.generate(exclude_types: [], only_types: [], material: materials.sample.new)
       not_excluded_types = node_types.reject do |type|
         if exclude_types.empty?
           false
@@ -51,7 +51,7 @@ module Dragon
         end
       end
 
-      included_types.sample.new
+      included_types.sample.new(material: material)
     end
 
     def self.qualities
@@ -60,12 +60,7 @@ module Dragon
     end
 
     def self.materials
-      [] # override..
+      [ Wood, Stone ] # should really override..
     end
-
-
-    # def self.colors
-    #   Color.all
-    # end
   end
 end

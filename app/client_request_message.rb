@@ -45,7 +45,7 @@ module Dragon
       end
 
       if profession_record
-        ps['profession'] = profession.new
+        ps['profession'] = profession
       end
 
       if race_record
@@ -66,7 +66,7 @@ module Dragon
 
     def find_adventuring_profession_with_name(name)
       Profession.adventuring.detect do |p|
-        p.new.type == name
+        p.new(nil).type == name
       end
     end
 

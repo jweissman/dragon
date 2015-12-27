@@ -5,19 +5,18 @@ module Dragon
     extend Forwardable
     def_delegators :engine, :place
 
-    def_delegators :profession, :base_range, :level, :xp_for_upgrade,
-      :power_range, :intellect_range, :coordination_range,
-      :resilience_range, :focus_range, :calm_range
+    def_delegators :profession, :level, :xp_for_upgrade
 
     attr_accessor :action, :engine, :quests, :gold, :xp
 
-    def initialize(name=nil, *args)
+    def initialize(name=Name.generate, 
+                  profession=Profession.adventuring.sample,
+                  *args)
       @quests = []
       @gold   = 2_000
       @xp     = 0
-      @profession = Profession.adventuring.sample.new(self)
 
-      super(name, *args)
+      super(name, profession, *args)
     end
 
     def self.generate(profession: Profession.adventuring.sample)
@@ -26,8 +25,13 @@ module Dragon
 
     def accessories
       @accessories ||= Accessory.types.
-        map { |t| { t.new.type => [t.new] } }.
+        map { |t| { t.new.type => [t.new(material: default_material_for(t))] } }.
         reduce(&:merge)
+    end
+
+    def default_material_for(type)
+      return Iron.new if type == Ring || type == Necklace # || type == Helm
+      Leather.new
     end
 
     def chance_of_hitting(*)

@@ -18,7 +18,7 @@ module Dragon
           gender: player.gender,
           race: player.race,
           subtype: player.subtype,
-          profession: player.profession
+          profession: player.profession.class
         )
       end
 

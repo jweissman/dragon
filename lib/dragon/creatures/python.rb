@@ -2,7 +2,7 @@ module Dragon
   module Creatures
     class Python < Snake
       def self.size_class
-        Medium
+        Large
       end
     end
   end

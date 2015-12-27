@@ -2,7 +2,7 @@ module Dragon
   module Creatures
     class Imp < Hominid
       def self.size_class
-        VerySmall
+        Small
       end
     end
   end

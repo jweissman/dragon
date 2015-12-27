@@ -3,16 +3,12 @@ module Dragon
     class Monk < Adventurer
       tagged :holy, :praying, :kneeling, :religious, :clergy
 
+      primary :focus
+      secondary :intellect
+      weak :resilience
+
       def default_weapon
         @default_weapon ||= Fists.new
-      end
-
-      def resilience_range
-        (12..14)
-      end
-
-      def focus_range
-        (15..18)
       end
 
       def power_modifier
@@ -21,7 +17,7 @@ module Dragon
 
       def fist_bonus
         if weapon.is_a?(Fists)
-          (2*modifier_for(focus))
+          modifier_for(person.focus)
         else
           -2
         end

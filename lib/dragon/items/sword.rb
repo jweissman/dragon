@@ -6,7 +6,7 @@ module Dragon
       end
 
       def base_damage
-        (3..10)
+        (2..10)
       end
     end
   end

@@ -2,7 +2,7 @@ module Dragon
   module Creatures
     class Rodent < Mammal
       def self.size_class
-        Tiny
+        VerySmall
       end
     end
   end

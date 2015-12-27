@@ -1,10 +1,8 @@
 module Dragon
   module Creatures
-    class Bear < Mammal
-      tagged :aboreal, :woods, :trees
-
+    class Werewolf < Canid
       def self.mind_class
-        Slow
+        VerySmart
       end
 
       def self.size_class

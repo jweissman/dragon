@@ -1,5 +1,9 @@
 module Dragon
   module Creatures
-    class Asp < Snake; end
+    class Asp < Snake
+      def self.spirit_class
+        GoodSpirited
+      end
+    end
   end
 end

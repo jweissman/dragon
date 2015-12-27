@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Clothing < Armor
       def self.materials
-        [ Cloth, Leather ]
+        [ Cloth ]
       end
 
       def base_cost
@@ -10,7 +10,7 @@ module Dragon
       end
 
       def base_absorption
-        (0..1)
+        (0..0)
       end
     end
   end

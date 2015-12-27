@@ -11,10 +11,14 @@ module Dragon
     attr_accessor :gender, :age, :race, :subtype
     attr_accessor :activity
 
-    def initialize(name, profession=Profession.available.sample, race=Race.types.sample)
+    def initialize(name=Name.generate, profession=Profession.available.sample, race=Race.types.sample)
       @profession = profession.new(self)
-      @race = race.new
+      @race       = race.new
       super(name, subtype: Subtype.generate_for(@race))
+    end
+    
+    def self.default_weapon_material
+      Iron.new
     end
 
     def self.generate(
@@ -95,6 +99,36 @@ module Dragon
       base = [ Resting, Reading ]
       base + profession.activities
     end
+
+    def base_range
+      super + profession.base_range
+    end
+
+    def calm_range
+      super + profession.calm_range
+    end
+
+    def focus_range
+      super + profession.focus_range
+    end
+
+    def intellect_range
+      super + profession.intellect_range
+    end
+
+    def coordination_range
+      super + profession.coordination_range
+    end
+
+    def resilience_range
+      super + profession.resilience_range
+    end
+
+    def power_range
+      super + profession.power_range
+    end
+
+    ##
 
     def base_modifier
       super + 

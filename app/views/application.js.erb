@@ -3,25 +3,54 @@
   var uri      = scheme + window.document.location.host + "/";
   var ws       = null;
 
+  var gotResponse = true;
+
+  function throttle(fn, threshhold, scope) {
+    threshhold || (threshhold = 250);
+    var last,
+        deferTimer;
+    return function () {
+      var context = scope || this;
+  
+      var now = +new Date,
+          args = arguments;
+      if (last && now < last + threshhold) {
+        // hold on to it
+        clearTimeout(deferTimer);
+        deferTimer = setTimeout(function () {
+          last = now;
+          fn.apply(context, args);
+        }, threshhold);
+      } else {
+        last = now;
+        fn.apply(context, args);
+      }
+    };
+  }
+
   var handleWebsocketMessage = function(message) {
     var data = JSON.parse(message.data);
     var content = data.content;
 
     $(".content").html(content);
     $(".action-choice").click(sendFormOverWebsocket);
+
+    gotResponse = true;
   };
 
   var sendFormOverWebsocket = function(event) {
     console.log("event", event);
-
     event.preventDefault();
-    var context = $(this).context;
-    var action = context.value.replace(/^([0-9]+: )/, "")
-    var form = $(".input-form");
-    var data = (form.serializeArray());
-    data.push({name: 'action', value: action});
-    var stringifiedData = JSON.stringify(data);
-    ws.send(stringifiedData);
+    if (gotResponse) {
+      var context = $(this).context;
+      var action = context.value.replace(/^([0-9]+: )/, "")
+      var form = $(".input-form");
+      var data = (form.serializeArray());
+      data.push({name: 'action', value: action});
+      var stringifiedData = JSON.stringify(data);
+      ws.send(stringifiedData);
+      gotResponse = false;
+    }
   };
 
   var handleKeypress = function(evt) {
@@ -44,7 +73,7 @@
 
     $(".action-choice").click(sendFormOverWebsocket);
 
-    $(document).keypress(handleKeypress);
+    $(document).keypress(throttle(handleKeypress, 500));
   };
 
   var init_ws = function() {

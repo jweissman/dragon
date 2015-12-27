@@ -1,72 +1,12 @@
 module Dragon
-  class SizeClass
-    include CombatAttributes
-
-    # really 'the' base range for creatures at this point
-    # should re-architect so that's a bit clearer
-    def base_range
-      (6..8)
-    end
-
-    def body_range
-      (10..12)
-    end
-
-    def power_range
-      body_range
-    end
-
-    def resilience_range
-      body_range
-    end
-  end
-
-  class Tiny < SizeClass
-    def body_range
-      (4..6)
-    end
-  end
-
-  class VerySmall < SizeClass
-    def body_range
-      (6..8)
-    end
-  end
-
-  class Small < SizeClass
-    def body_range
-      (8..10)
-    end
-  end
-
-  class Medium < SizeClass
-  end
-
-  class Large < SizeClass
-    def body_range
-      (12..14)
-    end
-  end
-
-  class VeryLarge < SizeClass
-    def body_range
-      (14..16)
-    end
-  end
-
-  class Huge < SizeClass
-    def body_range
-      (16..18)
-    end
-  end
-
-
   class Creature < Combatant
     extend Forwardable
 
     def_delegators :subtype, :base_modifier, :calm_modifier, :focus_modifier, :intellect_modifier, :coordination_modifier, :resilience_modifier, :power_modifier
 
-    def_delegators :size_class, :base_range, :calm_range, :focus_range, :intellect_range, :coordination_range, :resilience_range, :power_range
+    def_delegators :size_class, :resilience_range, :power_range
+    def_delegators :mind_class, :intellect_range,  :focus_range
+    def_delegators :spirit_class, :calm_range, :coordination_range
 
     def initialize(name=nil, subtype: nil)
       @subtype    = subtype
@@ -83,6 +23,26 @@ module Dragon
 
     def size_class
       @size_class ||= self.class.size_class.new
+    end
+
+    def mind_class
+      @mind_class ||= self.class.mind_class.new
+    end
+
+    def spirit_class
+      @spirit_class ||= self.class.spirit_class.new
+    end
+
+    def self.mind_class
+      Simple
+    end
+
+    def self.size_class
+      Medium
+    end
+
+    def self.spirit_class
+      GoodSpirited
     end
 
     def default_weapon

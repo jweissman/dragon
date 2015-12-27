@@ -51,7 +51,12 @@ require 'dragon/world'
 require 'dragon/attack_result'
 require 'dragon/combatant'
 
+require 'dragon/size_class'
+require 'dragon/spirit_class'
+require 'dragon/intelligence_class'
+
 require 'dragon/creature'
+
 require_all 'lib/dragon/creatures'
 
 require 'dragon/question'
@@ -113,30 +118,9 @@ module Dragon
   PLAYER_ACTION_PROMPT  = "What would you like to do?"
 
   RANDOM_ENCOUNTER_RATE = 0.28
-  
+
   def self.introspect
     inspector = Support::Inspector.new
-    puts
-    puts "(introspecting over the Dragon engine as currently configured, please wait)"
-    puts
-    puts
-    puts "----> Creatures (challenge rating)"
-    puts
-    inspector.creatures
-    puts
-    puts
-    puts "----> GATHERING ALL TAGS..."
-    puts
-    inspector.tags
-    puts
-    puts "----> CITIES : BUILDINGS"
-    puts
-    inspector.cities
-    puts
-    puts "----> BUILDINGS : ROOMS"
-    puts
-    inspector.buildings
-    puts
-   puts
+    inspector.introspect
   end
 end

@@ -11,7 +11,7 @@ module Dragon
       @type = type
       @subtype = subtype
       @wonder = wonder
-      @cities = City.generate_list(4, world: self)
+      @cities = City.generate_list(1, world: self)
       @created_at = Time.now
     end
 

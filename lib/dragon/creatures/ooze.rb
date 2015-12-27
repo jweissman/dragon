@@ -3,6 +3,14 @@ module Dragon
     class Ooze < Creature
       tagged :evil
 
+      def self.spirit_class
+        LowSpirited
+      end
+
+      def self.mind_class
+        Dimwitted
+      end
+
       def self.size_class
         VerySmall
       end

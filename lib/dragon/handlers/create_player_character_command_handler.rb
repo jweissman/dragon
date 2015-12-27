@@ -9,7 +9,7 @@ module Dragon
         engine.player.gender     = command.gender
         engine.player.race       = command.race
         engine.player.subtype    = command.subtype
-        engine.player.profession = command.profession
+        engine.player.profession = command.profession.new(engine.player)
 
         transition_to exploration
 

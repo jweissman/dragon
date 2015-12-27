@@ -21,12 +21,21 @@ module Dragon
       end
 
       Thread.new do
-        describe
-        engine.prompt_player
+        begin
+          describe
+          engine.prompt_player
+        rescue => ex
+          puts ex.message
+          puts ex.backtrace
+        end
       end
 
       @params = {} # clear out params...
       self
+    rescue => ex
+      puts ex.message
+      puts ex.backtrace
+      raise ex
     end
 
     def handle(message)

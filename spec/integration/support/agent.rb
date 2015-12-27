@@ -37,7 +37,7 @@ class Agent
   def create_character_actions(actions)
     actions.detect do |action|
       action.is_a?(GeneratePlayerCharacterCommand) ||
-        (action.is_a?(CreatePlayerCharacterCommand) && action.profession.is_a?(profession_to_select))
+        (action.is_a?(CreatePlayerCharacterCommand) && action.profession == profession_to_select)
     end
   end
 end

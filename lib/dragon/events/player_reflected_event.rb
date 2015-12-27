@@ -58,7 +58,7 @@ module Dragon
       end
 
       def describe
-        description = "You are #{player.describe}"
+        description = "You are #{player.describe}."
 
         description += " You have #{player.xp} experience points (you need #{player.xp_for_upgrade} XP to advance to level #{player.level+1})."
 
@@ -66,7 +66,7 @@ module Dragon
         description += " You are wearing #{describe_gear} (your defense rating is #{player.defense_rating})."
 
         player.stats.each do |name, value|
-          description += " Your #{name} is #{describe_stat(value)} (#{value})."
+          description += " Your #{name} is #{player.quality_label_for(value)} (#{value})."
         end
 
         description += " You have #{player.gold} gold pieces." if player.gold > 0
@@ -79,23 +79,23 @@ module Dragon
         ([player.armor] + player.accessories.values.flatten).map(&:describe).join(', ')
       end
 
-      def describe_stat(value)
-        case value
-        when 0..1 then 'terrible'
-        when 1..2 then 'awful'
-        when 2..4 then 'very poor'
-        when 4..6 then 'poor'
-        when 6..8 then 'fair'
-        when 8..10 then 'average'
-        when 10..12 then 'good'
-        when 12..14 then 'very good'
-        when 14..16 then 'excellent'
-        when 16..18 then 'superb'
-        when 18..19 then 'epic'
-        else
-          'indescribable'
-        end
-      end
+      # def describe_stat(value)
+      #   case value
+      #   when 0..1 then 'terrible'
+      #   when 1..2 then 'awful'
+      #   when 2..4 then 'very poor'
+      #   when 4..6 then 'poor'
+      #   when 6..8 then 'fair'
+      #   when 8..10 then 'average'
+      #   when 10..12 then 'good'
+      #   when 12..14 then 'very good'
+      #   when 14..16 then 'excellent'
+      #   when 16..18 then 'extraordinary'
+      #   when 18..19 then 'legendary'
+      #   else
+      #     'superb'
+      #   end
+      # end
     end
   end
 end

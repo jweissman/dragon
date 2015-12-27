@@ -1,10 +1,8 @@
 module Dragon
   module Creatures
-    class Turtle < Reptile
-      tagged :moon, :time, :earth
-
+    class Crow < Avian
       def self.size_class
-        Small
+        Tiny
       end
     end
   end

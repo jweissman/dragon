@@ -2,17 +2,13 @@ module Dragon
   module Professions
     class Soldier < Adventurer
       tagged :military, :army, :fighting, :brawling, :law
+      
+      primary :power
+      secondary :focus
+      weak :intellect
 
       def default_weapon
-        @default_weapon ||= Axe.new
-      end
-
-      def focus_range
-        (12..14)
-      end
-
-      def power_range
-        (15..18)
+        @default_weapon ||= Axe.new(material: person.class.default_weapon_material)
       end
     end
   end

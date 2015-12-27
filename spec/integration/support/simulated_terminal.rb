@@ -6,13 +6,13 @@ class SimulatedTerminal
   end
 
   def choose_action(player: nil, actions: nil)
-    # p [:actions, actions.map(&:label)]
+    #p [:actions, actions.map(&:label)]
     chosen_action = agent.pick_action(actions)
     player.action = chosen_action
   end
 
   def say(message, *)
-    # p [:message, message]
+    #p [:message, message]
   end
 end
 

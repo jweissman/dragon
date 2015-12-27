@@ -35,11 +35,15 @@ module Dragon
     def cost_multiplier
       0.6
     end
+
+    def strength
+      2
+    end
   end
 
   class Cloth < Material
     def strength
-      -1
+      0
     end
   end
 
@@ -48,9 +52,8 @@ module Dragon
       0.75
     end
 
-
     def strength
-      0
+      1
     end
   end
 
@@ -121,7 +124,6 @@ module Dragon
       2.5
     end
   end
-
 
   class Pearl < Material
     def cost_multiplier

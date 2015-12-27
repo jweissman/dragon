@@ -3,16 +3,12 @@ module Dragon
     class Warrior < Adventurer
       tagged :fighting, :brawling
 
+      primary :power
+      secondary :resilience
+      weak :calm
+
       def default_weapon
-        @default_weapon ||= Sword.new
-      end
-
-      def resilience_range
-        (12..14)
-      end
-
-      def power_range
-        (15..18)
+        @default_weapon ||= Sword.new(material: person.class.default_weapon_material)
       end
     end
   end

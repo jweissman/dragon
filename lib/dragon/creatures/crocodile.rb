@@ -4,6 +4,10 @@ module Dragon
       def self.size_class
         Large
       end
+
+      def self.mind_class
+        Simple
+      end
     end
   end
 end

@@ -6,7 +6,7 @@ module Dragon
       end
 
       def base_damage
-        (3..8)
+        (1..6)
       end
 
       def base_cost

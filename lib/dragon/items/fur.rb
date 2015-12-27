@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Fur < NaturalArmor
       def base_absorption
-        (2..3)
+        (3..5)
       end
     end
   end

@@ -1,8 +1,12 @@
 module Dragon
   module Creatures
-    class Canid < Mammal
+    class Kobold < Hominid
       def self.size_class
-        Medium
+        Tiny
+      end
+
+      def self.mind_class
+        Slow
       end
 
       def self.spirit_class

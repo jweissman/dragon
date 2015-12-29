@@ -15,40 +15,23 @@ module Dragon
     end
 
     def self.generate(place, challenge_level=1)
-      entity = sample_percentages(type_percentages(place)).call
-      until entity.challenge_rating == challenge_level # challenge_rating_range(challenge_level).include?(entity.challenge_rating)
-        entity = sample_percentages(type_percentages(place)).call
-      end
-      new(entity)
+      creature = generate_creature(place, challenge_level)
+      new(creature)
     end
 
-    def self.challenge_rating_range(challenge_level)
-      case challenge_level
-        when 1..5   then 0..5
-        when 6..10  then 5..10
-        when 11..15 then 10..15
-        when 15..20 then 15..20
-        else
-          20..1_000
-      end
-    end
+    def self.generate_creature(place, challenge_level)
 
-    def self.type_percentages(place)
-      if place.class.populated?
-        {
-          25 => -> { generate_creature(place) },
-          75 => -> { Person.generate }
-        }
-      else
-        {
-          85 => -> { generate_creature(place) },
-          15 => -> { Person.generate }
-        }
+      # types = place.class.associated(Creature) 
+      types = Creature.types(exclude_types: [Person]) # if types.empty?
+      
+      types.reject! do |type|
+        # cr = (Array.new(10) { type.new }.map(&:challenge_rating).reduce(&:+) / 10.0).floor
+        type.new.challenge_rating > challenge_level - 1
       end
-    end
 
-    def self.generate_creature(place)
-      Creature.generate(place: place)
+      types.sample.new
+
+      # Creature.generate(place: place, type: types.sample)
     end
   end
 end

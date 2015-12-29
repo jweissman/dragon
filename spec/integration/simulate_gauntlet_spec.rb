@@ -7,7 +7,7 @@ describe "a simulated gauntlet", speed: 'slow' do
   end
 
   let(:world) { @world }
-  let(:battles) { 20 }
+  let(:battles) { 50 }
 
   context 'for profession' do
     Profession.adventuring.each do |profession|

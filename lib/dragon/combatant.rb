@@ -80,12 +80,10 @@ module Dragon
     end
 
     def attack_damage_against(target)
-      damage = attack_rating.to_a.sample - (target.defense_rating.to_a.sample)
-      damage > 0 ? damage : 1
-    end
-
-    def chance_of_hitting(target)
-      0.5
+      base   = attack_rating.to_a.sample
+      absorb = (target.defense_rating.to_a.sample / 2).floor
+      adjusted = (base - absorb)
+      adjusted > 0 ? adjusted : 0
     end
 
     def hp
@@ -93,11 +91,11 @@ module Dragon
     end
 
     def xp
-      @xp ||= 1 + (1.15 * ((1+challenge_rating) ** 2)).floor
+      @xp ||= 10 + (1.85 * ((2+challenge_rating) ** 3)).floor
     end
 
     def bounty
-      @bounty ||= 3 + (2.5 * ((1+challenge_rating) ** 2)).floor
+      @bounty ||= 3 + (2.5 * ((1+challenge_rating) ** 4)).floor
     end
   end
 end

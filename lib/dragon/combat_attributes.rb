@@ -1,4 +1,5 @@
 module Dragon
+  # TODO break some of this apart..
   module CombatAttributes
     def stats
       {
@@ -24,34 +25,35 @@ module Dragon
 
     def quality_label_for(value)
       case value
-      when 0..1 then :terrible
-      when 1..2 then :awful
-      when 2..4 then :very_poor
-      when 4..6 then :poor
-      when 6..8 then :fair
-      when 8..10 then :average
-      when 10..12 then :good
-      when 12..14 then :excellent
-      when 14..16 then :extraordinary
-      when 16..18 then :legendary
-      else
-        :superb
+      when 0..0    then :terrible
+      when 1..2    then :awful
+      when 3..4    then :very_poor
+      when 5..6    then :poor
+      when 7..8    then :fair
+      when 9..10   then :average
+      when 10..11  then :good
+      when 12..13  then :great
+      when 14..15  then :excellent
+      when 16..17  then :extraordinary
+      when 18..19  then :superb
+      when 20..100 then :legendary
       end
     end
 
     def modifier_for(value)
       case quality_label_for(value)
-      when :terrible      then -5
-      when :awful         then -4
-      when :very_poor     then -3
-      when :poor          then -2
-      when :fair          then -1
-      when :average       then 0
-      when :good          then 1
-      when :excellent     then 2
-      when :extraordinary then 3
-      when :legendary     then 4
-      when :superb        then 5
+      when :terrible         then -5
+      when :awful            then -4
+      when :very_poor        then -3
+      when :poor             then -2
+      when :fair             then -1
+      when :average          then 0
+      when :good             then 1
+      when :great            then 2
+      when :excellent        then 3
+      when :extraordinary    then 4
+      when :superb           then 5
+      when :legendary        then 6
       end
     end
 
@@ -59,13 +61,8 @@ module Dragon
       [ power_range, intellect_range, coordination_range, resilience_range, focus_range, calm_range ].map(&:end).inject(&:+) / 6.0
     end
 
-    def base_challenge_rating
-      ((stat_average * 1.1) - 9).floor
-    end
-
-    # normalize for 0-20 roughly matching levels
     def challenge_rating
-      base_challenge_rating
+      ((stat_average * 1.1) - 9).floor
     end
 
     def base_attack_rating
@@ -73,7 +70,7 @@ module Dragon
     end
 
     def attack_rating
-      base_attack_rating + modifier_for(power) + modifier_for(focus)
+      base_attack_rating + modifier_for(power)
     end
 
     def base_defense_rating
@@ -89,7 +86,8 @@ module Dragon
     end
 
     def chance_of_hitting(target)
-      accuracy / target.resistance.to_f
+      1.0
+      # accuracy / target.resistance.to_f
     end
 
     # really a property of a weapon (and maybe size class of target?)
@@ -111,7 +109,7 @@ module Dragon
     end
 
     def max_hp
-      (body * 0.65).floor
+      (body * 1.25).floor
     end
 
     def body

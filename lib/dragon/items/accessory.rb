@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Accessory < Equipment
       def self.materials
-        [ Steel, Bronze, Iron, Leather ]
+        [ Steel, Iron, Leather ]
       end
 
       def self.maximum_equippable

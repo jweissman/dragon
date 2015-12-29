@@ -9,11 +9,11 @@ module Dragon
     end
 
     def self.basic
-      [ Wood, Iron, Stone, Bronze ]
+      [ Wood, Iron, Stone ]
     end
 
     def self.metallic
-      [ Iron, Bronze, Steel, Gold, Silver, Copper ]
+      [ Iron, Steel, Gold, Silver, Copper ]
     end
 
     def self.gemstone
@@ -27,17 +27,7 @@ module Dragon
     end
 
     def strength
-      1
-    end
-  end
-
-  class Stone < Material
-    def cost_multiplier
-      0.6
-    end
-
-    def strength
-      2
+      0
     end
   end
 
@@ -47,39 +37,40 @@ module Dragon
     end
   end
 
-  class Leather < Material
+  class Flesh < Material
     def cost_multiplier
-      0.75
+      0.15
     end
 
     def strength
-      1
-    end
-  end
-
-  class Bronze < Material
-    def cost_multiplier
-      0.8
-    end
-
-    def strength
-      2
+      -1
     end
   end
 
   class Bone < Material
     def cost_multiplier
-      0.9
+      0.4
     end
 
     def strength
-      1
+      0
     end
   end
 
-  class Flesh < Material
+
+  class Stone < Material
     def cost_multiplier
-      0.15
+      0.6
+    end
+
+    def strength
+      0
+    end
+  end
+
+  class Leather < Material
+    def cost_multiplier
+      0.65
     end
 
     def strength
@@ -93,7 +84,7 @@ module Dragon
     end
 
     def strength
-      2
+      1
     end
   end
 
@@ -103,7 +94,7 @@ module Dragon
     end
 
     def strength
-      3
+      2
     end
   end
 

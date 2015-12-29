@@ -4,6 +4,10 @@ module Dragon
       def self.mind_class
         Dimwitted
       end
+
+      def self.spirit_class
+        GoodSpirited
+      end
       
       def self.size_class
         VerySmall

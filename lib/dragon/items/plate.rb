@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Plate < Armor
       def self.materials
-        [ Iron, Bronze, Steel ]
+        [ Iron, Steel ]
       end
 
       def base_cost

@@ -15,7 +15,7 @@ module Dragon
 
   class Dimwitted < IntelligenceClass
     def mind_range
-      (8..8)
+      (7..8)
     end
   end
 
@@ -48,7 +48,7 @@ module Dragon
 
   class Genius < IntelligenceClass
     def mind_range
-      (17..18)
+      (19..20)
     end
   end
 end

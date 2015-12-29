@@ -2,7 +2,8 @@ module Dragon
   module Creatures
     class Hominid < Ape
       def default_weapon
-        @default_weapon ||= Weapon.generate(exclude_types: [ NaturalWeapon ], material: self.class.default_weapon_material)
+        @default_weapon ||= Weapon.generate(exclude_types: [ NaturalWeapon, GreatSword ], 
+                                            material: self.class.default_weapon_material)
       end
 
       def default_armor

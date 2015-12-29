@@ -10,7 +10,7 @@ module Dragon
       end
 
       def base_absorption
-        (0..0)
+        (0..1)
       end
     end
   end

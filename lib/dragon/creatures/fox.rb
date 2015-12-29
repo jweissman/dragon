@@ -3,8 +3,12 @@ module Dragon
     class Fox < Canid
       tagged :clever, :deception, :afterlife
 
+      def self.spirit_class
+        GoodSpirited
+      end
+
       def self.mind_class
-        VerySmart
+        Smart
       end
 
       def self.size_class

@@ -5,6 +5,10 @@ module Dragon
         Large
       end
 
+      def self.spirit_class
+        VeryHighSpirited
+      end
+
       def self.mind_class
         Simple
       end

@@ -1,9 +1,5 @@
 module Dragon
   module Creatures
-    class Rat < Rodent
-      def self.size_class
-        Tiny
-      end
-    end
+    class Rat < Rodent; end
   end
 end

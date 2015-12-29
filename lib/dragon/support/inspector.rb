@@ -66,9 +66,9 @@ module Dragon
           puts "====> challenge level #{challenge_level}"
           types.each do |type|
             creature = type.new
-            puts "#{creature.type.rjust(15,' ')} (#{challenge_rating_for(type)}) [#{creature.xp} xp] [#{creature.bounty} gold] <#{creature.attack_rating} atk/#{creature.defense_rating} def> -- #{creature.stats}"
+            puts "#{creature.type.rjust(15,' ')} (#{challenge_rating_for(type)}) [#{creature.xp} xp] [#{creature.bounty} gold] <#{creature.attack_rating} atk/#{creature.defense_rating} def> -- #{creature.class.mind_class} -- #{creature.class.spirit_class} -- #{creature.class.size_class}"
           end
-          end
+        end
       end
 
       def challenge_rating_for(type)

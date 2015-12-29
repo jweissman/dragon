@@ -9,7 +9,7 @@ module Dragon
 
     attr_accessor :action, :engine, :quests, :gold, :xp
 
-    def initialize(name=Name.generate, 
+    def initialize(name=Name.generate,
                   profession=Profession.adventuring.sample,
                   *args)
       @quests = []
@@ -25,13 +25,17 @@ module Dragon
 
     def accessories
       @accessories ||= Accessory.types.
-        map { |t| { t.new.type => [t.new(material: default_material_for(t))] } }.
+        map { |t| { t.new.type => [t.new(material: default_accessory_material_for(t))] } }.
         reduce(&:merge)
     end
 
-    def default_material_for(type)
-      return Iron.new if type == Ring || type == Necklace # || type == Helm
+    def default_accessory_material_for(type)
+      return Iron.new if type == Ring || type == Necklace || type == Helm
       Leather.new
+    end
+
+    def self.default_weapon_material
+      Iron.new
     end
 
     def chance_of_hitting(*)

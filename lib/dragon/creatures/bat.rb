@@ -4,7 +4,7 @@ module Dragon
       tagged :cave, :earth, :sky
 
       def self.mind_class
-        Dimwitted
+        Slow
       end
 
       def self.size_class

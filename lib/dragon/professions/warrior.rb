@@ -4,7 +4,7 @@ module Dragon
       tagged :fighting, :brawling
 
       primary :power
-      secondary :resilience
+      secondary :focus
       weak :calm
 
       def default_weapon

@@ -2,11 +2,11 @@ module Dragon
   module Items
     class Staff < Weapon
       def self.materials
-        [ Wood, Iron, Bronze, Steel ]
+        [ Wood, Iron, Steel ]
       end
 
       def base_damage
-        (1..6)
+        (1..3)
       end
 
       def base_cost

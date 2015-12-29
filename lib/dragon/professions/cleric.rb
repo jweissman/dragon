@@ -5,10 +5,10 @@ module Dragon
 
       primary :intellect
       secondary :calm
-      weak :resilience
+      weak :coordination
 
       def default_weapon
-        @default_weapon ||= WarHammer.new(material: person.class.default_weapon_material)
+        @default_weapon ||= WarHammer.new(material: Iron.new)
       end
     end
   end

@@ -1,16 +1,16 @@
 module Dragon
   module Creatures
-    class Crow < Avian
-      def self.spirit_class
-        HighSpirited
-      end
-
+    class Cyclops < Hominid
       def self.mind_class
-        Dimwitted
+        Slow
       end
 
       def self.size_class
-        Tiny
+        VeryLarge
+      end
+
+      def self.spirit_class
+        ExtremelySpirited
       end
     end
   end

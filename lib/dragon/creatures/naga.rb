@@ -1,16 +1,18 @@
 module Dragon
   module Creatures
-    class Frog < Amphibian
+    class Naga < Snake
+      tagged :water, :dark, :cavern
+
       def self.mind_class
-        Dimwitted
+        VerySmart
       end
 
       def self.size_class
-        Tiny
+        Large
       end
 
       def self.spirit_class
-        GoodSpirited
+        VeryHighSpirited
       end
     end
   end

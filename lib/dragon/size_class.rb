@@ -46,15 +46,21 @@ module Dragon
     end
   end
 
+  class Enormous < SizeClass
+    def body_range
+      (15..16)
+    end
+  end
+
   class Huge < SizeClass
     def body_range
-      (14..15)
+      (17..18)
     end
   end
 
   class Gigantic < SizeClass
     def body_range
-      (16..18)
+      (19..20)
     end
   end
 end

@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Boots < Accessory
       def base_cost
-        65
+        25
       end
 
       def base_absorption

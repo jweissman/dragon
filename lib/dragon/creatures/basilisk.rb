@@ -1,12 +1,14 @@
 module Dragon
   module Creatures
-    class Rodent < Mammal
-      def self.size_class
-        Tiny
-      end
+    class Basilisk < Snake
+      tagged :water, :stone
 
       def self.mind_class
-        Dimwitted
+        Smart
+      end
+
+      def self.size_class
+        Medium
       end
 
       def self.spirit_class

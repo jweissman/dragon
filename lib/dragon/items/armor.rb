@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Armor < Equipment
       def self.materials
-        [ Steel, Bronze, Iron, Leather ]
+        [ Steel,  Iron, Leather ]
       end
 
       def deflect_range

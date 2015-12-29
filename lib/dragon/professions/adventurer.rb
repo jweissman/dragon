@@ -20,12 +20,13 @@ module Dragon
     class Adventurer < Profession
       tagged :wandering, :quests
 
-      def default_weapon
-        @default_weapon ||= Sword.new
+      # adventurers get a little bump
+      def base_range
+        (1..2)
       end
 
       def self.primary(attr)
-        range_for(attr, 2..3)
+        range_for(attr, 3..4)
       end
 
       def self.secondary(attr)
@@ -37,7 +38,7 @@ module Dragon
       end
 
       def self.range_for(attr, range)
-        define_method("#{attr}_range") { range }
+        define_method("#{attr}_range") { range + base_range }
       end
     end
   end

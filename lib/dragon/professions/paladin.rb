@@ -8,7 +8,7 @@ module Dragon
       weak :calm
 
       def default_weapon
-        @default_weapon ||= GreatSword.new(material: person.class.default_weapon_material)
+        @default_weapon ||= Sword.new(material: person.class.default_weapon_material)
       end
     end
   end

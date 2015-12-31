@@ -1,26 +1,27 @@
 require 'spec_helper'
 
 describe Enemy do
-  let(:entity) { instance_double("Entity", challenge_rating: 1) }
-  subject(:enemy) do
-    Enemy.new(entity)
-  end
-
   it 'should have an entity' do
+    entity = instance_double Entity
+    enemy = Enemy.new(entity)
     expect(enemy.entity).to eq(entity)
   end
 
   describe '.generate' do
-    let(:generator) { -> { entity }}
+    let(:challenge_rating) { 1 }
 
-    let(:place) { instance_spy 'Place', class: place_type }
-    let(:place_type) { instance_double 'Place.class', populated?: false }
+    let(:creature_type) { class_double Creature, new: creature }
+    let(:creature) { instance_double Creature, challenge_rating: challenge_rating }
 
-    it 'should sample percentages' do
-      expect(Enemy).to receive(:sample_percentages).and_return(generator)
-      expect(Enemy).to receive(:new).with(entity).and_return(enemy)
+    let(:place) { instance_spy Place, class: place_type }
+    let(:place_type) { class_double Place, populated?: false, associated: [ creature_type ]  }
 
-      expect(described_class.generate(place)).to eq(enemy)
+    let(:level) { challenge_rating }
+    
+
+    it 'should produce creatures' do
+      expect(Enemy).to receive(:new).with(creature)
+      described_class.generate(place, level)
     end
   end
 end

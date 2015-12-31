@@ -20,7 +20,6 @@ module Dragon
     class Adventurer < Profession
       tagged :wandering, :quests
 
-      # adventurers get a little bump
       def base_range
         (1..2)
       end

@@ -4,7 +4,7 @@ class SimulatedTerminal
 
   def initialize(agent)
     @agent = agent
-    @log = Logger.new('simulation.log')
+    @log = Logger.new('log/simulation.log')
   end
 
   def choose_action(player: nil, actions: nil)

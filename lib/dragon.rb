@@ -4,6 +4,7 @@ end
 
 require 'pry' if under_test?
 
+require 'logger'
 require 'require_all'
 require 'forwardable'
 
@@ -38,7 +39,10 @@ require_all 'lib/dragon/rooms'
 require 'dragon/building'
 require_all 'lib/dragon/buildings'
 
+require 'dragon/material_strength'
 require 'dragon/material'
+require_all 'lib/dragon/materials'
+
 require 'dragon/quality'
 require 'dragon/item'
 require_all 'lib/dragon/items'
@@ -122,5 +126,9 @@ module Dragon
   def self.introspect
     inspector = Support::Inspector.new
     inspector.introspect
+  end
+
+  def self.log
+    @log ||= Logger.new('log/dragon.log')
   end
 end

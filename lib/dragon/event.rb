@@ -9,6 +9,14 @@ module Dragon
       false
     end
 
+    def to_s
+      if describe?
+        describe
+      else
+        self.class.name.split('::').last
+      end
+    end
+
     def describe?
       true
     end

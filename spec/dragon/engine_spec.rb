@@ -19,7 +19,7 @@ describe Engine do
     let(:action) { instance_double("Command", class: command_class)  }
 
     it 'remembers the action' do
-      expect(engine).to receive(:process).with([event])
+      expect(engine).to receive(:process_events).with([event])
       engine.react(action)
       expect(engine.last_command).to eq(action)
     end
@@ -35,7 +35,7 @@ describe Engine do
     let(:events)      { [event] }
 
     it 'should check events against listeners' do
-      engine.process(events)
+      engine.process_events(events)
       expect(listener).to have_received(:on).with(event)
     end
 
@@ -43,7 +43,7 @@ describe Engine do
       let(:quest) { instance_spy('Quest', receive: nil) }
 
       it 'should process events against player quests' do
-        engine.process(events, sagas: [ quest ])
+        engine.process_events(events, sagas: [ quest ])
 
         expect(quest).to have_received(:receive).with(event)
       end

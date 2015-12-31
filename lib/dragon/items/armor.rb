@@ -6,7 +6,9 @@ module Dragon
       end
 
       def deflect_range
-        base_absorption + material.strength + quality.modifier
+        base_absorption + 
+          material.strength_modifier + 
+          quality.modifier
       end
     end
   end

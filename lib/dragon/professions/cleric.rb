@@ -8,7 +8,7 @@ module Dragon
       weak :coordination
 
       def default_weapon
-        @default_weapon ||= WarHammer.new(material: Iron.new)
+        @default_weapon ||= WarHammer.new(material: person.class.default_weapon_material)
       end
     end
   end

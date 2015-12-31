@@ -4,8 +4,8 @@ module Dragon
       tagged :holy, :praying, :kneeling, :religious, :clergy
 
       primary :focus
-      secondary :intellect
-      weak :resilience
+      secondary :power
+      weak :intellect
 
       def default_weapon
         @default_weapon ||= Fists.new

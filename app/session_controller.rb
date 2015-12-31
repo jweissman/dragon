@@ -24,8 +24,10 @@ module Dragon
 
       parsed_event_data = JSON.parse(event.data)
 
-      active_session = find_active_session_for client
-      active_session.step!(parsed_event_data)
+      Thread.new do
+        active_session = find_active_session_for client
+        active_session.step!(parsed_event_data)
+      end
     rescue => ex
       puts ex.message
       puts ex.backtrace
@@ -39,18 +41,13 @@ module Dragon
 
     protected
     def find_active_session_for(client)
-      selector = method(:session_client_is?).curry.(client)
-      sessions.find(&selector)
+      sessions.find { |s| s.client == client }
     end
 
     def destroy_active_session_for(client)
       sessions.delete_if do |session|
         session.client == client
       end
-    end
-
-    def session_client_is?(client, session)
-      session.client == client
     end
   end
 end

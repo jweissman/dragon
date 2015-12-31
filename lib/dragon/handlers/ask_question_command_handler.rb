@@ -64,7 +64,7 @@ module Dragon
       def generate_quests_for(partner)
         [
           KillEnemies.new(
-            count: (3..5).to_a.sample,
+            count: (2..4).to_a.sample,
             species: Creature.categories.sample.new,
             requestor: partner
           )

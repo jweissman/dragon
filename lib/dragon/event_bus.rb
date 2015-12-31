@@ -6,7 +6,7 @@ module Dragon
       @engine = engine
     end
 
-    def process_event(event, player: nil, sagas: [])
+    def dispatch(event, sagas: [])
       additional_events = []
 
       if sagas.any?

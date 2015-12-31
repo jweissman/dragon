@@ -5,11 +5,7 @@ module Dragon
 
       primary :intellect
       secondary :focus
-      weak :resilience
-
-      def default_weapon
-        @default_weapon ||= Staff.new
-      end
+      weak :power
 
       def power_modifier
         super + staff_bonus
@@ -21,6 +17,10 @@ module Dragon
         else
           -2
         end
+      end
+
+      def default_weapon
+        @default_weapon ||= Staff.new(material: person.class.default_weapon_material)
       end
     end
   end

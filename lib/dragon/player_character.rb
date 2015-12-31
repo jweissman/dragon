@@ -1,6 +1,7 @@
 module Dragon
   class PlayerCharacter < Person
     include Activities
+    include Materials
 
     extend Forwardable
     def_delegators :engine, :place
@@ -19,9 +20,6 @@ module Dragon
       super(name, profession, *args)
     end
 
-    def self.generate(profession: Profession.adventuring.sample)
-      super(profession: profession)
-    end
 
     def accessories
       @accessories ||= Accessory.types.
@@ -34,9 +32,6 @@ module Dragon
       Leather.new
     end
 
-    def self.default_weapon_material
-      Iron.new
-    end
 
     def chance_of_hitting(*)
       0.8
@@ -60,6 +55,14 @@ module Dragon
 
     def self.professions
       Profession.adventuring
+    end
+
+    def self.default_weapon_material
+      Iron.new
+    end
+
+    def self.generate(profession: Profession.adventuring.sample)
+      super(profession: profession)
     end
   end
 end

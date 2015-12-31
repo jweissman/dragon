@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Stinger < NaturalWeapon
       def base_damage
-        (1..12)
+        (0..6)
       end
 
       def describe(*)

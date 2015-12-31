@@ -2,11 +2,11 @@ module Dragon
   module Creatures
     class Frog < Amphibian
       def self.mind_class
-        Dimwitted
+        Slow
       end
 
       def self.size_class
-        Tiny
+        VerySmall
       end
 
       def self.spirit_class

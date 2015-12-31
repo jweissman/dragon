@@ -1,5 +1,7 @@
 module Dragon
   class Item < Entity
+    include Dragon::Materials
+
     attr_reader :quality, :cost, :material
 
     def initialize(name=nil,
@@ -30,7 +32,7 @@ module Dragon
       (prefix.nil? ? '' : (prefix+' ')) + content
     end
 
-    def self.generate(exclude_types: [], only_types: [], material: materials.sample.new)
+    def self.generate(exclude_types: [], only_types: [], material: nil)
       not_excluded_types = node_types.reject do |type|
         if exclude_types.empty?
           false
@@ -51,16 +53,18 @@ module Dragon
         end
       end
 
-      included_types.sample.new(material: material)
+      type = included_types.sample
+      material ||= type.materials.sample.new
+
+      type.new material: material
     end
 
     def self.qualities
       Quality.types
-      # [ Inferior, Mediocre, Good, Superior ]
     end
 
     def self.materials
-      [ Wood, Stone ] # should really override..
+      [ Wood, Stone ]
     end
   end
 end

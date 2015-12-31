@@ -40,23 +40,38 @@ module Dragon
     end
 
     def react(action)
+      Dragon.log.info "Engine#react action=#{action}"
+      
       @last_command = action
-      events = *(action.class.handler(self).handle(action))
-      @last_events = process(events.flatten.compact)
+      @last_events  = []
+      
+      bubble_events(action)
+
       self
     end
 
-    def process(events, sagas: Saga.all)
-      events.each do |event|
-        addl_events = bus.process_event(event,
-                                        sagas: sagas,
-                                        player: player)
+    def handle_command(action)
+      (action.class.handler(self).handle(action))
+    end
 
-        if addl_events.any?
-          events << addl_events
-          events.flatten!.compact!
-        end
+    def bubble_events(action)
+      event_list = *handle_command(action)
+      process_events event_list
+      self
+    end
+
+    def process_events(event_list, sagas: Saga.all)
+      event_list.flatten.compact.each do |event|
+        process_event(event, sagas: sagas)
       end
+      self
+    end
+
+    def process_event(event, sagas: Saga.all)
+      Dragon.log.info "Engine#process_event event: #{event}"
+      process_events(bus.dispatch(event, sagas: sagas))
+      @last_events << event
+      self
     end
 
     def bus

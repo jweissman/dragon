@@ -2,7 +2,7 @@ module Dragon
   module Items
     class Teeth < NaturalWeapon
       def base_damage
-        (5..8)
+        (1..4)
       end
     end
   end

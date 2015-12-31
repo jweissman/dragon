@@ -3,8 +3,8 @@ module Dragon
     class Warrior < Adventurer
       tagged :fighting, :brawling
 
-      primary :power
-      secondary :focus
+      primary :focus
+      secondary :power
       weak :calm
 
       def default_weapon

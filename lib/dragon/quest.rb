@@ -1,6 +1,6 @@
 module Dragon
   class Quest < Saga
-    # include Items
+    include Items
 
     attr_reader :requestor
 

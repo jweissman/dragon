@@ -14,12 +14,12 @@ module Dragon
 
     def upgrade_statistic!(name: nil)
       case name
-      when :power then @power += 1
-      when :intellect then @intellect += 1
+      when :power        then @power += 1
+      when :intellect    then @intellect += 1
       when :coordination then @coordination += 1
-      when :resilience then @resilience += 1
-      when :focus then @focus += 1
-      when :calm then @calm += 1
+      when :resilience   then @resilience += 1
+      when :focus        then @focus += 1
+      when :calm         then @calm += 1
       end
     end
 
@@ -42,18 +42,18 @@ module Dragon
 
     def modifier_for(value)
       case quality_label_for(value)
-      when :terrible         then -5
-      when :awful            then -4
-      when :very_poor        then -3
-      when :poor             then -2
-      when :fair             then -1
+      when :terrible         then -4
+      when :awful            then -3
+      when :very_poor        then -2
+      when :poor             then -1
+      when :fair             then 0
       when :average          then 0
-      when :good             then 1
-      when :great            then 2
-      when :excellent        then 3
-      when :extraordinary    then 4
-      when :superb           then 5
-      when :legendary        then 6
+      when :good             then 0
+      when :great            then 1
+      when :excellent        then 2
+      when :extraordinary    then 3
+      when :superb           then 4
+      when :legendary        then 5
       end
     end
 
@@ -86,22 +86,22 @@ module Dragon
     end
 
     def chance_of_hitting(target)
-      1.0
-      # accuracy / target.resistance.to_f
+      #1.0
+      accuracy(target) / target.resistance.to_f
     end
 
     # really a property of a weapon (and maybe size class of target?)
-    def base_accuracy
-      20
+    def base_accuracy(target)
+      (4 * focus) - target.defense_rating.to_a.sample
     end
 
-    def accuracy
-      base_accuracy + modifier_for(coordination)
+    def accuracy(target)
+      base_accuracy(target) + modifier_for(coordination)
     end
 
     # again really prop of armor (and maybe size class?)
     def base_resistance
-      5
+      1 + armor.material.strength_modifier
     end
 
     def resistance
@@ -109,11 +109,11 @@ module Dragon
     end
 
     def max_hp
-      (body * 1.25).floor
+      (body/2).floor
     end
 
     def body
-      (resilience + power) / 2
+      resilience + power
     end
 
     def power

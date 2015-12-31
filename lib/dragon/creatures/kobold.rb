@@ -2,11 +2,11 @@ module Dragon
   module Creatures
     class Kobold < Hominid
       def self.size_class
-        Tiny
+        VerySmall
       end
 
       def self.mind_class
-        Slow
+        Simple
       end
 
       def self.spirit_class

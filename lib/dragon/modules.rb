@@ -15,4 +15,5 @@ module Dragon
   module Rooms; end
   module Scenes; end
   module Topics; end
+  module Materials; end
 end

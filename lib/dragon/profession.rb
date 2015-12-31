@@ -5,6 +5,7 @@ module Dragon
     include Questions
     include Professions
     include Items
+    include Materials
 
     attr_accessor :person
 
@@ -87,7 +88,7 @@ module Dragon
 
     def self.epic
       [
-        Archmage, Necromancer, Pyromancer, Ninja, Pirate
+        Archmage, Necromancer, Pyromancer, Ninja, Pirate, Spy
       ]
     end
   end

@@ -20,16 +20,9 @@ module Dragon
         handle(message) if message.action_record
       end
 
-      Thread.new do
-        begin
-          describe
-          engine.prompt_player
-        rescue => ex
-          puts ex.message
-          puts ex.backtrace
-        end
-      end
-
+      describe
+      engine.prompt_player
+      
       @params = {} # clear out params...
       self
     rescue => ex

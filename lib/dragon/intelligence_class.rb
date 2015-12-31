@@ -36,19 +36,19 @@ module Dragon
 
   class VerySmart < IntelligenceClass
     def mind_range
-      (12..13)
+      (13..14)
     end
   end
 
   class Brilliant < IntelligenceClass
     def mind_range
-      (14..16)
+      (15..17)
     end
   end
 
   class Genius < IntelligenceClass
     def mind_range
-      (19..20)
+      (18..19)
     end
   end
 end

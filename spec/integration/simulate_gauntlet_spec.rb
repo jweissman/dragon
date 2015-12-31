@@ -7,9 +7,9 @@ describe "a simulated gauntlet", speed: 'slow' do
   end
 
   let(:world) { @world }
-  let(:battles) { 50 }
+  let(:battles) { 100 }
 
-  context 'for profession' do
+  context 'by profession' do
     Profession.adventuring.each do |profession|
       describe "#{profession.new(nil).label}" do
         let(:sim) do
@@ -19,12 +19,14 @@ describe "a simulated gauntlet", speed: 'slow' do
         let(:victory_rate) { sim.driver.victory_ratio }
 
         it "should have a decent victory rate" do
-          aggregate_failures 'vic ratio between 60% and 95%' do
-            expect(victory_rate).to be > 0.6
-            expect(victory_rate).to be < 0.95
+          aggregate_failures 'victory ratio between 50% and 90%' do
+            expect(victory_rate).to be > 0.5
+            expect(victory_rate).to be < 0.9
           end
         end
       end
     end
   end
+
+  xcontext 'by level'
 end

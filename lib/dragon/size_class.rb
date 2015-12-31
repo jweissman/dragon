@@ -4,8 +4,11 @@ module Dragon
       (10..10)
     end
 
+    # everything gets a little bump in power
+    # over their resilience so on average things
+    # can hit each other and do damage :)
     def power_range
-      body_range
+      body_range + 1
     end
 
     def resilience_range
@@ -15,19 +18,19 @@ module Dragon
 
   class Tiny < SizeClass
     def body_range
-      (7..7)
+      (4..5)
     end
   end
 
   class VerySmall < SizeClass
     def body_range
-      (8..8)
+      (6..7)
     end
   end
 
   class Small < SizeClass
     def body_range
-      (9..9)
+      (8..9)
     end
   end
 

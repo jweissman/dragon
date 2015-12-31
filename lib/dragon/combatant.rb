@@ -4,6 +4,7 @@ module Dragon
 
     include CombatAttributes
     include Items
+    include Materials
 
     def armor
       @armor ||= default_armor
@@ -81,8 +82,8 @@ module Dragon
 
     def attack_damage_against(target)
       base   = attack_rating.to_a.sample
-      absorb = (target.defense_rating.to_a.sample / 2).floor
-      adjusted = (base - absorb)
+      absorb = (target.defense_rating.begin / 3.0).floor
+      adjusted = base - absorb
       adjusted > 0 ? adjusted : 0
     end
 

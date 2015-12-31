@@ -18,6 +18,7 @@ module Dragon
     end
 
     def on(event)
+      Dragon.log.info "KillEnemies#on event: #{event}"
       events = []
       @tally += 1
       events.push quest_progressed

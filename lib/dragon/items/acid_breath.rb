@@ -2,7 +2,7 @@ module Dragon
   module Items
     class AcidBreath < NaturalWeapon
       def base_damage
-        (4..9)
+        (2..5)
       end
     end
   end

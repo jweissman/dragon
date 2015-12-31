@@ -6,6 +6,10 @@ module Dragon
       Object.const_get("Dragon::Handlers::" + self.name.split('::').last + "Handler").new(engine)
     end
 
+    def to_s
+      describe
+    end
+
     def describe
       raise 'override Command#describe in subclass'
     end

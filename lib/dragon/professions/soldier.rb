@@ -3,8 +3,8 @@ module Dragon
     class Soldier < Adventurer
       tagged :military, :army, :fighting, :brawling, :law
       
-      primary :power
-      secondary :focus
+      primary :focus
+      secondary :power
       weak :intellect
 
       def default_weapon

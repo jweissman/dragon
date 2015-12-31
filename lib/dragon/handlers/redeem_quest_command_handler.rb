@@ -6,7 +6,7 @@ module Dragon
 
         player.inventory.push quest.item_rewards
         player.xp += quest.xp_reward
-        player.bounty += 
+        player.gold += quest.bounty
 
         player.quests -= [quest]
 

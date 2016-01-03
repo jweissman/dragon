@@ -188,3 +188,23 @@ select {
   display: table;
   clear: both;
 }
+
+.leaders td, th {
+  padding: 0.4rem;
+}
+
+.leaders th {
+  border: none;
+  border-bottom: 3px solid green;
+  padding-bottom: 0.3rem;
+}
+
+.leaders td {
+  background-color: rgba(240, 240, 240, 0.52);
+  text-align: right;
+}
+
+.leaders tr td:first-child {
+  text-align: left;
+  background-color: rgba(250, 250, 250, 0.62);
+}

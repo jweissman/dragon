@@ -14,12 +14,20 @@ module Dragon
                   profession=Profession.adventuring.sample,
                   *args)
       @quests = []
-      @gold   = 2_000
+      @gold   = initial_gold
       @xp     = 0
 
       super(name, profession, *args)
     end
 
+    def initial_gold
+      200
+    end
+
+    def score
+      gold_score = gold > initial_gold ? (gold-initial_gold) : 0
+      xp + (gold_score / 4)
+    end
 
     def accessories
       @accessories ||= Accessory.types.

@@ -4,13 +4,12 @@ module Dragon
   class Mud
     extend Forwardable
     def_delegators :controller, :create, :update, :delete
-    attr_reader :sessions, :world, :controller
+    attr_reader :world, :controller
 
     KEEPALIVE_TIME = 15 # seconds
 
     def initialize(app)
       @app = app
-      @sessions = []
       @world = World.new
     end
 
@@ -37,7 +36,7 @@ module Dragon
 
     private
     def controller
-      @controller ||= SessionController.new(multi_user_driver: self)
+      @controller ||= SessionController.new(world: world)
     end
 
     def create_websocket(env)

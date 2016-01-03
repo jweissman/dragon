@@ -1,0 +1,24 @@
+.content-item
+  h2.heading Active Game Sessions by Score
+  - if @players.any?
+    center
+      table.leaders
+        tr
+          th Name
+          th Level
+          th Location
+          th (Subtype) Race
+          th Job
+          th Gold
+          th Experience
+        - @players.each_with_index do |player, rank|
+          tr
+            td = "#{(rank + 1)}. #{player.name}"
+            td = player.level
+            td = player.place.describe
+            td = "#{player.subtype.label} #{player.race.to_s}"
+            td = player.profession
+            td = "#{player.gold} gp"
+            td = "#{player.xp} xp"
+  - else
+    h4 Waiting for wanderers to enter the Realms...

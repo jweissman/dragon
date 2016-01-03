@@ -2,7 +2,7 @@ module Dragon
   class GameSession < Driver
     extend Forwardable
 
-    attr_reader :client, :player, :world
+    attr_reader :client, :world
 
     def_delegators :client, :send, :delete
     def_delegators :console, :content, :clear
@@ -10,6 +10,24 @@ module Dragon
     def initialize(world: nil, client: nil)
       @client = client
       super(world)
+    end
+
+    def self.all
+      @_sessions ||= []
+    end
+
+    def self.create(client: nil, world: nil)
+      session = new(client: client, world: world)
+      all.push(session)
+      session
+    end
+
+    def self.find_by_client(client)
+      all.find { |s| s.client == client }
+    end
+
+    def self.delete_by_client(client)
+      all.delete find_by_client(client)
     end
 
     def step!(data=nil)

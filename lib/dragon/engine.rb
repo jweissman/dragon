@@ -41,12 +41,9 @@ module Dragon
 
     def react(action)
       Dragon.log.info "Engine#react action=#{action}"
-      
       @last_command = action
       @last_events  = []
-      
       bubble_events(action)
-
       self
     end
 

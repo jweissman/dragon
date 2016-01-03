@@ -11,8 +11,8 @@ Gem::Specification.new do |gem|
   gem.description   = %q{text-based rpg}
   gem.license       = "MIT"
   gem.authors       = ["Joseph Weissman"]
-  gem.email         = "joe@bignerdranch.com"
-  gem.homepage      = "https://rubygems.org/gems/dragon"
+  gem.email         = "joe@deepc.io"
+  gem.homepage      = "https://github.com/jweissman/dragon"
 
   gem.files         = `git ls-files`.split($/)
 
@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
       end
     end
   end
+
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']

@@ -21,7 +21,7 @@ describe "a simulated gauntlet", speed: 'slow' do
         it "should have a decent victory rate" do
           aggregate_failures 'victory ratio between 50% and 90%' do
             expect(victory_rate).to be > 0.5
-            expect(victory_rate).to be < 0.9
+            expect(victory_rate).to be < 0.95
           end
         end
       end

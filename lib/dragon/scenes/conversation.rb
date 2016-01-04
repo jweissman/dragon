@@ -1,10 +1,10 @@
 module Dragon
   module Scenes
     class Conversation < Scene
-      attr_reader :partner #, :player
+      attr_reader :partner
       attr_reader :topic
 
-      def with(partner: nil) #, player: nil)
+      def with(partner: nil)
         @partner = partner
         @topic = Topics::NullTopic.new(partner: @partner)
 

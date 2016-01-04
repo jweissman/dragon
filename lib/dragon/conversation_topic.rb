@@ -11,6 +11,10 @@ module Dragon
       @conversation = conversation
     end
 
+    def player
+      conversation.player
+    end
+
     def show_gold?
       false
     end

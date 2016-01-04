@@ -8,7 +8,7 @@ module Dragon
       end
       
       def describe
-        "The #{@item.describe} was left behind"
+        "The #{item.describe} was left behind"
       end
     end
   end

@@ -16,7 +16,7 @@ module Dragon
       @race       = race.new
       super(name, subtype: Subtype.generate_for(@race))
     end
-    
+
     def self.default_weapon_material
       Iron.new
     end
@@ -66,8 +66,7 @@ module Dragon
     end
 
     def completed_quests_for(player)
-      player.quests.
-        select { |q| q.requestor == self }.
+      player.quests.select { |q| q.requestor == self }.
         select(&:completed?)
     end
 

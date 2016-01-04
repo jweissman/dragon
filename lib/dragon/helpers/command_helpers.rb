@@ -30,6 +30,14 @@ module Dragon
         )
       end
 
+      def sell_item(item, recipient)
+        SellItemCommand.new(
+          item: item,
+          cost: item.cost / 2,
+          recipient: recipient
+        )
+      end
+
       def take_item(item)
         TakeItemCommand.new(item: item)
       end

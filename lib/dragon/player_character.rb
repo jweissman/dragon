@@ -4,8 +4,6 @@ module Dragon
     include Materials
 
     extend Forwardable
-    def_delegators :engine, :place
-
     def_delegators :profession, :level, :xp_for_upgrade
 
     attr_accessor :action, :engine, :quests, :gold, :xp

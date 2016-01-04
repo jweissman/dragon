@@ -129,6 +129,10 @@ module Dragon
   end
 
   def self.log
-    @log ||= Logger.new('log/dragon.log')
+    @log ||= Logger.new(log_target)
+  end
+
+  def self.log_target
+    @log_target ||= under_test? ? 'log/dragon.log' : STDOUT
   end
 end
